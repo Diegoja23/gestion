@@ -1,16 +1,16 @@
 <?php
 require_once('Persona.php');
 /**
- * class Cliente
+ * class Usuario
  * autor: gestion
  * 
  */
 
-class Cliente extends Persona
+class Usuario extends Persona
 {
     
-    private $direccion;
-    private $telefono;
+    private $contrasenia;
+    private $rol;
     private $ci;
     
     /* Constructor */
