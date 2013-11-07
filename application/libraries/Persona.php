@@ -6,17 +6,21 @@
  * 
  */
 
-class Persona
+abstract class Persona
 {
-    private $nombre;
-    private $apellido;
-    private $email;
+    protected $id_persona;
+    protected $nombre;
+    protected $apellido;
+    protected $email;
     
     // Instancia codeIgniters
     protected $myci;
     /* Constructor */
-    public function __construct($attr = array())
+    public function __construct($params = array())
     {
+        foreach ($params as $att => $key)
+            $this->$att = $key;   
+
         $this->myci =& get_instance();
         $this->loadDataModel();
         //TODO
@@ -35,8 +39,7 @@ class Persona
     public function setNombre($nombre) { $this->nombre = $nombre; }
     
     public function setApellido($apellido) { $this->apel = $nombre; }    
-    
-    public function setNombre($nombre) { $this->nombre = $nombre; }
+
     
     
     /* Database */
@@ -58,27 +61,7 @@ class Persona
         if (!is_null($this->myci))      
             $this->myci->load->model('personas', 'p');                                        
     }           
-    
-    
-    
-    
-
-    /* Miembros estáticos, manejan funcionalidad de todos */
-    public static function getAllPerson()
-    {
-        $arrayPersonas = array();
-        $paramsPersona = array();
-        $ci =& get_instance();                      
-        $data = $ci->p->get_all_personas();
-        foreach($data as $p)
-        {
-            $paramsPersona["GenreId"] = $p->GenreId;    
-            $Persona = new Persona($paramsPersona);   
-            $arrayPersonas[] = $Persona;
-        }
-        
-        return $arrayPersonas;
-    }    
+  
 }
 
 

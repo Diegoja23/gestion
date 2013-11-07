@@ -20,9 +20,14 @@ class Personas extends CI_Model
         if ($offset >= 0) $sql .= ",".$limit;
         //die($sql);
         $query = $this->db->query($sql);                   
-        return $query->result();
-        
+        return $query->result();        
     }     
+    
+    function insert_persona($personParams)
+    {
+        return $this->db->insert('personas', $personParams);     
+    }
+    
             
 }
 

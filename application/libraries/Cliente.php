@@ -1,34 +1,28 @@
 <?php
-require_once('Persona.php');
+require_once('Participante.php');
 /**
  * class Cliente
  * autor: gestion
  * 
  */
 
-class Cliente extends Persona
+class Cliente extends Participante
 {
     
-    private $direccion;
-    private $telefono;
-    private $ci;
+    protected $es_cliente=true;
     
     /* Constructor */
-    public function __construct($attr = array())
+    public function __construct($params = array())
     {
-        //TODO
+        parent::__construct($params);
     }
     
-    
-    /* Getters */
-    public function getDireccion(){ return $this->direccion; }
-                
-    public function getTelefono(){return $this->telefono;}
-    
-    public function getCI(){return $this->ci;}
-    
-    /* Setters */
 
+    /* Miembros estáticos, manejan funcionalidad de todos */
+    public static function getAll()
+    {
+        return parent::getAll(true);
+    }  
     
             
 }
