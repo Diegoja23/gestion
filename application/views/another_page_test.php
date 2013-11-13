@@ -31,7 +31,7 @@
     </div>
     <div id="site_content">
       <div id="sidebar_container">
-        <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
+        <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
         <!-- insert your sidebar items here -->
         <h3>Latest News</h3>
