@@ -55,12 +55,12 @@ class Participante extends Persona
     }
     
     /* Miembros estáticos, manejan funcionalidad de todos */
-    public static function getAll($esCliente=false)
+    public static function getAll($esCliente=false, $limit = 0, $offset = -1)
     {
         $arrayParticipantes = array();
         $paramsParticipante = array();
         $ci =& get_instance();                      
-        $data = $ci->p->get_all_personas($esCliente);
+        $data = $ci->p->get_all_personas($esCliente, $limit, $offset);
         foreach($data as $p)
         {
             $paramsParticipante["id_persona"] = $p->id_persona;   
@@ -74,7 +74,7 @@ class Participante extends Persona
             $Participante = new Participante($paramsParticipante);   
             $arrayParticipantes[] = $Participante;
         }
-        
+
         return $arrayParticipantes;
     }  
     

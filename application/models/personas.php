@@ -15,7 +15,7 @@ class Personas extends CI_Model
     {
         $sql = "SELECT * FROM personas AS p where p.es_cliente=".$esCliente;                
         
-        if ($limit > 0) $sql .= "LIMIT ".$offset;
+        if ($limit > 0) $sql .= " LIMIT ".$offset;
         //$this->db->limit($limit);
         if ($offset >= 0) $sql .= ",".$limit;
         //die($sql);
