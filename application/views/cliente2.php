@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+
 
         $CI = &get_instance();
         //$CI->load->library('form_validation');

@@ -30,6 +30,12 @@ class Participante extends Persona
     
     /* Setters */
     
+    public function validar()
+    {
+        //TODO -- aqui hay que validar los datos del participante, asi como asegurarnos de que no exista previamente
+        return true;
+    }
+    
     public function add()
     {
         $object_vars=get_object_vars($this);

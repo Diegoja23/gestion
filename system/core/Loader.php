@@ -1004,101 +1004,106 @@ class CI_Loader {
 	 * @param	string	an optional object name
 	 * @return	null
 	 */
-	protected function _ci_init_class($class, $prefix = '', $config = FALSE, $object_name = NULL)
-	{
-		// Is there an associated config file for this class?  Note: these should always be lowercase
-		if ($config === NULL)
-		{
-			// Fetch the config paths containing any package paths
-			$config_component = $this->_ci_get_component('config');
+    protected function _ci_init_class($class, $prefix = '', $config = FALSE, $object_name = NULL)
+    {
+        // Is there an associated config file for this class?  Note: these should always be lowercase
+        if ($config === NULL)
+        {
+            // Fetch the config paths containing any package paths
+            $config_component = $this->_ci_get_component('config');
 
-			if (is_array($config_component->_config_paths))
-			{
-				// Break on the first found file, thus package files
-				// are not overridden by default paths
-				foreach ($config_component->_config_paths as $path)
-				{
-					// We test for both uppercase and lowercase, for servers that
-					// are case-sensitive with regard to file names. Check for environment
-					// first, global next
-					if (defined('ENVIRONMENT') AND file_exists($path .'config/'.ENVIRONMENT.'/'.strtolower($class).'.php'))
-					{
-						include($path .'config/'.ENVIRONMENT.'/'.strtolower($class).'.php');
-						break;
-					}
-					elseif (defined('ENVIRONMENT') AND file_exists($path .'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php'))
-					{
-						include($path .'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php');
-						break;
-					}
-					elseif (file_exists($path .'config/'.strtolower($class).'.php'))
-					{
-						include($path .'config/'.strtolower($class).'.php');
-						break;
-					}
-					elseif (file_exists($path .'config/'.ucfirst(strtolower($class)).'.php'))
-					{
-						include($path .'config/'.ucfirst(strtolower($class)).'.php');
-						break;
-					}
-				}
-			}
-		}
+            if (is_array($config_component->_config_paths))
+            {
+                // Break on the first found file, thus package files
+                // are not overridden by default paths
+                foreach ($config_component->_config_paths as $path)
+                {
+                    // We test for both uppercase and lowercase, for servers that
+                    // are case-sensitive with regard to file names. Check for environment
+                    // first, global next
+                    if (defined('ENVIRONMENT') AND file_exists($path .'config/'.ENVIRONMENT.'/'.strtolower($class).'.php'))
+                    {
+                        include($path .'config/'.ENVIRONMENT.'/'.strtolower($class).'.php');
+                        break;
+                    }
+                    elseif (defined('ENVIRONMENT') AND file_exists($path .'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php'))
+                    {
+                        include($path .'config/'.ENVIRONMENT.'/'.ucfirst(strtolower($class)).'.php');
+                        break;
+                    }
+                    elseif (file_exists($path .'config/'.strtolower($class).'.php'))
+                    {
+                        include($path .'config/'.strtolower($class).'.php');
+                        break;
+                    }
+                    elseif (file_exists($path .'config/'.ucfirst(strtolower($class)).'.php'))
+                    {
+                        include($path .'config/'.ucfirst(strtolower($class)).'.php');
+                        break;
+                    }
+                }
+            }
+        }
 
-		if ($prefix == '')
-		{
-			if (class_exists('CI_'.$class))
-			{
-				$name = 'CI_'.$class;
-			}
-			elseif (class_exists(config_item('subclass_prefix').$class))
-			{
-				$name = config_item('subclass_prefix').$class;
-			}
-			else
-			{
-				$name = $class;
-			}
-		}
-		else
-		{
-			$name = $prefix.$class;
-		}
+        if ($prefix == '')
+        {
+            if (class_exists('CI_'.$class))
+            {
+                $name = 'CI_'.$class;
+            }
+            elseif (class_exists(config_item('subclass_prefix').$class))
+            {
+                $name = config_item('subclass_prefix').$class;
+            }
+            else
+            {
+                $name = $class;
+            }
+        }
+        else
+        {
+            $name = $prefix.$class;
+        }
 
-		// Is the class name valid?
-		if ( ! class_exists($name))
-		{
-			log_message('error', "Non-existent class: ".$name);
-			show_error("Non-existent class: ".$class);
-		}
+        // Is the class name valid?
+        if ( ! class_exists($name))
+        {
+            log_message('error', "Non-existent class: ".$name);
+            show_error("Non-existent class: ".$class);
+        }
 
-		// Set the variable name we will assign the class to
-		// Was a custom class name supplied?  If so we'll use it
-		$class = strtolower($class);
+        // Set the variable name we will assign the class to
+        // Was a custom class name supplied?  If so we'll use it
+        $class = strtolower($class);
 
-		if (is_null($object_name))
-		{
-			$classvar = ( ! isset($this->_ci_varmap[$class])) ? $class : $this->_ci_varmap[$class];
-		}
-		else
-		{
-			$classvar = $object_name;
-		}
+        if (is_null($object_name))
+        {
+            $classvar = ( ! isset($this->_ci_varmap[$class])) ? $class : $this->_ci_varmap[$class];
+        }
+        else
+        {
+            $classvar = $object_name;
+        }
 
-		// Save the class name and object name
-		$this->_ci_classes[$class] = $classvar;
+        // Save the class name and object name
+        $this->_ci_classes[$class] = $classvar;
 
-		// Instantiate the class
-		$CI =& get_instance();
-		if ($config !== NULL)
-		{
-			$CI->$classvar = new $name($config);
-		}
-		else
-		{
-			$CI->$classvar = new $name;
-		}
-	}
+        // Instantiate the class
+        $CI =& get_instance();
+        if ($config !== NULL)
+        {
+            $CI->$classvar = new $name($config);
+        }
+        else
+        {
+            $classInstance = new ReflectionClass($name);
+            if ($classInstance->hasMethod('getInstancia')) 
+                $CI->$classvar = $name::getInstancia();
+            else 
+                $CI->$classvar = new $name;                 
+                
+        }
+    }
 
 	// --------------------------------------------------------------------
 
