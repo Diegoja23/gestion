@@ -28,6 +28,13 @@ class Personas extends CI_Model
         return $this->db->insert('personas', $personParams);     
     }
     
+    function exists_persona($ci)
+    {
+        $query = $this->db->get_where('personas', array('ci' => $ci));
+        if ($query->num_rows > 0) return true;
+        return false;
+    }
+        
             
 }
 

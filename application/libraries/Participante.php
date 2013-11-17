@@ -33,7 +33,12 @@ class Participante extends Persona
     public function validar()
     {
         //TODO -- aqui hay que validar los datos del participante, asi como asegurarnos de que no exista previamente
-        return true;
+        return !$this->exists();
+    }
+    
+    public function exists()
+    {
+        return $this->myci->p->exists_persona($this->ci);    
     }
     
     public function add()

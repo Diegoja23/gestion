@@ -62,6 +62,8 @@ abstract class Persona
             $this->myci->load->model('personas', 'p');                                        
     }           
   
+    abstract public function exists();
+      
 }
 
 

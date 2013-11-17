@@ -30,7 +30,11 @@ class Usuario extends Persona
     /* Setters */
 
     
-            
+    public function exists()
+    {
+        //TODO
+        return false;
+    }            
 }
 
 
