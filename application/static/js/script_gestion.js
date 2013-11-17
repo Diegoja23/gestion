@@ -14,10 +14,16 @@ $(document).on("click","#agregar_cliente",agregarCliente);
 
 function agregarCliente(){
     if($("#div_formulario_cliente").css("display") == "none"){
-        $("#div_formulario_cliente").css("display","block");
+        $("#div_formulario_cliente").fadeIn(1500);
+        //$("#div_formulario_cliente").css("display","block");
+        $("#div_listado_cliente").fadeOut(1500);
+        //$("#div_listado_cliente").css("display","none");        
     }
     else{
-        $("#div_formulario_cliente").css("display","none");
+        $("#div_formulario_cliente").fadeOut(1500);
+        //$("#div_formulario_cliente").css("display","none");
+        $("#div_listado_cliente").fadeIn(1500);
+        //$("#div_listado_cliente").css("display","block"); 
     }
 }
 //$( document ).on( "change",".elegir_familia", cambiarElemento );
