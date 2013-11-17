@@ -150,7 +150,8 @@ ul#menu li a
   color: #444;
   display: block; 
   float: left; 
-  height: 20px;
+  /*height: 20px;*/
+  height: 42px !important;
   padding: 7px 23px 15px 23px;
   text-align: center;} 
 
@@ -182,7 +183,7 @@ ul#menu li a:hover
 
 .sidebar
 { float: right;
-  width: 200px;
+  width: 265px;
   margin: 0 24px 27px 0;
   background: #FBFBFB;
   border: 1px solid #eee;
@@ -324,3 +325,7 @@ table tr td
 { background: #FBFBFB;
   color: #111;
   border-top: 1px solid #FFF;}
+
+#div_formulario_cliente{
+    display:none;
+}

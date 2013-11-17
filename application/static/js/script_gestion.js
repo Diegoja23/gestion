@@ -9,4 +9,15 @@ function iniEventos() {
      
      //cargar();
 }
+
+$(document).on("click","#agregar_cliente",agregarCliente);
+
+function agregarCliente(){
+    if($("#div_formulario_cliente").css("display") == "none"){
+        $("#div_formulario_cliente").css("display","block");
+    }
+    else{
+        $("#div_formulario_cliente").css("display","none");
+    }
+}
 //$( document ).on( "change",".elegir_familia", cambiarElemento );

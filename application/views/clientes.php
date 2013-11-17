@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<html>
 
-<head>
-  <title>simplestyle_7</title>
-  <meta name="description" content="website description" />
-  <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <title>Sistema de Gestión Notarial</title>
+  <meta name="description" content="sistema de gestion notarial" />
+  <meta name="keywords" content="sistema,gestion,notarial,documentos,juridicos" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
 
@@ -16,12 +13,12 @@
     <div id="header">
       <div id="logo">
         <h1>simplestyle<a href="#">_7</a></h1>
-        <div class="slogan">Cool slogan goes here!</div>
+        <div class="slogan">Sistema de Gesti&oacute;n Notarial</div>
       </div>
       <div id="menubar">
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="index_test.php">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li class="current"><a href="clientes.php">Clientes</a></li>
           <li><a href="examples_test.php">Examples</a></li>
           <li><a href="page_test.php">A Page</a></li>
@@ -32,7 +29,7 @@
     </div>
     <div id="site_content">
       <div id="sidebar_container">
-        <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
+        <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
         <!-- insert your sidebar items here -->
         <h3>Latest News</h3>
@@ -40,7 +37,7 @@
         <h5>1st July 2011</h5>
         <p>Put your latest news item here, or anything else you would like in the sidebar!<br /><a href="#">Read more</a></p>
         </div>
-        <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
+        <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
           <h3>Newsletter</h3>
           <p>If you would like to receive our newletter, please enter your email address and click 'Subscribe'.</p>
@@ -49,7 +46,7 @@
             <p><input class="subscribe" name="subscribe" type="submit" value="Subscribe" /></p>
           </form>
         </div>
-        <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
+        <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
           <h3>Latest Blog</h3>
           <h4>Website Goes Live</h4>
@@ -59,8 +56,13 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Examples</h1>
-        <p>This page contains examples of all the styled elements available as part of this design. Use this page for reference, whilst you build your website.</p>
+        <h1>Clientes</h1>
+        <button id="agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
+        <div id="div_formulario_cliente">
+        <p>This page contains examples of all the styled elements available as part of this design. 
+            Use this page for reference, whilst you build your website.</p>
+        
+        </div>
         <h2>Headings</h2>
         <p>These are the different heading formats:</p>
         <h1>Heading 1</h1>
@@ -91,15 +93,15 @@
         </ol>
         <h2>Images</h2>
         <p>images can be placed on the left, in the center or on the right:</p>
-        <span class="left"><img src="style/graphic.png" alt="example graphic" /></span>
+        <span class="left"><img src="<?=APPPATH?>static/images/graphic.png" alt="example graphic" /></span>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
           exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
           irure dolor in reprehenderit in voluptate velit esse cillum.
         </p>
-        <span class="center"><img src="style/graphic.png" alt="example graphic" /></span>
-        <span class="right"><img src="style/graphic.png" alt="example graphic" /></span>
+        <span class="center"><img src="<?=APPPATH?>static/images/graphic.png" alt="example graphic" /></span>
+        <span class="right"><img src="<?=APPPATH?>static/images/graphic.png" alt="example graphic" /></span>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
