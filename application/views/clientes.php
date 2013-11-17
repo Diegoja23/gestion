@@ -63,6 +63,7 @@
             Use this page for reference, whilst you build your website.</p>
         
         </div>
+        <div id="div_listado_cliente">
         <h2>Headings</h2>
         <p>These are the different heading formats:</p>
         <h1>Heading 1</h1>
@@ -128,6 +129,7 @@
             <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="name" value="button" /></p>
           </div>
         </form>
+        </div>
       </div>
     </div>
     <div id="footer">
