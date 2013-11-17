@@ -26,6 +26,10 @@ class ServiciosPersona
         
     }
     
+    public function getClientes($limit = 0, $offset = -1) 
+    {
+        return Cliente::getAll($limit, $offset);
+    }    
             
 }
 

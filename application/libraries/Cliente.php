@@ -19,9 +19,9 @@ class Cliente extends Participante
     
 
     /* Miembros estáticos, manejan funcionalidad de todos */
-    public static function getAll()
+    public static function getAll($limit, $offset)
     {
-        return parent::getAll(true);
+        return parent::getAll(true, $limit, $offset);
     }  
     
             
