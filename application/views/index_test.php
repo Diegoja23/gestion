@@ -1,13 +1,10 @@
-<!DOCTYPE HTML>
-<html>
 
-<head>
-  <title>simplestyle_7</title>
-  <meta name="description" content="website description" />
-  <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <title>Sistema de Gestión Notarial</title>
+  <meta name="description" content="sistema de gestion notarial" />
+  <meta name="keywords" content="sistema,gestion,notarial,documentos,juridicos" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine&amp;v1" />
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />  
 
 </head>
 
@@ -16,12 +13,13 @@
     <div id="header">
       <div id="logo">
         <h1>simplestyle<a href="#">_7</a></h1>
-        <div class="slogan">Cool slogan goes here!</div>
+        <div class="slogan">Sistema de Gesti&oacute;n Notarial</div>
       </div>
       <div id="menubar">
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="current" ><a href="index_test.php">Home</a></li>
+          <li class="current" ><a href="index_test.php">Inicio</a></li>
+          <li><a href="clientes.php">Clientes</a></li>
           <li><a href="examples_test.php">Examples</a></li>
           <li><a href="page_test.php">A Page</a></li>
           <li><a href="another_page_test.php">Another Page</a></li>
