@@ -59,8 +59,19 @@
         <h1>Clientes</h1>
         <button id="agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
         <div id="div_formulario_cliente">
-        <h3>Datos del cliente</h3>
-            
+            <h3>Datos del cliente</h3>
+            <div class="form-group">
+                <label for="txt_nombre_cliente">Nombre</label>
+                <input type="text" class="form-control" d="txt_nombre_cliente" placeholder="Text input">                
+            </div>
+            <div class="form-group">
+                <label for="txt_apellido_cliente">Apellido</label>
+                <input type="text" class="form-control" d="txt_apellido_cliente" placeholder="Text input">                
+            </div>
+            <div class="form-group">
+                <label for="txt_email_cliente">Email</label>                
+                <input type="email" class="form-control" id="txt_email_cliente" placeholder="Enter email">
+            </div>            
         </div>
         <div id="div_listado_cliente">            
         </div>

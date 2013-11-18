@@ -36,7 +36,13 @@ function cargarValores(){
     $paramsCliente['direccion']=$_POST['direccion']; 
     return $paramsCliente;
 }
+
 function traerTodos(){
+    $todos_los_clientes = traerTodosDP();
+    return $todos_los_clientes;
+}
+
+function traerTodosDP(){
     $todos_los_clientes = '<table class="table table-hover">
         <thead>
           <tr>
