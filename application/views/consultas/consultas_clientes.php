@@ -1,5 +1,6 @@
 <?php
-
+header('Content-Type: text/html; charset=UTF-8');
+$Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
 
 switch($consulta){
@@ -26,7 +27,7 @@ switch($consulta){
         break;
 }
 
-function cargarValores(){   
+function cargarValores(){ 
     $paramsCliente=array();
     $paramsCliente['nombre']=$_POST['nombre'];
     $paramsCliente['apellido']=$_POST['apellido'];
@@ -34,6 +35,7 @@ function cargarValores(){
     $paramsCliente['email']=$_POST['email'];
     $paramsCliente['telefono']=$_POST['telefono'];
     $paramsCliente['direccion']=$_POST['direccion']; 
+    //$paramsCliente['ci_escaneada']=$_POST['ci_escaneada'];
     return $paramsCliente;
 }
 

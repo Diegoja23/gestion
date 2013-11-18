@@ -328,4 +328,15 @@ table tr td
 
 #div_formulario_cliente{
     display:none;
+    margin:15px;
+}
+
+#txt_ci_cliente{
+    width: 50%;
+    margin-right: 25px;
+    float: left;
+}
+
+.clear{
+    clear: both;
 }

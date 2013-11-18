@@ -57,21 +57,38 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Clientes</h1>
-        <button id="agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
+        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
         <div id="div_formulario_cliente">
             <h3>Datos del cliente</h3>
             <div class="form-group">
                 <label for="txt_nombre_cliente">Nombre</label>
-                <input type="text" class="form-control" d="txt_nombre_cliente" placeholder="Text input">                
+                <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                
             </div>
             <div class="form-group">
                 <label for="txt_apellido_cliente">Apellido</label>
-                <input type="text" class="form-control" d="txt_apellido_cliente" placeholder="Text input">                
+                <input type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
             </div>
+            <div class="form-group">                
+                <label for="txt_ci_cliente">Cédula de Identidad</label><br />
+                <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
+                <button type="button" class="btn btn-info">Agregar escaneo</button>
+            </div>  
             <div class="form-group">
                 <label for="txt_email_cliente">Email</label>                
-                <input type="email" class="form-control" id="txt_email_cliente" placeholder="Enter email">
-            </div>            
+                <input type="email" class="form-control" id="txt_email_cliente" placeholder="E-mail">
+            </div>
+            
+            <div class="form-group">
+                <label for="txt_telefono_cliente">Teléfono</label>
+                <input type="text" class="form-control" id="txt_telefono_cliente" placeholder="Ingresar Teléfono">                
+            </div>
+            <div class="form-group">
+                <label for="txt_direccion_cliente">Dirección</label>
+                <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
+            </div>  
+            <div class="button-group">
+                <button type="button" class="btn btn-success" id="btn_guardar">Guardar</button><div id="retorno_ajax"></div>
+            </div>  
         </div>
         <div id="div_listado_cliente">            
         </div>
