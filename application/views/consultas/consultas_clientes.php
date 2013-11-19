@@ -17,7 +17,7 @@ switch($consulta){
         }
         else{
             /*echo "El cliente ". $un_cliente['nombre']." no pudo ser ingresado. Verifique los datos<br>"; */
-            echo 2;
+            echo 0;
         }
         break;
     

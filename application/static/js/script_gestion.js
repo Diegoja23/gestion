@@ -31,7 +31,26 @@ function guardarCliente(){
     var telefono_cli = $.trim($("#txt_telefono_cliente").val());
     var direccion_cli = $.trim($("#txt_direccion_cliente").val());
     var ci_escaneada_cli = $.trim($("#txt_ci_cliente").val()); 
-
-    $("#retorno_ajax").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
+    $.post("http://localhost/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
+        .done(function(data) {
+        if(parseInt(data) == 1){
+            $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
+            limpiarFormularioAgregarCliente();
+        }
+        else{
+            $("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
+        }
+    });
+    //$("#retorno_ajax").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 //$( document ).on( "change",".elegir_familia", cambiarElemento );
+
+function limpiarFormularioAgregarCliente(){
+    $("#txt_nombre_cliente").val("");
+    $("#txt_apellido_cliente").val("");
+    $("#txt_ci_cliente").val("");
+    $("#txt_email_cliente").val("");
+    $("#txt_telefono_cliente").val("");
+    $("#txt_direccion_cliente").val("");
+    $("#txt_ci_cliente").val(""); 
+}
