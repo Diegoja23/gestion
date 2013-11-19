@@ -11,11 +11,13 @@ switch($consulta){
 
     case "agregar_cliente": 
         $un_cliente = cargarValores();
-        if($Fachada->agregarCliente($paramsCliente)){
-            echo "El cliente ". $paramsCliente['nombre']." se ingresó con éxito<br>";
+        if($Fachada->agregarCliente($un_cliente)){
+            /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
+            echo 1;
         }
         else{
-            echo "El cliente ". $paramsCliente['nombre']." no pudo ser ingresado. Verifique los datos<br>";   
+            /*echo "El cliente ". $un_cliente['nombre']." no pudo ser ingresado. Verifique los datos<br>"; */
+            echo 2;
         }
         break;
     
