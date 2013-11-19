@@ -1,5 +1,6 @@
 <?php
-
+header('Content-Type: text/html; charset=UTF-8');
+$Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
 
 switch($consulta){
@@ -26,7 +27,7 @@ switch($consulta){
         break;
 }
 
-function cargarValores(){   
+function cargarValores(){ 
     $paramsCliente=array();
     $paramsCliente['nombre']=$_POST['nombre'];
     $paramsCliente['apellido']=$_POST['apellido'];
@@ -34,6 +35,7 @@ function cargarValores(){
     $paramsCliente['email']=$_POST['email'];
     $paramsCliente['telefono']=$_POST['telefono'];
     $paramsCliente['direccion']=$_POST['direccion']; 
+    //$paramsCliente['ci_escaneada']=$_POST['ci_escaneada'];
     return $paramsCliente;
 }
 
@@ -47,17 +49,17 @@ function traerTodosDP(){
         <thead>
           <tr>
             <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>Obdulio Varela</td>
+            <td>4.444.444-4</td>
+            <td><p><i class="fa fa-pencil-square-o fa-2x"><i class="fa fa-ban"></i></i></p></td>
           </tr>
           <tr>
             <td>2</td>
