@@ -35,6 +35,11 @@ class Fachada
         return $this->sp->agregarCliente($paramsCliente);    
     }
   
+    public function modificarCliente($Cliente) 
+    {
+        return $this->sp->modificarCliente($Cliente);    
+    }
+      
     public function getClientes($limit = 0, $offset = -1) 
     {
         return $this->sp->getClientes($limit, $offset);

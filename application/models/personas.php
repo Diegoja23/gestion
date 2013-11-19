@@ -37,10 +37,13 @@ class Personas extends CI_Model
     
     function update_persona($personParams)
     {        
-        $id_persona = $entityParams['id_persona'];
+        $id_persona = $personParams['id_persona'];
         
         $this->db->where('id_persona', $id_persona);
-        $this->db->update('personas', $personParams);     
+        $this->db->update('personas', $personParams);    
+        //$query = $this->db->update('personas', $personParams);    
+        //var_dump($query);
+        return true;
     }
         
             

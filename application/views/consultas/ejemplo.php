@@ -19,9 +19,9 @@
     // get clientes
     echo "Clientes sin limite (todos)<br>";
     $clientes = $Fachada->getClientes();
-    
+        
     foreach ($clientes as $c) 
-    {
+    {        
         echo $c->getNombre()."<br>";
     }         
 
@@ -32,7 +32,10 @@
     foreach ($clientes as $c) 
     {
         echo $c->getNombre()."<br>";
+        $clienteModificar = $c;
     }       
+         
+    $clienteModificar->setNombre('Adela');
+    $Fachada->modificarCliente($clienteModificar);
     
-  
 ?>

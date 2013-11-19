@@ -54,6 +54,18 @@ class Participante extends Persona
 
     }
     
+    public function update()
+    {
+        $object_vars=get_object_vars($this);
+        var_dump(get_object_vars($this));
+        $fieldsParticipante = array();
+        foreach($object_vars as $key => $value)        
+            if($key != 'myci')
+                $fieldsParticipante[$key] = $value;                     
+              
+      //  return $this->myci->p->update_persona($fieldsParticipante);
+
+    }    
     /* Miembros estáticos, manejan funcionalidad de todos */
     public static function getAll($esCliente=false, $limit = 0, $offset = -1)
     {
