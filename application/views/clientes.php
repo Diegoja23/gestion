@@ -87,7 +87,7 @@
                 <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
             </div>  
             <div class="button-group">
-                <button type="button" class="btn btn-success" id="btn_guardar">Guardar</button><div id="retorno_ajax"></div>
+                <button type="button" class="btn btn-success" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
             </div>  
         </div>
         <div id="div_listado_cliente">            
