@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+//$GLOBALS['fachada'] = Fachada::getInstancia();
 $Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
 
 switch($consulta){
     case "traer_todos":
-        echo traerTodos();
+        echo crearListaClientes(traerTodos());
         //echo "traigo todos";
         break;
 
@@ -42,8 +43,19 @@ function cargarValores(){
 }
 
 function traerTodos(){
-    $todos_los_clientes = traerTodosDP();
+    $Fachada = Fachada::getInstancia();
+    $todos_los_clientes = $Fachada->getClientes();;
     return $todos_los_clientes;
+}
+
+function crearListaClientes($lista){
+    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
+    $numero = 0;    
+    foreach ($lista as $c) 
+    {        
+        $retorno .= '<tr><td>'.++$numero.'</td><td>'.$c->getNombre()." ".$c->getApellido()."</td><td>".$c->getCI().'</td><td></td><td><p><i class="fa fa-pencil-square-o fa-2x"><i class="fa fa-ban"></i></i></p></td></tr>';
+    }
+    return $retorno;
 }
 
 function traerTodosDP(){
