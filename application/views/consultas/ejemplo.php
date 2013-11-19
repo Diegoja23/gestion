@@ -29,13 +29,14 @@
     
     $clientes = $Fachada->getClientes(2,0);
     
+    $clienteModificar = null;
     foreach ($clientes as $c) 
     {
         echo $c->getNombre()."<br>";
         $clienteModificar = $c;
     }       
          
-    $clienteModificar->setNombre('Adela');
+    $clienteModificar->setNombre('Pablo');
     $Fachada->modificarCliente($clienteModificar);
     
 ?>

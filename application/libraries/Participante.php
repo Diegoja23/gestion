@@ -57,22 +57,21 @@ class Participante extends Persona
     public function update()
     {
         $object_vars=get_object_vars($this);
-        var_dump(get_object_vars($this));
         $fieldsParticipante = array();
         foreach($object_vars as $key => $value)        
             if($key != 'myci')
                 $fieldsParticipante[$key] = $value;                     
               
-      //  return $this->myci->p->update_persona($fieldsParticipante);
+        return $this->myci->p->update_persona($fieldsParticipante);
 
     }    
     /* Miembros estáticos, manejan funcionalidad de todos */
-    public static function getAll($esCliente=false, $limit = 0, $offset = -1)
+    public static function getAll($limit = 0, $offset = -1)
     {
         $arrayParticipantes = array();
         $paramsParticipante = array();
         $ci =& get_instance();                      
-        $data = $ci->p->get_all_personas($esCliente, $limit, $offset);
+        $data = $ci->p->get_all_personas(false, $limit, $offset);
         foreach($data as $p)
         {
             $paramsParticipante["id_persona"] = $p->id_persona;   

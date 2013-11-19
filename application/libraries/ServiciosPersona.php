@@ -25,7 +25,7 @@ class ServiciosPersona
             return false;        
     }
     
-    public function modificarCliente(Clien $Cliente)
+    public function modificarCliente(Cliente $Cliente)
     {
         return $Cliente->update(); 
     } 
