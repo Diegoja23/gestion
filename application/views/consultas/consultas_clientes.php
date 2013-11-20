@@ -1,21 +1,21 @@
 <?php
 
 header('Content-Type: text/html; charset=UTF-8');
-//$GLOBALS['fachada'] = Fachada::getInstancia();
-$Fachada = Fachada::getInstancia();
+$GLOBALS['fachada'] = Fachada::getInstancia();
+//$Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
 
     
 switch($consulta){
     case "traer_todos":
-        
-        echo crearListaClientes(traerTodos());
-        echo "traigo todos";
+        //echo crearListaClientes(traerTodos());
+        echo traerTodos2();
+        //echo "traigo todos";
         break;
 
     case "agregar_cliente": 
         $un_cliente = cargarValores();
-        if($Fachada->agregarCliente($un_cliente)){
+        if($GLOBALS['fachada']->agregarCliente($un_cliente)){
             /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
             echo 1;
         }
@@ -46,7 +46,7 @@ function cargarValores(){
 }
 
 function traerTodos(){
-    $Fachada = Fachada::getInstancia();
+    $Fachada = $GLOBALS['fachada'];
     $todos_los_clientes = $Fachada->getClientes();
     return $todos_los_clientes;
 }
@@ -59,6 +59,11 @@ function crearListaClientes($lista){
         $retorno .= '<tr><td>'.++$numero.'</td><td>'.$c->getNombre()." ".$c->getApellido()."</td><td>".$c->getCI().'</td><td></td><td><p><i class="fa fa-pencil-square-o fa-2x"><i class="fa fa-ban"></i></i></p></td></tr>';
     }
     return $retorno;
+}
+
+function traerTodos2(){
+    $todos_los_clientes = traerTodosDP();
+    return $todos_los_clientes;
 }
 
 function traerTodosDP(){
