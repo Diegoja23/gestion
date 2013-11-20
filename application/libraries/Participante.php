@@ -64,7 +64,12 @@ class Participante extends Persona
               
         return $this->myci->personas->update_persona($fieldsParticipante);
 
-    }    
+    }   
+    
+    public function getByCI($cedula){
+        $ci =& get_instance();
+        return $ci->personas->getByCI($cedula);   
+    }
     /* Miembros estáticos, manejan funcionalidad de todos */
     public static function getAll($limit = 0, $offset = -1)
     {
