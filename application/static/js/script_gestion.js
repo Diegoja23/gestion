@@ -4,12 +4,12 @@ function iniEventos() {
     $("#div_listado_cliente").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
 }
 
-$(document).on("click","#btn_agregar_cliente",agregarCliente);
+$(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
 $(document).on("click","#guardar_cliente",guardarCliente);
 $(document).on("click","#btn_guardar",guardarCliente);
+$(document).on("click","tr",traerClienteElegido);
 
-
-function agregarCliente(){
+function agregarDivDatosCliente(){
     if($("#div_formulario_cliente").css("display") == "none"){         
         $("#div_listado_cliente").fadeOut(1500);
         $("#div_formulario_cliente").fadeIn(1500);
@@ -21,6 +21,11 @@ function agregarCliente(){
         $("#div_listado_cliente").fadeIn(1500);
         $("#btn_agregar_cliente").text("Agregar");
     }
+}
+
+function traerClienteElegido(){
+    var documento = $(this).children()[2].innerText;
+    alert(documento);
 }
 
 function guardarCliente(){
