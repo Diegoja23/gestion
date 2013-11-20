@@ -38,7 +38,7 @@ class Participante extends Persona
     
     public function exists()
     {
-        return $this->myci->p->exists_persona($this->ci);    
+        return $this->myci->personas->exists_persona($this->ci);    
     }
     
     public function add()
@@ -50,7 +50,7 @@ class Participante extends Persona
             if($key != 'myci')
                 $fieldsParticipante[$key] = $value;                    
               
-        return $this->myci->p->insert_persona($fieldsParticipante);
+        return $this->myci->personas->insert_persona($fieldsParticipante);
 
     }
     
@@ -62,7 +62,7 @@ class Participante extends Persona
             if($key != 'myci')
                 $fieldsParticipante[$key] = $value;                     
               
-        return $this->myci->p->update_persona($fieldsParticipante);
+        return $this->myci->personas->update_persona($fieldsParticipante);
 
     }    
     /* Miembros estáticos, manejan funcionalidad de todos */
@@ -71,7 +71,7 @@ class Participante extends Persona
         $arrayParticipantes = array();
         $paramsParticipante = array();
         $ci =& get_instance();                      
-        $data = $ci->p->get_all_personas(false, $limit, $offset);
+        $data = $ci->personas->get_all_personas(false, $limit, $offset);
         foreach($data as $p)
         {
             $paramsParticipante["id_persona"] = $p->id_persona;   

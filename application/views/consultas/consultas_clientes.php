@@ -1,13 +1,16 @@
 <?php
+
 header('Content-Type: text/html; charset=UTF-8');
 //$GLOBALS['fachada'] = Fachada::getInstancia();
 $Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
 
+    
 switch($consulta){
     case "traer_todos":
+        
         echo crearListaClientes(traerTodos());
-        //echo "traigo todos";
+        echo "traigo todos";
         break;
 
     case "agregar_cliente": 
@@ -44,7 +47,7 @@ function cargarValores(){
 
 function traerTodos(){
     $Fachada = Fachada::getInstancia();
-    $todos_los_clientes = $Fachada->getClientes();;
+    $todos_los_clientes = $Fachada->getClientes();
     return $todos_los_clientes;
 }
 

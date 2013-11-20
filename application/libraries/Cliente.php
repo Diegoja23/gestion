@@ -25,8 +25,7 @@ class Cliente extends Participante
         $arrayClientes = array();
         $paramsCliente = array();
         $ci =& get_instance();
-        $data = $ci->p->get_all_personas(true, $limit, $offset);
-        var_dump($data);die();
+        $data = $ci->personas->get_all_personas(true, $limit, $offset);
         foreach($data as $p)
         {
             $paramsCliente["id_persona"] = $p->id_persona;   

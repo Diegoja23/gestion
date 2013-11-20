@@ -22,7 +22,6 @@ abstract class Persona
             $this->$att = $key;   
 
         $this->myci =& get_instance();
-        $this->loadDataModel();
         //TODO
     }
     
@@ -39,29 +38,8 @@ abstract class Persona
     public function setNombre($nombre) { $this->nombre = $nombre; }
     
     public function setApellido($apellido) { $this->apel = $nombre; }    
+    
 
-    
-    
-    /* Database */
-    private function loadDataModel()
-    {
-        $this->myci =& get_instance();
-        $this->loadDatabase();
-        $this->setModel();  
-    }    
-    
-    private function loadDatabase()
-    {
-        if (!is_null($this->myci))      
-            $this->myci->load->database('gestion', false, true);                                
-    }
-    
-    private function setModel()
-    {
-        if (!is_null($this->myci))      
-            $this->myci->load->model('personas', 'p');                                        
-    }           
-  
     abstract public function exists();
       
 }

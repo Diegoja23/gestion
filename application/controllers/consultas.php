@@ -5,7 +5,7 @@
         public function __construct()
         {            
             parent::__construct();            
-                            
+            $this->load->database();
         }
                         
         public function index($page = 'home', $id = -1)
