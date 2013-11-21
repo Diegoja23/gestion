@@ -1,7 +1,8 @@
 <?php
 
 header('Content-Type: text/html; charset=UTF-8');
-$GLOBALS['fachada'] = Fachada::getInstancia();
+//$GLOBALS['fachada'] = Fachada::getInstancia();
+
 //$Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
 
@@ -9,13 +10,14 @@ $consulta = $_POST['consulta'];
 switch($consulta){
     case "traer_todos":
         //echo crearListaClientes(traerTodos());
-        echo traerTodos2();
-        //echo "traigo todos";
+        echo crearListaClientes(traerTodos());
+        /*echo "traigo todos";*/
         break;
 
     case "agregar_cliente": 
         $un_cliente = cargarValores();
-        if($GLOBALS['fachada']->agregarCliente($un_cliente)){
+
+        if(Fachada::getInstancia()->agregarCliente($un_cliente)){
             /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
             echo 1;
         }
@@ -24,10 +26,12 @@ switch($consulta){
             echo 0;
         }
         break;
-    
-    case 2:
-        echo "a es igual a 2";
+        
+    case "traer_por_ci":
+        $ci = cargarUnValor('ci');        
+        echo serialize(Fachada::getInstancia()->getByCI($ci));
         break;
+    
     default:
         echo "a no es igual a ninguno de los valores esperados";
         break;
@@ -45,9 +49,13 @@ function cargarValores(){
     return $paramsCliente;
 }
 
+function cargarUnValor($variable){
+    return $_POST[$variable];
+}
+
 function traerTodos(){
-    $Fachada = $GLOBALS['fachada'];
-    $todos_los_clientes = $Fachada->getClientes();
+    //$Fachada = $GLOBALS['fachada'];
+    $todos_los_clientes = Fachada::getInstancia()->getClientes();
     return $todos_los_clientes;
 }
 
@@ -56,7 +64,7 @@ function crearListaClientes($lista){
     $numero = 0;    
     foreach ($lista as $c) 
     {        
-        $retorno .= '<tr><td>'.++$numero.'</td><td>'.$c->getNombre()." ".$c->getApellido()."</td><td>".$c->getCI().'</td><td></td><td><p><i class="fa fa-pencil-square-o fa-2x"><i class="fa fa-ban"></i></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado">'.++$numero.'</td><td class="dato_mostrado">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado">'.$c->getCI().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="fa fa-ban fa-2x"></i></p></td></tr>';
     }
     return $retorno;
 }

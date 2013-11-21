@@ -43,7 +43,11 @@ class Fachada
     public function getClientes($limit = 0, $offset = -1) 
     {
         return $this->sp->getClientes($limit, $offset);
-    }              
+    }
+    
+    public function getByCI($ci){
+        return $this->sp->getByCI($ci);
+    }
 }
 
 

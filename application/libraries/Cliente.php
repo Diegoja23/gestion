@@ -50,7 +50,11 @@ class Cliente extends Participante
         }
 
         return $arrayClientes;
-    }      
+    }
+    
+    public function getByCI($ci){
+        return parent::getByCI($ci);
+    }
     
     public function update()
     {
