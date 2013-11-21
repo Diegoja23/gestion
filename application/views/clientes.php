@@ -66,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label for="txt_apellido_cliente">Apellido</label>
-                <input type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
+                <input enabled="false" type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
             </div>
             <div class="form-group">                
                 <label for="txt_ci_cliente">Cédula de Identidad</label><br />

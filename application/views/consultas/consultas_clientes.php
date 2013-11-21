@@ -29,7 +29,9 @@ switch($consulta){
         
     case "traer_por_ci":
         $ci = cargarUnValor('ci');        
-        echo serialize(Fachada::getInstancia()->getByCI($ci));
+        //echo str_replace('"',"'",json_encode(Fachada::getInstancia()->getByCI($ci)));
+        echo json_encode(Fachada::getInstancia()->getByCI($ci));
+        //echo get_object_vars(Fachada::getInstancia()->getByCI($ci));
         break;
     
     default:

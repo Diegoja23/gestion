@@ -26,70 +26,13 @@ function agregarDivDatosCliente(){
 function traerClienteElegido(){
     var documento = $(this).parent().children()[2].innerText;
     $.post("http://localhost/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
-            .done(function(data) {
-            /*if(parseInt(data) == 1){
-                $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
-                limpiarFormularioAgregarCliente();
-            }
-            else{
-                $("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
-            }*/
-                //alert(data);
-                var valor = desSerializar(data);
-                var lolo = $.unserialize(data);
-                alert(valor);
-                $('#content').append(valor);
-        });
-    //alert(documento);
+            .done(function(data) {            
+                agregarDivDatosCliente();
+                var un_cliente = jQuery.parseJSON(data);
+                cargarFormulario(un_cliente[0]);
+                //$('#content').append(data);
+        }, "json");
 }
-(function($){
-	$.unserialize = function(serializedString){
-		var str = decodeURI(serializedString);
-		var pairs = str.split('&');
-		var obj = {}, p, idx, val;
-		for (var i=0, n=pairs.length; i < n; i++) {
-			p = pairs[i].split('=');
-			idx = p[0];
- 
-			if (idx.indexOf("[]") == (idx.length - 2)) {
-				// Eh um vetor
-				var ind = idx.substring(0, idx.length-2)
-				if (obj[ind] === undefined) {
-					obj[ind] = [];
-				}
-				obj[ind].push(p[1]);
-			}
-			else {
-				obj[idx] = p[1];
-			}
-		}
-		return obj;
-	};
-})(jQuery);
-
-function desSerializar (serializedString){
-		var str = decodeURI(serializedString);
-		var pairs = str.split('&');
-		var obj = {}, p, idx, val;
-		for (var i=0, n=pairs.length; i < n; i++) {
-			p = pairs[i].split('=');
-			idx = p[0];
- 
-			if (idx.indexOf("[]") == (idx.length - 2)) {
-				// Eh um vetor
-				var ind = idx.substring(0, idx.length-2)
-				if (obj[ind] === undefined) {
-					obj[ind] = [];
-				}
-				obj[ind].push(p[1]);
-			}
-			else {
-				obj[idx] = p[1];
-			}
-		}
-		return obj;
-}
-
 
 function guardarCliente(){
     var nombre_cli = $.trim($("#txt_nombre_cliente").val());
@@ -105,7 +48,7 @@ function guardarCliente(){
             .done(function(data) {
             if(parseInt(data) == 1){
                 $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
-                limpiarFormularioAgregarCliente();
+                cargarFormulario(-1);
             }
             else{
                 $("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
@@ -128,12 +71,24 @@ function validarDatosIngresados(nombre_cli,apellido_cli,ci_cli,email_cli,telefon
     }
 }
 
-function limpiarFormularioAgregarCliente(){
-    $("#txt_nombre_cliente").val("");
-    $("#txt_apellido_cliente").val("");
-    $("#txt_ci_cliente").val("");
-    $("#txt_email_cliente").val("");
-    $("#txt_telefono_cliente").val("");
-    $("#txt_direccion_cliente").val("");
-    $("#txt_ci_cliente").val(""); 
+function cargarFormulario(un_cliente){
+    if(un_cliente != -1){
+        $("#txt_nombre_cliente").val(un_cliente.nombre);
+        $("#txt_apellido_cliente").val(un_cliente.apellido);
+        $("#txt_ci_cliente").val(un_cliente.ci);
+        $("#txt_email_cliente").val(un_cliente.email);
+        $("#txt_telefono_cliente").val(un_cliente.telefono);
+        $("#txt_direccion_cliente").val(un_cliente.direccion);
+        $("#txt_direccion_cliente").attr("locked","true");
+        //$("#txt_ci_cliente").val(""); 
+    }
+    else{
+        $("#txt_nombre_cliente").val("");
+        $("#txt_apellido_cliente").val("");
+        $("#txt_ci_cliente").val("");
+        $("#txt_email_cliente").val("");
+        $("#txt_telefono_cliente").val("");
+        $("#txt_direccion_cliente").val("");
+        $("#txt_ci_cliente").val(""); 
+    }
 }
