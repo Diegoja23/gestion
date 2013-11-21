@@ -1,5 +1,6 @@
 <?php
 require_once('Persona.php');
+require_once('Adjunto.php');
 /**
  * class Cliente
  * autor: gestion
@@ -28,6 +29,8 @@ class Participante extends Persona
     
     public function getCI(){return $this->ci;}
     
+    public function getAdjuntos(){return $this->adjuntos;}
+    
     /* Setters */
     
     public function validar()
@@ -47,10 +50,15 @@ class Participante extends Persona
         //var_dump(get_object_vars($this));
         $fieldsParticipante = array();
         foreach($object_vars as $key => $value)        
-            if($key != 'myci')
-                $fieldsParticipante[$key] = $value;                    
-              
-        return $this->myci->personas->insert_persona($fieldsParticipante);
+            if($this->attNotDistinctToTable($key))
+                $fieldsParticipante[$key] = $value; 
+            
+        $id_persona = $this->myci->personas->insert_persona($fieldsParticipante);             
+        if(!empty($this->adjuntos) && $id_persona > 0)
+            foreach($this->adjuntos as $adjunto)            
+                if(!$this->myci->datos_complementarios->add($adjunto, $id_persona)) return false;            
+                                                              
+        return true;
 
     }
     
@@ -59,11 +67,16 @@ class Participante extends Persona
         $object_vars=get_object_vars($this);
         $fieldsParticipante = array();
         foreach($object_vars as $key => $value)        
-            if($key != 'myci')
+            if($this->attNotDistinctToTable($key))
                 $fieldsParticipante[$key] = $value;                     
               
         return $this->myci->personas->update_persona($fieldsParticipante);
 
+    }    
+    
+    public function attNotDistinctToTable($att)
+    {
+        return ($att != 'myci' && $att != 'adjuntos');
     }    
     /* Miembros estáticos, manejan funcionalidad de todos */
     public static function getAll($limit = 0, $offset = -1)

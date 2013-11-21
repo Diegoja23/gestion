@@ -3,12 +3,8 @@
 class Personas extends CI_Model 
 {
     
-    private $myci;
-    
     function __construct()
     {
-        $this->myci = &get_instance();
-
     }
     
     function get_all_personas($esCliente = false, $limit = 0, $offset = -1)
@@ -25,7 +21,10 @@ class Personas extends CI_Model
     
     function insert_persona($personParams)
     {
-        return $this->db->insert('personas', $personParams);     
+        $id_persona = 0;
+        $this->db->insert('personas', $personParams);   
+        $id_persona = $this->db->insert_id();
+        return $id_persona;   
     }
     
     function exists_persona($ci)
@@ -45,6 +44,8 @@ class Personas extends CI_Model
         //var_dump($query);
         return true;
     }
+    
+ 
         
             
 }

@@ -30,9 +30,9 @@ class Fachada
         return self::$Instancia;
     }
 
-    public function agregarCliente($paramsCliente) 
+    public function agregarCliente($paramsCliente, $paramsAdjuntos=array()) 
     {
-        return $this->sp->agregarCliente($paramsCliente);    
+        return $this->sp->agregarCliente($paramsCliente,$paramsAdjuntos);    
     }
   
     public function modificarCliente($Cliente) 

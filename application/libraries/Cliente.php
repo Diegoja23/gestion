@@ -35,6 +35,15 @@ class Cliente extends Participante
             $paramsCliente["direccion"] = $p->direccion;    
             $paramsCliente["telefono"] = $p->telefono;    
             $paramsCliente["ci"] = $p->ci;    
+            $paramsCliente["adjuntos"] = array();    
+            
+            $adjuntos = $ci->datos_complementarios->get_adjuntos($p->id_persona);    
+            foreach ($adjuntos as $a) 
+            {
+                $attsAdjuntos = array('nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
+                $Adjunto = new Adjunto($attsAdjuntos);
+                array_push($paramsCliente["adjuntos"],$Adjunto);
+            }  
             
             $Cliente = new Cliente($paramsCliente);   
             $arrayClientes[] = $Cliente;
