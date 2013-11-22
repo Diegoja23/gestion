@@ -40,8 +40,9 @@ class ServiciosPersona
     } 
     
     public function getByCI($ci){
-        //var_dump($ci);die();
-        return Cliente::getByCI($ci);
+        $un_cliente = new Cliente(array('ci'=>$ci)); 
+        $un_cliente->getByCI();
+        return $un_cliente;
     }
     
     

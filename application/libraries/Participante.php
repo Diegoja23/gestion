@@ -80,12 +80,11 @@ class Participante extends Persona
     }    
 
     
-    public function getByCI($cedula){
-        $ci =& get_instance();
-        //return $this->myci->personas->getByCI($cedula);  
-        return $ci->personas->getByCI($cedula); 
+    public function getByCI(){
+        $array_con_datos_cliente = $this->myci->personas->getByCI($this->getCI());        
+        $this->materializar($array_con_datos_cliente[0]);
     }
-
+    
     /* Miembros estáticos, manejan funcionalidad de todos */
     public static function getAll($limit = 0, $offset = -1)
     {

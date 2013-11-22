@@ -29,15 +29,20 @@ switch($consulta){
         
     case "traer_por_ci":
         $ci = cargarUnValor('ci');        
-        //echo str_replace('"',"'",json_encode(Fachada::getInstancia()->getByCI($ci)));
-        echo json_encode(Fachada::getInstancia()->getByCI($ci));
-        //echo get_object_vars(Fachada::getInstancia()->getByCI($ci));
-        break;
+        $un_cliente = Fachada::getInstancia()->getByCI($ci);
+        echo json_encode($un_cliente->convertirArray());
+         break;
+    
+   case "subir foto":
+        $file = $_FILES['archivo']['name'];
+        echo $file;
+        break;   
     
     default:
         echo "a no es igual a ninguno de los valores esperados";
         break;
 }
+
 
 function cargarValores(){ 
     $paramsCliente=array();

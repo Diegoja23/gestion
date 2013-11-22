@@ -26,6 +26,13 @@ abstract class Persona
         //TODO
     }
     
+    public function materializar($params)
+    {
+        foreach ($params as $att => $key){
+            $this->$att = $key;   
+        }
+    }  
+    
     
     /* Getters */
     public function getNombre(){ return $this->nombre; }

@@ -337,6 +337,10 @@ table tr td
     float: left;
 }
 
+#div_formulario_subir_ci{
+    display:none;
+}
+
 .clear{
     clear: both;
 }

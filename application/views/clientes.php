@@ -71,8 +71,16 @@
             <div class="form-group">                
                 <label for="txt_ci_cliente">Cédula de Identidad</label><br />
                 <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
-                <button type="button" class="btn btn-info">Agregar escaneo</button>
+                <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar escaneo</button>                
             </div>  
+            <!--div class="form-group" id="div_formulario_subir_ci"-->
+            <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">
+                    <label for="exampleInputFile">Cédula</label>
+                    <input type="file" class="archivo" id="input_file_cedula">
+                    <p class="help-block">Agregar cédula de identidad. <span class="span_respuestas_archivos"></span></p>
+                    <button type="button" class="subir_archivo btn btn-info btn-sm">Subir cédula</button> 
+            </form>
+            <!--/div-->
             <div class="form-group">
                 <label for="txt_email_cliente">Email</label>                
                 <input type="email" class="form-control" id="txt_email_cliente" placeholder="E-mail">

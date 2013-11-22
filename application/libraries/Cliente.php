@@ -52,15 +52,24 @@ class Cliente extends Participante
         return $arrayClientes;
     }
     
-    public function getByCI($ci){
-        return parent::getByCI($ci);
+    public function getByCI(){
+        return parent::getByCI();
     }
     
     public function update()
     {
         return parent::update();
-    }      
+    }
+    
+    public function convertirArray(){
+        $object_vars=get_object_vars($this);
+        $fieldsParticipante = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsParticipante[$key] = $value; 
             
+        return $fieldsParticipante;
+    }            
 }
 
 

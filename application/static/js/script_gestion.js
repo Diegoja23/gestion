@@ -8,6 +8,7 @@ $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
 //$(document).on("click","#guardar_cliente",guardarCliente);
 $(document).on("click","#btn_guardar",guardarCliente);
 $(document).on("click",".dato_mostrado",traerClienteElegido);
+$(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 
 function agregarDivDatosCliente(){
     if($("#div_formulario_cliente").css("display") == "none"){         
@@ -23,14 +24,27 @@ function agregarDivDatosCliente(){
     }
 }
 
+function mostrarFormularioSubirCI(){
+    if($("#div_formulario_subir_ci").css("display") == "none"){ 
+        $("#div_formulario_subir_ci").fadeIn(1500);
+    }
+    else{
+        $("#div_formulario_subir_ci").fadeOut(1500);
+        $("#input_file_cedula").val("");
+    }
+}
+
 function traerClienteElegido(){
-    var documento = $(this).parent().children()[2].innerText;
+    /*var padre = $(this).parent();
+    var hijo = padre.children()[2];
+    var documento = $(hijo).text();*/
+    var documento = $($(this).parent().children()[2]).text();
     $.post("http://localhost/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
                 var un_cliente = jQuery.parseJSON(data);
-                cargarFormulario(un_cliente[0]);
-                //$('#content').append(data);
+                cargarFormulario(un_cliente);
+                //$('#content').append(un_cliente);
         }, "json");
 }
 
