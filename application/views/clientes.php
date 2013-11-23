@@ -1,4 +1,3 @@
-
   <title>Sistema de Gestión Notarial</title>
   <meta name="description" content="sistema de gestion notarial" />
   <meta name="keywords" content="sistema,gestion,notarial,documentos,juridicos" />
@@ -76,10 +75,11 @@
             <!--div class="form-group" id="div_formulario_subir_ci"-->
             <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">
                     <label for="exampleInputFile">Cédula</label>
-                    <input type="file" class="archivo" id="input_file_cedula">
-                    <p class="help-block">Agregar cédula de identidad. <span class="span_respuestas_archivos"></span></p>
+                    <input type="file" class="archivo" id="input_file_cedula" name="input_file_cedula">
+                    <p class="help-block retorno_del_file_agregar_elemento">Agregar cédula de identidad.</p>
                     <button type="button" class="subir_archivo btn btn-info btn-sm">Subir cédula</button> 
             </form>
+            <div class="mostrarCI"></div>
             <!--/div-->
             <div class="form-group">
                 <label for="txt_email_cliente">Email</label>                

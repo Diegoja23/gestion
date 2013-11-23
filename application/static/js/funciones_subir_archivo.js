@@ -21,11 +21,11 @@ $(document).ready(function(){
 	});
 
 	//al enviar el formulario
-	$('.subir_archivo').click(function(){
+	$('.subir_archivo_generico').click(function(){
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo")[0]);
-                var datos_para_mandar = new Array('consulta', 'foto');
-                datos_para_mandar['consulta'] = "subir foto";
+                var datos_para_mandar = new Array();
+                datos_para_mandar['consulta'] = "subir_foto";
                 datos_para_mandar['foto'] = formData;
 		var message = "";	
 		//hacemos la petición ajax  
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			type: 'POST',
 			// Form data
 			//datos del formulario
-			data: datos_para_mandar,
+			data: formData,
 			//necesario para subir archivos via ajax
 			cache: false,
 			contentType: false,
@@ -50,7 +50,7 @@ $(document).ready(function(){
 			    showMessage(message);
 			    if(isImage(fileExtension))
 			    {
-			        $(".showImage").html("<img src='files/"+data+"' />");
+			        $(".mostrarCI").html(data);
 			    }
 			},
 			//si ha ocurrido un error

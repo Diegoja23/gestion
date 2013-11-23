@@ -5,7 +5,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
 //$Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
-
+//var_dump($consulta);die();
     
 switch($consulta){
     case "traer_todos":
@@ -15,9 +15,16 @@ switch($consulta){
         break;
 
     case "agregar_cliente": 
-        $un_cliente = cargarValores();
-
-        if(Fachada::getInstancia()->agregarCliente($un_cliente)){
+        $un_cliente_array = cargarValores();
+        $adjunto_array = cargarAdjunto();
+        
+        if($adjunto_array != -1){
+            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array,$adjunto_array);
+        }
+        else{
+            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array);
+        }
+        if($retorno){
             /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
             echo 1;
         }
@@ -33,13 +40,44 @@ switch($consulta){
         echo json_encode($un_cliente->convertirArray());
          break;
     
-   case "subir foto":
+   case "subir_foto":
         $file = $_FILES['archivo']['name'];
         echo $file;
         break;   
     
     default:
-        echo "a no es igual a ninguno de los valores esperados";
+        //echo "a no es igual a ninguno de los valores esperados";
+        //$file = $_FILES['archivo']['name'];
+        //$file = $_FILES["input_file_cedula"]["file"];
+        //var_dump($_FILES); die();
+        //echo base64_encode($file);
+        
+        /*
+        $archivo = $_FILES["input_file_cedula"]["tmp_name"];    
+         $tamanio = $_FILES["input_file_cedula"]["size"];
+         $tipo    = $_FILES["input_file_cedula"]["type"];
+         $nombre  = $_FILES["input_file_cedula"]["name"];    
+         
+         if ( $archivo != "none" )
+         {
+            $fp = fopen($archivo, "rb");
+            $contenido = fread($fp, $tamanio);
+            $contenido = addslashes($contenido);
+            fclose($fp);     
+         }
+         
+        $arrayDatosAdjuntos = array(
+                                    array('nombre' => 'cedula',
+                                           'archivo' => $contenido,
+                                           'tipo' => $tipo)
+                                    );    
+        //var_dump($archivo); die();
+        echo '<img src="data:image/jpeg;base64,' . base64_encode( $archivo ) . '" />';
+         * 
+         * 
+         */
+        
+        //echo $archivo;
         break;
 }
 
@@ -54,6 +92,38 @@ function cargarValores(){
     $paramsCliente['direccion']=$_POST['direccion']; 
     //$paramsCliente['ci_escaneada']=$_POST['ci_escaneada'];
     return $paramsCliente;
+}
+
+function cargarAdjunto(){
+    /*$archivo = $_FILES["input_file_cedula"]["tmp_name"];    
+    $tamanio = $_FILES["input_file_cedula"]["size"];
+    $tipo    = $_FILES["input_file_cedula"]["type"];
+    $nombre  = $_FILES["input_file_cedula"]["name"];    
+         
+    if ( $archivo != "none" )
+    {
+        $fp = fopen($archivo, "rb");
+        $contenido = fread($fp, $tamanio);
+        $contenido = addslashes($contenido);
+        fclose($fp);     
+    }
+    else{
+        return -1;
+    }
+         
+    $arrayDatosAdjuntos = array(
+                                array(  'nombre' => 'cedula',
+                                        'archivo' => $contenido,
+                                        'tipo' => $tipo)
+                               );   */
+    session_start();
+    if(isset($_SESSION['ci'])){
+        return $arrayDatosAdjuntos = $_SESSION['ci'];
+    }
+    else{
+        return -1;
+    }
+        //echo '<img src="data:image/jpeg;base64,' . base64_encode( $archivo ) . '" />';
 }
 
 function cargarUnValor($variable){
@@ -76,42 +146,5 @@ function crearListaClientes($lista){
     return $retorno;
 }
 
-function traerTodos2(){
-    $todos_los_clientes = traerTodosDP();
-    return $todos_los_clientes;
-}
-
-function traerTodosDP(){
-    $todos_los_clientes = '<table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Documento</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Obdulio Varela</td>
-            <td>4.444.444-4</td>
-            <td><p><i class="fa fa-pencil-square-o fa-2x"><i class="fa fa-ban"></i></i></p></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>';
-    return $todos_los_clientes;
-}
 
 ?>

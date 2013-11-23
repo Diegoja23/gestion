@@ -27,7 +27,9 @@ class ServiciosPersona
             array_push($paramsCliente['adjuntos'], $Adjunto);  
            
         }
+        //var_dump($paramsCliente);die();
         $Cliente = new Cliente($paramsCliente);
+        //var_dump($Cliente);die();
         if($Cliente->validar()) 
             return $Cliente->add();            
         else 
