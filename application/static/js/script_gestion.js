@@ -2,9 +2,18 @@
 $(document).ready(iniEventos);
 
 function iniEventos() {
-    $("#div_listado_cliente").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
-    //$(".subir_archivo").click(subirElArchivo);
-    $(":file").change(cambioElFile);
+    var url = window.location.pathname;
+    if(url == '/gestion/gestiones' || url == '/gestion/gestiones.php'){
+            
+    }
+    else{
+        if(url == '/gestion/clientes' || url == '/gestion/clientes.php'){
+                $("#div_listado_cliente").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+                //$(".subir_archivo").click(subirElArchivo);
+                $(":file").change(cambioElFile);
+        }
+    }
+
 }
 
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
@@ -15,14 +24,16 @@ $(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 $(document).on("click",".subir_archivo",subirElArchivo);
 $(document).on("change",":file",cambioElFile);
 
-function agregarDivDatosCliente(){
-    if($("#div_formulario_cliente").css("display") == "none"){         
+function agregarDivDatosCliente(){    
+    if($("#div_formulario_cliente").css("display") == "none"){        
         $("#div_listado_cliente").fadeOut(1500);
         $("#div_formulario_cliente").fadeIn(1500);
         $("#btn_agregar_cliente").text("Mostrar Lista"); 
         cargarFormulario(-1);
+        //$("input").prop('disable', false);
     }
     else{        
+        
         $("#div_listado_cliente").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
         $("#div_formulario_cliente").fadeOut(1500);
         $("#div_listado_cliente").fadeIn(1500);
@@ -127,6 +138,7 @@ function traerClienteElegido(){
                 cargarFormulario(un_cliente);
                 //$('#content').append(un_cliente);
         }, "json");
+        //$("input").prop('disable', true);
 }
 
 function guardarCliente(){

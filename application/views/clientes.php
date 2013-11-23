@@ -19,7 +19,7 @@
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="index.php">Inicio</a></li>
           <li class="current"><a href="clientes.php">Clientes</a></li>
-          <li><a href="examples_test.php">Examples</a></li>
+          <li><a href="gestiones">Gestiones</a></li>
           <li><a href="page_test.php">A Page</a></li>
           <li><a href="another_page_test.php">Another Page</a></li>
           <li><a href="contact_test.php">Contact Us</a></li>
