@@ -1,5 +1,6 @@
 <?php
 
+header("Content-type: image/png");
 //function cargarAdjunto(){
 //$_FILES = $_POST['data'];
     $archivo = $_FILES["input_file_cedula"]["tmp_name"];    
@@ -37,13 +38,16 @@
     unset($_SESSION['ci']);
     $_SESSION['ci'] = $arrayDatosAdjuntos;    
     
-    header("Content-type: image/jpeg");
+    //header("Content-type: image/jpeg");
 
-    //echo $cod = base64_encode($contenido);
-    echo 'data:image/jpeg;base64,' . base64_encode( $contenido );
-    //echo json_encode($contenido);
+    echo $cod = base64_encode($contenido);
+   // echo 'data:image/jpeg;base64,' . base64_encode( $contenido );
+    echo json_encode($cod);
     //echo $nombre;
         //var_dump($archivo); die();
         //echo '<img src="data:image/jpeg;base64,' . base64_encode( $archivo ) . '" />';
 //}
-?>
+    
+
+
+

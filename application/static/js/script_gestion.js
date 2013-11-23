@@ -67,8 +67,8 @@ function subirElArchivo(){
                               //  {
        
                             //message = "<img src='"+ data + "' />";
-         
-                            message =  data;
+         message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
+                            //message =  data;
 
                             //    }
                             
