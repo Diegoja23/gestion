@@ -20,7 +20,7 @@
           <li><a href="index.php">Inicio</a></li>
           <li><a href="clientes.php">Clientes</a></li>
           <li class="current"><a href="gestiones">Gestiones</a></li>
-          <li><a href="tramites">Tramites</a></li>
+          <li><a href="tramites">Trámites</a></li>
           <li><a href="another_page_test.php">Another Page</a></li>
           <li><a href="contact_test.php">Contact Us</a></li>
         </ul>
