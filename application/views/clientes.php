@@ -56,7 +56,7 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Clientes</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
+        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button><div id="retorno_borrado_cliente"></div>
         <div id="div_formulario_cliente">
             <h3>Datos del cliente</h3>
             <div class="form-group">

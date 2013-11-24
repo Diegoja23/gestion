@@ -48,6 +48,10 @@ class Fachada
     public function getByCI($ci){
         return $this->sp->getByCI($ci);
     }
+    
+    public function eliminarByCI($ci){
+        return $this->sp->eliminarByCI($ci);
+    }    
 }
 
 

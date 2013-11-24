@@ -85,6 +85,11 @@ class Participante extends Persona
         $this->materializar($array_con_datos_cliente[0]);
     }
     
+    public function eliminarByCI(){        
+        return $this->myci->personas->eliminarByCI($this->getCI());       
+    }
+    
+        
     /* Miembros estáticos, manejan funcionalidad de todos */
     public static function getAll($limit = 0, $offset = -1)
     {

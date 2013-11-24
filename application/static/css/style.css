@@ -347,3 +347,7 @@ table tr td
 .clear{
     clear: both;
 }
+
+#btn_agregar_cliente #retorno_borrado_cliente{
+    float:left;
+}

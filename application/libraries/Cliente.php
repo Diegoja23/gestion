@@ -56,6 +56,10 @@ class Cliente extends Participante
         return parent::getByCI();
     }
     
+    public function eliminarByCI(){
+        return parent::eliminarByCI();
+    }    
+    
     public function update()
     {
         return parent::update();

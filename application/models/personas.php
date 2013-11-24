@@ -39,6 +39,10 @@ class Personas extends CI_Model
         if ($query->num_rows > 0) return $query->result();
         return false;
     }
+        
+    public function eliminarByCI($ci){  
+        return $this->db->delete('personas', array('ci' => $ci));        
+    }
     
     function update_persona($personParams)
     {        

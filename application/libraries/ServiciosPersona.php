@@ -47,6 +47,10 @@ class ServiciosPersona
         return $un_cliente;
     }
     
+    public function eliminarByCI($ci){        
+        $un_cliente = new Cliente(array('ci'=>$ci));        
+        return $un_cliente->eliminarByCI();        
+    }    
     
     public function getClientes($limit = 0, $offset = -1) 
     {

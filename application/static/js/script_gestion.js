@@ -21,6 +21,7 @@ $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
 //$(document).on("click","#guardar_cliente",guardarCliente);
 $(document).on("click","#btn_guardar",guardarCliente);
 $(document).on("click",".dato_mostrado",traerClienteElegido);
+$(document).on("click",".btn_eliminar",eliminarClienteElegido);
 $(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 $(document).on("click",".subir_archivo",subirElArchivo);
 $(document).on("change",":file",cambioElFile);
@@ -140,6 +141,22 @@ function traerClienteElegido(){
                 //$('#content').append(un_cliente);
         }, "json");
         //$("input").prop('disable', true);
+}
+
+function eliminarClienteElegido(){
+    var confirmado = confirm("¿Seguro que desea eliminar este cliente?");
+    if(confirmado){
+        //var documento = $($(this).parent().children()[2]).text();  
+        var documento = $($(this).parent().parent().parent().children()[2]).text();  
+        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_por_ci",ci: documento})
+                .done(function(data) {
+                    $("#retorno_borrado_cliente").html(data);
+                    //$('#content').append(un_cliente);
+            }, "json");
+        //$("input").prop('disable', true);
+        //ocultamos el borrado
+        $(this).parent().parent().parent().fadeOut(1500);       
+    }
 }
 
 function guardarCliente(){
