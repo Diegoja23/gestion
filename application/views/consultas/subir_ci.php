@@ -1,6 +1,6 @@
 <?php
 
-header("Content-type: image/png");
+//header("Content-type: image/png");
 //function cargarAdjunto(){
 //$_FILES = $_POST['data'];
     $archivo = $_FILES["input_file_cedula"]["tmp_name"];    
@@ -31,9 +31,10 @@ header("Content-type: image/png");
          
     $arrayDatosAdjuntos = array(
                                 array(  'nombre' => 'cedula',
-                                        'archivo' => $contenido,
+                                        'archivo' => $contenido,                                       
                                         'tipo' => $tipo)
-                               );   
+                               );                                          
+                                               
     session_start();
     unset($_SESSION['ci']);
     $_SESSION['ci'] = $arrayDatosAdjuntos;    

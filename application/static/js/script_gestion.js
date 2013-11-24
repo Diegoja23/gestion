@@ -1,4 +1,5 @@
 //var fileExtension = "";
+var globalUrl = "http://"+document.domain;
 $(document).ready(iniEventos);
 
 function iniEventos() {
@@ -8,7 +9,7 @@ function iniEventos() {
     }
     else{
         if(url == '/gestion/clientes' || url == '/gestion/clientes.php'){
-                $("#div_listado_cliente").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+                $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
                 //$(".subir_archivo").click(subirElArchivo);
                 $(":file").change(cambioElFile);
         }
@@ -34,7 +35,7 @@ function agregarDivDatosCliente(){
     }
     else{        
         
-        $("#div_listado_cliente").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
+        $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
         $("#div_formulario_cliente").fadeOut(1500);
         $("#div_listado_cliente").fadeIn(1500);
         $("#btn_agregar_cliente").text("Agregar");
@@ -54,7 +55,7 @@ function subirElArchivo(){
                 //var asdfasdf;
                 //var ñkljñlk;
 		$.ajax({
-			url: "http://localhost/gestion/consultas/subir_ci.php",  
+			url: globalUrl+"/gestion/consultas/subir_ci.php",  
 			type: 'POST',
 			// Form data
 			//datos del formulario
@@ -131,7 +132,7 @@ function traerClienteElegido(){
     var hijo = padre.children()[2];
     var documento = $(hijo).text();*/
     var documento = $($(this).parent().children()[2]).text();
-    $.post("http://localhost/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
+    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
                 var un_cliente = jQuery.parseJSON(data);
@@ -156,7 +157,7 @@ function guardarCliente(){
     
     var valido = validarDatosIngresados(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli);
     if(valido == 1){
-        $.post("http://localhost/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
+        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
             .done(function(data) {
             if(parseInt(data) == 1){
                 $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");

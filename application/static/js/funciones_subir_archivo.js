@@ -1,3 +1,4 @@
+var globalUrl = "http://"+document.domain;
 $(document).ready(function(){
 
 	$(".span_respuestas_archivos").hide();
@@ -30,7 +31,7 @@ $(document).ready(function(){
 		var message = "";	
 		//hacemos la petición ajax  
 		$.ajax({
-			url: "http://localhost/gestion/consultas/consultas_clientes.php",  
+			url: globalUrl+"/gestion/consultas/consultas_clientes.php",  
 			type: 'POST',
 			// Form data
 			//datos del formulario
