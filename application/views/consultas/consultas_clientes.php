@@ -1,16 +1,10 @@
 <?php
 
-//$GLOBALS['fachada'] = Fachada::getInstancia();
-
-//$Fachada = Fachada::getInstancia();
 $consulta = $_POST['consulta'];
-//var_dump($consulta);die();
     
 switch($consulta){
     case "traer_todos":
-        //echo crearListaClientes(traerTodos());
         echo crearListaClientes(traerTodos());
-        /*echo "traigo todos";*/
         break;
 
     case "agregar_cliente": 
@@ -110,11 +104,11 @@ function cargarUnValor($variable){
 
 function traerTodos(){
     //$Fachada = $GLOBALS['fachada'];
-    $todos_los_clientes = Fachada::getInstancia()->getClientes();
-    return $todos_los_clientes;
+    $todas_las_gestiones = Fachada::getInstancia()->getGestiones();
+    return $todas_las_gestiones;
 }
 
-function crearListaClientes($lista){
+function crearListaGestiones($lista){
     $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0;    
     foreach ($lista as $c) 

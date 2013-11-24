@@ -19,8 +19,8 @@
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="index.php">Inicio</a></li>
           <li><a href="clientes.php">Clientes</a></li>
-          <li class="current"><a href="gestiones">Gestiones</a></li>
-          <li><a href="tramites">Tramites</a></li>
+          <li><a href="gestiones">Gestiones</a></li>
+          <li class="current"><a href="tramites">Tramites</a></li>
           <li><a href="another_page_test.php">Another Page</a></li>
           <li><a href="contact_test.php">Contact Us</a></li>
         </ul>
@@ -55,34 +55,43 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Gestiones</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
+        <h1>Clientes</h1>
+        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button><div id="retorno_borrado_cliente"></div>
         <div id="div_formulario_cliente">
-            <h3>Datos de gestión</h3>
+            <h3>Datos del cliente</h3>
             <div class="form-group">
-                <label for="txt_nombre_cliente">Descripción</label>
+                <label for="txt_nombre_cliente">Nombre</label>
                 <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                
             </div>
             <div class="form-group">
-                <label for="txt_apellido_cliente">Tipo de Gestión</label>
+                <label for="txt_apellido_cliente">Apellido</label>
                 <input enabled="false" type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
             </div>
             <div class="form-group">                
-                <label for="txt_ci_cliente">Fecha de inicio</label><br />
+                <label for="txt_ci_cliente">Cédula de Identidad</label><br />
                 <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
-                            
+                <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar escaneo</button>                
             </div>  
+            <!--div class="form-group" id="div_formulario_subir_ci"-->
+            <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">
+                    <label for="exampleInputFile">Cédula</label>
+                    <input type="file" class="archivo" id="input_file_cedula" name="input_file_cedula">
+                    <p class="help-block retorno_del_file_agregar_elemento">Agregar cédula de identidad.</p>
+                    <button type="button" class="subir_archivo btn btn-info btn-sm">Subir cédula</button> 
+            </form>
+            <div class="mostrarCI"></div>
+            <!--/div-->
             <div class="form-group">
-                <label for="txt_email_cliente">Fecha de finalización</label>                
+                <label for="txt_email_cliente">Email</label>                
                 <input type="email" class="form-control" id="txt_email_cliente" placeholder="E-mail">
             </div>
             
             <div class="form-group">
-                <label for="txt_telefono_cliente">Estado</label>
+                <label for="txt_telefono_cliente">Teléfono</label>
                 <input type="text" class="form-control" id="txt_telefono_cliente" placeholder="Ingresar Teléfono">                
             </div>
             <div class="form-group">
-                <label for="txt_direccion_cliente">Clientes</label>
+                <label for="txt_direccion_cliente">Dirección</label>
                 <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
             </div>  
             <div class="button-group">

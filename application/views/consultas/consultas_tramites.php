@@ -4,7 +4,7 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        //echo crearListaClientes(traerTodos());
+        echo crearListaClientes(traerTodos());
         break;
 
     case "agregar_cliente": 
