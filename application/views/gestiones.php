@@ -67,14 +67,14 @@
                 <label for="txt_apellido_cliente">Tipo de Gestión</label>
                 <input enabled="false" type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
             </div>
-            <div class="form-group">                
-                <label for="txt_ci_cliente">Fecha de inicio</label><br />
-                <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
+            <div class="form-group fecha">                
+                <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
+                <input type="text" class="form-control datepicker" id="txt_fecha_inicio" placeholder="Fecha de inicio">    
                             
             </div>  
-            <div class="form-group">
-                <label for="txt_email_cliente">Fecha de finalización</label>                
-                <input type="email" class="form-control" id="txt_email_cliente" placeholder="E-mail">
+            <div class="form-group fecha">
+                <label for="lbl_fecha_fin">Fecha de finalización</label>                
+                <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
             </div>
             
             <div class="form-group">

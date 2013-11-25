@@ -331,6 +331,11 @@ table tr td
     margin:15px;
 }
 
+#div_formulario_tramite{
+    display:none;
+    margin:15px;
+}
+
 #txt_ci_cliente{
     width: 50%;
     margin-right: 25px;
@@ -348,6 +353,19 @@ table tr td
     clear: both;
 }
 
+.datepicker{
+    width: 100px;
+    margin-right: 50px
+}
+
+.fecha{
+    float:left;
+}
+
 #btn_agregar_cliente #retorno_borrado_cliente{
     float:left;
+}
+
+#combo_estado_tramite{
+    width: 150px;
 }

@@ -51,7 +51,11 @@ class Fachada
     
     public function eliminarByCI($ci){
         return $this->sp->eliminarByCI($ci);
-    }    
+    }
+    
+    public function getTiposTramite(){
+        return $this->sp->getTiposTramite();
+    }
 }
 
 

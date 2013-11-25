@@ -4,7 +4,11 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        echo crearListaClientes(traerTodos());
+        //echo crearListaClientes(traerTodos());
+        break;
+    
+    case "traer_tipos_tramite":
+        echo Fachada::getInstancia()->getTiposTramite();
         break;
 
     case "agregar_cliente": 

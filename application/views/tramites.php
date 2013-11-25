@@ -55,50 +55,37 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Clientes</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button><div id="retorno_borrado_cliente"></div>
-        <div id="div_formulario_cliente">
-            <h3>Datos del cliente</h3>
+        <h1>Trámites</h1>
+        <button id="btn_agregar_tramite" type="button" class="btn btn-primary">Agregar</button><div id="retorno_borrado"></div>
+        <div id="div_formulario_tramite">
+            <h3>Datos del trámite</h3>
             <div class="form-group">
-                <label for="txt_nombre_cliente">Nombre</label>
-                <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                
+                <label for="lbl_descripcion_tramite">Descripción</label>
+                <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
             </div>
             <div class="form-group">
-                <label for="txt_apellido_cliente">Apellido</label>
-                <input enabled="false" type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
-            </div>
-            <div class="form-group">                
-                <label for="txt_ci_cliente">Cédula de Identidad</label><br />
-                <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
-                <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar escaneo</button>                
+                <label for="lbl_tipo_tramite">Tipo de trámite</label
+                <select class='form-control' id='combo_tipo_tramite'></select>             
+            </div>            
+            <div class="form-group fecha">                
+                <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
+                <input type="text" class="form-control datepicker" id="txt_fecha_inicio" placeholder="Fecha de inicio">    
+                            
             </div>  
-            <!--div class="form-group" id="div_formulario_subir_ci"-->
-            <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">
-                    <label for="exampleInputFile">Cédula</label>
-                    <input type="file" class="archivo" id="input_file_cedula" name="input_file_cedula">
-                    <p class="help-block retorno_del_file_agregar_elemento">Agregar cédula de identidad.</p>
-                    <button type="button" class="subir_archivo btn btn-info btn-sm">Subir cédula</button> 
-            </form>
-            <div class="mostrarCI"></div>
-            <!--/div-->
-            <div class="form-group">
-                <label for="txt_email_cliente">Email</label>                
-                <input type="email" class="form-control" id="txt_email_cliente" placeholder="E-mail">
+            <div class="form-group fecha">
+                <label for="lbl_fecha_fin">Fecha de finalización</label>                
+                <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
             </div>
-            
+            <br/><br/><br/><br/><br/>
             <div class="form-group">
-                <label for="txt_telefono_cliente">Teléfono</label>
-                <input type="text" class="form-control" id="txt_telefono_cliente" placeholder="Ingresar Teléfono">                
+                <label for="lbl_esado_tramite">Estado</label>
+                <select class='form-control' id='combo_estado_tramite'>                    
+                    <option value='1'>En curso</option>
+                    <option value='0'>Finalizado</option>
+                </select>                
             </div>
-            <div class="form-group">
-                <label for="txt_direccion_cliente">Dirección</label>
-                <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
-            </div>  
-            <div class="button-group">
-                <button type="button" class="btn btn-success" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
-            </div>  
         </div>
-        <div id="div_listado_cliente">            
+        <div id="div_listado_tramite">            
         </div>
       </div>
     </div>

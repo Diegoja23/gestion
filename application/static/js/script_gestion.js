@@ -5,7 +5,8 @@ $(document).ready(iniEventos);
 function iniEventos() {
     var url = window.location.pathname;
     if(url == '/gestion/gestiones' || url == '/gestion/gestiones.php'){
-            
+            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
+            $( ".datepicker" ).datepicker();
     }
     else{
         if(url == '/gestion/clientes' || url == '/gestion/clientes.php'){
@@ -13,11 +14,18 @@ function iniEventos() {
                 //$(".subir_archivo").click(subirElArchivo);
                 $(":file").change(cambioElFile);
         }
+        else{
+        if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
+                $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+                $( ".datepicker" ).datepicker();
+            }
+        }
     }
 
 }
 
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
+$(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
 //$(document).on("click","#guardar_cliente",guardarCliente);
 $(document).on("click","#btn_guardar",guardarCliente);
 $(document).on("click",".dato_mostrado",traerClienteElegido);
@@ -40,6 +48,23 @@ function agregarDivDatosCliente(){
         $("#div_formulario_cliente").fadeOut(1500);
         $("#div_listado_cliente").fadeIn(1500);
         $("#btn_agregar_cliente").text("Agregar");
+    }
+}
+
+function agregarDivDatosTramite(){
+    if($("#div_formulario_tramite").css("display") == "none"){        
+        $("#div_listado_tramite").fadeOut(1500);
+        $("#div_formulario_tramite").fadeIn(1500);
+        $("#btn_agregar_tramite").text("Mostrar Lista");
+        $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite"});
+        //cargarFormulario(-1);
+        //$("input").prop('disable', false);
+    }
+    else{
+        $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+        $("#div_formulario_tramite").fadeOut(1500);
+        $("#div_listado_tramite").fadeIn(1500);
+        $("#btn_agregar_tramite").text("Agregar");
     }
 }
 
@@ -150,7 +175,7 @@ function eliminarClienteElegido(){
         var documento = $($(this).parent().parent().parent().children()[2]).text();  
         $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_por_ci",ci: documento})
                 .done(function(data) {
-                    $("#retorno_borrado_cliente").html(data);
+                    $("#retorno_borrado").html(data);
                     //$('#content').append(un_cliente);
             }, "json");
         //$("input").prop('disable', true);

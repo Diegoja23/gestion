@@ -75,6 +75,11 @@ class ServiciosPersona
         return $arrayClientes;    */
     }
     
+    public function getTiposTramite(){
+        return Cliente::getAll($limit, $offset);
+    }
+
+
     /*public function getPersonas($limit = 0, $offset = -1) 
     {
         //return Cliente::getAll($limit, $offset);
