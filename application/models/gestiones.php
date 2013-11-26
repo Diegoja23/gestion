@@ -17,6 +17,15 @@ class Gestiones extends CI_Model
         return $query->result();        
     } 
                 
+    function insert_gestion($gestionParams)
+    {
+        $id_gestion = 0;
+        $this->db->insert('personas', $gestionParams);   
+        $id_gestion = $this->db->insert_id();
+        return ($id_gestion > 0);           
+    }   
+    
+                 
 }
 
 ?>

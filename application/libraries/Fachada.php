@@ -45,21 +45,34 @@ class Fachada
         return $this->sp->getClientes($limit, $offset);
     }
     
-    public function getByCI($ci){
+    public function getByCI($ci)
+    {
         return $this->sp->getByCI($ci);
     }
     
-    public function eliminarByCI($ci){
+    public function eliminarByCI($ci)
+    {
         return $this->sp->eliminarByCI($ci);
     }
 
-    public function getTiposGestion(){
+    /* GESTIONES */
+    
+    public function getTiposGestion()
+    {
         return $this->sg->getTiposGestion();
     }    
     
-    public function getTiposTramiteByGestion($id_tipos_gestion){
+    public function getTiposTramiteByGestion($id_tipos_gestion)
+    {
         return $this->sg->getTiposTramiteByGestion($id_tipos_gestion);
     }      
+    
+    public function agregarGestion($paramsGestion) 
+    {
+        return $this->sg->agregarGestion($paramsGestion);    
+    }
+      
+    
 }
 
 

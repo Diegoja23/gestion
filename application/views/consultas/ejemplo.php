@@ -106,4 +106,23 @@
         //getTiposTramiteByGestion
     }      
     
+    //fecha_inicio    fecha_fin   estado  id_tipo_gestion     id_grupo    id_usuario 
+        
+    $paramsGestion=array();
+    $paramsGestion['nombre']='Alberto';
+    $paramsGestion['apellido']='Peterson';
+    $paramsGestion['ci']='2.933.982-9';
+    $paramsGestion['email']='c.peterson@gmail.com';
+    $paramsGestion['telefono']='099227340';
+    $paramsGestion['direccion']='Charrúa 3344';       
+    
+    
+    /*if($Fachada->agregarGestion($paramsCliente, $arrayDatosAdjuntos))
+        echo "El cliente ". $paramsCliente['nombre']." se ingresó con éxito<br>";
+    else
+        echo "El cliente ". $paramsCliente['nombre']." no pudo ser ingresado. Verifique los datos<br>";       
+    */
+    
+    
+    
 ?>

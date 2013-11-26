@@ -2,6 +2,7 @@
 
 require_once('TipoGestion.php');
 require_once('TipoTramite.php');
+require_once('Gestion.php');
 /**
  * class ServiciosGestion
  * autor: gestion
@@ -55,6 +56,16 @@ class ServiciosGestion
 
         return $arrayTipos;
     }      
+    
+    public function agregarGestion($paramsGestion) 
+    {
+        $Gestion = new Gestion($paramsGestion);
+        //var_dump($Cliente);die();
+        if($Gestion->validar()) 
+            return $Gestion->add();            
+        else 
+            return false;        
+    }    
             
 }
 
