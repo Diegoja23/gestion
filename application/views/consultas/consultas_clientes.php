@@ -104,7 +104,7 @@ function cargarUnValor($variable){
 
 function traerTodos(){
     //$Fachada = $GLOBALS['fachada'];
-    $todas_las_gestiones = Fachada::getInstancia()->getGestiones();
+    $todas_las_gestiones = Fachada::getInstancia()->getClientes();
     return $todas_las_gestiones;
 }
 
