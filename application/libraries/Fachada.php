@@ -52,10 +52,14 @@ class Fachada
     public function eliminarByCI($ci){
         return $this->sp->eliminarByCI($ci);
     }
+
+    public function getTiposGestion(){
+        return $this->sg->getTiposGestion();
+    }    
     
-    public function getTiposTramite(){
-        return $this->sp->getTiposTramite();
-    }
+    public function getTiposTramiteByGestion($id_tipos_gestion){
+        return $this->sg->getTiposTramiteByGestion($id_tipos_gestion);
+    }      
 }
 
 

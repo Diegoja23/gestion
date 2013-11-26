@@ -82,4 +82,28 @@
     $clienteModificar->setNombre('Pablo');
     $Fachada->modificarCliente($clienteModificar);
     
+   /* echo "<hr>Tipos de Gestion <br>";
+    $tipos = $Fachada->getTiposGestion();
+        
+    foreach ($tipos as $t) 
+    {        
+        echo $t->getDescripcion()."<br>";
+    }    
+    */
+    echo "<hr>Tipos de Gestion <br><br>";
+    $tipos = $Fachada->getTiposGestion();
+        
+    foreach ($tipos as $t) 
+    {        
+        echo $t->getDescripcion()."<br>";                
+        echo "Tipos de Tramite para gestion ".$t->getDescripcion().": <br>";
+        $tipos = $Fachada->getTiposTramiteByGestion($t->getIdTiposGestion());
+        foreach($tipos as $t)        
+        {
+            echo $t->getDescripcion();
+        }
+        echo "<br><br>";
+        //getTiposTramiteByGestion
+    }      
+    
 ?>
