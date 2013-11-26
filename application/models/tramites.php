@@ -16,6 +16,14 @@ class Tramites extends CI_Model
         $query = $this->db->query($sql);                   
         return $query->result();        
     } 
+    
+    function insert_tramite($tramiteParams)
+    {
+        $id_tramite = 0;
+        $this->db->insert('tramites', $tramiteParams);   
+        $id_tramite = $this->db->insert_id();
+        return ($id_tramite > 0);   
+    }    
                 
 }
 

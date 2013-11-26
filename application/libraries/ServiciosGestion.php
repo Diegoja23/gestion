@@ -3,6 +3,7 @@
 require_once('TipoGestion.php');
 require_once('TipoTramite.php');
 require_once('Gestion.php');
+require_once('Tramite.php');
 /**
  * class ServiciosGestion
  * autor: gestion
@@ -60,12 +61,20 @@ class ServiciosGestion
     public function agregarGestion($paramsGestion) 
     {
         $Gestion = new Gestion($paramsGestion);
-        //var_dump($Cliente);die();
         if($Gestion->validar()) 
             return $Gestion->add();            
         else 
             return false;        
     }    
+    
+    public function agregarTramite($paramsTramite) 
+    {
+        $Tramite = new Tramite($paramsTramite);
+        if($Tramite->validar()) 
+            return $Tramite->add();            
+        else 
+            return false;        
+    }     
             
 }
 

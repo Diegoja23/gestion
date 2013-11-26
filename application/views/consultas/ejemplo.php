@@ -107,21 +107,32 @@
     }      
     
     //fecha_inicio    fecha_fin   estado  id_tipo_gestion     id_grupo    id_usuario 
-        
-    $paramsGestion=array();
-    $paramsGestion['nombre']='Alberto';
-    $paramsGestion['apellido']='Peterson';
-    $paramsGestion['ci']='2.933.982-9';
-    $paramsGestion['email']='c.peterson@gmail.com';
-    $paramsGestion['telefono']='099227340';
-    $paramsGestion['direccion']='Charrúa 3344';       
+    /*private $id_tramite;  
+    private $descripcion;
+    private $fecha_inicio;
+    private $fecha_fin;
+    private $estado;
     
+    private $id_tipo_tramite;
     
-    /*if($Fachada->agregarGestion($paramsCliente, $arrayDatosAdjuntos))
-        echo "El cliente ". $paramsCliente['nombre']." se ingresó con éxito<br>";
+    private $tipo_tramite;//Objecto TipoTramite
+    private $id_gestion; */
+            
+    $paramsTramite=array();
+    
+    $paramsTramite['descripcion']='Nuevo tramite de compra-venta para la empresa Pepito hnos.';
+    $paramsTramite['fecha_inicio']=date("Y-m-d");    
+    //$paramsTramite['fecha_fin']='c.peterson@gmail.com';
+    $paramsTramite['estado']=0;
+    $paramsTramite['id_tipo_tramite']=1;
+    $paramsTramite['id_gestion']=1;       
+    
+    //var_dump($paramsTramite);
+    if($Fachada->agregarTramite($paramsTramite))
+        echo "El tramite ". $paramsTramite['descripcion']." se ingresó con éxito<br>";
     else
-        echo "El cliente ". $paramsCliente['nombre']." no pudo ser ingresado. Verifique los datos<br>";       
-    */
+        echo "El tramite ". $paramsTramite['descripcion']." no pudo ser ingresado. Verifique los datos<br>";       
+    
     
     
     
