@@ -22,6 +22,11 @@ class Adjunto
             $this->$att = $key;  
     }
     
+    public function getId()
+    {
+        return $this->id;
+    }
+        
     public function getArchivo()
     {
         return $this->archivo;

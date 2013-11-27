@@ -54,6 +54,11 @@ class Fachada
     {
         return $this->sp->eliminarByCI($ci);
     }
+    
+    public function getBlobDatoComplementario($id)
+    {
+        return $this->sp->getBlob($id);    
+    }    
 
     /* GESTIONES */
     
@@ -81,6 +86,8 @@ class Fachada
     {
         return $this->sg->getTramites($id_gestion);    
     }            
+    
+
     
 }
 
