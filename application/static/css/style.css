@@ -369,3 +369,7 @@ table tr td
 #combo_estado_tramite{
     width: 150px;
 }
+
+#combo_tipo_tramite{
+    width: 250px;
+}

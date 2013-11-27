@@ -8,7 +8,9 @@ switch($consulta){
         break;
     
     case "traer_tipos_tramite":
-        echo Fachada::getInstancia()->getTiposTramite();
+        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');          
+        //echo Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
+        echo crearSelectTiposTramites(Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion));
         break;
 
     case "agregar_cliente": 
@@ -67,12 +69,12 @@ function traerTodos(){
     return $todos_los_clientes;
 }
 
-function crearListaClientes($lista){
-    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0;    
-    foreach ($lista as $c) 
+function crearSelectTiposTramites($lista){
+    $retorno = '';
+    //$numero = 0;    
+    foreach ($lista as $tt) 
     {        
-        $retorno .= '<tr><td class="dato_mostrado">'.++$numero.'</td><td class="dato_mostrado">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado">'.$c->getCI().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<option value="'.$tt->getIdTiposTramite().'">'.$tt->getDescripcion().'</option>';
     }
     return $retorno;
 }

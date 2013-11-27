@@ -15,9 +15,12 @@ function iniEventos() {
                 $(":file").change(cambioElFile);
         }
         else{
-        if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
-                $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
-                $( ".datepicker" ).datepicker();
+            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
+                if(listar()){
+                    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+                    $( ".datepicker" ).datepicker();  
+                }
+                agregarDivDatosTramite();
             }
         }
     }
@@ -56,7 +59,8 @@ function agregarDivDatosTramite(){
         $("#div_listado_tramite").fadeOut(1500);
         $("#div_formulario_tramite").fadeIn(1500);
         $("#btn_agregar_tramite").text("Mostrar Lista");
-        $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite"});
+        var vid_tipo_gestion = $("#div_id_tipo_gestion").text();
+        $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
         //cargarFormulario(-1);
         //$("input").prop('disable', false);
     }
@@ -66,6 +70,10 @@ function agregarDivDatosTramite(){
         $("#div_listado_tramite").fadeIn(1500);
         $("#btn_agregar_tramite").text("Agregar");
     }
+}
+
+function listar(){
+    return $.isNumeric(($("#div_id_gestion").text()));
 }
 
 function subirElArchivo(){

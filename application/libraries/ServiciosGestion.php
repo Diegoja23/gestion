@@ -42,15 +42,16 @@ class ServiciosGestion
     {
         $arrayTipos = array();
         $paramsTipo = array();
-        $ci =& get_instance();                      
-        $data = $ci->tramites->get_tipos_tramite_by_gestion($id_tipos_gestion);
+        $ci =& get_instance(); 
+        
+        $data = $ci->tramites->get_tipos_tramite_by_gestion($id_tipos_gestion);        
         foreach($data as $t)
         {
             $paramsTipo["id_tipo_tramite"] = $t->id_tipo_tramite;   
             $paramsTipo["descripcion"] = $t->descripcion;    
             $paramsTipo["plantilla"] = $t->plantilla;    
 
-            $Tipo = new TipoTramite($paramsTipo);   
+            $Tipo = new TipoTramite($paramsTipo); 
             $arrayTipos[] = $Tipo;
         }
 

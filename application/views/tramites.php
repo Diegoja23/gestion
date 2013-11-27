@@ -7,7 +7,7 @@
 
 </head>
 
-<body>
+<body> 
   <div id="main">
     <div id="header">
       <div id="logo">
@@ -64,8 +64,11 @@
                 <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
             </div>
             <div class="form-group">
-                <label for="lbl_tipo_tramite">Tipo de trámite</label
-                <select class='form-control' id='combo_tipo_tramite'></select>             
+                <label for="lbl_tipo_tramite">Tipo de trámite</label>
+                
+                <select class='form-control' id='combo_tipo_tramite'>
+                    <option>No se cargaron las opcione</option>
+                </select>             
             </div>            
             <div class="form-group fecha">                
                 <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
@@ -93,5 +96,13 @@
       <p>Copyright &copy; simplestyle_7 | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
     </div>
   </div>
+    <div id="div_parametros" style="display:none;">
+        <span id="div_id_gestion" style="display:none;">
+            <?php echo 1//$_POST['id_gestion']; ?>            
+        </span>
+        <span id="div_id_tipo_gestion" style="display:none;">
+            <?php echo 1//$_POST['id_tipos_gestion']; ?>            
+        </span>
+    </div>
 </body>
 </html>
