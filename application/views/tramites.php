@@ -70,23 +70,24 @@
                     <option>No se cargaron las opcione</option>
                 </select>             
             </div>            
-            <div class="form-group fecha">                
+            <div class="form-group fecha fecha-inicio">                
                 <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
                 <input type="text" class="form-control datepicker" id="txt_fecha_inicio" placeholder="Fecha de inicio">    
                             
             </div>  
-            <div class="form-group fecha">
+            <div class="form-group fecha fecha-fin">
                 <label for="lbl_fecha_fin">Fecha de finalización</label>                
                 <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
             </div>
             <br/><br/><br/><br/><br/>
-            <div class="form-group">
-                <label for="lbl_esado_tramite">Estado</label>
-                <select class='form-control' id='combo_estado_tramite'>                    
-                    <option value='1'>En curso</option>
-                    <option value='0'>Finalizado</option>
+            <div class="form-group" id="div_estado_transaccion">
+                <label for="lbl_esado_tramite">Estado</label> <br/>
+                <button id="btn_finalizar_tramite" type="button" class="btn btn-primary btn-xs">Finalizar</button>
                 </select>                
-            </div>
+            </div><br/>
+            <div class="button-group">
+                <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
+            </div>  
         </div>
         <div id="div_listado_tramite">            
         </div>

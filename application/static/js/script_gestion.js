@@ -36,6 +36,7 @@ $(document).on("click",".btn_eliminar",eliminarClienteElegido);
 $(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 $(document).on("click",".subir_archivo",subirElArchivo);
 $(document).on("change",":file",cambioElFile);
+$(document).on("click","#btn_guardar_tramite",guardarTramite);
 
 function agregarDivDatosCliente(){    
     if($("#div_formulario_cliente").css("display") == "none"){        
@@ -59,6 +60,11 @@ function agregarDivDatosTramite(){
         $("#div_listado_tramite").fadeOut(1500);
         $("#div_formulario_tramite").fadeIn(1500);
         $("#btn_agregar_tramite").text("Mostrar Lista");
+        
+        //$("#combo_estado_tramite").css("display","none");
+        $(".fecha-fin").css("display","none");
+        
+        
         var vid_tipo_gestion = $("#div_id_tipo_gestion").text();
         $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
         //cargarFormulario(-1);
@@ -74,6 +80,10 @@ function agregarDivDatosTramite(){
 
 function listar(){
     return $.isNumeric(($("#div_id_gestion").text()));
+}
+
+function guardarTramite(){
+    var descripcion = $("#txt_descripcion_tramite").val();
 }
 
 function subirElArchivo(){
