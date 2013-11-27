@@ -83,7 +83,18 @@ function listar(){
 }
 
 function guardarTramite(){
-    var descripcion = $("#txt_descripcion_tramite").val();
+    var vdescripcion = $("#txt_descripcion_tramite").val();
+    var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    var vfecha_inicio = $("#txt_fecha_inicio").val();
+    var vid_gestion = $.trim($("#div_id_gestion").text());
+    var vid_tipo_gestion = $.trim($("#div_id_tipo_gestion").text());
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
+            .done(function(data) {            
+                //alert(data);
+                //var un_cliente = jQuery.parseJSON(data);
+                //cargarFormulario(un_cliente);
+                $('#content').append(data);
+        });
 }
 
 function subirElArchivo(){

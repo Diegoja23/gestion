@@ -13,16 +13,10 @@ switch($consulta){
         echo crearSelectTiposTramites(Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion));
         break;
 
-    case "agregar_cliente": 
-        $un_cliente_array = cargarValores();
-        $adjunto_array = cargarAdjunto();
+    case "agregar_tramite": 
+        $un_tramite_array = cargarValoresTramite();  
         
-        if($adjunto_array != -1){
-            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array,$adjunto_array);
-        }
-        else{
-            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array);
-        }
+        $retorno = Fachada::getInstancia()->agregarTramite($un_tramite_array);
         if($retorno){
             /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
             echo 1;
@@ -67,6 +61,33 @@ function traerTodos(){
     //$Fachada = $GLOBALS['fachada'];
     $todos_los_clientes = Fachada::getInstancia()->getClientes();
     return $todos_los_clientes;
+}
+
+function cargarValoresTramite(){
+    $paramsCliente=array();
+    $paramsCliente['descripcion']=$_POST['descripcion'];
+    $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
+    $paramsCliente['fecha_inicio']=$_POST['fecha_inicio'];    
+    $paramsCliente['fecha_inicio']=str_replace("/", "-", $_POST['fecha_inicio']);
+    $paramsCliente['estado']=0;
+    $paramsCliente['id_tipo_gestion']=intval($_POST['id_tipo_gestion']);
+    $paramsCliente['id_gestion']=intval($_POST['id_gestion']);
+    
+    $a= str_replace("/", "-", $_POST['fecha_inicio']);
+
+ $paramsCliente['fecha_inicio'] = DateTime::createFromFormat('m-d-Y', $a)->format('Y-m-d');
+/*var_dump($date);die();
+    $lolo = date('d-m-Y',strtotime($a));
+    
+    var_dump(strtotime($a));die();
+ /*   $fecha = $_POST['fecha_inicio'];
+    $fecha_formateada = str_replace("/", "-", $fecha);
+    //$newformat = date('Y-m-d',$fecha_formateada);
+//$newformat = strtotime ($fecha_formateada);
+
+$newformat = date('m/d/y', strtotime($fecha_formateada));
+    var_dump($newformat);die();*/
+    return $paramsCliente;
 }
 
 function crearSelectTiposTramites($lista){

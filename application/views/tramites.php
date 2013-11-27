@@ -64,8 +64,7 @@
                 <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
             </div>
             <div class="form-group">
-                <label for="lbl_tipo_tramite">Tipo de trámite</label>
-                
+                <label for="lbl_tipo_tramite">Tipo de trámite</label>                
                 <select class='form-control' id='combo_tipo_tramite'>
                     <option>No se cargaron las opcione</option>
                 </select>             

@@ -71,6 +71,7 @@ class ServiciosGestion
     public function agregarTramite($paramsTramite) 
     {
         $Tramite = new Tramite($paramsTramite);
+        //var_dump($Tramite);die();
         if($Tramite->validar()) 
             return $Tramite->add();            
         else 
