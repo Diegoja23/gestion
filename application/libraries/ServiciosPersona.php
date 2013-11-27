@@ -100,6 +100,13 @@ class ServiciosPersona
         return $arrayClientes;    
     }*/
     
+    public function getBlob($id)
+    {
+        $ci =& get_instance();
+        $data = $ci->datos_complementarios->get_blob($id);
+        return ($data[0]->archivo);      
+    }
+    
     
             
 }

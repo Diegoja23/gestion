@@ -24,6 +24,14 @@ class Datos_complementarios extends CI_Model
         $query = $this->db->query($sql);                   
         return $query->result();   
     }       
+    
+    function get_blob($id)
+    {
+        $sql = "SELECT * FROM datos_complementarios as d where d.id_dato_complementario=".$id;                
+        $query = $this->db->query($sql);                   
+        return $query->result();   
+    }   
+        
 }
 
 ?>
