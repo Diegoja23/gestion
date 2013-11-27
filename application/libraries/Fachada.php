@@ -72,6 +72,11 @@ class Fachada
         return $this->sg->agregarGestion($paramsGestion);    
     }
       
+    public function agregarTramite($paramsTramite) 
+    {
+        return $this->sg->agregarTramite($paramsTramite);    
+    }
+            
     
 }
 
