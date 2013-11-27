@@ -76,6 +76,29 @@ class ServiciosGestion
         else 
             return false;        
     }     
+    
+    public function getTramites($id_gestion = 0)
+    {
+        $arrayTramites = array();
+        $paramsTramite = array();
+        $ci =& get_instance();                      
+        $data = $ci->tramites->get_tramites($id_gestion);
+        foreach($data as $t)
+        {
+            $paramsTramite["id_tramite"] = $t->id_tramite;   
+            $paramsTramite["descripcion"] = $t->descripcion;    
+            $paramsTramite["fecha_inicio"] = $t->fecha_inicio;   
+            $paramsTramite["fecha_fin"] = $t->fecha_fin;   
+            $paramsTramite["estado"] = $t->estado;   
+            $paramsTramite["id_tipo_tramite"] = $t->fecha_inicio;   
+            $paramsTramite["id_gestion"] = $t->id_gestion;    
+
+            $Tipo = new Tramite($paramsTramite);   
+            $arrayTramites[] = $Tipo;
+        }
+
+        return $arrayTramites;        
+    }
             
 }
 
