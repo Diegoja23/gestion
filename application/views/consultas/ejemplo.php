@@ -120,7 +120,7 @@
             
     $paramsTramite=array();
     
-    $paramsTramite['descripcion']='Nuevo tramite de compra-venta para la empresa Pepito hnos.';
+    $paramsTramite['descripcion']='Nuevo tramite.';
     $paramsTramite['fecha_inicio']=date("Y-m-d");    
     //$paramsTramite['fecha_fin']='c.peterson@gmail.com';
     $paramsTramite['estado']=0;
@@ -133,6 +133,15 @@
     else
         echo "El tramite ". $paramsTramite['descripcion']." no pudo ser ingresado. Verifique los datos<br>";       
     
+    echo "<hr>Tramites: <br><br>";
+    $tramites = $Fachada->getTramites();
+        
+    foreach ($tramites as $t) 
+    {        
+        echo $t->getDescripcion()."<br>";                
+        //getTiposTramiteByGestion
+    }      
+        
     
     
     

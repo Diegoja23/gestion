@@ -25,6 +25,15 @@ class Tramites extends CI_Model
         return ($id_tramite > 0);   
     }    
                 
+    function get_tramites($id_gestion = 0)
+    {
+        $sql = "SELECT * FROM tramites";   
+        if($id_gestion > 0)
+            $sql .= " WHERE id_gestion = ".$id_gestion;             
+        $query = $this->db->query($sql);                   
+        return $query->result();         
+    }   
+                 
 }
 
 ?>

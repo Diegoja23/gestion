@@ -77,6 +77,10 @@ class Fachada
         return $this->sg->agregarTramite($paramsTramite);    
     }
             
+    public function getTramites($id_gestion = 0) 
+    {
+        return $this->sg->getTramites($id_gestion);    
+    }            
     
 }
 

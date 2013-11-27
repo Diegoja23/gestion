@@ -21,7 +21,7 @@ class Tramite
     
     private $adjuntos = array();
     
-    private $myci;
+    private $myci;   
     
     /* Constructor */
     public function __construct($params = array())
@@ -32,7 +32,22 @@ class Tramite
         $this->myci =& get_instance();       
     }
     
-
+    public function getId()
+    {
+        return $this->id_tramite;
+    }    
+        
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
+    
     public function validar()
     {
         //TODO -- validar
