@@ -206,7 +206,7 @@ ul#menu li a:hover
 #content
 { text-align: left;
   width: 630px;
-  padding: 25px 0 5px 25px;
+  padding: 30px 0 5px 25px;
   margin: 0;}
 
 #content ul
@@ -372,4 +372,16 @@ table tr td
 
 #combo_tipo_tramite{
     width: 250px;
+}
+
+#div_ci_cliente{
+    float:right;
+    margin-right: 14px;
+    margin-top: -119px;
+    display: none;
+}
+
+#iframe_ci_cliente{
+    width: 300px;
+    height: 200px;
 }

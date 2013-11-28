@@ -52,6 +52,7 @@ function agregarDivDatosCliente(){
         $("#div_formulario_cliente").fadeOut(1500);
         $("#div_listado_cliente").fadeIn(1500);
         $("#btn_agregar_cliente").text("Agregar");
+        cargarFormulario(-1);
     }
 }
 
@@ -190,9 +191,9 @@ function traerClienteElegido(){
     $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
-                //var un_cliente = jQuery.parseJSON(data);
-                //cargarFormulario(un_cliente);
-                $('#retorno_borrado').append(data);
+                var un_cliente = jQuery.parseJSON(data);
+                cargarFormulario(un_cliente);
+                //$('#div_ci_cliente').append(data);                
         }, "json");
         //$("input").prop('disable', true);
 }
@@ -265,7 +266,8 @@ function cargarFormulario(un_cliente){
         $("#txt_telefono_cliente").val(un_cliente.telefono);
         $("#txt_direccion_cliente").val(un_cliente.direccion);
         $("#txt_direccion_cliente").attr("locked","true");
-        //$("#txt_ci_cliente").val(""); 
+        $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="http://localhost/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
+        $('#div_ci_cliente').fadeIn(1500);         
     }
     else{
         $("#txt_nombre_cliente").val("");
@@ -275,6 +277,7 @@ function cargarFormulario(un_cliente){
         $("#txt_telefono_cliente").val("");
         $("#txt_direccion_cliente").val("");
         $("#txt_ci_cliente").val(""); 
+        $('#div_ci_cliente').fadeOut(1500);
     }
 }
 

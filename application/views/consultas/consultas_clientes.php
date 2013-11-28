@@ -30,15 +30,11 @@ switch($consulta){
         $ci = cargarUnValor('ci'); 
         $un_cliente = Fachada::getInstancia()->getByCI($ci);
         $a = traerPrimerAdjunto($un_cliente);
-        
-        //var_dump($a);die();
-        //$a = array_pop($stack);
-        var_dump($stack['adjuntos']);die();
         $array = $un_cliente->convertirArray();        
-        $imagen = '<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&from=dato_complementario"></iframe>'; 
-        array_push($array,$imagen);
-        var_dump($array);die();
-        echo json_encode($un_cliente->convertirArray());
+        $array['adjunto_tipo'] = $a->getTipo();
+                //'<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&from=dato_complementario"></iframe>'; 
+        $array['adjunto_id'] = $a->getId();
+        echo json_encode($array);
         break;
     
    case "subir_foto":
@@ -109,10 +105,7 @@ function cargarAdjunto(){
 function traerPrimerAdjunto($un_cliente){
     $listaAdjuntos = $un_cliente->getAdjuntos();
     $listaSola = $listaAdjuntos['adjuntos'];
-    
-    
-    var_dump($listaSola[0]);die();
-    return $listaAdjuntos[0];
+    return $listaSola[0];
 }
 
 function cargarUnValor($variable){
