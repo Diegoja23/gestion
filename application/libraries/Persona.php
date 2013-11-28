@@ -31,6 +31,9 @@ abstract class Persona
         foreach ($params as $att => $key){
             $this->$att = $key;   
         }
+        //$ci =& get_instance();
+        //$this->adjuntos = $ci->datos_complementarios->get_adjuntos($this->id_persona); 
+        
     }  
     
     
@@ -41,6 +44,8 @@ abstract class Persona
     
     public function getMail(){return $this->email;}
     
+    //public function getAdjuntos(){return $this->adjuntos;}
+    
     /* Setters */
     
     public function setNombre($nombre) { $this->nombre = $nombre; }
@@ -48,8 +53,8 @@ abstract class Persona
     public function setApellido($apellido) { $this->apel = $nombre; }    
     
 
-    abstract public function exists();
-      
+    abstract public function exists();    
+     
 }
 
 

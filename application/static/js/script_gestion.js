@@ -190,9 +190,9 @@ function traerClienteElegido(){
     $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
-                var un_cliente = jQuery.parseJSON(data);
-                cargarFormulario(un_cliente);
-                //$('#content').append(un_cliente);
+                //var un_cliente = jQuery.parseJSON(data);
+                //cargarFormulario(un_cliente);
+                $('#retorno_borrado').append(data);
         }, "json");
         //$("input").prop('disable', true);
 }

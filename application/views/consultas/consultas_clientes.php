@@ -1,5 +1,4 @@
 <?php
-
 $consulta = $_POST['consulta'];
     
 switch($consulta){
@@ -28,8 +27,17 @@ switch($consulta){
         break;
         
     case "traer_por_ci":
-        $ci = cargarUnValor('ci');        
+        $ci = cargarUnValor('ci'); 
         $un_cliente = Fachada::getInstancia()->getByCI($ci);
+        $a = traerPrimerAdjunto($un_cliente);
+        
+        //var_dump($a);die();
+        //$a = array_pop($stack);
+        var_dump($stack['adjuntos']);die();
+        $array = $un_cliente->convertirArray();        
+        $imagen = '<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&from=dato_complementario"></iframe>'; 
+        array_push($array,$imagen);
+        var_dump($array);die();
         echo json_encode($un_cliente->convertirArray());
         break;
     
@@ -96,6 +104,15 @@ function cargarAdjunto(){
         return -1;
     }
         //echo '<img src="data:image/jpeg;base64,' . base64_encode( $archivo ) . '" />';
+}
+
+function traerPrimerAdjunto($un_cliente){
+    $listaAdjuntos = $un_cliente->getAdjuntos();
+    $listaSola = $listaAdjuntos['adjuntos'];
+    
+    
+    var_dump($listaSola[0]);die();
+    return $listaAdjuntos[0];
 }
 
 function cargarUnValor($variable){

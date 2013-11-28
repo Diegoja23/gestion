@@ -53,7 +53,19 @@ class Cliente extends Participante
     }
     
     public function getByCI(){
-        return parent::getByCI();
+        parent::getByCI();
+        $paramsCliente["adjuntos"] = array();         
+        $ci =& get_instance();
+        $adjuntos = $ci->datos_complementarios->get_adjuntos($this->id_persona); 
+ 
+            foreach ($adjuntos as $a) 
+            {
+                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
+                $Adjunto = new Adjunto($attsAdjuntos);
+                array_push($paramsCliente["adjuntos"],$Adjunto);
+            }  
+            
+        $this->adjuntos=$paramsCliente;
     }
     
     public function eliminarByCI(){
@@ -65,6 +77,12 @@ class Cliente extends Participante
         return parent::update();
     }
     
+    /*public function getAdjuntos() {
+        return $this->adjuntos;
+        $ci =& get_instance();
+        return $ci->datos_complementarios->get_adjuntos($this->id_persona); 
+    }*/
+
     public function convertirArray(){
         $object_vars=get_object_vars($this);
         $fieldsParticipante = array();
