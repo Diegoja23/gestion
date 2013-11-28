@@ -42,6 +42,21 @@ class Tramite
         return $this->descripcion;
     }
     
+    public function getFechaInicio()
+    {
+        return $this->fecha_inicio;
+    }
+    
+    public function getFechaFin()
+    {
+        return $this->fecha_fin;
+    }
+    
+    public function getTipoTramite()
+    {
+        return $this->tipo_tramite;
+    }
+    
     public function getEstado()
     {
         return $this->estado;

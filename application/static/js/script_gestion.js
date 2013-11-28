@@ -17,9 +17,9 @@ function iniEventos() {
         else{
             if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
                 if(listar()){
-                    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+                    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});                    
                     $( ".datepicker" ).datepicker();  
-                }
+                }                
                 agregarDivDatosTramite();
             }
         }
@@ -94,7 +94,14 @@ function guardarTramite(){
                 //alert(data);
                 //var un_cliente = jQuery.parseJSON(data);
                 //cargarFormulario(un_cliente);
-                $('#content').append(data);
+                var retorno = parseInt(data);
+                if(retorno==1){
+                    $("#retorno_borrado").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
+                }
+                else{
+                    $("#retorno_borrado").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
+                }
+                //$('#content').append(data);
         });
 }
 

@@ -4,12 +4,11 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        //echo crearListaClientes(traerTodos());
+        echo crearListaTramites(traerTodos());
         break;
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');          
-        //echo Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
         echo crearSelectTiposTramites(Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion));
         break;
 
@@ -57,10 +56,21 @@ function cargarUnValor($variable){
     return $_POST[$variable];
 }
 
-function traerTodos(){
-    //$Fachada = $GLOBALS['fachada'];
-    $todos_los_clientes = Fachada::getInstancia()->getClientes();
-    return $todos_los_clientes;
+function traerTodos(){   
+    $todos_los_tramites = Fachada::getInstancia()->getTramites();
+    return $todos_los_tramites;
+}
+
+function crearListaTramites($lista){
+    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
+    $numero = 0; 
+    foreach ($lista as $t)
+    {        
+        $retorno .= '<tr><td class="dato_mostrado">'.++$numero.'</td><td class="dato_mostrado">'.$t->getDescripcion().'</td><td class="dato_mostrado">'.$t->getDescripcion().'</td><td class="dato_mostrado">'.$t->getFechaInicio().'</td><td class="dato_mostrado">'.$t->getFechaFin().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
+     }   
+
+    return $retorno;
+    
 }
 
 function cargarValoresTramite(){

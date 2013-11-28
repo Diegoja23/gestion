@@ -128,7 +128,7 @@ function crearListaClientes($lista){
     return $retorno;
 }
 
-function crearListaGestiones($lista){
+/*function crearListaGestiones($lista){
     $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0;    
     foreach ($lista as $c) 
@@ -136,7 +136,7 @@ function crearListaGestiones($lista){
         $retorno .= '<tr><td class="dato_mostrado">'.++$numero.'</td><td class="dato_mostrado">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado">'.$c->getCI().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
     }
     return $retorno;
-}
+}*/
 
 
 ?>
