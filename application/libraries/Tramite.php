@@ -91,6 +91,16 @@ class Tramite
     {
         return ($att != 'myci' && $att != 'tipo_tramite' && $att != 'adjuntos');
     }  
+    
+    public function convertirArray(){
+        $object_vars=get_object_vars($this);
+        $fieldsTramite = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsTramite[$key] = $value; 
+            
+        return $fieldsTramite;
+    }
 
 }
 

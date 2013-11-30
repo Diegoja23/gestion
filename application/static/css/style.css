@@ -385,3 +385,7 @@ table tr td
     width: 300px;
     height: 200px;
 }
+
+#btn_guardar_tramite{
+    float:right;
+}

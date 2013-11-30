@@ -56,7 +56,9 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Clientes</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button><div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
+        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
+        <button id="btn_mostrar_lista_clientes" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
         <div id="div_formulario_cliente">
             <h3>Datos del cliente</h3>
             <div class="form-group">
@@ -70,7 +72,7 @@
             <div class="form-group">                
                 <label for="txt_ci_cliente">Cédula de Identidad</label><br />
                 <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
-                <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar escaneo</button>                
+                <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar cédula <i class="fa fa-upload"></i></button>                
             </div>  
             <!--div class="form-group" id="div_formulario_subir_ci"-->
             <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">

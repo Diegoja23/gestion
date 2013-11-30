@@ -56,13 +56,15 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Trámites</h1>
-        <button id="btn_agregar_tramite" type="button" class="btn btn-primary">Agregar</button><div id="retorno_borrado"></div>
+        <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
+        <button id="btn_mostrar_lista_tramites" type="button" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado"></div>
         <div id="div_formulario_tramite">
             <h3>Datos del trámite</h3>
             <div class="form-group">
                 <label for="lbl_descripcion_tramite">Descripción</label>
                 <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
-            </div>
+            </div>            
             <div class="form-group">
                 <label for="lbl_tipo_tramite">Tipo de trámite</label>                
                 <select class='form-control' id='combo_tipo_tramite'>
@@ -81,11 +83,11 @@
             <br/><br/><br/><br/><br/>
             <div class="form-group" id="div_estado_transaccion">
                 <label for="lbl_esado_tramite">Estado</label> <br/>
-                <button id="btn_finalizar_tramite" type="button" class="btn btn-primary btn-xs">Finalizar</button>
+                <button id="btn_finalizar_tramite" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
                 </select>                
             </div><br/>
             <div class="button-group">
-                <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
+                <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div>
             </div>  
         </div>
         <div id="div_listado_tramite">            
@@ -97,11 +99,14 @@
     </div>
   </div>
     <div id="div_parametros" style="display:none;">
-        <span id="div_id_gestion" style="display:none;">
+        <span id="span_id_gestion" style="display:none;">
             <?php echo 1//$_POST['id_gestion']; ?>            
         </span>
-        <span id="div_id_tipo_gestion" style="display:none;">
+        <span id="span_id_tipo_gestion" style="display:none;">
             <?php echo 1//$_POST['id_tipos_gestion']; ?>            
+        </span
+        <span id="span_id_tramite" style="display:none;">
+                        
         </span>
     </div>
 </body>

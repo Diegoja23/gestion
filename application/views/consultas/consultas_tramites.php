@@ -14,22 +14,27 @@ switch($consulta){
 
     case "agregar_tramite": 
         $un_tramite_array = cargarValoresTramite();  
-        
         $retorno = Fachada::getInstancia()->agregarTramite($un_tramite_array);
         if($retorno){
-            /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
             echo 1;
         }
         else{
-            /*echo "El cliente ". $un_cliente['nombre']." no pudo ser ingresado. Verifique los datos<br>"; */
             echo 0;
         }
         break;
         
-    case "traer_por_ci":
-        $ci = cargarUnValor('ci');        
-        $un_cliente = Fachada::getInstancia()->getByCI($ci);
-        echo json_encode($un_cliente->convertirArray());
+    case "traer_por_id":
+        $id_tramite = cargarUnValor('id_tramite'); 
+        $lista_tramites = traerTodos();
+        $un_tramite = seleccionarPorID($lista_tramites,$id_tramite);
+        if($un_tramite != false){
+            echo json_encode($un_tramite->convertirArray());
+        }
+        else{
+            return -1;
+        }
+        //$un_tramite = Fachada::getInstancia()->getTramiteByID($id_tramite);
+        //echo json_encode($un_tramite->convertirArray());
         break;
     
    case "subir_foto":
@@ -66,11 +71,21 @@ function crearListaTramites($lista){
     $numero = 0; 
     foreach ($lista as $t)
     {        
-        $retorno .= '<tr><td class="dato_mostrado">'.++$numero.'</td><td class="dato_mostrado">'.$t->getDescripcion().'</td><td class="dato_mostrado">'.$t->getDescripcion().'</td><td class="dato_mostrado">'.$t->getFechaInicio().'</td><td class="dato_mostrado">'.$t->getFechaFin().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
-     }   
+        $retorno .= '<tr><td class="dato_mostrado_tramite">'.++$numero.'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
+    }   
 
     return $retorno;
     
+}
+
+function seleccionarPorID($lista_tramites,$id_tramite){
+    foreach ($lista_tramites as $t)
+    {   
+        if($t->getId() == $id_tramite){
+            return $t;            
+        }        
+    }
+    return false;
 }
 
 function cargarValoresTramite(){
