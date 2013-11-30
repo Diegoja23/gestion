@@ -43,7 +43,7 @@ $(document).on("click","#btn_mostrar_lista_tramites",agregarDivListaTramite);
 $(document).on("click",".dato_mostrado_tramite",traerTramiteElegido);
 $(document).on("click","#btn_guardar_tramite",guardarTramite);
 $(document).on("click","#btn_finalizar_tramite",finalizarTramite);
-
+$(document).on("click","#btn_agregar_adjunto",visibilidadFormularioSubirAdjunto);
 
 
 
@@ -362,6 +362,10 @@ function finalizarTramite(){
         }
          
     }
+}
+
+function visibilidadFormularioSubirAdjunto(){
+    $(".formulario_archivo").fadeIn(1500);
 }
 
 function cargarFormularioTramite(un_tramite){

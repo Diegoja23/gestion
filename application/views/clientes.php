@@ -76,7 +76,7 @@
             </div>  
             <!--div class="form-group" id="div_formulario_subir_ci"-->
             <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">
-                    <label for="exampleInputFile">Cédula</label>
+                    <label for="input_file_cedula">Cédula</label>
                     <input type="file" class="archivo" id="input_file_cedula" name="input_file_cedula">
                     <p class="help-block retorno_del_file_agregar_elemento">Agregar cédula de identidad.</p>
                     <button type="button" class="subir_archivo btn btn-info btn-sm">Subir cédula</button> 
