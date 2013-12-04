@@ -389,3 +389,11 @@ table tr td
 #btn_guardar_tramite{
     float:right;
 }
+
+.float-left{
+    float:left;
+}
+
+.float-right{
+    float:right;
+}
