@@ -37,9 +37,11 @@ switch($consulta){
         //echo json_encode($un_tramite->convertirArray());
         break;
     
-   case "subir_foto":
-        $file = $_FILES['archivo']['name'];
-        echo $file;
+   case "get_plantilla_por_id_tipo_tramite":
+       $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
+       echo traerPlantillaDelTipoTraite($id_tipo_tramite);
+       //$file = $_FILES['archivo']['name'];
+        //echo $file;
         break;   
     
    case "eliminar_por_ci":
@@ -110,6 +112,12 @@ function crearSelectTiposTramites($lista){
         $retorno .= '<option value="'.$tt->getIdTiposTramite().'">'.$tt->getDescripcion().'</option>';
     }
     return $retorno;
+}
+
+function traerPlantillaDelTipoTraite($id_tt){
+    return '<h2>Boleto de reserva</h2>
+<p>Este es un documento de boleto de reserva. <input type="text" class="form-control input_plantilla" id="txt_elemento" placeholder="Nombre del comprador"> Sigue el doc, etc.
+La otra parte del documento es <input type="text" class="form-control input_plantilla" id="txt_elemento" placeholder="Nombre del vendedor"> que además bla bla bla.</p>';
 }
 
 ?>

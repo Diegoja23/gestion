@@ -66,7 +66,7 @@
                 <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
             </div>            
             <div class="form-group float-left">
-                <label for="lbl_tipo_tramite">Tipo de trámite</label>                
+                <label for="lbl_tipo_tramite">Tipo de trámite</label>  <br />              
                 <select class='form-control' id='combo_tipo_tramite'>
                     <option>No se cargaron las opcione</option>
                 </select>
@@ -81,7 +81,7 @@
                             
             </div>  
             <div class="form-group fecha fecha-fin">
-                <label for="lbl_fecha_fin">Fecha de finalización</label>                
+                <label for="lbl_fecha_fin">Fecha de finalización</label><br />                
                 <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
             </div>
             <br/><br/><br/><br/><br/>

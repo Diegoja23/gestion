@@ -399,5 +399,26 @@ function cargarFormularioTramite(un_tramite){
 }
 
 function mostrarDialogPlantilla(){
-    $("#dialog_plantilla").dialog({width: 600,height:500});
+    var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    
+    $("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
+    $("#dialog_plantilla").dialog({width: 800,modal: true,
+    buttons: {
+                DelUser:{ 
+                    class: 'leftButton',
+                    text: 'Guardar',
+                    click : function (){
+                        var planilla_llena = extraerDatosPlanilla();
+                        alert('delete here');
+                    }
+                },
+                Cerrar: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+}
+
+function extraerDatosPlanilla(){
+    
 }
