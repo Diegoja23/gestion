@@ -17,10 +17,11 @@ function iniEventos() {
         else{
             if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
                 if(listar()){
-                    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});                    
+                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+                    //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
                     $( ".datepicker" ).datepicker();  
-                }                
-                agregarDivDatosTramite();
+                }    
+                //agregarDivDatosTramite();
             }
         }
     }
@@ -44,7 +45,7 @@ $(document).on("click",".dato_mostrado_tramite",traerTramiteElegido);
 $(document).on("click","#btn_guardar_tramite",guardarTramite);
 $(document).on("click","#btn_finalizar_tramite",finalizarTramite);
 $(document).on("click","#btn_agregar_adjunto",visibilidadFormularioSubirAdjunto);
-
+$(document).on("click","#btn_mostrar_dialog_plantilla",mostrarDialogPlantilla);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -395,4 +396,29 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_tipo_gestion").text("");
         $("#span_id_tramite").text("un_tramite.id_tramite");
     }
+}
+
+function mostrarDialogPlantilla(){
+    var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    
+    $("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
+    $("#dialog_plantilla").dialog({width: 800,modal: true,
+    buttons: {
+                DelUser:{ 
+                    class: 'leftButton',
+                    text: 'Guardar',
+                    click : function (){
+                        var planilla_llena = extraerDatosPlanilla();
+                        alert('delete here');
+                    }
+                },
+                Cerrar: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+}
+
+function extraerDatosPlanilla(){
+    
 }

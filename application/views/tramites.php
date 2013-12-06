@@ -57,7 +57,7 @@
         <!-- insert the page content here -->
         <h1>Trámites</h1>
         <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
-        <button id="btn_mostrar_lista_tramites" type="button" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado"></div>
         <div id="div_formulario_tramite">
             <h3>Datos del trámite</h3>
@@ -65,19 +65,23 @@
                 <label for="lbl_descripcion_tramite">Descripción</label>
                 <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
             </div>            
-            <div class="form-group">
-                <label for="lbl_tipo_tramite">Tipo de trámite</label>                
+            <div class="form-group float-left">
+                <label for="lbl_tipo_tramite">Tipo de trámite</label>  <br />              
                 <select class='form-control' id='combo_tipo_tramite'>
                     <option>No se cargaron las opcione</option>
-                </select>             
-            </div>            
+                </select>
+            </div> 
+            <div class="button-group float-left" style="margin-top:30px;margin-left:20px;">
+                <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Plantilla <i class="fa fa-list"></i></button>        
+            </div>   
+            <br /><br /><br /><br /><br />
             <div class="form-group fecha fecha-inicio">                
                 <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
                 <input type="text" class="form-control datepicker" id="txt_fecha_inicio" placeholder="Fecha de inicio">    
                             
             </div>  
             <div class="form-group fecha fecha-fin">
-                <label for="lbl_fecha_fin">Fecha de finalización</label>                
+                <label for="lbl_fecha_fin">Fecha de finalización</label><br />                
                 <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
             </div>
             <br/><br/><br/><br/><br/>
@@ -95,6 +99,11 @@
                     <p class="help-block retorno_del_file_agregar_elemento">Agregar adjunto.</p>
                     <button type="button" class="subir_archivo btn btn-info btn-sm">Subir adjunto <i class="fa fa-cloud-upload"></i></button> 
             </form>
+            <div id="dialog_plantilla" title="Llene la plantilla" style="display:none;">
+                    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+            </div>
+            <div id="div_listado_adjuntos"> 
+            </div>
         </div>
         <div id="div_listado_tramite">            
         </div>

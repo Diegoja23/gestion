@@ -257,7 +257,8 @@ ul#menu li a:hover
   text-align: left;}
   
 .form_settings input, .form_settings textarea
-{ width: 252px; 
+{ 
+  width: 252px; 
   font: 100% 'trebuchet ms', arial;
   border: 0;
   border: 1px solid #eee;
@@ -388,4 +389,21 @@ table tr td
 
 #btn_guardar_tramite{
     float:right;
+}
+
+.float-left{
+    float:left;
+}
+
+.float-right{
+    float:right;
+}
+
+.input_plantilla{
+    width: 200px;
+}
+
+#guardar_plantilla_modificada{
+    position: aboslute;
+    bottom:5px;
 }
