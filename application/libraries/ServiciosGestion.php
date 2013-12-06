@@ -100,6 +100,13 @@ class ServiciosGestion
 
         return $arrayTramites;        
     }
+    
+    public function getTramiteById($id)
+    {
+        $un_tramite = new Tramite(array('id_tramite'=>$id)); 
+        $un_tramite->getById();
+        return $un_tramite;    
+    }
             
 }
 

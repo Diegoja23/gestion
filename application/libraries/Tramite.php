@@ -101,6 +101,21 @@ class Tramite
             
         return $fieldsTramite;
     }
+    
+    public function getById()
+    {
+        $array_tramite = $this->myci->tramites->getById($this->id_tramite);        
+        $this->materializar($array_tramite[0]);
+    }    
+    
+    public function materializar($params)
+    {
+        foreach ($params as $att => $key){
+            $this->$att = $key;   
+        }
+ 
+        
+    }      
 
 }
 
