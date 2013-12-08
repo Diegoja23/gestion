@@ -46,6 +46,7 @@ $(document).on("click","#btn_guardar_tramite",guardarTramite);
 $(document).on("click","#btn_finalizar_tramite",finalizarTramite);
 $(document).on("click","#btn_agregar_adjunto",visibilidadFormularioSubirAdjunto);
 $(document).on("click","#btn_mostrar_dialog_plantilla",mostrarDialogPlantilla);
+$(document).on("change","#combo_tipo_tramite",cambioTipoTramite);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -396,6 +397,13 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_tipo_gestion").text("");
         $("#span_id_tramite").text("un_tramite.id_tramite");
     }
+}
+
+function cambioTipoTramite(){
+    var tipo_tramite = $("#combo_tipo_tramite option:selected").text();
+    //$("#dialog_plantilla").attr("title",tipo_tramite);
+    $( "#dialog_plantilla" ).dialog( "option", "title", tipo_tramite );
+    //alert(tipo_tramite);
 }
 
 function mostrarDialogPlantilla(){
