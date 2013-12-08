@@ -33,6 +33,14 @@ class Tramites extends CI_Model
         $query = $this->db->query($sql);                   
         return $query->result();         
     }   
+    
+    function getById($id)
+    {
+        $query = $this->db->get_where('tramites', array('id_tramite' => $id));
+        if ($query->num_rows > 0) return $query->result();
+        return false;        
+    }
+
                  
 }
 

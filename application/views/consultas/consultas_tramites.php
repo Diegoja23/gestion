@@ -26,7 +26,7 @@ switch($consulta){
     case "traer_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
         $lista_tramites = traerTodos();
-        $un_tramite = seleccionarPorID($lista_tramites,$id_tramite);
+        $un_tramite = seleccionarPorID($id_tramite);
         if($un_tramite != false){
             echo json_encode($un_tramite->convertirArray());
         }
@@ -80,14 +80,9 @@ function crearListaTramites($lista){
     
 }
 
-function seleccionarPorID($lista_tramites,$id_tramite){
-    foreach ($lista_tramites as $t)
-    {   
-        if($t->getId() == $id_tramite){
-            return $t;            
-        }        
-    }
-    return false;
+function seleccionarPorID($id_tramite)
+{
+    return Fachada::getInstancia()->getTramiteById($id_tramite);
 }
 
 function cargarValoresTramite(){

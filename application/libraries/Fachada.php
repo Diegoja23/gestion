@@ -87,7 +87,10 @@ class Fachada
         return $this->sg->getTramites($id_gestion);    
     }            
     
-
+    public function getTramiteById($id)
+    {
+        return $this->sg->getTramiteById($id);    
+    }
     
 }
 
