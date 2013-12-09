@@ -1,5 +1,6 @@
 //var fileExtension = "";
 var globalUrl = "http://"+document.domain;
+var plantilla;
 $(document).ready(iniEventos);
 
 function iniEventos() {
@@ -409,7 +410,14 @@ function cambioTipoTramite(){
 function mostrarDialogPlantilla(){
     var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
     
-    $("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
+    //$("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
+    
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite})
+            .done(function(data) {
+        plantilla = data;
+        $("#dialog_plantilla").html(data);
+            });
+    
     $("#dialog_plantilla").dialog({width: 800,modal: true,
     buttons: {
                 DelUser:{ 
@@ -418,6 +426,7 @@ function mostrarDialogPlantilla(){
                     click : function (){
                         var planilla_llena = extraerDatosPlanilla();
                         alert('delete here');
+                        alert(plantilla);
                     }
                 },
                 Cerrar: function () {
