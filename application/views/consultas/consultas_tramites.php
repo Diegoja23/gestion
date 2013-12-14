@@ -111,8 +111,8 @@ function crearSelectTiposTramites($lista){
 
 function traerPlantillaDelTipoTraite($id_tt){
     return '<h2>Boleto de reserva</h2>
-<p>Este es un documento de boleto de reserva. <input type="text" class="form-control input_plantilla" id="txt_elemento" placeholder="Nombre del comprador"> Sigue el doc, etc.
-La otra parte del documento es <input type="text" class="form-control input_plantilla" id="txt_elemento" placeholder="Nombre del vendedor"> que además bla bla bla.</p>';
+<p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
+La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';
 }
 
 ?>
