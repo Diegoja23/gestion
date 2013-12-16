@@ -55,7 +55,18 @@
         </div>
       </div>
       <div id="content">
-        <!-- insert the page content here -->
+        <div id="cabecera">  
+            <div class="form-group">
+                <label for="lbl_seleccionar_elemento_busqueda">Buscar por:</label>  <br />              
+                <select class='form-control' id='combo_elemento_busqueda'>
+                    <option value="clientes">Clientes</option>
+                    <option value="gestion">Gestiones</option>
+                    <option value="tramites">Trámites</option>
+                </select>
+            </div> 
+        </div>
+        <div class="clear"></div>
+          <!-- insert the page content here -->
         <h1>Welcome to the simplestyle_7 template</h1>
         <p>This standards compliant, simple, fixed width website template is released as an 'open source' design (under a <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 Licence</a>), which means that you are free to download and use it for anything you want (including modifying and amending it). All I ask is that you leave the 'design from HTML5webtemplates.co.uk' link in the footer of the template, but other than that...</p>
         <p>This template is written entirely in <strong>HTML5</strong> and <strong>CSS</strong>, and can be validated using the links in the footer.</p>

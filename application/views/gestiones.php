@@ -73,10 +73,10 @@
                             
             </div>  
             <div class="form-group fecha">
-                <label for="lbl_fecha_fin">Fecha de finalización</label>                
+                <label for="lbl_fecha_fin">Fecha de finalización</label><br/>            
                 <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
             </div>
-            
+            <br/><br/><br/><br/>
             <div class="form-group">
                 <label for="txt_telefono_cliente">Estado</label>
                 <input type="text" class="form-control" id="txt_telefono_cliente" placeholder="Ingresar Teléfono">                
