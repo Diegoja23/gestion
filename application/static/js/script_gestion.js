@@ -48,6 +48,7 @@ $(document).on("click","#btn_finalizar_tramite",finalizarTramite);
 $(document).on("click","#btn_agregar_adjunto",visibilidadFormularioSubirAdjunto);
 $(document).on("click","#btn_mostrar_dialog_plantilla",mostrarDialogPlantilla);
 $(document).on("change","#combo_tipo_tramite",cambioTipoTramite);
+$(document).on("click",".subir_archivo_tramite",subirElArchivo_tramite);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -112,6 +113,65 @@ function subirElArchivo(){
     
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo")[0]);
+                /*var datos_para_mandar = new Array();
+                datos_para_mandar['consulta'] = "subir_foto";
+                datos_para_mandar['foto'] = formData;*/
+		var message = "";	
+		//hacemos la petición ajax  
+                //$(".retorno_del_file_agregar_elemento").load("http://localhost/gestion/consultas/subir_ci.php",{data: formData});
+                //var asdfasdf;
+                //var ñkljñlk;
+		$.ajax({
+			url: globalUrl+"/gestion/consultas/subir_ci.php",  
+			type: 'POST',
+			// Form data
+			//datos del formulario
+			data: formData,
+			//necesario para subir archivos via ajax
+			cache: false,
+                        //contentType: 'image/jpeg',
+                        contentType: false,
+			processData: false,
+                        
+			//mientras enviamos el archivo
+			beforeSend: function(){
+			    message = $("<span class='before'>Subiendo archivo, por favor espere...</span>");
+			    retornoSubirArchivo(message)     	
+			},
+			//una vez finalizado correctamente
+			success: function(data){
+			    //message = "<span class='success'>Archivo '" + data + "'ha subido correctamente.</span>";
+                            //message = "<img src='" + data:image/jpeg;base64 + "' />";
+                            //if (data.IsImage)
+                              //  {
+       
+                            //message = "<img src='"+ data + "' />";
+         message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
+                            //message =  data;
+
+                            //    }
+                            
+                            //var lolo = data.post.attachments[0]['images'].full.url
+                            //message = ('<div id="nimg" style="background-image: url(' + data.post.attachments[0]['images'].full.url + ')"></div><div id="newstext"><div id="newstitle">' + data.post.title + '</div><div>' + data.post.content + '</div></div>');
+			    retornoSubirArchivo(message);
+			    //if(isImage(fileExtension))
+			    //{
+			        //$(".mostrarCI").html(data);
+			    //}
+			},
+			//si ha ocurrido un error
+			error: function(){
+			    message = $("<span class='error'>Ha ocurrido un error.</span>");
+			    retornoSubirArchivo(message);
+			}
+		});
+
+}
+
+function subirElArchivo_tramite(){
+    
+		//información del formulario
+		var formData = new FormData($(".formulario_archivo_tramite")[0]);
                 /*var datos_para_mandar = new Array();
                 datos_para_mandar['consulta'] = "subir_foto";
                 datos_para_mandar['foto'] = formData;*/
