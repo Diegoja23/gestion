@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('personas', 'datos_complementarios', 'gestiones', 'tramites', 'adjuntos');
+$autoload['model'] = array('personas', 'datos_complementarios', 'gestiones', 'tramites', 'adjuntos', 'grupos');
 
 
 /* End of file autoload.php */

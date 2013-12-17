@@ -45,6 +45,11 @@ class Fachada
         return $this->sp->getClientes($limit, $offset);
     }
     
+    public function getParticipantes($limit = 0, $offset = -1) 
+    {
+        return $this->sp->getParticipantes($limit, $offset);
+    }
+        
     public function getByCI($ci)
     {
         return $this->sp->getByCI($ci);

@@ -131,6 +131,7 @@ class ServiciosGestion
         $data = $ci->adjuntos->get_blob($id);
         return ($data[0]->archivo);      
     }    
+      
             
 }
 

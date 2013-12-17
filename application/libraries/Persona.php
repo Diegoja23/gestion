@@ -38,6 +38,8 @@ abstract class Persona
     
     
     /* Getters */
+    public function getId(){ return $this->id_persona; }
+    
     public function getNombre(){ return $this->nombre; }
                 
     public function getApellido(){return $this->apellido;}

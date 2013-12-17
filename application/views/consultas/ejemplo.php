@@ -129,11 +129,11 @@
     $paramsTramite['id_gestion']=1;       
     
     //var_dump($paramsTramite);
-    if($Fachada->agregarTramite($paramsTramite))
+   /* if($Fachada->agregarTramite($paramsTramite))
         echo "El tramite ". $paramsTramite['descripcion']." se ingresó con éxito<br>";
     else
         echo "El tramite ". $paramsTramite['descripcion']." no pudo ser ingresado. Verifique los datos<br>";       
-    
+    */
     echo "<hr>Tramites: <br><br>";
     $tramites = $Fachada->getTramites();
         

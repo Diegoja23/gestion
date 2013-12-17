@@ -7,7 +7,7 @@ class Personas extends CI_Model
     {
     }
     
-    function get_all_personas($esCliente = false, $limit = 0, $offset = -1)
+    function get_all_personas($esCliente = 0, $limit = 0, $offset = -1)
     {
         $sql = "SELECT * FROM personas AS p where p.es_cliente=".$esCliente;                
         

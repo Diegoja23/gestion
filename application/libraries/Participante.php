@@ -96,7 +96,7 @@ class Participante extends Persona
         $arrayParticipantes = array();
         $paramsParticipante = array();
         $ci =& get_instance();                      
-        $data = $ci->personas->get_all_personas(false, $limit, $offset);
+        $data = $ci->personas->get_all_personas(0, $limit, $offset);
         foreach($data as $p)
         {
             $paramsParticipante["id_persona"] = $p->id_persona;   

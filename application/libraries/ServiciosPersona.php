@@ -55,51 +55,15 @@ class ServiciosPersona
     public function getClientes($limit = 0, $offset = -1) 
     {
         return Cliente::getAll($limit, $offset);
-        /*$arrayClientes = array();
-        $paramsCliente = array();
-        $ci =& get_instance();
-        $data = $ci->personas->get_all_personas(true, $limit, $offset);
-        foreach($data as $p)
-        {
-            $paramsCliente["id_persona"] = $p->id_persona;   
-            $paramsCliente["nombre"] = $p->nombre;    
-            $paramsCliente["apellido"] = $p->apellido;    
-            $paramsCliente["email"] = $p->email;    
-            $paramsCliente["direccion"] = $p->direccion;    
-            $paramsCliente["telefono"] = $p->telefono;    
-            $paramsCliente["ci"] = $p->ci;    
-            
-            $Cliente = new Cliente($paramsCliente);   
-            $arrayClientes[] = $Cliente;
-        }
-        return $arrayClientes;    */
+
     }   
-
-
-
-    /*public function getPersonas($limit = 0, $offset = -1) 
-    {
-        //return Cliente::getAll($limit, $offset);
-        $arrayClientes = array();
-        $paramsCliente = array();
-        $ci =& get_instance();
-        $data = $ci->personas->get_all_personas(true, $limit, $offset);
-        foreach($data as $p)
-        {
-            $paramsCliente["id_persona"] = $p->id_persona;   
-            $paramsCliente["nombre"] = $p->nombre;    
-            $paramsCliente["apellido"] = $p->apellido;    
-            $paramsCliente["email"] = $p->email;    
-            $paramsCliente["direccion"] = $p->direccion;    
-            $paramsCliente["telefono"] = $p->telefono;    
-            $paramsCliente["ci"] = $p->ci;    
-            
-            $Cliente = new Cliente($paramsCliente);   
-            $arrayClientes[] = $Cliente;
-        }
-        return $arrayClientes;    
-    }*/
     
+    public function getParticipantes($limit = 0, $offset = -1) 
+    {
+        return Participante::getAll($limit, $offset);
+    }       
+
+
     public function getBlob($id)
     {
         $ci =& get_instance();
