@@ -4,6 +4,7 @@ require_once('TipoGestion.php');
 require_once('TipoTramite.php');
 require_once('Gestion.php');
 require_once('Tramite.php');
+require_once('Adjunto.php');
 /**
  * class ServiciosGestion
  * autor: gestion
@@ -101,7 +102,15 @@ class ServiciosGestion
             $paramsTramite["estado"] = $t->estado;   
             $paramsTramite["id_tipo_tramite"] = $t->fecha_inicio;   
             $paramsTramite["id_gestion"] = $t->id_gestion;    
-
+            
+            $adjuntos = $ci->adjuntos->get_adjuntos($t->id_tramite);               
+            foreach ($adjuntos as $a) 
+            {
+                $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
+                $Adjunto = new Adjunto($attsAdjuntos);
+                array_push($paramsTramite["adjuntos"],$Adjunto);
+            } 
+            
             $Tipo = new Tramite($paramsTramite);   
             $arrayTramites[] = $Tipo;
         }
@@ -115,6 +124,13 @@ class ServiciosGestion
         $un_tramite->getById();
         return $un_tramite;    
     }
+    
+    public function getBlob($id)
+    {
+        $ci =& get_instance();
+        $data = $ci->adjuntos->get_blob($id);
+        return ($data[0]->archivo);      
+    }    
             
 }
 

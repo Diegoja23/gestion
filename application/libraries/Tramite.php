@@ -62,6 +62,7 @@ class Tramite
         return $this->estado;
     }
     
+    public function getAdjuntos(){return $this->adjuntos;}
     
     public function validar()
     {

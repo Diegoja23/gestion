@@ -8,6 +8,9 @@ switch($from)
     case "dato_complementario":
         echo $Fachada->getBlobDatoComplementario($id_adjunto);
         break;
+    case "adjunto":
+        echo $Fachada->getBlobAdjunto($id_adjunto);
+        break;        
 }
 
 

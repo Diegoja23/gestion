@@ -92,6 +92,12 @@ class Fachada
         return $this->sg->getTramiteById($id);    
     }
     
+    public function getBlobAdjunto($id)
+    {
+        return $this->sg->getBlob($id);    
+    }    
+    
+    
 }
 
 

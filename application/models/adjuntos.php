@@ -18,20 +18,20 @@ class Adjuntos extends CI_Model
         return $this->db->query($sql);               
     }     
        
- /*   function get_adjuntos($id_persona)
+   function get_adjuntos($id_tramite)
     {
-        $sql = "SELECT * FROM datos_complementarios as d where d.id_persona=".$id_persona;                
+        $sql = "SELECT * FROM adjuntos as a where a.id_tramite=".$id_tramite;                
         $query = $this->db->query($sql);                   
         return $query->result();   
     }       
-    
+     
     function get_blob($id)
     {
-        $sql = "SELECT * FROM datos_complementarios as d where d.id_dato_complementario=".$id;                
+        $sql = "SELECT * FROM adjuntos as a where a.id_adjunto=".$id;                
         $query = $this->db->query($sql);                   
         return $query->result();   
     }   
-        */
+        
 }
 
 ?>
