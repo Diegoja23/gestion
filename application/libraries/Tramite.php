@@ -77,15 +77,15 @@ class Tramite
             if($this->attNotDistinctToTable($key))
                 $fieldsTramite[$key] = $value;
              
-        return $this->myci->tramites->insert_tramite($fieldsTramite);            
-        //$id_persona = $this->myci->personas->insert_persona($fieldsGestion);             
-        /*if(!empty($this->adjuntos) && $id_persona > 0)
+        $id_tramite = $this->myci->tramites->insert_tramite($fieldsTramite);            
+        if(!empty($this->adjuntos) && $id_tramite > 0)
             foreach($this->adjuntos as $adjunto)            
-                if(!$this->myci->datos_complementarios->add($adjunto, $id_persona)) return false;            
-          */                                                    
-        //return true;
+                if(!$this->myci->adjuntos->add($adjunto, $id_tramite)) return false;            
+                                                              
+        return true;
 
     }
+    
 
     public function attNotDistinctToTable($att)
     {
