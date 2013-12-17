@@ -68,15 +68,23 @@ class ServiciosGestion
             return false;        
     }    
     
-    public function agregarTramite($paramsTramite) 
+    public function agregarTramite($paramsTramite, $paramsAdjuntos = array()) 
     {
+        $paramsTramite['adjuntos'] = array();
+        foreach ($paramsAdjuntos as $p) 
+        {
+            $attsAdjuntos = array('nombre' => $p['nombre'], 'archivo' => $p['archivo'], 'tipo' => $p['tipo']);
+            $Adjunto = new Adjunto($attsAdjuntos);
+            array_push($paramsTramite['adjuntos'], $Adjunto);  
+           
+        }        
         $Tramite = new Tramite($paramsTramite);
         //var_dump($Tramite);die();
         if($Tramite->validar()) 
             return $Tramite->add();            
         else 
             return false;        
-    }     
+    }            
     
     public function getTramites($id_gestion = 0)
     {

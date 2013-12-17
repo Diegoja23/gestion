@@ -22,7 +22,7 @@ class Tramites extends CI_Model
         $id_tramite = 0;
         $this->db->insert('tramites', $tramiteParams);   
         $id_tramite = $this->db->insert_id();
-        return ($id_tramite > 0);   
+        return $id_tramite;
     }    
                 
     function get_tramites($id_gestion = 0)
