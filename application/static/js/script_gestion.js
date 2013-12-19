@@ -428,7 +428,12 @@ function finalizarTramite(){
 }
 
 function visibilidadFormularioSubirAdjunto(){
-    $(".formulario_archivo").fadeIn(1500);
+    if($(".formulario_archivo_tramite").css('display')=='none'){
+        $(".formulario_archivo_tramite").fadeIn(1500);
+    }
+    else{
+        $(".formulario_archivo_tramite").fadeOut(1500);
+    }
 }
 
 function cargarFormularioTramite(un_tramite){
