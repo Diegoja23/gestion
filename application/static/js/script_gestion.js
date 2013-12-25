@@ -172,16 +172,9 @@ function subirElArchivo_tramite(){
     
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo_tramite")[0]);
-                /*var datos_para_mandar = new Array();
-                datos_para_mandar['consulta'] = "subir_foto";
-                datos_para_mandar['foto'] = formData;*/
 		var message = "";	
-		//hacemos la petición ajax  
-                //$(".retorno_del_file_agregar_elemento").load("http://localhost/gestion/consultas/subir_ci.php",{data: formData});
-                //var asdfasdf;
-                //var ñkljñlk;
 		$.ajax({
-			url: globalUrl+"/gestion/consultas/subir_ci.php",  
+			url: globalUrl+"/gestion/consultas/subir_adjunto.php",  
 			type: 'POST',
 			// Form data
 			//datos del formulario
@@ -199,24 +192,8 @@ function subirElArchivo_tramite(){
 			},
 			//una vez finalizado correctamente
 			success: function(data){
-			    //message = "<span class='success'>Archivo '" + data + "'ha subido correctamente.</span>";
-                            //message = "<img src='" + data:image/jpeg;base64 + "' />";
-                            //if (data.IsImage)
-                              //  {
-       
-                            //message = "<img src='"+ data + "' />";
-         message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
-                            //message =  data;
-
-                            //    }
-                            
-                            //var lolo = data.post.attachments[0]['images'].full.url
-                            //message = ('<div id="nimg" style="background-image: url(' + data.post.attachments[0]['images'].full.url + ')"></div><div id="newstext"><div id="newstitle">' + data.post.title + '</div><div>' + data.post.content + '</div></div>');
-			    retornoSubirArchivo(message);
-			    //if(isImage(fileExtension))
-			    //{
-			        //$(".mostrarCI").html(data);
-			    //}
+                            message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
+                            retornoSubirArchivo(message);			    
 			},
 			//si ha ocurrido un error
 			error: function(){

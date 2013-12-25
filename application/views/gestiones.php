@@ -17,8 +17,8 @@
       <div id="menubar">
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="index.php">Inicio</a></li>
-          <li><a href="clientes.php">Clientes</a></li>
+          <li><a href="index">Inicio</a></li>
+          <li><a href="clientes">Clientes</a></li>
           <li class="current"><a href="gestiones">Gestiones</a></li>
           <li><a href="tramites">Trámites</a></li>
           <li><a href="another_page_test.php">Another Page</a></li>
