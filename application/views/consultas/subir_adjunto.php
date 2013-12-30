@@ -23,8 +23,8 @@
                                );                                          
                                                
     session_start();
-    unset($_SESSION['ci']);
-    $_SESSION['ci'] = $arrayDatosAdjuntos;    
+    unset($_SESSION['adjunto']);
+    $_SESSION['adjunto'] = $arrayDatosAdjuntos;    
     
     //echo $cod = base64_encode($contenido);
     $cod = base64_encode($contenido);

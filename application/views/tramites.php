@@ -93,7 +93,7 @@
             <div class="button-group">
                 <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div>
             </div>
-            <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_ci">
+            <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
                     <label>Nombre del ajunto: </label>
                     <input type="text" class="form-control" id="txt_nombre_adjunto" placeholder="Nombre del adjunto"><br/><br/>   
                     <label for="input_file_adjunto">Adjunto</label>
