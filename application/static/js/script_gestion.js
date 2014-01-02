@@ -49,6 +49,7 @@ $(document).on("click","#btn_agregar_adjunto",visibilidadFormularioSubirAdjunto)
 $(document).on("click","#btn_mostrar_dialog_plantilla",mostrarDialogPlantilla);
 $(document).on("change","#combo_tipo_tramite",cambioTipoTramite);
 $(document).on("click",".subir_archivo_tramite",subirElArchivo_tramite);
+$(document).on("click",".btn_eliminar_tramite",eliminarTramiteElegido);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -481,4 +482,20 @@ function mostrarDialogPlantilla(){
 
 function extraerDatosPlanilla(){
     
+}
+
+function eliminarTramiteElegido(){
+    var confirmado = confirm("¿Seguro que desea eliminar este trámite?");
+    if(confirmado){
+        //var documento = $($(this).parent().children()[2]).text();  
+        var id_tramite = $($(this).parent().parent().parent().children()[2]).text();  
+        $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_por_id",id_tramite: id_tramite})
+                .done(function(data) {
+                    $("#retorno_borrado_tramite").html(data);
+                    //$('#content').append(un_cliente);
+            }, "json");
+        //$("input").prop('disable', true);
+        //ocultamos el borrado
+        $(this).parent().parent().parent().fadeOut(1500);       
+    }
 }

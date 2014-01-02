@@ -44,14 +44,16 @@ switch($consulta){
         //echo $file;
         break;   
     
-   case "eliminar_por_ci":
-        $ci = cargarUnValor('ci');
-        $borrado = Fachada::getInstancia()->eliminarByCI($ci);
+   case "eliminar_por_id":
+        $id_tramite = cargarUnValor('id_tramite');
+        //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
+        //$borrado = Fachada::getInstancia()->eliminarByID_tramite($id_tramite);
+       $borrado = true;
         if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$ci." fue exitosamente borrado!";
+            echo "<strong style='color:green;'>El cliente de cédula ".$id_tramite." fue exitosamente borrado!";
         }
         else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$ci." no se pudo borrar";
+            echo "<strong style='color:red;'>El cliente de cédula ".$id_tramite." no se pudo borrar";
         }
         break;
     
@@ -73,7 +75,7 @@ function crearListaTramites($lista){
     $numero = 0; 
     foreach ($lista as $t)
     {        
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.++$numero.'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_tramite">'.++$numero.'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
     return $retorno;
