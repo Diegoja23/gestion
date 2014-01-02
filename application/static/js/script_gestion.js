@@ -192,8 +192,9 @@ function subirElArchivo_tramite(){
 			},
 			//una vez finalizado correctamente
 			success: function(data){
-                            message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
-                            retornoSubirArchivo(message);			    
+                            //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
+                            //retornoSubirArchivo(message);
+                            retornoSubirArchivo(data);
 			},
 			//si ha ocurrido un error
 			error: function(){

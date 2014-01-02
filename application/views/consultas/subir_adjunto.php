@@ -1,9 +1,10 @@
 <?php
 
-    $archivo = $_FILES["input_file_cedula"]["tmp_name"];    
-    $tamanio = $_FILES["input_file_cedula"]["size"];
-    $tipo    = $_FILES["input_file_cedula"]["type"];
-    $nombre  = $_FILES["input_file_cedula"]["name"]; 
+    $archivo = $_FILES["input_file_adjunto"]["tmp_name"];    
+    $tamanio = $_FILES["input_file_adjunto"]["size"];
+    $tipo    = $_FILES["input_file_adjunto"]["type"];
+    $nombre  = $_FILES["input_file_adjunto"]["name"]; 
+    $nombre_adjunto = $_POST['txt_nombre_adjunto'];
     
     if ( $archivo != "none" )
     {
@@ -21,14 +22,15 @@
                                         'archivo' => $contenido,                                       
                                         'tipo' => $tipo)
                                );                                          
-                                               
+    array_push($arrayDatosAdjuntos, $nombre_adjunto);                                           
     session_start();
     unset($_SESSION['adjunto']);
     $_SESSION['adjunto'] = $arrayDatosAdjuntos;    
     
     //echo $cod = base64_encode($contenido);
-    $cod = base64_encode($contenido);
-    echo json_encode($cod);
+    /*$cod = base64_encode($contenido);
+    echo json_encode($cod);*/
+    echo '<span>El archivo <strong>'.$nombre_adjunto.'</strong> fue subido exitosamente</span>';
    
 
 
