@@ -94,6 +94,7 @@
                 <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div>
             </div>
             <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
+                    <br />
                     <label>Nombre del ajunto: </label>
                     <input type="text" class="form-control" id="txt_nombre_adjunto" name="txt_nombre_adjunto" placeholder="Nombre del adjunto"><br/><br/>   
                     <label for="input_file_adjunto">Adjunto</label>
@@ -104,7 +105,13 @@
             <div id="dialog_plantilla" title="Llene la plantilla" style="display:none;">
                     <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
             </div>
-            <div id="div_listado_adjuntos"> 
+            <br/><br/>
+            <div id="div_archivos_adjuntos">
+                <h3>Lista de adjuntos</h3>
+                <table class="table table-hover" >
+                    <thead><tr><th>#</th><th>Nombre de ajunto</th><th>Acciones</th></tr></thead>
+                    <tbody id="div_listado_adjuntos"></tbody>
+                </table>
             </div>
         </div>
         <div id="div_listado_tramite">            

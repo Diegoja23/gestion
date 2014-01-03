@@ -181,6 +181,10 @@ ul#menu li a:hover
   width: 250px;
   margin: 25px 0;}
 
+.adjunto_mostrado_tramite{
+  font-size: 20px  
+}
+
 .sidebar
 { float: right;
   width: 265px;
@@ -393,6 +397,7 @@ table tr td
 
 #btn_guardar_tramite{
     float:right;
+    display: none;
 }
 
 .float-left{

@@ -42,7 +42,23 @@ switch($consulta){
        echo traerPlantillaDelTipoTraite($id_tipo_tramite);
        //$file = $_FILES['archivo']['name'];
         //echo $file;
-        break;   
+        break;  
+   
+   case "agregar_adjunto_al_tramite":
+       $id_tramite = cargarUnValor('id_tramite');
+       $el_adjunto = cargarAdjunto();
+       //esto ya está hecho, solo falta todo lo del dominio
+       //$hecho = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
+       $hecho = true;
+       if($hecho){
+           //esto también está hecho
+           //echo json_encode($el_adjunto->convertirArray());
+           echo json_encode(array('id_adjunto' => 44,'tipo' => 'un tipo'));
+       }
+       else{
+           echo -1;
+       }
+       break;
     
    case "eliminar_por_id":
         $id_tramite = cargarUnValor('id_tramite');
@@ -115,6 +131,16 @@ function traerPlantillaDelTipoTraite($id_tt){
     return '<h2>Boleto de reserva</h2>
 <p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
 La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';
+}
+
+function cargarAdjunto(){
+    session_start();
+    if(isset($_SESSION['adjunto'])){
+        return $arrayDatosAdjuntos = $_SESSION['adjunto'];
+    }
+    else{
+        return -1;
+    }
 }
 
 ?>
