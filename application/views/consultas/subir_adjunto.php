@@ -30,7 +30,7 @@
     //echo $cod = base64_encode($contenido);
     /*$cod = base64_encode($contenido);
     echo json_encode($cod);*/
-    echo '<span>El archivo <strong>'.$nombre_adjunto.'</strong> fue subido exitosamente</span>';
+    echo $nombre_adjunto;
    
 
 

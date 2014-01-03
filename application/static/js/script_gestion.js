@@ -195,7 +195,9 @@ function subirElArchivo_tramite(){
 			success: function(data){
                             //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
                             //retornoSubirArchivo(message);
-                            retornoSubirArchivo(data);
+                            retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
+                            $('#div_listado_adjuntos').append('<span><strong>'+data+'</strong></span>');
+                            $(".formulario_archivo_tramite").fadeOut(1500);
 			},
 			//si ha ocurrido un error
 			error: function(){
