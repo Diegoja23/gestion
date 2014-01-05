@@ -87,6 +87,15 @@ class ServiciosGestion
             return false;        
     }            
     
+    public function agregarAdjuntoAlTramite($id_tramite,$el_adjunto)
+    {
+        $Tramite = new Tramite(array('id_tramite' => $id_tramite));        
+        $attsAdjuntos = array('nombre' => $el_adjunto['nombre'], 'archivo' => $el_adjunto['archivo'], 'tipo' => $el_adjunto['tipo']);
+        $Adjunto = new Adjunto($attsAdjuntos);
+        return $Tramite->addAdjunto($Adjunto);
+    }
+    
+        
     public function getTramites($id_gestion = 0)
     {
         $arrayTramites = array();
@@ -102,12 +111,13 @@ class ServiciosGestion
             $paramsTramite["estado"] = $t->estado;   
             $paramsTramite["id_tipo_tramite"] = $t->fecha_inicio;   
             $paramsTramite["id_gestion"] = $t->id_gestion;    
+            $paramsTramite["adjuntos"] = array();
             
             $adjuntos = $ci->adjuntos->get_adjuntos($t->id_tramite);               
             foreach ($adjuntos as $a) 
             {
                 $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
-                $Adjunto = new Adjunto($attsAdjuntos);
+                $Adjunto = new Adjunto($attsAdjuntos);               
                 array_push($paramsTramite["adjuntos"],$Adjunto);
             } 
             

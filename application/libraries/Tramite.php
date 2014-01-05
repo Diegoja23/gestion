@@ -87,6 +87,11 @@ class Tramite
 
     }
     
+    public function addAdjunto($Adjunto)
+    {
+        return ($this->myci->adjuntos->add($Adjunto, $this->id_tramite));     
+    }
+    
 
     public function attNotDistinctToTable($att)
     {

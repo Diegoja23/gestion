@@ -46,10 +46,17 @@ switch($consulta){
    
    case "agregar_adjunto_al_tramite":
        $id_tramite = cargarUnValor('id_tramite');
-       $el_adjunto = cargarAdjunto();
+       /*tener en cuenta que cargarAdjuntos esta preparado para poder cargar un array de adjuntos en el caso de que se quieran 
+        * subir varios. En este caso hay que llamar a la posición 0 del array porque queremos subir uno sólo. O sea,
+        * esta funcion se llama con cada click del botón "Subir adjunto" por lo que, a nivel de UI, no permite subir varios a la vez
+        * pero sí está soportado a nivel de dominio.
+       */
+       $posibles_adjuntos = cargarAdjuntos();    
+       $el_adjunto = $posibles_adjuntos[0];
+
        //esto ya está hecho, solo falta todo lo del dominio
-       //$hecho = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
-       $hecho = true;
+       $hecho = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
+       //$hecho = true;
        if($hecho){
            //esto también está hecho
            //echo json_encode($el_adjunto->convertirArray());
@@ -133,9 +140,9 @@ function traerPlantillaDelTipoTraite($id_tt){
 La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';
 }
 
-function cargarAdjunto(){
+function cargarAdjuntos(){
     session_start();
-    if(isset($_SESSION['adjunto'])){
+    if(isset($_SESSION['adjunto'])){        
         return $arrayDatosAdjuntos = $_SESSION['adjunto'];
     }
     else{

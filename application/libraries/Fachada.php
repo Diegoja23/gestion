@@ -97,6 +97,11 @@ class Fachada
         return $this->sg->getTramiteById($id);    
     }
     
+    public function agregarAdjuntoAlTramite($id_tramite,$el_adjunto)
+    {
+        return $this->sg->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
+    }
+    
     public function getBlobAdjunto($id)
     {
         return $this->sg->getBlob($id);    

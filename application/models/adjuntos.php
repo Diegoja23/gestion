@@ -20,7 +20,7 @@ class Adjuntos extends CI_Model
        
    function get_adjuntos($id_tramite)
     {
-        $sql = "SELECT * FROM adjuntos as a where a.id_tramite=".$id_tramite;                
+        $sql = "SELECT * FROM adjuntos as a where a.id_tramite=".$id_tramite;              
         $query = $this->db->query($sql);                   
         return $query->result();   
     }       
