@@ -51,20 +51,23 @@ switch($consulta){
         * esta funcion se llama con cada click del botón "Subir adjunto" por lo que, a nivel de UI, no permite subir varios a la vez
         * pero sí está soportado a nivel de dominio.
        */
-       $posibles_adjuntos = cargarAdjuntos();    
+       $posibles_adjuntos = cargarAdjuntos(); 
+       
+       /*echo json_encode(array('id_adjunto' => 34,'tipo' => $posibles_adjuntos[0]['tipo']));*/      
+       
        $el_adjunto = $posibles_adjuntos[0];
-
+       
        //esto ya está hecho, solo falta todo lo del dominio
        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
        //$hecho = true;
        if($id_adjunto > 0){
            //esto también está hecho
            //echo json_encode($el_adjunto->convertirArray());
-           echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => 'un tipo'));
+           echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
        }
        else{
            echo -1;
-       }
+       }              
        break;
     
    case "eliminar_por_id":
