@@ -25,10 +25,15 @@ switch($consulta){
         
     case "traer_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
-        $lista_tramites = traerTodos();
-        $un_tramite = seleccionarPorID($id_tramite);
+        //$lista_tramites = traerTodos();
+        
+        $un_tramite = traerTramiteElegido($id_tramite);
+        //$un_tramite = seleccionarPorID($id_tramite);
         if($un_tramite != false){
-            echo json_encode($un_tramite->convertirArray());
+            $array_tramite = $un_tramite->convertirArray();
+            //$array_tramite['adjuntos'] = $un_tramite
+            echo json_encode($array_tramite);
+            //echo json_encode('lolo');
         }
         else{
             return -1;
@@ -95,6 +100,15 @@ function cargarUnValor($variable){
 function traerTodos(){   
     $todos_los_tramites = Fachada::getInstancia()->getTramites();
     return $todos_los_tramites;
+}
+
+function traerTramiteElegido($id_tramite){
+    $lista_tramites = traerTodos();
+    foreach($lista_tramites as $un_tramite){
+        if($un_tramite->getId() == $id_tramite){
+            return $un_tramite;
+        }
+    }
 }
 
 function crearListaTramites($lista){

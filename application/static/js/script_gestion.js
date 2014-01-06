@@ -536,7 +536,7 @@ function ver_adjunto_seleccionado(){
     var adjunto_id = this.id;
     var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
     $('#dialog_adjunto').html('<iframe id="iframe_ci_cliente" src="http://localhost/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&from=dato_complementario"></iframe>');
-    $("#dialog_plantilla").dialog({width: 800,modal: true,
+    $("#dialog_adjunto").dialog({width: 800,modal: true,
     buttons: {
                 DelUser:{ 
                     class: 'leftButton',
