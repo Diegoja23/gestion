@@ -31,6 +31,13 @@ class Adjuntos extends CI_Model
         $query = $this->db->query($sql);                   
         return $query->result();   
     }   
+    
+    function eliminar($id)
+    {
+        $sql = "DELETE FROM adjuntos where id_adjunto=".$id;   
+        //$query = $this->db->query($sql);                   
+        return $this->db->query($sql);          
+    }
         
 }
 

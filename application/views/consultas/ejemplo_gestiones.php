@@ -2,6 +2,8 @@
 
     $Fachada = Fachada::getInstancia();
     
+    //echo "Eliminar ".$Fachada->eliminarAdjunto(8);
+    
     echo "<hr><b>Tipos de Gestion</b> <br><br>";
     $tipos = $Fachada->getTiposGestion();
         

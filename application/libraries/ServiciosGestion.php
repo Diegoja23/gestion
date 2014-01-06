@@ -141,6 +141,12 @@ class ServiciosGestion
         $data = $ci->adjuntos->get_blob($id);
         return ($data[0]->archivo);      
     }    
+    
+    public function eliminarAdjunto($id)
+    {
+        $Adjunto = new Adjunto(array('id' => $id));
+        return $Adjunto->Eliminar();  
+    }    
       
             
 }

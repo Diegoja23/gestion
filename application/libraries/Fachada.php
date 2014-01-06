@@ -107,6 +107,12 @@ class Fachada
         return $this->sg->getBlob($id);    
     }    
     
+    public function eliminarAdjunto($id_adjunto)
+    {
+        return $this->sg->eliminarAdjunto($id_adjunto);    
+    }
+    
+    
     
 }
 

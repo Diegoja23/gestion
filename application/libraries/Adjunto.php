@@ -15,11 +15,15 @@ class Adjunto
     private $nombre;
     private $tipo;
     
+    private $myci;       
     /* Constructor */
     public function __construct($params = array())
     {
         foreach ($params as $att => $key)
             $this->$att = $key;  
+        
+        $this->myci =& get_instance();
+                       
     }
     
     public function getId()
@@ -42,6 +46,10 @@ class Adjunto
         return $this->tipo;
     }     
 
+    public function Eliminar()
+    {
+        return $this->myci->adjuntos->eliminar($this->id);             
+    }
             
 }
 
