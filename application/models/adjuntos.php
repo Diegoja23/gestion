@@ -14,8 +14,8 @@ class Adjuntos extends CI_Model
             "INSERT INTO adjuntos 
             (archivo, mime, nombre, id_tramite) values
             ('".$adjunto->getArchivo()."', '".$adjunto->getTipo()."','".$adjunto->getNombre()."', '".$id_tramite."')";
-
-        return $this->db->query($sql);               
+        $this->db->query($sql);            
+        return $this->db->insert_id();              
     }     
        
    function get_adjuntos($id_tramite)
