@@ -51,6 +51,8 @@ $(document).on("click","#btn_mostrar_dialog_plantilla",mostrarDialogPlantilla);
 $(document).on("change","#combo_tipo_tramite",cambioTipoTramite);
 $(document).on("click",".subir_archivo_tramite",subirElArchivo_tramite);
 $(document).on("click",".btn_eliminar_tramite",eliminarTramiteElegido);
+$(document).on("click","#div_listado_adjuntos tr",ver_adjunto_seleccionado);
+
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -197,10 +199,9 @@ function subirElArchivo_tramite(){
                             //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
                             //retornoSubirArchivo(message);
                             retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
-                            agregarAdjuntoAlTramite();
-                            var id_adjunto = 1;
-                            var fila = '<tr><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td id="' + id_adjunto + '" class="adjunto_mostrado_tramite">' + data + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
-                            $('#div_listado_adjuntos').append(fila);
+                            agregarAdjuntoAlTramite(data);
+                            //var id_adjunto = datos_adjunto.id_adjunto;
+                            
                             $(".formulario_archivo_tramite").fadeOut(1500);
 			},
 			//si ha ocurrido un error
@@ -509,7 +510,7 @@ function eliminarTramiteElegido(){
     }
 }
 
-function agregarAdjuntoAlTramite(){
+function agregarAdjuntoAlTramite(nombre_adjunto){
     var vid_tramite = GLOBAL_id_tramite;
 
     
@@ -517,9 +518,38 @@ function agregarAdjuntoAlTramite(){
             .done(function(data) {            
                 //agregarDivDatosCliente();
                 var retorno_adjunto = jQuery.parseJSON(data);
-                alert(retorno_adjunto.id_adjunto);
-                //cargarFormularioCliente(un_cliente);
-                //$('#div_ci_cliente').append(data);                
+                //alert(retorno_adjunto.id_adjunto);
+                agregar_fila_adjunto_tramite(retorno_adjunto,nombre_adjunto)
+                //return retorno_adjunto;
         }, "json");
 
+}
+
+function agregar_fila_adjunto_tramite(datos_adjunto,nombre_adjunto){
+    var fila = '<tr id="' + datos_adjunto.id_adjunto + '" tipo=' + datos_adjunto.tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
+    $('#div_listado_adjuntos').append(fila);
+}
+
+function ver_adjunto_seleccionado(){
+    //var lolo = this;  
+    
+    var adjunto_id = this.id;
+    var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
+    $('#dialog_adjunto').html('<iframe id="iframe_ci_cliente" src="http://localhost/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&from=dato_complementario"></iframe>');
+    $("#dialog_plantilla").dialog({width: 800,modal: true,
+    buttons: {
+                DelUser:{ 
+                    class: 'leftButton',
+                    text: 'Guardar',
+                    click : function (){
+                        var planilla_llena = extraerDatosPlanilla();
+                        alert('delete here');
+                        alert(plantilla);
+                    }
+                },
+                Cerrar: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
 }
