@@ -96,15 +96,20 @@ class Tramite
     public function attNotDistinctToTable($att)
     {
         return ($att != 'myci' && $att != 'tipo_tramite' && $att != 'adjuntos');
-    }  
-    
+        //return ($att != 'myci');
+    } 
+        
     public function convertirArray(){
-        $object_vars=get_object_vars($this);
+        $object_vars=get_object_vars($this);        
         $fieldsTramite = array();
         foreach($object_vars as $key => $value)        
-            if($this->attNotDistinctToTable($key))
-                $fieldsTramite[$key] = $value; 
-            
+            //if($this->attNotDistinctToTable($key))
+            if($key != 'myci'){
+                if($key == 'adjuntos'){
+                    $value = $this->traerAdjuntosDelArray($value);
+                }
+                $fieldsTramite[$key] = $value;   
+            }        
         return $fieldsTramite;
     }
     
@@ -119,9 +124,16 @@ class Tramite
         foreach ($params as $att => $key){
             $this->$att = $key;   
         }
- 
-        
-    }      
+    }
+    
+    function traerAdjuntosDelArray($lista_de_adjuntos)
+    {
+        $retorno = array();
+        foreach($lista_de_adjuntos as $un_adjunto){
+            array_push($retorno, $un_adjunto->convertirArray());
+        }
+        return $retorno;
+    }
 
 }
 

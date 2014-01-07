@@ -105,6 +105,7 @@
             <div id="dialog_plantilla" title="Llene la plantilla" style="display:none;">
                     <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
             </div>
+            <div id="dialog_adjunto" title="Archivo adjunto" style="display:none;"></div>
             <br/><br/>
             <div id="div_archivos_adjuntos">
                 <h3>Lista de adjuntos</h3>
