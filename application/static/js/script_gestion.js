@@ -51,7 +51,8 @@ $(document).on("click","#btn_mostrar_dialog_plantilla",mostrarDialogPlantilla);
 $(document).on("change","#combo_tipo_tramite",cambioTipoTramite);
 $(document).on("click",".subir_archivo_tramite",subirElArchivo_tramite);
 $(document).on("click",".btn_eliminar_tramite",eliminarTramiteElegido);
-$(document).on("click","#div_listado_adjuntos tr",ver_adjunto_seleccionado);
+$(document).on("click",".btn_ver_adjunto",ver_adjunto_seleccionado);
+$(document).on("click",".btn_eliminar_adjunto",eliminar_adjunto_seleccionado);
 
 
 
@@ -381,18 +382,18 @@ function agregarDivListaTramite(){
 }
 
 function traerTramiteElegido(){
-    var vid_tramite = $(this).parent().children()[1].id;
-    GLOBAL_id_tramite = vid_tramite;
-    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "traer_por_id",id_tramite: vid_tramite})
+    var id_tramite = $(this).parent().children()[1].id;
+    GLOBAL_id_tramite = id_tramite;
+    traerTramitePorId(id_tramite);
+}
+
+function traerTramitePorId(id_tramite){
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "traer_por_id",id_tramite: id_tramite})
             .done(function(data) {            
                 agregarDivDatosTramite();
                 var un_tramite = jQuery.parseJSON(data);
-                cargarFormularioTramite(un_tramite);
-                //$('#div_ci_cliente').append(data);                
-                
-        }, "json");        
-        //$("input").prop('disable', true);
-        //$('#span_id_tramite').text(33);
+                cargarFormularioTramite(un_tramite);      
+        }, "json");  
 }
 
 function finalizarTramite(){
@@ -521,8 +522,6 @@ function eliminarTramiteElegido(){
 
 function agregarAdjuntoAlTramite(nombre_adjunto){
     var vid_tramite = GLOBAL_id_tramite;
-
-    
     $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_adjunto_al_tramite",id_tramite: vid_tramite})
             .done(function(data) {            
                 //agregarDivDatosCliente();
@@ -540,24 +539,30 @@ function agregar_fila_adjunto_tramite(id_adjunto,nombre_adjunto,tipo){
 }
 
 function ver_adjunto_seleccionado(){
-    //var lolo = this;  
-    var adjunto_id = this.id;
+    var padre = $(this).parent().parent().parent()[0];
+    var adjunto_id = padre.id;
     var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
-    $('#dialog_adjunto').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=nombredeladjunto &from=adjunto"></iframe>');
+    $('#dialog_adjunto').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=nombredeladjunto &from=adjunto"></iframe>');
     $("#dialog_adjunto").dialog({width: 800,modal: true,
     buttons: {
-                DelUser:{ 
-                    class: 'leftButton',
-                    text: 'Guardar',
-                    click : function (){
-                        var planilla_llena = extraerDatosPlanilla();
-                        alert('delete here');
-                        alert(plantilla);
-                    }
-                },
+                
                 Cerrar: function () {
                     $(this).dialog("close");
                 }
             }
         });
+}
+
+function eliminar_adjunto_seleccionado(){
+    var id_tramite = GLOBAL_id_tramite;
+    var padre = $(this).parent().parent().parent()[0];
+    var vadjunto_id = padre.id;
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_adjunto_por_id",adjunto_id: vadjunto_id})
+            .done(function(data) {  
+            var ret = parseInt(data);
+            if(ret == 1){
+                alert('Adjunto eliminado');
+                traerTramitePorId(id_tramite);
+            }             
+        }, "json");
 }

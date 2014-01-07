@@ -395,6 +395,11 @@ table tr td
     height: 200px;
 }
 
+#iframe_adjunto_tramite{
+    width: 773px;
+    height: 800px;
+}
+
 #btn_guardar_tramite{
     float:right;
     display: none;
@@ -410,6 +415,10 @@ table tr td
 
 .input_plantilla{
     width: 200px;
+}
+
+.btn_ver_adjunto, .btn_eliminar_adjunto{
+    cursor:pointer;
 }
 
 #guardar_plantilla_modificada{

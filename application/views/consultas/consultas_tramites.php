@@ -43,7 +43,8 @@ switch($consulta){
        echo traerPlantillaDelTipoTraite($id_tipo_tramite);
        //$file = $_FILES['archivo']['name'];
         //echo $file;
-        break;  
+        break;
+
    
    case "agregar_adjunto_al_tramite":
        $id_tramite = cargarUnValor('id_tramite');
@@ -60,18 +61,20 @@ switch($consulta){
        
        //esto ya está hecho, solo falta todo lo del dominio
        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
-       //$id_adjunto = 12;
-       //$hecho = true;
        if($id_adjunto > 0){
-           //esto también está hecho
-           //echo json_encode($el_adjunto->convertirArray());
-           echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
+            echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
        }
        else{
            echo -1;
        }              
-       break;
-    
+       break;    
+       
+    case "eliminar_adjunto_por_id":
+       $id_adjunto = cargarUnValor('adjunto_id');
+       $retorno = Fachada::getInstancia()->eliminarAdjunto($id_adjunto);
+       echo $retorno;
+       break; 
+       
    case "eliminar_por_id":
         $id_tramite = cargarUnValor('id_tramite');
         //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
