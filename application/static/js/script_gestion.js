@@ -36,6 +36,7 @@ $(document).on("click","#btn_mostrar_lista_clientes",agregarDivListaClientes);
 $(document).on("click","#btn_guardar",guardarCliente);
 $(document).on("click",".dato_mostrado_cliente",traerClienteElegidoClicNombre);
 $(document).on("click",".btn_ver_cliente",traerClienteElegidoClicIcono);
+$(document).on("click",".adjunto_cliente",traerListaAdjuntosDeCliente);
 $(document).on("click",".btn_eliminar_cliente",eliminarClienteElegido);
 $(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 $(document).on("click",".subir_archivo",subirElArchivo);
@@ -78,6 +79,14 @@ function agregarDivDatosCliente(){
         
         
     //}
+}
+
+function agregarDivAdjuntosCliente(){        
+        $("#div_listado_cliente").fadeOut(1500);        
+        $("#btn_agregar_cliente").fadeOut(1500);
+        $("#btn_mostrar_lista_clientes").fadeOut(1500);        
+        $("#div_formulario_cliente").fadeOut(1500);
+        cargarFormularioCliente(-1);
 }
 
 function agregarDivListaClientes(){
@@ -252,10 +261,27 @@ function traerClienteElegidoClicIcono(){
     traerClienteElegido(documento);
 }
 
+function traerListaAdjuntosDeCliente(){
+    var documento = $($(this).parent().parent().parent().children()[2]).text();
+    traerAdjuntosDeClienteElegido(documento);
+}
+
 function traerClienteElegido(documento){    
     $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
+                var un_cliente = jQuery.parseJSON(data);
+                cargarFormularioCliente(un_cliente);
+                //$('#div_ci_cliente').append(data);                
+        }, "json");
+        //$("input").prop('disable', true);
+}
+
+function traerAdjuntosDeClienteElegido(documento){    
+    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
+            .done(function(data) {            
+                //agregarDivDatosCliente();
+                agregarDivAdjuntosCliente();
                 var un_cliente = jQuery.parseJSON(data);
                 cargarFormularioCliente(un_cliente);
                 //$('#div_ci_cliente').append(data);                

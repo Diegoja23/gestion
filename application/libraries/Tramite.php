@@ -102,14 +102,15 @@ class Tramite
     public function convertirArray(){
         $object_vars=get_object_vars($this);        
         $fieldsTramite = array();
-        foreach($object_vars as $key => $value)        
+        foreach($object_vars as $key => $value){       
             //if($this->attNotDistinctToTable($key))
             if($key != 'myci'){
                 if($key == 'adjuntos'){
                     $value = $this->traerAdjuntosDelArray($value);
                 }
                 $fieldsTramite[$key] = $value;   
-            }        
+            } 
+        }
         return $fieldsTramite;
     }
     
