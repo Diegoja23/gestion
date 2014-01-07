@@ -430,3 +430,7 @@ table tr td
     border: 2px solid #555;
     padding: 15px;
 }
+
+#div_formulario_adjuntos_cliente{
+    display: none;
+}

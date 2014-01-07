@@ -100,6 +100,31 @@
                 <button type="button" class="btn btn-success" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
             </div>  
         </div>
+        <br/>
+        <div id="div_formulario_adjuntos_cliente">
+            <h3 id="nombre_cliente_adjunto">Nombre del cliente</h3>
+            <form enctype="multipart/form-data" class="formulario_archivo_para_adjunto" id="div_formulario_subir_adjunto">
+                    <label for="input_file_cedula">Adjunto</label>
+                    <input type="file" class="archivo" id="input_file_adjunto" name="input_file_adjunto">
+                    <p class="help-block retorno_del_file_agregar_elemento_adjunto">Agregar adjunto del cliente.</p>
+                    <button type="button" class="subir_archivo_adjunto btn btn-info btn-sm">Subir adjunto</button> 
+            </form>
+            <br/>
+            <hr/>
+            <br/>
+            <div id="div_listado_adjuntos_total_del_cliente">
+                <div id="div_no_hay_adjuntos_del_cliente">
+                    <h3> - No hay adjuntos - </h3>
+                </div>
+                <div id="div_archivos_adjuntos">
+                    <h3>Lista de adjuntos</h3>
+                    <table class="table table-hover" >
+                        <thead><tr><th>#</th><th>Nombre de ajunto</th><th>Acciones</th></tr></thead>
+                        <tbody id="div_listado_adjuntos_de_un_cliente"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         <div id="div_listado_cliente">            
         </div>
       </div>

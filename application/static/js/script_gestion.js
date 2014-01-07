@@ -83,9 +83,10 @@ function agregarDivDatosCliente(){
 
 function agregarDivAdjuntosCliente(){        
         $("#div_listado_cliente").fadeOut(1500);        
-        $("#btn_agregar_cliente").fadeOut(1500);
-        $("#btn_mostrar_lista_clientes").fadeOut(1500);        
+        $("#btn_agregar_cliente").fadeOut(1500);                
         $("#div_formulario_cliente").fadeOut(1500);
+        $("#btn_mostrar_lista_clientes").fadeIn(1500);
+        $("#div_formulario_adjuntos_cliente").fadeIn(1500);        
         cargarFormularioCliente(-1);
 }
 
@@ -93,6 +94,7 @@ function agregarDivListaClientes(){
     $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
     $("#div_formulario_cliente").fadeOut(1500);
     $("#btn_mostrar_lista_clientes").fadeOut(1500);
+    $("#div_formulario_adjuntos_cliente").fadeOut(1500);
     $("#btn_agregar_cliente").fadeIn(1500);
     $("#div_listado_cliente").fadeIn(1500);
     //$("#btn_agregar_cliente").html('Agregar <i class="fa fa-list"></i>');
@@ -125,8 +127,7 @@ function guardarTramite(){
         });
 }
 
-function subirElArchivo(){
-    
+function subirElArchivo(){    
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo")[0]);
                 /*var datos_para_mandar = new Array();
@@ -174,6 +175,46 @@ function subirElArchivo(){
 			    //{
 			        //$(".mostrarCI").html(data);
 			    //}
+			},
+			//si ha ocurrido un error
+			error: function(){
+			    message = $("<span class='error'>Ha ocurrido un error.</span>");
+			    retornoSubirArchivo(message);
+			}
+		});
+
+}
+
+function subirElArchivoAdjuntoParaCliente(){ 
+                //información del formulario
+		var formData = new FormData($(".formulario_archivo_para_adjunto")[0]);
+		var message = "";	
+		$.ajax({
+			url: globalUrl+"/gestion/consultas/subir_adjunto.php",  
+			type: 'POST',
+			// Form data
+			//datos del formulario
+			data: formData,
+			//necesario para subir archivos via ajax
+			cache: false,
+                        //contentType: 'image/jpeg',
+                        contentType: false,
+			processData: false,
+                        
+			//mientras enviamos el archivo
+			beforeSend: function(){
+			    message = $("<span class='before'>Subiendo archivo, por favor espere...</span>");
+			    retornoSubirArchivo(message)     	
+			},
+			//una vez finalizado correctamente
+			success: function(data){
+                            //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
+                            //retornoSubirArchivo(message);
+                            retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
+                            agregarAdjuntoAlTramite(data);
+                            //var id_adjunto = datos_adjunto.id_adjunto;
+                            
+                            $(".formulario_archivo_tramite").fadeOut(1500);
 			},
 			//si ha ocurrido un error
 			error: function(){
@@ -283,8 +324,15 @@ function traerAdjuntosDeClienteElegido(documento){
                 //agregarDivDatosCliente();
                 agregarDivAdjuntosCliente();
                 var un_cliente = jQuery.parseJSON(data);
-                cargarFormularioCliente(un_cliente);
-                //$('#div_ci_cliente').append(data);                
+                if(un_cliente.adjuntos.length > 0){
+                    $('#div_no_hay_adjuntos_del_cliente').fadeOut(1500);
+                    $('#div_archivos_adjuntos').fadeIn(1500);     
+                    agregarAdjuntosAListaDeCliente(un_cliente.adjuntos);
+                }
+                else{
+                    $('#div_no_hay_adjuntos_del_cliente').fadeIn(1500);
+                    $('#div_archivos_adjuntos').fadeOut(1500);                    
+                }
         }, "json");
         //$("input").prop('disable', true);
 }
@@ -479,7 +527,15 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
         $("#span_id_tramite").text(un_tramite.id_tramite);        
         
-        agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
+        if(un_tramite.adjuntos.length > 0){
+            $("#div_no_hay_adjuntos_tramite").fadeOut(1500);
+            $("#div_archivos_adjuntos").fadeIn(1500);            
+            agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
+        }
+        else{
+            $("#div_no_hay_adjuntos_tramite").fadeIn(1500);
+            $("#div_archivos_adjuntos").fadeOut(1500);
+        }
         //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
         //$('#div_ci_cliente').fadeIn(1500);         
     }
@@ -497,6 +553,14 @@ function agregarAdjuntosAlTramiteCargado(lista_adjuntos){
     $('#div_listado_adjuntos').html('');
     jQuery.each(lista_adjuntos,function(num,data){
             agregar_fila_adjunto_tramite(data.id,data.nombre,data.tipo)
+        }
+    );
+}
+
+function agregarAdjuntosAListaDeCliente(lista_adjuntos){
+    $('#div_listado_adjuntos_de_un_cliente').html('');
+    jQuery.each(lista_adjuntos,function(num,data){
+            agregar_fila_adjunto_cliente(data.id,data.nombre,data.tipo)
         }
     );
 }
@@ -573,6 +637,11 @@ function agregarAdjuntoAlTramite(nombre_adjunto){
 function agregar_fila_adjunto_tramite(id_adjunto,nombre_adjunto,tipo){
     var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
     $('#div_listado_adjuntos').append(fila);
+}
+
+function agregar_fila_adjunto_cliente(id_adjunto,nombre_adjunto,tipo){
+    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
+    $('#div_listado_adjuntos_de_un_cliente').append(fila);
 }
 
 function ver_adjunto_seleccionado(){

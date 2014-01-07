@@ -107,6 +107,9 @@
             </div>
             <div id="dialog_adjunto" title="Archivo adjunto" style="display:none;"></div>
             <br/><br/>
+            <div id="div_no_hay_adjuntos_tramite">
+                    <h3> - No hay adjuntos - </h3>
+                </div>
             <div id="div_archivos_adjuntos">
                 <h3>Lista de adjuntos</h3>
                 <table class="table table-hover" >
@@ -115,7 +118,8 @@
                 </table>
             </div>
         </div>
-        <div id="div_listado_tramite">            
+        
+        <div id="div_listado_tramite">     - No hay adjuntos -       
         </div>
       </div>
     </div>
