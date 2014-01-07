@@ -119,7 +119,7 @@ function cargarValoresTramite(){
     $paramsCliente['id_gestion']=intval($_POST['id_gestion']);
     
     $a= str_replace("/", "-", $_POST['fecha_inicio']);
-    $paramsCliente['fecha_inicio'] = DateTime::createFromFormat('m-d-Y', $a)->format('Y-m-d');
+    $paramsCliente['fecha_inicio'] = DateTime::createFromFormat('d-m-Y', $a)->format('Y-m-d');
 
     return $paramsCliente;
 }

@@ -8,7 +8,7 @@ function iniEventos() {
     var url = window.location.pathname;
     if(url == '/gestion/gestiones' || url == '/gestion/gestiones.php'){
             $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
-            $( ".datepicker" ).datepicker();
+            $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});
     }
     else{
         if(url == '/gestion/clientes' || url == '/gestion/clientes.php'){
@@ -21,7 +21,7 @@ function iniEventos() {
                 if(listar()){
                     $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
                     //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
-                    $( ".datepicker" ).datepicker();  
+                    $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
                 }    
                 //agregarDivDatosTramite();
             }
