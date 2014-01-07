@@ -439,7 +439,7 @@ function cargarFormularioTramite(un_tramite){
         }
         $("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
-        $("#span_id_tramite").text(un_tramite.id_tramite);
+        $("#span_id_tramite").text(un_tramite.id_tramite);        
         
         agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
         //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="http://localhost/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
@@ -456,7 +456,8 @@ function cargarFormularioTramite(un_tramite){
 }
 
 function agregarAdjuntosAlTramiteCargado(lista_adjuntos){
-    each(lista_adjuntos,function(data){
+    $('#div_listado_adjuntos').html('');
+    jQuery.each(lista_adjuntos,function(num,data){
             agregar_fila_adjunto_tramite(data.id,data.nombre,data.tipo)
         }
     );
