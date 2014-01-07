@@ -1,17 +1,18 @@
 <?php
 header('Content-type: '.$_GET['mime']);
+header("Content-Disposition: inline; filename=".$_GET['nombre']."");
 $Fachada = Fachada::getInstancia();
 $id_adjunto = $_GET['id'];
 $from = $_GET['from']; 
 switch($from)
 {
     case "dato_complementario":
-        echo $Fachada->getBlobDatoComplementario($id_adjunto);
+        $blob = $Fachada->getBlobDatoComplementario($id_adjunto);
         break;
     case "adjunto":
-        echo $Fachada->getBlobAdjunto($id_adjunto);
+        $blob = $Fachada->getBlobAdjunto($id_adjunto);                
         break;        
 }
 
-
-
+header("Content-Length: ".strlen($blob)); 
+echo $blob;

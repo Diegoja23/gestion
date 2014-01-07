@@ -13,7 +13,7 @@ class Adjuntos extends CI_Model
         $sql =
             "INSERT INTO adjuntos 
             (archivo, mime, nombre, id_tramite) values
-            ('".$adjunto->getArchivo()."', '".$adjunto->getTipo()."','".$adjunto->getNombre()."', '".$id_tramite."')";
+            ('".($adjunto->getArchivo())."', '".$adjunto->getTipo()."','".$adjunto->getNombre()."', '".$id_tramite."')";
         $this->db->query($sql);            
         return $this->db->insert_id();              
     }     
