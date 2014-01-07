@@ -440,7 +440,8 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
         $("#span_id_tramite").text(un_tramite.id_tramite);
-
+        
+        agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
         //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="http://localhost/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
         //$('#div_ci_cliente').fadeIn(1500);         
     }
@@ -452,6 +453,13 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_tipo_gestion").text("");
         $("#span_id_tramite").text("un_tramite.id_tramite");
     }
+}
+
+function agregarAdjuntosAlTramiteCargado(lista_adjuntos){
+    each(lista_adjuntos,function(data){
+            agregar_fila_adjunto_tramite(data.id,data.nombre,data.tipo)
+        }
+    );
 }
 
 function cambioTipoTramite(){
@@ -519,14 +527,14 @@ function agregarAdjuntoAlTramite(nombre_adjunto){
                 //agregarDivDatosCliente();
                 var retorno_adjunto = jQuery.parseJSON(data);
                 //alert(retorno_adjunto.id_adjunto);
-                agregar_fila_adjunto_tramite(retorno_adjunto,nombre_adjunto)
+                agregar_fila_adjunto_tramite(retorno_adjunto.id_adjunto,nombre_adjunto,retorno_adjunto.tipo);
                 //return retorno_adjunto;
         }, "json");
 
 }
 
-function agregar_fila_adjunto_tramite(datos_adjunto,nombre_adjunto){
-    var fila = '<tr id="' + datos_adjunto.id_adjunto + '" tipo=' + datos_adjunto.tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
+function agregar_fila_adjunto_tramite(id_adjunto,nombre_adjunto,tipo){
+    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
     $('#div_listado_adjuntos').append(fila);
 }
 

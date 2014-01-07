@@ -59,8 +59,8 @@ switch($consulta){
        $el_adjunto = $posibles_adjuntos[0];
        
        //esto ya está hecho, solo falta todo lo del dominio
-       //$id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
-       $id_adjunto = 12;
+       $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
+       //$id_adjunto = 12;
        //$hecho = true;
        if($id_adjunto > 0){
            //esto también está hecho
