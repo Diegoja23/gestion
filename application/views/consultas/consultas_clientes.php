@@ -123,7 +123,7 @@ function crearListaClientes($lista){
     $numero = 0;    
     foreach ($lista as $c) 
     {        
-        $retorno .= '<tr><td class="dato_mostrado_cliente">'.++$numero.'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_cliente fa fa-ban fa-2x"></i><i class="adjunto_cliente fa fa-paperclip fa-lg"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_cliente">'.++$numero.'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
     }
     return $retorno;
 }
