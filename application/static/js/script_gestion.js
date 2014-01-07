@@ -44,6 +44,7 @@ $(document).on("change",":file",cambioElFile);
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
 $(document).on("click","#btn_mostrar_lista_tramites",agregarDivListaTramite);
 $(document).on("click",".dato_mostrado_tramite",traerTramiteElegido);
+$(document).on("click",".btn_ver_tramite",traerTramiteElegido); 
 $(document).on("click","#btn_guardar_tramite",guardarTramite);
 $(document).on("click","#btn_finalizar_tramite",finalizarTramite);
 $(document).on("click","#btn_agregar_adjunto",visibilidadFormularioSubirAdjunto);
