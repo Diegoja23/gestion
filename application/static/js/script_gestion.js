@@ -122,7 +122,7 @@ function subirElArchivo(){
                 datos_para_mandar['foto'] = formData;*/
 		var message = "";	
 		//hacemos la petición ajax  
-                //$(".retorno_del_file_agregar_elemento").load("http://localhost/gestion/consultas/subir_ci.php",{data: formData});
+                //$(".retorno_del_file_agregar_elemento").load("'+globalUrl+'/gestion/consultas/subir_ci.php",{data: formData});
                 //var asdfasdf;
                 //var ñkljñlk;
 		$.ajax({
@@ -297,7 +297,7 @@ function guardarCliente(){
     else{
         alert("Datos incorrectos. No se puedo guardar");
     }
-    //$("#retorno_ajax").load("http://localhost/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
+    //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 //$( document ).on( "change",".elegir_familia", cambiarElemento );
 
@@ -442,7 +442,7 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_tramite").text(un_tramite.id_tramite);        
         
         agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
-        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="http://localhost/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
+        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
         //$('#div_ci_cliente').fadeIn(1500);         
     }
     else{
