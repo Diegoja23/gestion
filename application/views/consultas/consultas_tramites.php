@@ -25,15 +25,11 @@ switch($consulta){
         
     case "traer_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
-        //$lista_tramites = traerTodos();
-        
         $un_tramite = traerTramiteElegido($id_tramite);
         //$un_tramite = seleccionarPorID($id_tramite);
         if($un_tramite != false){
-            $array_tramite = $un_tramite->convertirArray();
-            //$array_tramite['adjuntos'] = $un_tramite
+            $array_tramite = $un_tramite->convertirArray();            
             echo json_encode($array_tramite);
-            //echo json_encode('lolo');
         }
         else{
             return -1;

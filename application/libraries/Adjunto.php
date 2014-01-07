@@ -50,6 +50,17 @@ class Adjunto
     {
         return $this->myci->adjuntos->eliminar($this->id);             
     }
+    
+    public function convertirArray()
+    {
+        $object_vars=get_object_vars($this);        
+        $fieldsTramite = array();
+        foreach($object_vars as $key => $value)        
+            if($key != 'myci'){
+                $fieldsTramite[$key] = $value;   
+            }        
+        return $fieldsTramite;
+    }
             
 }
 
