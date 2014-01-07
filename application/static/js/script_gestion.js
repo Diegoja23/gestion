@@ -34,8 +34,9 @@ function iniEventos() {
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
 $(document).on("click","#btn_mostrar_lista_clientes",agregarDivListaClientes);
 $(document).on("click","#btn_guardar",guardarCliente);
-$(document).on("click",".dato_mostrado",traerClienteElegido);
-$(document).on("click",".btn_eliminar",eliminarClienteElegido);
+$(document).on("click",".dato_mostrado_cliente",traerClienteElegidoClicNombre);
+$(document).on("click",".btn_ver_cliente",traerClienteElegidoClicIcono);
+$(document).on("click",".btn_eliminar_cliente",eliminarClienteElegido);
 $(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 $(document).on("click",".subir_archivo",subirElArchivo);
 $(document).on("change",":file",cambioElFile);
@@ -241,8 +242,17 @@ function mostrarFormularioSubirCI(){
     }    
 }
 
-function traerClienteElegido(){
+function traerClienteElegidoClicNombre(){
     var documento = $($(this).parent().children()[2]).text();
+    traerClienteElegido(documento);
+}
+
+function traerClienteElegidoClicIcono(){
+    var documento = $($(this).parent().parent().parent().children()[2]).text();
+    traerClienteElegido(documento);
+}
+
+function traerClienteElegido(documento){    
     $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
