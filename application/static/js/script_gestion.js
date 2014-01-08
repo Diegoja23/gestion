@@ -3,6 +3,7 @@ var globalUrl = "http://"+document.domain;
 var plantilla;
 var GLOBAL_id_tramite;
 var GLOBAL_documento_cliente;
+var GLOBAL_id_cliente;
 $(document).ready(iniEventos);
 
 function iniEventos() {
@@ -264,21 +265,25 @@ function mostrarFormularioSubirCI(){
 
 function traerClienteElegidoClicNombre(){
     var documento = $($(this).parent().children()[2]).text();
-    traerClienteElegido(documento);
+    var id_cliente = $($(this).parent().children()[0]).text();    
+    traerClienteElegido(documento, id_cliente);
 }
 
 function traerClienteElegidoClicIcono(){
     var documento = $($(this).parent().parent().parent().children()[2]).text();
-    traerClienteElegido(documento);
+    var id_cliente = $($(this).parent().parent().parent().children()[0]).text();    
+    traerClienteElegido(documento,id_cliente);
 }
 
 function traerListaAdjuntosDeCliente(){
     var documento = $($(this).parent().parent().parent().children()[2]).text();
-    traerDatosComplementariosDeClienteElegido(documento);
+    var id_cliente = $($(this).parent().parent().parent().children()[0]).text();
+    traerDatosComplementariosDeClienteElegido(documento,id_cliente);
 }
 
-function traerClienteElegido(documento){  
+function traerClienteElegido(documento, id_cliente){  
     GLOBAL_documento_cliente = documento;
+    GLOBAL_id_cliente = id_cliente;
     $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
@@ -289,9 +294,10 @@ function traerClienteElegido(documento){
         //$("input").prop('disable', true);
 }
 
-function traerDatosComplementariosDeClienteElegido(documento){ 
+function traerDatosComplementariosDeClienteElegido(documento, id_cliente){ 
     GLOBAL_documento_cliente = documento;
-    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
+    GLOBAL_id_cliente = id_cliente;
+    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento, id_cliente: id_cliente})
             .done(function(data) {            
                 //agregarDivDatosCliente();
                 agregarDivAdjuntosCliente();
@@ -457,7 +463,8 @@ function eliminar_adjunto_seleccionado_del_cliente(){
 
 function agregarAdjuntoALosDelCliente(nombre_adjunto){
     var vdocumento_cliente = GLOBAL_documento_cliente;
-    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_adjunto_al_cliente",ci: vdocumento_cliente})
+    var vid_cliente = GLOBAL_id_cliente;
+    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_adjunto_al_cliente",ci: vdocumento_cliente, id_cliente: GLOBAL_id_cliente})
             .done(function(data) {            
                 //agregarDivDatosCliente();
                 var retorno_adjunto = jQuery.parseJSON(data);

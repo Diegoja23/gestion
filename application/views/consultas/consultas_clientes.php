@@ -28,11 +28,12 @@ switch($consulta){
         
     case "agregar_adjunto_al_cliente": 
         $ci = cargarUnValor('ci');
+        $id_cliente = cargarUnValor('id_cliente');
         $posibles_adjuntos = cargarTodosLosAdjuntos(); 
-        $el_adjunto = $posibles_adjuntos[0];        
+        $el_adjunto = $posibles_adjuntos[0];                
         //$adjunto_array = cargarCiDelCliente();
-        //$id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlCliente($ci,$el_adjunto);
-        $id_adjunto = 12;
+        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlCliente($id_cliente,$el_adjunto);
+        //$id_adjunto = 12;
         if($id_adjunto > 0){
              echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
         }
@@ -147,7 +148,7 @@ function crearListaClientes($lista){
     $numero = 0;    
     foreach ($lista as $c) 
     {        
-        $retorno .= '<tr><td class="dato_mostrado_cliente">'.++$numero.'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
     }
     return $retorno;
 }
