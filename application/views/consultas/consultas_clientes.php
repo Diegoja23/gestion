@@ -8,7 +8,7 @@ switch($consulta){
 
     case "agregar_cliente": 
         $un_cliente_array = cargarValores();
-        $adjunto_array = cargarAdjunto();
+        $adjunto_array = cargarCiDelCliente();
         
         if($adjunto_array != -1){
             $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array,$adjunto_array);
@@ -26,8 +26,24 @@ switch($consulta){
         }
         break;
         
-    case "eliminar_adjunto_por_id":
+    case "agregar_adjunto_al_cliente": 
+        $ci = cargarUnValor('ci');
+        $posibles_adjuntos = cargarTodosLosAdjuntos(); 
+        $el_adjunto = $posibles_adjuntos[0];
+        $adjunto_array = cargarCiDelCliente();
+        //$id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlCliente($ci,$el_adjunto);
+        $id_adjunto = 12;
+        if($id_adjunto > 0){
+             echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
+        }
+        else{
+            echo -1;
+        }
+        break;    
+    
+    case "eliminar_dato_complementario_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
+        //Falta la función eliminarDatosComplementario
        //$retorno = Fachada::getInstancia()->eliminarAdjunto($id_adjunto);
        echo $id_adjunto;
        break; 
@@ -76,7 +92,7 @@ function cargarValores(){
     return $paramsCliente;
 }
 
-function cargarAdjunto(){
+function cargarCiDelCliente(){
     /*$archivo = $_FILES["input_file_cedula"]["tmp_name"];    
     $tamanio = $_FILES["input_file_cedula"]["size"];
     $tipo    = $_FILES["input_file_cedula"]["type"];
@@ -98,7 +114,10 @@ function cargarAdjunto(){
                                         'archivo' => $contenido,
                                         'tipo' => $tipo)
                                );   */
-    session_start();
+    //session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
     if(isset($_SESSION['ci'])){
         return $arrayDatosAdjuntos = $_SESSION['ci'];
     }
@@ -143,6 +162,19 @@ function crearListaClientes($lista){
     }
     return $retorno;
 }*/
+
+function cargarTodosLosAdjuntos(){
+    //session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    if(isset($_SESSION['adjunto'])){        
+        return $arrayDatosAdjuntos = $_SESSION['adjunto'];
+    }
+    else{
+        return -1;
+    }
+}
 
 
 ?>

@@ -104,10 +104,13 @@
         <div id="div_formulario_adjuntos_cliente">
             <h3 id="nombre_cliente_adjunto">Nombre del cliente</h3>
             <form enctype="multipart/form-data" class="formulario_archivo_para_adjunto" id="div_formulario_subir_adjunto">
+                    <br />
+                    <label>Nombre del ajunto: </label>
+                    <input type="text" class="form-control" id="txt_nombre_adjunto" name="txt_nombre_adjunto" placeholder="Nombre del adjunto"><br/><br/> 
                     <label for="input_file_cedula">Adjunto</label>
                     <input type="file" class="archivo" id="input_file_adjunto" name="input_file_adjunto">
                     <p class="help-block retorno_del_file_agregar_elemento_adjunto">Agregar adjunto del cliente.</p>
-                    <button type="button" class="subir_archivo_adjunto btn btn-info btn-sm">Subir adjunto</button> 
+                    <button type="button" class="subir_archivo_adjunto_cliente btn btn-info btn-sm">Subir adjunto</button> 
             </form>
             <br/>
             <hr/>

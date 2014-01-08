@@ -41,6 +41,7 @@ $(document).on("click",".adjunto_cliente",traerListaAdjuntosDeCliente);
 $(document).on("click",".btn_eliminar_cliente",eliminarClienteElegido);
 $(document).on("click","#btn_agregar_form_subir_ci",mostrarFormularioSubirCI);
 $(document).on("click",".subir_archivo",subirElArchivo);
+$(document).on("click",".subir_archivo_adjunto_cliente",subirElArchivoAdjuntoParaCliente);
 $(document).on("change",":file",cambioElFile);
 $(document).on("click",".btn_ver_adjunto_de_un_cliente",ver_adjunto_seleccionado_del_cliente);
 $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_seleccionado_del_cliente);
@@ -215,48 +216,7 @@ function subirElArchivoAdjuntoParaCliente(){
                             //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
                             //retornoSubirArchivo(message);
                             retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
-                            agregarAdjuntoAlTramite(data);
-                            //var id_adjunto = datos_adjunto.id_adjunto;
-                            
-                            $(".formulario_archivo_tramite").fadeOut(1500);
-			},
-			//si ha ocurrido un error
-			error: function(){
-			    message = $("<span class='error'>Ha ocurrido un error.</span>");
-			    retornoSubirArchivo(message);
-			}
-		});
-
-}
-
-function subirElArchivo_tramite(){
-    
-		//información del formulario
-		var formData = new FormData($(".formulario_archivo_tramite")[0]);
-		var message = "";	
-		$.ajax({
-			url: globalUrl+"/gestion/consultas/subir_adjunto.php",  
-			type: 'POST',
-			// Form data
-			//datos del formulario
-			data: formData,
-			//necesario para subir archivos via ajax
-			cache: false,
-                        //contentType: 'image/jpeg',
-                        contentType: false,
-			processData: false,
-                        
-			//mientras enviamos el archivo
-			beforeSend: function(){
-			    message = $("<span class='before'>Subiendo archivo, por favor espere...</span>");
-			    retornoSubirArchivo(message)     	
-			},
-			//una vez finalizado correctamente
-			success: function(data){
-                            //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
-                            //retornoSubirArchivo(message);
-                            retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
-                            agregarAdjuntoAlTramite(data);
+                            agregarAdjuntoALosDelCliente(data);
                             //var id_adjunto = datos_adjunto.id_adjunto;
                             
                             $(".formulario_archivo_tramite").fadeOut(1500);
@@ -308,7 +268,7 @@ function traerClienteElegidoClicIcono(){
 
 function traerListaAdjuntosDeCliente(){
     var documento = $($(this).parent().parent().parent().children()[2]).text();
-    traerAdjuntosDeClienteElegido(documento);
+    traerDatosComplementariosDeClienteElegido(documento);
 }
 
 function traerClienteElegido(documento){  
@@ -323,7 +283,8 @@ function traerClienteElegido(documento){
         //$("input").prop('disable', true);
 }
 
-function traerAdjuntosDeClienteElegido(documento){    
+function traerDatosComplementariosDeClienteElegido(documento){ 
+    GLOBAL_documento_cliente = documento;
     $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 //agregarDivDatosCliente();
@@ -463,19 +424,32 @@ function eliminar_adjunto_seleccionado_del_cliente(){
     if(confirmado){
         var documento = GLOBAL_documento_cliente;
         var padre = $(this).parent().parent().parent()[0];
-        var vadjunto_id = padre.id;
-        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_adjunto_por_id",adjunto_id: vadjunto_id})
+        var vdato_complementario_id = padre.id;
+        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_dato_complementario_por_id",adjunto_id: vdato_complementario_id})
                 .done(function(data) {  
                 var ret = parseInt(data);
                 if(ret == 1){
                     alert('Adjunto eliminado');
-                    traerAdjuntosDeClienteElegido(documento);
+                    traerDatosComplementariosDeClienteElegido(documento);
                     //traerTramitePorId(id_tramite);
                 }             
             }, "json");
     }
 }
 
+
+function agregarAdjuntoALosDelCliente(nombre_adjunto){
+    var vdocumento_cliente = GLOBAL_documento_cliente;
+    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_adjunto_al_cliente",ci: vdocumento_cliente})
+            .done(function(data) {            
+                //agregarDivDatosCliente();
+                var retorno_adjunto = jQuery.parseJSON(data);
+                //alert(retorno_adjunto.id_adjunto);
+                agregar_fila_adjunto_tramite(retorno_adjunto.id_adjunto,nombre_adjunto,retorno_adjunto.tipo);
+                //return retorno_adjunto;
+        }, "json");
+
+}
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -665,6 +639,47 @@ function eliminarTramiteElegido(){
     }
 }
 
+function subirElArchivo_tramite(){
+    
+		//información del formulario
+		var formData = new FormData($(".formulario_archivo_tramite")[0]);
+		var message = "";	
+		$.ajax({
+			url: globalUrl+"/gestion/consultas/subir_adjunto.php",  
+			type: 'POST',
+			// Form data
+			//datos del formulario
+			data: formData,
+			//necesario para subir archivos via ajax
+			cache: false,
+                        //contentType: 'image/jpeg',
+                        contentType: false,
+			processData: false,
+                        
+			//mientras enviamos el archivo
+			beforeSend: function(){
+			    message = $("<span class='before'>Subiendo archivo, por favor espere...</span>");
+			    retornoSubirArchivo(message)     	
+			},
+			//una vez finalizado correctamente
+			success: function(data){
+                            //message = "<img src='data:image/jpeg;base64,"+data;+"' width='300' height='200' alt='embedded folder icon'>";
+                            //retornoSubirArchivo(message);
+                            retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
+                            agregarAdjuntoAlTramite(data);
+                            //var id_adjunto = datos_adjunto.id_adjunto;
+                            
+                            $(".formulario_archivo_tramite").fadeOut(1500);
+			},
+			//si ha ocurrido un error
+			error: function(){
+			    message = $("<span class='error'>Ha ocurrido un error.</span>");
+			    retornoSubirArchivo(message);
+			}
+		});
+
+}
+
 function agregarAdjuntoAlTramite(nombre_adjunto){
     var vid_tramite = GLOBAL_id_tramite;
     $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_adjunto_al_tramite",id_tramite: vid_tramite})
@@ -704,7 +719,7 @@ function eliminar_adjunto_seleccionado(){
         var id_tramite = GLOBAL_id_tramite;
         var padre = $(this).parent().parent().parent()[0];
         var vadjunto_id = padre.id;
-        $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_adjunto_por_id",adjunto_id: vadjunto_id})
+        $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_datos__por_id",adjunto_id: vadjunto_id})
                 .done(function(data) {  
                 var ret = parseInt(data);
                 if(ret == 1){
