@@ -132,7 +132,7 @@ function guardarTramite(){
         });
 }
 
-function subirElArchivo(){    
+function subirElArchivo(){      
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo")[0]);
                 /*var datos_para_mandar = new Array();
@@ -190,8 +190,10 @@ function subirElArchivo(){
 
 }
 
-function subirElArchivoAdjuntoParaCliente(){ 
-                //información del formulario
+function subirElArchivoAdjuntoParaCliente(){     
+    //chequea nombre del archivo
+    if($('#txt_nombre_adjunto').val() != ''){
+    //información del formulario
 		var formData = new FormData($(".formulario_archivo_para_adjunto")[0]);
 		var message = "";	
 		$.ajax({
@@ -227,6 +229,10 @@ function subirElArchivoAdjuntoParaCliente(){
 			    retornoSubirArchivo(message);
 			}
 		});
+    }
+    else{
+        alert('Debe agregarle un nombre al adjunto');
+    }
 
 }
 
@@ -651,7 +657,7 @@ function eliminarTramiteElegido(){
 }
 
 function subirElArchivo_tramite(){
-    
+    if($('#txt_nombre_adjunto').val() != ''){
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo_tramite")[0]);
 		var message = "";	
@@ -688,6 +694,10 @@ function subirElArchivo_tramite(){
 			    retornoSubirArchivo(message);
 			}
 		});
+    }
+    else{
+        alert('Debe agregarle un nombre al adjunto');
+    }
 
 }
 
