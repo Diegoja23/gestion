@@ -14,8 +14,8 @@ class Datos_complementarios extends CI_Model
             "INSERT INTO datos_complementarios 
             (archivo, mime, nombre, id_persona) values
             ('".$adjunto->getArchivo()."', '".$adjunto->getTipo()."','".$adjunto->getNombre()."', '".$id_persona."')";
-
-        return $this->db->query($sql);               
+        $this->db->query($sql);            
+        return $this->db->insert_id();               
     }     
     
     function get_adjuntos($id_persona)
