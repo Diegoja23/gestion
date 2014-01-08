@@ -77,7 +77,7 @@ class ServiciosGestion
         $paramsTramite['adjuntos'] = array();
         foreach ($paramsAdjuntos as $p) 
         {
-            $attsAdjuntos = array('nombre' => $p['nombre'], 'archivo' => $p['archivo'], 'tipo' => $p['tipo']);
+            $attsAdjuntos = array('nombre' => $p['nombre'], 'archivo' => $p['archivo'], 'tipo' => $p['tipo'], 'from' => 'adjuntos');
             $Adjunto = new Adjunto($attsAdjuntos);
             array_push($paramsTramite['adjuntos'], $Adjunto);  
            
@@ -119,7 +119,7 @@ class ServiciosGestion
             $adjuntos = $ci->adjuntos->get_adjuntos($t->id_tramite);               
             foreach ($adjuntos as $a) 
             {
-                $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
+                $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'adjuntos');
                 $Adjunto = new Adjunto($attsAdjuntos);               
                 array_push($paramsTramite["adjuntos"],$Adjunto);
             } 
@@ -145,9 +145,9 @@ class ServiciosGestion
         return ($data[0]->archivo);      
     }    
     
-    public function eliminarAdjunto($id)
+    public function eliminarAdjuntoTramite($id)
     {
-        $Adjunto = new Adjunto(array('id' => $id));
+        $Adjunto = new Adjunto(array('id' => $id, 'from' => 'adjuntos'));
         return $Adjunto->Eliminar();  
     }    
       

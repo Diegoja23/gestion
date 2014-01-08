@@ -44,7 +44,7 @@ switch($consulta){
     case "eliminar_dato_complementario_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
         //Falta la función eliminarDatosComplementario
-       //$retorno = Fachada::getInstancia()->eliminarAdjunto($id_adjunto);
+       $retorno = Fachada::getInstancia()->eliminarAdjuntoCliente($id_adjunto);
        echo $id_adjunto;
        break; 
         
@@ -54,7 +54,7 @@ switch($consulta){
         $a = traerPrimerAdjunto($un_cliente);
         $array = $un_cliente->convertirArray();        
         $array['adjunto_tipo'] = $a->getTipo();
-                //'<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&from=dato_complementario"></iframe>'; 
+                //'<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>'; 
         $array['adjunto_id'] = $a->getId();
         echo json_encode($array);
         break;

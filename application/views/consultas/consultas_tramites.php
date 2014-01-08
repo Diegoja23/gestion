@@ -71,7 +71,7 @@ switch($consulta){
        
     case "eliminar_adjunto_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjunto($id_adjunto);
+       $retorno = Fachada::getInstancia()->eliminarAdjuntoTramite($id_adjunto);
        echo $retorno;
        break; 
        

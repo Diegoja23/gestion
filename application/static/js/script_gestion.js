@@ -372,7 +372,7 @@ function cargarFormularioCliente(un_cliente){
         $("#txt_telefono_cliente").val(un_cliente.telefono);
         $("#txt_direccion_cliente").val(un_cliente.direccion);
         $("#txt_direccion_cliente").attr("locked","true");
-        $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
+        $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
         $('#div_ci_cliente').fadeIn(1500);         
     }
     else{
@@ -408,7 +408,7 @@ function ver_adjunto_seleccionado_del_cliente(){
     var padre = $(this).parent().parent().parent()[0];
     var adjunto_id = padre.id;
     var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
-    $('#dialog_adjunto_del_cliente').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=nombredeladjunto &from=adjunto"></iframe>');
+    $('#dialog_adjunto_del_cliente').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=poneraquinombrearchivo&from=adjunto"></iframe>');
     $("#dialog_adjunto_del_cliente").dialog({width: 800,modal: true,
     buttons: {
                 
@@ -562,7 +562,7 @@ function cargarFormularioTramite(un_tramite){
             $("#div_no_hay_adjuntos_tramite").fadeIn(1500);
             $("#div_archivos_adjuntos").fadeOut(1500);
         }
-        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&from=dato_complementario"></iframe>');
+        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
         //$('#div_ci_cliente').fadeIn(1500);         
     }
     else{
@@ -702,7 +702,7 @@ function ver_adjunto_seleccionado(){
     var padre = $(this).parent().parent().parent()[0];
     var adjunto_id = padre.id;
     var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
-    $('#dialog_adjunto').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=nombredeladjunto &from=adjunto"></iframe>');
+    $('#dialog_adjunto').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&&nombre=poneraquinombrearchivo&from=adjunto"></iframe>');
     $("#dialog_adjunto").dialog({width: 800,modal: true,
     buttons: {
                 

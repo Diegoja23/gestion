@@ -15,6 +15,8 @@ class Adjunto
     private $nombre;
     private $tipo;
     
+    private $from;
+    
     private $myci;       
     /* Constructor */
     public function __construct($params = array())
@@ -48,7 +50,12 @@ class Adjunto
 
     public function Eliminar()
     {
-        return $this->myci->adjuntos->eliminar($this->id);             
+        if($this->from == 'adjuntos')
+            return $this->myci->adjuntos->eliminar($this->id);
+        if($this->from == 'datos_complementarios')
+            return $this->myci->datos_complementarios->eliminar($this->id);
+        
+        return false;                     
     }
     
     public function convertirArray()

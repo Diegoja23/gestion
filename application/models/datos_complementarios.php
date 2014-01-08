@@ -32,6 +32,12 @@ class Datos_complementarios extends CI_Model
         return $query->result();   
     }   
         
+    function eliminar($id)
+    {
+        $sql = "DELETE FROM datos_complementarios where id_dato_complementario=".$id;   
+        //$query = $this->db->query($sql);                   
+        return $this->db->query($sql);          
+    }        
 }
 
 ?>

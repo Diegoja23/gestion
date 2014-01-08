@@ -68,7 +68,7 @@
         }
     }    
       
-    echo '<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&from=dato_complementario"></iframe>'; 
+    echo '<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>'; 
     echo "Clientes, los primeros dos<br>";
     
     $clientes = $Fachada->getClientes(2,0);

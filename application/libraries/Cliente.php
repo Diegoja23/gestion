@@ -40,7 +40,7 @@ class Cliente extends Participante
             $adjuntos = $ci->datos_complementarios->get_adjuntos($p->id_persona);    
             foreach ($adjuntos as $a) 
             {
-                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
+                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'datos_complementarios');
                 $Adjunto = new Adjunto($attsAdjuntos);
                 array_push($paramsCliente["adjuntos"],$Adjunto);
             }  
@@ -60,7 +60,7 @@ class Cliente extends Participante
  
             foreach ($adjuntos as $a) 
             {
-                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime);
+                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'datos_complementarios');
                 $Adjunto = new Adjunto($attsAdjuntos);
                 array_push($paramsCliente["adjuntos"],$Adjunto);
             }  
@@ -92,7 +92,11 @@ class Cliente extends Participante
             
         return $fieldsParticipante;
     }*/
-    
+    public function addAdjunto($Adjunto)
+    {
+        return ($this->myci->datos_complementarios->add($Adjunto, $this->id_persona));     
+    }
+        
     public function convertirArray(){
         $object_vars=get_object_vars($this);
         $fieldsParticipante = array();

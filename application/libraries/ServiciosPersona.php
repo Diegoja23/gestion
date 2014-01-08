@@ -22,7 +22,7 @@ class ServiciosPersona
         $paramsCliente['adjuntos'] = array();
         foreach ($paramsAdjuntos as $p) 
         {
-            $attsAdjuntos = array('nombre' => $p['nombre'], 'archivo' => $p['archivo'], 'tipo' => $p['tipo']);
+            $attsAdjuntos = array('nombre' => $p['nombre'], 'archivo' => $p['archivo'], 'tipo' => $p['tipo'], 'from' => 'adjuntos');
             $Adjunto = new Adjunto($attsAdjuntos);
             array_push($paramsCliente['adjuntos'], $Adjunto);  
            
@@ -71,8 +71,20 @@ class ServiciosPersona
         return ($data[0]->archivo);      
     }
     
+    public function eliminarAdjuntoCliente($id)
+    {
+        $Adjunto = new Adjunto(array('id' => $id, 'from' => 'datos_complementarios'));
+        return $Adjunto->Eliminar();     
+    }      
     
-            
+    public function agregarAdjuntoAlCliente($id_cliente,$el_adjunto)
+    {
+        $Cliente = new Cliente(array('id_persona' => $id_cliente));        
+        $attsAdjuntos = array('nombre' => $el_adjunto['nombre'], 'archivo' => $el_adjunto['archivo'], 'tipo' => $el_adjunto['tipo']);
+        $Adjunto = new Adjunto($attsAdjuntos);
+        return $Cliente->addAdjunto($Adjunto);        
+    }  
+ 
 }
 
 
