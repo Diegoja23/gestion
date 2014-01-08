@@ -3,8 +3,9 @@
     $archivo = $_FILES["input_file_adjunto"]["tmp_name"];    
     $tamanio = $_FILES["input_file_adjunto"]["size"];
     $tipo    = $_FILES["input_file_adjunto"]["type"];
-    $nombre  = $_FILES["input_file_adjunto"]["name"]; 
+    //$nombre  = $_FILES["input_file_adjunto"]["name"];     
     $nombre_adjunto = $_POST['txt_nombre_adjunto'];
+    $nombre  = $nombre_adjunto; 
     
     if ( $archivo != "none" )
     {
