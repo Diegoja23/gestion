@@ -719,7 +719,7 @@ function eliminar_adjunto_seleccionado(){
         var id_tramite = GLOBAL_id_tramite;
         var padre = $(this).parent().parent().parent()[0];
         var vadjunto_id = padre.id;
-        $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_datos__por_id",adjunto_id: vadjunto_id})
+        $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_adjunto_por_id",adjunto_id: vadjunto_id})
                 .done(function(data) {  
                 var ret = parseInt(data);
                 if(ret == 1){
