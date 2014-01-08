@@ -112,6 +112,7 @@
             <br/>
             <hr/>
             <br/>
+            <div id="dialog_adjunto_del_cliente" title="Archivo adjunto" style="display:none;"></div>
             <div id="div_listado_adjuntos_total_del_cliente">
                 <div id="div_no_hay_adjuntos_del_cliente">
                     <h3> - No hay adjuntos - </h3>

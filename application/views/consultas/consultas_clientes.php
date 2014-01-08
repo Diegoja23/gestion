@@ -26,6 +26,12 @@ switch($consulta){
         }
         break;
         
+    case "eliminar_adjunto_por_id":
+       $id_adjunto = cargarUnValor('adjunto_id');
+       //$retorno = Fachada::getInstancia()->eliminarAdjunto($id_adjunto);
+       echo $id_adjunto;
+       break; 
+        
     case "traer_por_ci":
         $ci = cargarUnValor('ci'); 
         $un_cliente = Fachada::getInstancia()->getByCI($ci);

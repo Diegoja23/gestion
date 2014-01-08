@@ -417,7 +417,8 @@ table tr td
     width: 200px;
 }
 
-.btn_ver_adjunto, .btn_eliminar_adjunto, .btn_ver_tramite, .btn_eliminar_tramite, .btn_ver_cliente, .btn_eliminar_cliente, .adjunto_cliente{
+.btn_ver_adjunto, .btn_eliminar_adjunto, .btn_ver_tramite, .btn_eliminar_tramite, .btn_ver_cliente, .btn_eliminar_cliente, .adjunto_cliente,
+.btn_ver_adjunto_de_un_cliente, .btn_eliminar_adjunto_de_un_cliente{
     cursor:pointer;
 }
 
