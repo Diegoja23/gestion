@@ -9,7 +9,7 @@
     <script type="text/javascript" src="'.APPPATH.'static/dist/js/bootstrap.min.js"></script>';
         echo '<script type="text/javascript" src="'.APPPATH.'static/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min_date.js"></script>'; 
         echo '<script type="text/javascript" src="'.APPPATH.'static/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min_dialog.js"></script>';
-    echo '<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">';  
+    //echo '<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">';  
     echo '<link href="'.APPPATH.'static/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min_dialog.css" rel="stylesheet">'; 
     echo '<link href="'.APPPATH.'static/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min_date.css" rel="stylesheet">'; 
     echo '<script type="text/javascript" src="'.APPPATH.'static/js/script_gestion.js"></script>'; 
