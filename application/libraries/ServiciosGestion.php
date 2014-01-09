@@ -90,6 +90,16 @@ class ServiciosGestion
             return false;        
     }            
     
+    public function modificarTramite($paramsTramite)
+    {
+        $Tramite = new Tramite($paramsTramite);
+        //var_dump($Tramite);die();
+        if($Tramite->validar()) 
+            return $Tramite->modificar();            
+        else 
+            return false;                 
+    }
+    
     public function agregarAdjuntoAlTramite($id_tramite,$el_adjunto)
     {
         $Tramite = new Tramite(array('id_tramite' => $id_tramite));        

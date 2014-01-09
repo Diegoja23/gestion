@@ -103,6 +103,17 @@ class Tramite
 
     }
     
+    public function modificar()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsTramite = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsTramite[$key] = $value;
+             
+        return $this->myci->tramites->modificar_tramite($fieldsTramite);                           
+    }    
+    
     public function addAdjunto($Adjunto)
     {
         return ($this->myci->adjuntos->add($Adjunto, $this->id_tramite));     

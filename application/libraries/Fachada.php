@@ -96,6 +96,11 @@ class Fachada
     {
         return $this->sg->agregarTramite($paramsTramite, $paramsAdjuntos);     
     }
+    
+    public function modificarTramite($paramsTramite)  
+    {
+        return $this->sg->modificarTramite($paramsTramite);     
+    }    
                 
     public function getTramites($id_gestion = 0) 
     {
