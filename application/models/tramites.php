@@ -41,6 +41,12 @@ class Tramites extends CI_Model
         return false;        
     }
 
+    function getTipoTramiteById($id)
+    {
+        $query = $this->db->get_where('tipos_tramite', array('id_tipo_tramite' => $id));
+        if ($query->num_rows > 0) return $query->result();
+        return false;        
+    }
                  
 }
 

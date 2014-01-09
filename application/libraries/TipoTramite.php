@@ -39,6 +39,20 @@
 
     public function setPlantilla($vplantilla) { $this->plantilla = $vplantilla; }  
     
+    public function getById()
+    {
+        $array_tipo_tramite = $this->myci->tramites->getTipoTramiteById($this->id_tipo_tramite);        
+        $this->materializar($array_tipo_tramite[0]);
+    }    
+    
+    public function materializar($params)
+    {
+        foreach ($params as $att => $key){
+            $this->$att = $key;   
+        }
+    }
+        
+    
 }
 
 

@@ -1,9 +1,11 @@
 <?php
+require_once('TipoTramite.php');
 /**
  * class Tramite
  * autor: gestion
  * 
  */
+
 
 class Tramite
 {
@@ -30,6 +32,14 @@ class Tramite
             $this->$att = $key;   
 
         $this->myci =& get_instance();       
+        
+        if(isset($this->id_tipo_tramite) && $this->id_tipo_tramite > 0)
+        {
+            $TipoTramite = new TipoTramite(array('id_tipo_tramite' => $this->id_tipo_tramite));
+            $TipoTramite->getById();
+            $this->tipo_tramite = $TipoTramite;
+        }
+            
     }
     
     public function getId()

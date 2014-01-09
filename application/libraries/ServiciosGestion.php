@@ -112,7 +112,7 @@ class ServiciosGestion
             $paramsTramite["fecha_inicio"] = Common::fromSqlToUsrDate($t->fecha_inicio);   
             $paramsTramite["fecha_fin"] = Common::fromSqlToUsrDate($t->fecha_fin);   
             $paramsTramite["estado"] = $t->estado;   
-            $paramsTramite["id_tipo_tramite"] = $t->id_tipo_tramite;   
+            $paramsTramite["id_tipo_tramite"] = $t->id_tipo_tramite;    
             $paramsTramite["id_gestion"] = $t->id_gestion;    
             $paramsTramite["adjuntos"] = array();
             

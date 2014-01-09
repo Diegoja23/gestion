@@ -46,3 +46,12 @@
     $select_multiple_participantes .= '</select><br>';
             
     echo $select_multiple_participantes;    
+    
+    
+    $tramites = $Fachada->getTramites();
+    
+    foreach($tramites as $tramite)
+    {
+        echo "<hr><b>Descri tramite:</b> ".$tramite->getDescripcion();
+        echo "<br><b>Descri tipo tramite:</b> ".$tramite->getTipoTramite()->getDescripcion(); 
+    }
