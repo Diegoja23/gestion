@@ -32,6 +32,7 @@ function iniEventos() {
 
 }
 
+
 /*asignar eventos CLIENTES*/
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
 $(document).on("click","#btn_mostrar_lista_clientes",agregarDivListaClientes);
@@ -65,12 +66,12 @@ $(document).on("click",".btn_eliminar_adjunto",eliminar_adjunto_seleccionado);
 
 
 
+
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
   MÉTODOS DE CLIENTE
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
-
 function agregarDivDatosCliente(){    
     //if($("#div_formulario_cliente").css("display") == "none"){        
         $("#div_listado_cliente").fadeOut(1500);        
