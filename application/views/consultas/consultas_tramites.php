@@ -131,7 +131,7 @@ function cargarValoresTramite(){
     $paramsCliente=array();
     $paramsCliente['descripcion']=$_POST['descripcion'];
     $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
-
+    $paramsCliente['documento']='<h2>Compra-venta inmueble</h2><p>Este es un documento de compraventa de inmueble. <input type="text" class="form-control" id="txt_elemento" placeholder="Nombre del comprador"> Sigue el doc, etc</p>';
     $paramsCliente['estado']=0;
     $paramsCliente['id_gestion']=intval($_POST['id_gestion']);
     

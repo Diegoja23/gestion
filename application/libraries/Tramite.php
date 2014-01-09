@@ -21,6 +21,7 @@ class Tramite
     private $tipo_tramite;//Objecto TipoTramite
     private $id_gestion;
     
+    private $documento;    
     private $adjuntos = array();
     
     private $myci;   
