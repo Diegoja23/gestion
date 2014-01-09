@@ -95,7 +95,7 @@
             </div>
             <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
                     <br />
-                    <label>Nombre del ajunto: </label>
+                    <label>Nombre del adjunto: </label>
                     <input type="text" class="form-control" id="txt_nombre_adjunto" name="txt_nombre_adjunto" placeholder="Nombre del adjunto"><br/><br/>   
                     <label for="input_file_adjunto">Adjunto</label>
                     <input type="file" class="archivo" id="input_file_adjunto" name="input_file_adjunto">

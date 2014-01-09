@@ -1,6 +1,8 @@
 <?php
 
 $consulta = $_POST['consulta'];
+
+$allTiposTramiteByGestion = array();
     
 switch($consulta){
     case "traer_todos":
@@ -8,8 +10,9 @@ switch($consulta){
         break;
     
     case "traer_tipos_tramite":
-        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');          
-        echo crearSelectTiposTramites(Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion));
+        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
+        $allTiposTramite = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);       
+        echo crearSelectTiposTramites($allTiposTramite);
         break;
 
     case "agregar_tramite": 
