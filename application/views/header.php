@@ -12,7 +12,8 @@
     //echo '<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">';  
     echo '<link href="'.APPPATH.'static/css/font-awesome.css" rel="stylesheet">';
     echo '<link href="'.APPPATH.'static/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min_dialog.css" rel="stylesheet">'; 
-    echo '<link href="'.APPPATH.'static/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min_date.css" rel="stylesheet">'; 
+    echo '<link href="'.APPPATH.'static/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.min_date.css" rel="stylesheet">';
+    echo '<script type="text/javascript" src="'.APPPATH.'static/ckeditor/ckeditor.js"></script>';
     echo '<script type="text/javascript" src="'.APPPATH.'static/js/script_gestion.js"></script>'; 
     //echo '<script type="text/javascript" src="'.APPPATH.'static/js/funciones_subir_archivo.js"></script>'; 
     echo '<link href="'.APPPATH.'static/css/reset.css" rel="stylesheet" media="screen">';

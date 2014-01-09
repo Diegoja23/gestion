@@ -155,9 +155,12 @@ function crearSelectTiposTramites($lista){
 }
 
 function traerPlantillaDelTipoTraite($id_tt){
-    return '<h2>Boleto de reserva</h2>
+    $textarea = '<textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;asdfasdfasdfasdfa asdfasdaf asdf</textarea>';
+    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
+    return $textarea;
+    /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
 <p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
-La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';
+La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
 }
 
 function cargarAdjuntos(){
