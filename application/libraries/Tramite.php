@@ -43,10 +43,8 @@ class Tramite
             
     }
     
-    public function getId()
-    {
-        return $this->id_tramite;
-    }    
+    /* getters */
+    public function getId(){ return $this->id_tramite; }    
         
     public function getDescripcion()
     {
@@ -79,6 +77,10 @@ class Tramite
     }    
     
     public function getAdjuntos(){return $this->adjuntos;}
+    
+    /* setters */
+    public function setDescripcion($descripcion){ $this->descripcion = $descripcion; }
+    public function setDocumento($documento){ $this->documento = $documento; }    
     
     public function validar()
     {

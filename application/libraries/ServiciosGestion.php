@@ -90,12 +90,10 @@ class ServiciosGestion
             return false;        
     }            
     
-    public function modificarTramite($paramsTramite)
+    public function modificarTramite($unTramite)
     {
-        $Tramite = new Tramite($paramsTramite);
-        //var_dump($Tramite);die();
-        if($Tramite->validar()) 
-            return $Tramite->modificar();            
+        if($unTramite->validar()) 
+            return $unTramite->modificar();            
         else 
             return false;                 
     }

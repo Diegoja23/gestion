@@ -55,3 +55,19 @@
         echo "<hr><b>Descri tramite:</b> ".$tramite->getDescripcion();
         echo "<br><b>Descri tipo tramite:</b> ".$tramite->getTipoTramite()->getDescripcion(); 
     }
+
+    // Logica para modificar un trámite mediante el propio objeto tramite
+    //Las propiedades del tramite q van a ser modificadas son las que se cambien con los setters
+    // como en el ejemplo
+    $tramite->setDescripcion("Esta es la nueva descripcion para el trámite modificado");
+    $tramite->setDocumento("<p>Esta es la nueva PLANTILLA para este tramite que hasido modificado </p>");
+    $Fachada->modificarTramite($tramite);
+    
+    
+    
+    
+    
+    
+    
+    
+    

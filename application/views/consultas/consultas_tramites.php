@@ -2,6 +2,8 @@
 
 $consulta = $_POST['consulta'];
 
+if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
+
 $allTiposTramiteByGestion = array();
     
 switch($consulta){
