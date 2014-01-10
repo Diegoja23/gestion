@@ -2,8 +2,8 @@
 
 $consulta = $_POST['consulta'];
 
-if(!isset($GLOBALS['allTiposTramite']))
-    $GLOBALS['allTiposTramite'] = array();
+if(!isset($_GLOBALS['allTiposTramite']))
+    $_GLOBALS['allTiposTramite'] = array();
     
 switch($consulta){
     case "traer_todos":
@@ -12,8 +12,8 @@ switch($consulta){
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
-        $GLOBALS['allTiposTramite'] = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);       
-        echo crearSelectTiposTramites($GLOBALS['allTiposTramite']);
+        $_GLOBALS['allTiposTramite'] = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);       
+        echo crearSelectTiposTramites($_GLOBALS['allTiposTramite']);
         break;
 
     case "agregar_tramite": 
@@ -166,7 +166,7 @@ La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que ademÃ
 }
 
 function traerTipoTramitePorId($id_tt){
-    $todos_los_tipo_tramtie = $GLOBALS['allTiposTramite'];
+    $todos_los_tipo_tramtie = $_GLOBALS['allTiposTramite'];
     var_dump($todos_los_tipo_tramtie); die();
     foreach($todos_los_tipo_tramtie as $un_tt){
         if($un_tt->id_tipo_tramite == $id_tt){
