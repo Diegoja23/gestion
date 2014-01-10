@@ -2,10 +2,14 @@
 
 $consulta = $_POST['consulta'];
 
+
 if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
 
 $allTiposTramiteByGestion = array();
-    
+/*
+if(!isset($_GLOBALS['allTiposTramite']))
+    $_GLOBALS['allTiposTramite'] = array();
+  */  
 switch($consulta){
     case "traer_todos":
         echo crearListaTramites(traerTodos());
@@ -13,8 +17,8 @@ switch($consulta){
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
-        $allTiposTramite = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);       
-        echo crearSelectTiposTramites($allTiposTramite);
+        define('TIPOS_TRAMITE_BY_GESTION', Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion));       
+        echo crearSelectTiposTramites($_GLOBALS['allTiposTramite']);
         break;
 
     case "agregar_tramite": 
@@ -157,12 +161,23 @@ function crearSelectTiposTramites($lista){
 }
 
 function traerPlantillaDelTipoTraite($id_tt){
-    $textarea = '<textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;asdfasdfasdfasdfa asdfasdaf asdf</textarea>';
+    $elTipoTramite = traerTipoTramitePorId($id_tt);
+    $textarea = '<textarea id="editor1" name="editor1">'.$elTipoTramite->plantilla.'</textarea>';
     $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
     return $textarea;
     /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
 <p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
 La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
+}
+
+function traerTipoTramitePorId($id_tt){
+    $todos_los_tipo_tramtie = $_GLOBALS['allTiposTramite'];
+    var_dump($todos_los_tipo_tramtie); die();
+    foreach($todos_los_tipo_tramtie as $un_tt){
+        if($un_tt->id_tipo_tramite == $id_tt){
+            return $un_tt;
+        }
+    }
 }
 
 function cargarAdjuntos(){
