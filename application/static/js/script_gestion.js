@@ -485,8 +485,7 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
 function agregarDivDatosTramite(){
-    //if($("#div_formulario_tramite").css("display") == "none"){      
-    
+    //if($("#div_formulario_tramite").css("display") == "none"){
     $("#btn_agregar_tramite").fadeOut(1500);
     $("#div_listado_tramite").fadeOut(1500);
     $("#btn_mostrar_lista_tramites").fadeIn(1500);
@@ -509,6 +508,7 @@ function agregarDivDatosTramite(){
 }
 
 function agregarDivListaTramite(){
+    GLOBAL_id_tramite = -1;
     $("#btn_mostrar_lista_tramites").fadeOut(1500);
     
     $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
@@ -528,7 +528,7 @@ function traerTramiteElegido(){
 function traerTramitePorId(id_tramite){
     $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "traer_por_id",id_tramite: id_tramite})
             .done(function(data) {            
-                agregarDivDatosTramite();
+                agregarDivDatosTramite();                
                 var un_tramite = jQuery.parseJSON(data);
                 cargarFormularioTramite(un_tramite);      
         }, "json");  
@@ -621,8 +621,13 @@ function mostrarDialogPlantilla(){
     var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
     
     //$("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
+    var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
+    var vid_tramite = GLOBAL_id_tramite;
+    if(typeof vid_tramite === 'undefined'){
+        vid_tramite = -1;
+    } 
     
-    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite})
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, id_tipo_gestion: vid_tipo_gestion, id_tramite:vid_tramite})
             .done(function(data) {
         plantilla = data;
         $("#dialog_plantilla").html(data);

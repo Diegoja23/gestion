@@ -3,9 +3,9 @@
 $consulta = $_POST['consulta'];
 
 
-if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
+//if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
 
-$allTiposTramiteByGestion = array();
+//$allTiposTramiteByGestion = array();
 /*
 if(!isset($_GLOBALS['allTiposTramite']))
     $_GLOBALS['allTiposTramite'] = array();
@@ -17,8 +17,9 @@ switch($consulta){
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
-        define('TIPOS_TRAMITE_BY_GESTION', Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion));       
-        echo crearSelectTiposTramites(TIPOS_TRAMITE_BY_GESTION);
+        //define('TIPOS_TRAMITE_BY_GESTION', Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion)); 
+        $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
+        echo crearSelectTiposTramites($listaTiposTramites);
         break;
 
     case "agregar_tramite": 
@@ -49,7 +50,14 @@ switch($consulta){
     
    case "get_plantilla_por_id_tipo_tramite":
        $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
-       echo traerPlantillaDelTipoTraite($id_tipo_tramite);
+       $id_tipo_gestion = cargarUnValor('id_tipo_gestion');
+       $id_tramite = cargarUnValor('id_tramite');
+       if($id_tramite > 0){
+           echo traerPlantillaTramite($id_tramite);
+       }
+       else{
+           echo traerPlantillaDelTipoTraite($id_tipo_tramite,$id_tipo_gestion);
+       }       
        //$file = $_FILES['archivo']['name'];
         //echo $file;
         break;
@@ -160,9 +168,16 @@ function crearSelectTiposTramites($lista){
     return $retorno;
 }
 
-function traerPlantillaDelTipoTraite($id_tt){
-    $elTipoTramite = traerTipoTramitePorId($id_tt);
-    $textarea = '<textarea id="editor1" name="editor1">'.$elTipoTramite->plantilla.'</textarea>';
+function traerPlantillaDelTipoTraite($id_tt,$id_tipo_gestion){
+    $elTipoTramite = traerTipoTramitePorId($id_tt,$id_tipo_gestion);
+    $textarea = '<textarea id="editor1" name="editor1">'.$elTipoTramite->getPlantilla().'</textarea>';
+    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
+    return $textarea;
+}
+
+function traerPlantillaTramite($id_tramite){
+    $el_tramite = traerTramiteElegido($id_tramite);
+    $textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
     $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
     return $textarea;
     /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
@@ -170,11 +185,11 @@ function traerPlantillaDelTipoTraite($id_tt){
 La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
 }
 
-function traerTipoTramitePorId($id_tt){
-    $todos_los_tipo_tramtie = TIPOS_TRAMITE_BY_GESTION;
-    var_dump($todos_los_tipo_tramtie); die();
+function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
+    $todos_los_tipo_tramtie = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);;
+    //var_dump($todos_los_tipo_tramtie); die();
     foreach($todos_los_tipo_tramtie as $un_tt){
-        if($un_tt->id_tipo_tramite == $id_tt){
+        if($un_tt->getIdTiposTramite() == $id_tt){
             return $un_tt;
         }
     }
