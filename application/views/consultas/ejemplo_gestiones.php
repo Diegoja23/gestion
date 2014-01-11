@@ -63,7 +63,26 @@
     $tramite->setDocumento("<p>Esta es la nueva PLANTILLA para este tramite que hasido modificado </p>");
     $Fachada->modificarTramite($tramite);
     
+    // Eliminar tramite
     echo "Eliminar tramite ".$Fachada->eliminarTramite(2);
+    
+    //Agregar Tipo Tramite (Plantilla) - se necesita un id tipo de gestion
+    $paramsTipoTramite = array();
+        
+    $paramsTipoTramite['descripcion'] = 'Compra-venta cacharro';
+    $paramsTipoTramite['plantilla'] = '<h2>Compra-venta cacharro</h2><p>Este es un docu..';
+    $paramsTipoTramite['id_tipos_gestion'] = 1;
+    echo "Tipo tramite agregado ".$Fachada->agregarTipoTramite($paramsTipoTramite);
+    
+    //Modificar tipo tramite
+    $TipoTramite = new TipoTramite(array(
+                                         'id_tipo_tramite' => 3,
+                                         'descripcion' => 'descripcion de tramite modificado',
+                                         'plantilla' => '<h2>Pkantilla tramite modificado</h2>',
+                                         'id_tipos_gestion' => 1));
+   
+    //Modificar 
+    $Fachada->modificarTipoTramite($TipoTramite);
     
     
     

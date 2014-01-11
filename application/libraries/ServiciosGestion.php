@@ -165,6 +165,24 @@ class ServiciosGestion
         $Tramite = new Tramite(array('id_tramite' => $id_tramite));
         return $Tramite->eliminar();  
     }      
+    
+    public function agregarTipoTramite($paramsTipoTramite)
+    {
+        $TipoTramite = new TipoTramite($paramsTipoTramite);
+        if($TipoTramite->validar()) 
+            return $TipoTramite->add();            
+        else 
+            return false;             
+    }    
+    
+    public function modificarTipoTramite($unTipoTramite)
+    {
+        if($unTipoTramite->validar()) 
+            return $unTipoTramite->modificar();            
+        else 
+            return false;                 
+    }
+     
             
 }
 
