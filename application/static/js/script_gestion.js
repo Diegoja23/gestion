@@ -112,28 +112,6 @@ function listar(){
     return $.isNumeric(($("#span_id_gestion").text()));
 }
 
-function guardarTramite(){
-    var vdescripcion = $("#txt_descripcion_tramite").val();
-    var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
-    var vfecha_inicio = $("#txt_fecha_inicio").val();
-    var vid_gestion = $.trim($("#span_id_gestion").text());
-    var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
-    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
-            .done(function(data) {            
-                //alert(data);
-                //var un_cliente = jQuery.parseJSON(data);
-                //cargarFormulario(un_cliente);
-                var retorno = parseInt(data);
-                if(retorno==1){
-                    $("#retorno_borrado").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
-                }
-                else{
-                    $("#retorno_borrado").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
-                }
-                //$('#content').append(data);
-        });
-}
-
 function subirElArchivo(){      
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo")[0]);
@@ -488,6 +466,8 @@ function agregarDivDatosTramite(){
     //if($("#div_formulario_tramite").css("display") == "none"){
     $("#btn_agregar_tramite").fadeOut(1500);
     $("#div_listado_tramite").fadeOut(1500);
+    $("#div_archivos_adjuntos").fadeOut(1500);
+    $("#div_no_hay_adjuntos_tramite").fadeOut(1500);    
     $("#btn_mostrar_lista_tramites").fadeIn(1500);
     $("#div_formulario_tramite").fadeIn(1500);
     $("#btn_guardar_tramite").fadeIn(1500);  
@@ -507,16 +487,49 @@ function agregarDivDatosTramite(){
     //}
 }
 
+function guardarTramite(){
+    var vdescripcion = $("#txt_descripcion_tramite").val();
+    var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    var vfecha_inicio = $("#txt_fecha_inicio").val();
+    var vfecha_fin = $("#txt_fecha_fin").val();
+    var vid_gestion = $.trim($("#span_id_gestion").text());
+    var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
+    var vplantilla = plantilla;
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla})
+            .done(function(data) {            
+                //alert(data);
+                //var un_cliente = jQuery.parseJSON(data);
+                //cargarFormulario(un_cliente);
+                var retorno = parseInt(data);
+                if(retorno==1){
+                    $("#retorno_borrado").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
+                    agregarDivListaTramite();
+                }
+                else{
+                    $("#retorno_borrado").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
+                }
+                //$('#content').append(data);
+        });
+}
+
 function agregarDivListaTramite(){
-    GLOBAL_id_tramite = -1;
     $("#btn_mostrar_lista_tramites").fadeOut(1500);
-    
     $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
     $("#div_formulario_tramite").fadeOut(1500);
     $("#btn_guardar_tramite").fadeOut(1500);    
     $("#div_listado_tramite").fadeIn(1500);
     $("#btn_agregar_tramite").fadeIn(1500);
-    //$("#btn_agregar_tramite").text('Agregar <i class="fa fa-list"></i>');
+    limpiarFormularioAgregarTramite();
+}
+
+function limpiarFormularioAgregarTramite(){
+    GLOBAL_id_tramite = -1;
+    plantilla = '';
+    $("#txt_descripcion_tramite").val('');
+    $("#txt_fecha_inicio").val('');
+    $("#txt_fecha_fin").val('');
+    $("#span_id_gestion").text('');
+    $("#span_id_tipo_gestion").text('');
 }
 
 function traerTramiteElegido(){

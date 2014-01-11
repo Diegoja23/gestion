@@ -84,7 +84,14 @@ switch($consulta){
        else{
            echo -1;
        }              
-       break;    
+       break;
+   
+   case "modificar_tramite":
+       /*$id_adjunto = cargarUnValor('adjunto_id');
+       $retorno = Fachada::getInstancia()->eliminarAdjuntoTramite($id_adjunto);
+       echo $retorno;*/
+       break;
+       
        
     case "eliminar_adjunto_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
@@ -132,7 +139,7 @@ function crearListaTramites($lista){
     $numero = 0; 
     foreach ($lista as $t)
     {        
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.++$numero.'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
     return $retorno;
@@ -148,7 +155,7 @@ function cargarValoresTramite(){
     $paramsCliente=array();
     $paramsCliente['descripcion']=$_POST['descripcion'];
     $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
-    $paramsCliente['documento']='<h2>Compra-venta inmueble</h2><p>Este es un documento de compraventa de inmueble. <input type="text" class="form-control" id="txt_elemento" placeholder="Nombre del comprador"> Sigue el doc, etc</p>';
+    $paramsCliente['documento']= $_POST['plantilla_modificada'];
     $paramsCliente['estado']=0;
     $paramsCliente['id_gestion']=intval($_POST['id_gestion']);
     
@@ -176,13 +183,8 @@ function traerPlantillaDelTipoTraite($id_tt,$id_tipo_gestion){
 }
 
 function traerPlantillaTramite($id_tramite){
-    $el_tramite = traerTramiteElegido($id_tramite);
-    $textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
-    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
-    return $textarea;
-    /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
-<p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
-La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
+    $el_tramite = traerTramiteElegido($id_tramite);    
+    return $el_tramite->getDocumento();
 }
 
 function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
