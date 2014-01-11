@@ -113,25 +113,48 @@ function listar(){
 }
 
 function guardarTramite(){
+	var vid_tramite = $("#txt_id_tramite").val();
     var vdescripcion = $("#txt_descripcion_tramite").val();
     var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
     var vfecha_inicio = $("#txt_fecha_inicio").val();
     var vid_gestion = $.trim($("#span_id_gestion").text());
     var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
-    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
-            .done(function(data) {            
-                //alert(data);
-                //var un_cliente = jQuery.parseJSON(data);
-                //cargarFormulario(un_cliente);
-                var retorno = parseInt(data);
-                if(retorno==1){
-                    $("#retorno_borrado").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
-                }
-                else{
-                    $("#retorno_borrado").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
-                }
-                //$('#content').append(data);
-        });
+    if(vid_tramite > 0)
+    {
+    	console.log("aqui se modifica el tramite");
+	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
+	            .done(function(data) {            
+	                //alert(data);
+	                //var un_cliente = jQuery.parseJSON(data);
+	                //cargarFormulario(un_cliente);
+	                var retorno = parseInt(data);
+	                if(retorno==1){
+	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente!</strong></span>");
+	                }
+	                else{
+	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado !</strong></span>");
+	                }
+	                //$('#content').append(data);
+	        });      	
+    }
+    else
+    {
+	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
+	            .done(function(data) {            
+	                //alert(data);
+	                //var un_cliente = jQuery.parseJSON(data);
+	                //cargarFormulario(un_cliente);
+	                var retorno = parseInt(data);
+	                if(retorno==1){
+	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
+	                }
+	                else{
+	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
+	                }
+	                //$('#content').append(data);
+	        });    	
+    }
+
 }
 
 function subirElArchivo(){      
@@ -566,6 +589,7 @@ function visibilidadFormularioSubirAdjunto(){
 
 function cargarFormularioTramite(un_tramite){
     if(un_tramite != -1){
+    	$("#txt_id_tramite").val(un_tramite.id_tramite);
         $("#txt_descripcion_tramite").val(un_tramite.descripcion);
         $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
         $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
@@ -641,7 +665,7 @@ function mostrarDialogPlantilla(){
                     click : function (){
                         var planilla_llena = extraerDatosPlanilla();
                         alert('delete here');
-                        alert(plantilla);
+                        alert(planilla);
                     }
                 },
                 Cerrar: function () {
@@ -652,7 +676,6 @@ function mostrarDialogPlantilla(){
 }
 
 function extraerDatosPlanilla(){
-    
 }
 
 function eliminarTramiteElegido(){
