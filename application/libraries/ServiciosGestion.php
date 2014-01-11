@@ -160,6 +160,11 @@ class ServiciosGestion
         return $Adjunto->Eliminar();  
     }    
       
+    public function eliminarTramite($id_tramite)
+    {
+        $Tramite = new Tramite(array('id_tramite' => $id_tramite));
+        return $Tramite->eliminar();  
+    }      
             
 }
 

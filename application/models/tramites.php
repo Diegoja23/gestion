@@ -55,6 +55,12 @@ class Tramites extends CI_Model
         return false;        
     }
                  
+    function eliminar($id_tramite)
+    {
+        $this->db->delete('tramites', array('id_tramite' => $id_tramite));
+        return($this->db->affected_rows() > 0);
+              
+    }                 
 }
 
 ?>

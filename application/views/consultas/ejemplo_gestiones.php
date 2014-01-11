@@ -63,6 +63,7 @@
     $tramite->setDocumento("<p>Esta es la nueva PLANTILLA para este tramite que hasido modificado </p>");
     $Fachada->modificarTramite($tramite);
     
+    echo "Eliminar tramite ".$Fachada->eliminarTramite(2);
     
     
     
