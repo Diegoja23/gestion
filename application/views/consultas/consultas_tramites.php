@@ -31,8 +31,32 @@ switch($consulta){
         else{
             echo 0;
         }
-        break;
-        
+        break;        
+    case "modificar_tramite":        
+        $un_tramite_array = cargarValoresTramite();  
+        $un_tramite_array['id_tramite']=$_POST['id_tramite'];
+        $Tramite = new Tramite(array
+                                    (
+                                        'id_tramite'=>$un_tramite_array['id_tramite'],
+                                        'descripcion'=>$un_tramite_array['descripcion'],
+                                        'fecha_inicio'=>$un_tramite_array['fecha_inicio'],
+                                        //'fecha_fin'=>$un_tramite_array['fecha_fin'],
+                                        'estado'=>$un_tramite_array['estado'],
+                                        'id_tipo_tramite'=>$un_tramite_array['id_tipo_tramite'],
+                                        'id_gestion'=>$un_tramite_array['id_gestion'],
+                                        'documento'=>$un_tramite_array['documento'],
+                                    )
+                               );
+        /*$Tramite->setDescripcion($un_tramite_array['descripcion']);
+        $Tramite->setDocumento($un_tramite_array['documento']);*/
+        $retorno = Fachada::getInstancia()->modificarTramite($Tramite);
+        if($retorno){
+            echo 1;
+        }
+        else{
+            echo 0;
+        }
+        break;        
     case "traer_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
         $un_tramite = traerTramiteElegido($id_tramite);
@@ -183,8 +207,19 @@ function traerPlantillaDelTipoTraite($id_tt,$id_tipo_gestion){
 }
 
 function traerPlantillaTramite($id_tramite){
+
     $el_tramite = traerTramiteElegido($id_tramite);    
     return $el_tramite->getDocumento();
+/*
+    $el_tramite = traerTramiteElegido($id_tramite);
+    //var_dump($el_tramite);    
+    $textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
+    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
+    return $textarea;
+    /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
+<p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
+La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
+
 }
 
 function traerTipoTramitePorId($id_tt,$id_tipo_gestion){

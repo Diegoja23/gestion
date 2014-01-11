@@ -121,8 +121,8 @@ class ServiciosGestion
             $paramsTramite["fecha_fin"] = Common::fromSqlToUsrDate($t->fecha_fin);   
             $paramsTramite["estado"] = $t->estado;   
             $paramsTramite["id_tipo_tramite"] = $t->id_tipo_tramite;    
-            $paramsTramite["id_gestion"] = $t->id_gestion;
-            $paramsTramite["documento"] = $t->documento; 
+            $paramsTramite["id_gestion"] = $t->id_gestion;   
+            $paramsTramite["documento"] = $t->documento;     
             $paramsTramite["adjuntos"] = array();
             
             $adjuntos = $ci->adjuntos->get_adjuntos($t->id_tramite);               
