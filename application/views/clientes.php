@@ -11,7 +11,7 @@
   <div id="main">
     <div id="header">
       <div id="logo">
-        <h1>simplestyle<a href="#">_7</a></h1>
+        <h1>GIRASOL</h1>
         <div class="slogan">Sistema de Gesti&oacute;n Notarial</div>
       </div>
       <div id="menubar">
@@ -21,7 +21,8 @@
           <li class="current"><a href="clientes.php">Clientes</a></li>
           <li><a href="gestiones">Gestiones</a></li>
           <li><a href="tramites">Trámites</a></li>
-          <li><a href="another_page_test.php">Another Page</a></li>
+          <li><a href="plantillas">Plantillas</a></li>
+          <!--li><a href="another_page_test.php">Another Page</a></li-->
           <li><a href="contact_test.php">Contact Us</a></li>
         </ul>
       </div>
@@ -134,7 +135,7 @@
       </div>
     </div>
     <div id="footer">
-      <p>Copyright &copy; simplestyle_7 | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
+      <p>Copyright &copy; Girasol | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
     </div>
   </div>
 </body>

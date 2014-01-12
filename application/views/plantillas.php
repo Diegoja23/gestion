@@ -20,8 +20,8 @@
           <li><a href="index">Inicio</a></li>
           <li><a href="clientes.php">Clientes</a></li>
           <li><a href="gestiones">Gestiones</a></li>
-          <li class="current"><a href="tramites">Trámites</a></li>
-          <li><a href="plantillas">Plantillas</a></li>
+          <li><a href="tramites">Trámites</a></li>
+          <li class="current"><a href="plantillas">Plantillas</a></li>
           <!--li><a href="another_page_test.php">Another Page</a></li-->
           <li><a href="contact_test.php">Contact Us</a></li>
         </ul>
@@ -56,10 +56,10 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Trámites</h1>
-        <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
-        <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
-        <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
+        <h1>Plantillas</h1>
+        <button id="btn_agregar_plantilla" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
+        <button id="btn_mostrar_lista_plantillas" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_plantilla"></div>
         <div id="div_formulario_tramite">
             <h3>Datos del trámite</h3>
             <div class="form-group">
