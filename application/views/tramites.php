@@ -58,7 +58,7 @@
         <h1>Trámites</h1>
         <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
-        <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_tramite">HOLA HOLA</div>
+        <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
         <div id="div_formulario_tramite">
             <h3>Datos del trámite</h3>
             <div class="form-group">

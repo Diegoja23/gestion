@@ -31,7 +31,8 @@ switch($consulta){
         else{
             echo 0;
         }
-        break;        
+        break;
+        
     case "modificar_tramite":        
         $un_tramite_array = cargarValoresTramite();  
         $un_tramite_array['id_tramite']=$_POST['id_tramite'];
