@@ -57,7 +57,8 @@ switch($consulta){
         else{
             echo 0;
         }
-        break;        
+        break;
+        
     case "traer_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
         $un_tramite = traerTramiteElegido($id_tramite);
@@ -202,14 +203,17 @@ function crearSelectTiposTramites($lista){
 
 function traerPlantillaDelTipoTraite($id_tt,$id_tipo_gestion){
     $elTipoTramite = traerTipoTramitePorId($id_tt,$id_tipo_gestion);
-    $textarea = '<textarea id="editor1" name="editor1">'.$elTipoTramite->getPlantilla().'</textarea>';
-    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
-    return $textarea;
+    //$textarea = '<textarea id="editor1" name="editor1">'.$elTipoTramite->getPlantilla().'</textarea>';
+    //$textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
+    //return $textarea;
+    return $elTipoTramite->getPlantilla();
 }
 
 function traerPlantillaTramite($id_tramite){
 
-    $el_tramite = traerTramiteElegido($id_tramite);    
+    $el_tramite = traerTramiteElegido($id_tramite);
+    /*$textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
+    return $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';*/
     return $el_tramite->getDocumento();
 /*
     $el_tramite = traerTramiteElegido($id_tramite);

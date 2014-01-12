@@ -112,53 +112,6 @@ function listar(){
     return $.isNumeric(($("#span_id_gestion").text()));
 }
 
-/*
-function guardarTramite(){
-	var vid_tramite = $("#txt_id_tramite").val();
-    var vdescripcion = $("#txt_descripcion_tramite").val();
-    var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
-    var vfecha_inicio = $("#txt_fecha_inicio").val();
-    var vid_gestion = $.trim($("#span_id_gestion").text());
-    var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
-    if(vid_tramite > 0)
-    {
-    	console.log("aqui se modifica el tramite");
-	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
-	            .done(function(data) {            
-	                //alert(data);
-	                //var un_cliente = jQuery.parseJSON(data);
-	                //cargarFormulario(un_cliente);
-	                var retorno = parseInt(data);
-	                if(retorno==1){
-	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente!</strong></span>");
-	                }
-	                else{
-	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado !</strong></span>");
-	                }
-	                //$('#content').append(data);
-	        });      	
-    }
-    else
-    {
-	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion})
-	            .done(function(data) {            
-	                //alert(data);
-	                //var un_cliente = jQuery.parseJSON(data);
-	                //cargarFormulario(un_cliente);
-	                var retorno = parseInt(data);
-	                if(retorno==1){
-	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
-	                }
-	                else{
-	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
-	                }
-	                //$('#content').append(data);
-	        });    	
-    }
-
-}
-*/
-
 function subirElArchivo(){      
 		//información del formulario
 		var formData = new FormData($(".formulario_archivo")[0]);
@@ -534,7 +487,7 @@ function agregarDivDatosTramite(){
     //}
 }
 
-function guardarTramite(){
+/*function guardarTramite(){
     var vdescripcion = $("#txt_descripcion_tramite").val();
     var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
     var vfecha_inicio = $("#txt_fecha_inicio").val();
@@ -557,10 +510,50 @@ function guardarTramite(){
                 }
                 //$('#content').append(data);
         });
+}*/
+
+
+function guardarTramite(){
+    var vid_tramite = $("#txt_id_tramite").val();
+    var vdescripcion = $("#txt_descripcion_tramite").val();
+    var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    var vfecha_inicio = $("#txt_fecha_inicio").val();
+    var vid_gestion = $.trim($("#span_id_gestion").text());
+    var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
+    var vplantilla = plantilla;
+    if(vid_tramite > 0)
+    {
+    	console.log("aqui se modifica el tramite");
+	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla})
+	            .done(function(data) {            
+	                var retorno = parseInt(data);
+	                if(retorno==1){
+	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente!</strong></span>");
+	                }
+	                else{
+	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado !</strong></span>");
+	                }
+	        });      	
+    }
+    else
+    {
+	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla})
+	            .done(function(data) {            
+	                var retorno = parseInt(data);
+	                if(retorno==1){
+	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
+	                }
+	                else{
+	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
+	                }
+	        });    	
+    }
 }
+
 
 function agregarDivListaTramite(){
     $("#btn_mostrar_lista_tramites").fadeOut(1500);
+    $("#retorno_borrado_tramite").html("");
     $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
     $("#div_formulario_tramite").fadeOut(1500);
     $("#btn_guardar_tramite").fadeOut(1500);    
@@ -682,7 +675,7 @@ function mostrarDialogPlantilla(){
     var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
     
     //$("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
-    var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
+    var vid_tipo_gestion = parseInt($("#span_id_tipo_gestion").text());
     var vid_tramite = GLOBAL_id_tramite;
     if(typeof vid_tramite === 'undefined'){
         vid_tramite = -1;
@@ -691,7 +684,9 @@ function mostrarDialogPlantilla(){
     $.post(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, id_tipo_gestion: vid_tipo_gestion, id_tramite:vid_tramite})
             .done(function(data) {
         plantilla = data;
-        $("#dialog_plantilla").html(data);
+        var una_plantilla = '<textarea id="editor1" name="editor1">'+data;
+        una_plantilla += '</textarea><script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
+        $("#dialog_plantilla").html(una_plantilla);
             });
     
     $("#dialog_plantilla").dialog({width: 800,modal: true,
@@ -700,9 +695,10 @@ function mostrarDialogPlantilla(){
                     class: 'leftButton',
                     text: 'Guardar',
                     click : function (){
-                        var planilla_llena = extraerDatosPlanilla();
-                        alert('delete here');
-                        alert(planilla);
+                        plantilla = CKEDITOR.instances.editor1.getData();
+                        guardarTramite();
+                        //alert(planilla_llena);
+                        $(this).dialog("close");
                     }
                 },
                 Cerrar: function () {
@@ -712,8 +708,7 @@ function mostrarDialogPlantilla(){
         });
 }
 
-function extraerDatosPlanilla(){
-}
+
 
 function eliminarTramiteElegido(){
     var confirmado = confirm("¿Seguro que desea eliminar este trámite?");
