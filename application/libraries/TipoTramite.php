@@ -39,6 +39,40 @@
 
     public function setPlantilla($vplantilla) { $this->plantilla = $vplantilla; }  
     
+    
+    public function validar()
+    {
+        //TODO
+        return true;    
+    }
+    
+    public function add()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsTipoTramite = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsTipoTramite[$key] = $value;
+             
+        return $this->myci->tramites->insert_tipo_tramite($fieldsTipoTramite);           
+    }
+    
+    public function modificar()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsTipoTramite = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsTipoTramite[$key] = $value;
+             
+        return $this->myci->tramites->modificar_tipo_tramite($fieldsTipoTramite);                           
+    }     
+    
+    public function attNotDistinctToTable($att)
+    {
+        return ($att != 'myci');
+    }     
+
     public function getById()
     {
         $array_tipo_tramite = $this->myci->tramites->getTipoTramiteById($this->id_tipo_tramite);        

@@ -127,8 +127,22 @@ class Fachada
         return $this->sg->eliminarAdjuntoTramite($id_adjunto);    
     }
     
+    public function eliminarTramite($id_tramite)
+    {
+        return $this->sg->eliminarTramite($id_tramite);    
+    }
     
-    
+    public function agregarTipoTramite($paramsTipoTramite)
+    {
+        return $this->sg->agregarTipoTramite($paramsTipoTramite);
+    }
+   
+    public function modificarTipoTramite($unTipoTramite)
+    {
+        return $this->sg->modificarTipoTramite($unTipoTramite);     
+        
+    }
+
 }
 
 

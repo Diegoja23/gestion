@@ -63,7 +63,7 @@
             <h3>Datos del trámite</h3>
             <div class="form-group">
                 <label for="lbl_descripcion_tramite">Descripción</label>
-                <input type="text" class="form-control" id="txt_id_tramite">                
+                <input type="hidden" class="form-control" id="txt_id_tramite">                
                 <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
             </div>            
             <div class="form-group float-left">

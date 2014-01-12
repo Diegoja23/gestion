@@ -162,6 +162,11 @@ class Tramite
         }
         return $retorno;
     }
+    
+    public function eliminar()
+    {
+        return $this->myci->tramites->eliminar($this->id_tramite);        
+    }
 
 }
 

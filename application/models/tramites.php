@@ -24,6 +24,21 @@ class Tramites extends CI_Model
         $id_tramite = $this->db->insert_id();
         return $id_tramite;
     }    
+    
+    function insert_tipo_tramite($tipoTramiteParams)
+    {
+        $id_tipo_tramite = 0;
+        $this->db->insert('tipos_tramite', $tipoTramiteParams);   
+        $id_tipo_tramite = $this->db->insert_id();
+        return $id_tipo_tramite;        
+    }    
+    
+    function modificar_tipo_tramite($tipoTramiteParams)
+    {
+        $this->db->where('id_tipo_tramite', $tipoTramiteParams['id_tipo_tramite']);
+        $this->db->update('tipos_tramite', $tipoTramiteParams);
+        return($this->db->affected_rows() > 0);     
+    }       
    
     function modificar_tramite($tramiteParams)
     {
@@ -55,6 +70,12 @@ class Tramites extends CI_Model
         return false;        
     }
                  
+    function eliminar($id_tramite)
+    {
+        $this->db->delete('tramites', array('id_tramite' => $id_tramite));
+        return($this->db->affected_rows() > 0);
+              
+    }                 
 }
 
 ?>
