@@ -27,6 +27,13 @@ function iniEventos() {
                 }    
                 //agregarDivDatosTramite();
             }
+            else{
+                if(url == '/gestion/plantillas' || url == '/gestion/plantillas.php'){
+                    $("#div_listado_plantilla").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                    //$(".subir_archivo").click(subirElArchivo);
+                    $(":file").change(cambioElFile);
+                }
+            }
         }
     }
 
@@ -47,6 +54,11 @@ $(document).on("click",".subir_archivo_adjunto_cliente",subirElArchivoAdjuntoPar
 $(document).on("change",":file",cambioElFile);
 $(document).on("click",".btn_ver_adjunto_de_un_cliente",ver_adjunto_seleccionado_del_cliente);
 $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_seleccionado_del_cliente);
+
+
+/*asignar eventos GESTIONES*/
+$(document).on("click","#btn_agregar_gestion",agregarDivDatosGestion);
+$(document).on("click","#btn_mostrar_lista_gestiones",agregarDivListaGestiones);
 
 
 /*asignar eventos TRÁMITES*/
@@ -455,6 +467,33 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
         }, "json");
 
 }
+
+
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS DE GESTION
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function agregarDivDatosGestion(){    
+        $("#div_listado_gestion").fadeOut(1500);        
+        $("#btn_agregar_gestion").fadeOut(1500);
+        $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
+        $("#div_formulario_gestion").fadeIn(1500);
+        cargarFormularioCliente(-1);
+}
+        
+function agregarDivListaGestiones(){
+    $("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"});
+    $("#div_formulario_gestion").fadeOut(1500);
+    $("#btn_mostrar_lista_gestiones").fadeOut(1500);
+    $("#div_formulario_adjuntos_gestion").fadeOut(1500);
+    $("#btn_agregar_gestion").fadeIn(1500);
+    $("#div_listado_gestion").fadeIn(1500);
+    //$("#btn_agregar_cliente").html('Agregar <i class="fa fa-list"></i>');
+    cargarFormularioCliente(-1);
+}
+
 
 
 /*---------------------------------------------------------------------------------------------------------------

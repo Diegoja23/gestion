@@ -57,8 +57,12 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Gestiones</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar</button>
-        <div id="div_formulario_cliente">
+        <button id="btn_agregar_gestion" type="button" class="btn btn-primary">Agregar nueva <i class="fa fa-plus-circle"></i></button>
+        <button id="btn_mostrar_lista_gestiones" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
+        
+        
+        <div id="div_formulario_gestion">
             <h3>Datos de gestión</h3>
             <div class="form-group">
                 <label for="txt_nombre_cliente">Descripción</label>
@@ -90,7 +94,7 @@
                 <button type="button" class="btn btn-success" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
             </div>  
         </div>
-        <div id="div_listado_cliente">            
+        <div id="div_listado_gestion">            
         </div>
       </div>
     </div>
