@@ -89,13 +89,30 @@
                 <label for="lbl_esado_tramite">Estado</label> <br/>
                 <button id="btn_finalizar_gestion" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
                 </select>                
-            </div><br/>
-            <div class="form-group">
-                <label for="txt_direccion_cliente">Clientes</label>
-                <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
-            </div>  
+            </div><br/>            
+            <div class="form-group float-left">
+                <label for="lbl_lista_clientes">Seleccionar grupo</label>  <br />              
+                <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_personas'>
+                    <option>No se cargaron las opcione</option>
+                </select>
+            </div> 
+            
+            <div class="form-group float-left">
+                <br/>
+                <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_cliente" id="btn_agregar_cliente_a_grupo"><i class="fa fa-arrow-right"></i></button>
+                <br/>
+                <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_cliente" id="btn_quitar_cliente_a_grupo"><i class="fa fa-arrow-left"></i></button>
+           </div>
+            
+            <div class="form-group float-left">
+                <label for="lbl_lista_clientes">Clientes elegidos</label>  <br />              
+                <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_clientes_elegidos'>
+                    <option value="-1">No hay clientes elegidos</option>
+                </select>
+            </div>
+            
             <div class="button-group">
-                <button type="button" class="btn btn-success" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
+                <button type="button" class="btn btn-success" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
             </div>  
         </div>
         <div id="div_listado_gestion">            

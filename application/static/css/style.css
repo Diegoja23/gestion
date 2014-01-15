@@ -418,8 +418,16 @@ table tr td
 }
 
 .btn_ver_adjunto, .btn_eliminar_adjunto, .btn_ver_tramite, .btn_eliminar_tramite, .btn_ver_cliente, .btn_eliminar_cliente, .adjunto_cliente,
-.btn_ver_adjunto_de_un_cliente, .btn_eliminar_adjunto_de_un_cliente{
+.btn_ver_adjunto_de_un_cliente, .btn_eliminar_adjunto_de_un_cliente, .btn{
     cursor:pointer;
+}
+
+.btn_sumar_quitar_cliente{
+    margin-top:7px;
+}
+
+.select_sumar_quitar_cliente{
+    height:120px !important;
 }
 
 #guardar_plantilla_modificada{

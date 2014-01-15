@@ -28,16 +28,22 @@ switch($consulta){
         }
         break;
         
-    case "traer_por_ci":
+    case "traer_por_id":
+        
         $ci = cargarUnValor('ci');        
         $un_cliente = Fachada::getInstancia()->getByCI($ci);
         echo json_encode($un_cliente->convertirArray());
         break;
     
-   case "subir_foto":
-        $file = $_FILES['archivo']['name'];
-        echo $file;
+   case "traer_tipos_gestion":
+        $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
+        echo crearSelectTiposGestion($listaTiposGestion);
         break;   
+    
+    case "traer_lista_personas":
+        $listaPersonas = Fachada::getInstancia()->getClientes(); 
+        echo crearSelectPersonas($listaPersonas);
+        break;  
     
    case "eliminar_por_ci":
         $ci = cargarUnValor('ci');
@@ -87,6 +93,23 @@ function crearListaTramites($lista){
 
     return $retorno;
     
+}
+
+function crearSelectTiposGestion($lista){
+    $retorno = '';
+    foreach ($lista as $tg) 
+    {        
+        $retorno .= '<option value="'.$tg->getIdTiposGestion().'">'.$tg->getDescripcion().'</option>';
+    }
+    return $retorno;
+}
+
+function crearSelectPersonas($listaPersonas){
+    $retorno = '';
+    foreach ($listaPersonas as $c){
+        $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$c->getCI().'</option>';
+    }
+    return $retorno;
 }
 
 ?>

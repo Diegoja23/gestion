@@ -60,6 +60,9 @@ $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_se
 $(document).on("click","#btn_agregar_gestion",agregarDivDatosGestion);
 $(document).on("click","#btn_mostrar_lista_gestiones",agregarDivListaGestiones);
 $(document).on("click","#btn_finalizar_gestion",finalizarGestion);
+$(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
+$(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
+$(document).on("click","#btn_guardar_gestion",guardarGestion);
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
@@ -480,6 +483,10 @@ function agregarDivDatosGestion(){
         $("#btn_agregar_gestion").fadeOut(1500);
         $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
         $("#div_formulario_gestion").fadeIn(1500);
+        $(".fecha-fin-gestion").css("display","none");
+        $('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
+        $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
+    
         cargarFormularioGestion(-1);
 }
         
@@ -552,6 +559,60 @@ function finalizarGestion(){
     //}
 }
 
+function agregarClienteAGrupoSelector(){
+    var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
+    var lista_personas = $('#combo_lista_personas')[0];
+    var persona_elegida_id = $('#combo_lista_personas').val();
+    var persona_elegida_contenido = $('#combo_lista_personas').find(":selected").text();
+    var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
+    //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
+    borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+    borrarElementoDeSelector(persona_elegida_id,lista_personas);
+    if(persona_elegida_id == null){
+        alert("Debe seleccionar a una persona para poder agregarla al grupo");
+    }
+    else{
+        //combo_lista_clientes_elegidos
+        
+        $('#combo_lista_clientes_elegidos').append(option_agregar);
+    }
+    //var persona_elegida = $('#combo_lista_personas').find(":selected").text();
+    //alert(persona_elegida);
+}
+
+function quitarClienteAGrupoSelector(){
+    var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
+    //var lista_personas = $('#combo_lista_personas')[0];
+    var persona_elegida_id = $('#combo_lista_clientes_elegidos').val();
+    var persona_elegida_contenido = $('#combo_lista_clientes_elegidos').find(":selected").text();
+    var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
+    //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
+    //borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+    borrarElementoDeSelector(persona_elegida_id,lista_clientes_seleccionados);
+    if(persona_elegida_id == null){
+        alert("Debe seleccionar a una persona para poder quitarla del grupo");
+    }
+    else{
+        //combo_lista_clientes_elegidos
+        
+        $('#combo_lista_personas').append(option_agregar);
+    }
+    //var persona_elegida = $('#combo_lista_personas').find(":selected").text();
+    //alert(persona_elegida);
+}
+
+function borrarElementoDeSelector(id_elemento, lista){
+    //var lista_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0];
+    for(var x=0; x<lista.length;x++){
+        if(lista[x].value == id_elemento){
+            lista[x].remove();
+        }        
+    }
+}
+
+function guardarGestion(){
+    
+}
 
 
 /*---------------------------------------------------------------------------------------------------------------
