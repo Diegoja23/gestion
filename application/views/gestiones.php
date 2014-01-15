@@ -65,27 +65,31 @@
         <div id="div_formulario_gestion">
             <h3>Datos de gestión</h3>
             <div class="form-group">
-                <label for="txt_nombre_cliente">Descripción</label>
-                <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                
+                <label for="txt_descripcion_gestion">Descripción</label>
+                <input type="text" class="form-control" id="txt_descripcion_gestion" placeholder="Ingresar Descripción">                
             </div>
+            
             <div class="form-group">
-                <label for="txt_apellido_cliente">Tipo de Gestión</label>
-                <input enabled="false" type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
-            </div>
-            <div class="form-group fecha">                
+                <label for="lbl_tipo_gestion">Tipo de gestión</label>  <br />              
+                <select class='form-control' id='combo_tipo_gestion'>
+                    <option>No se cargaron las opcione</option>
+                </select>
+            </div> 
+            <div class="form-group fecha fecha-inicio-gestion">                
                 <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
-                <input type="text" class="form-control datepicker" id="txt_fecha_inicio" placeholder="Fecha de inicio">    
+                <input type="text" class="form-control datepicker" id="txt_fecha_inicio_gestion" placeholder="Fecha de inicio">    
                             
             </div>  
-            <div class="form-group fecha">
+            <div class="form-group fecha fecha-fin-gestion">
                 <label for="lbl_fecha_fin">Fecha de finalización</label><br/>            
-                <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
+                <input type="text" class="form-control datepicker" id="txt_fecha_fin_gestion" placeholder="Fecha de finalizacion">
             </div>
-            <br/><br/><br/><br/>
-            <div class="form-group">
-                <label for="txt_telefono_cliente">Estado</label>
-                <input type="text" class="form-control" id="txt_telefono_cliente" placeholder="Ingresar Teléfono">                
-            </div>
+            <br/><br/><br/><br/><br/>
+            <div class="form-group" id="div_estado_gestion">
+                <label for="lbl_esado_tramite">Estado</label> <br/>
+                <button id="btn_finalizar_gestion" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
+                </select>                
+            </div><br/>
             <div class="form-group">
                 <label for="txt_direccion_cliente">Clientes</label>
                 <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                

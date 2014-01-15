@@ -9,7 +9,7 @@ $(document).ready(iniEventos);
 function iniEventos() {
     var url = window.location.pathname;
     if(url == '/gestion/gestiones' || url == '/gestion/gestiones.php'){
-            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
+            $("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
             $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});
     }
     else{
@@ -59,7 +59,7 @@ $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_se
 /*asignar eventos GESTIONES*/
 $(document).on("click","#btn_agregar_gestion",agregarDivDatosGestion);
 $(document).on("click","#btn_mostrar_lista_gestiones",agregarDivListaGestiones);
-
+$(document).on("click","#btn_finalizar_gestion",finalizarGestion);
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
@@ -480,7 +480,7 @@ function agregarDivDatosGestion(){
         $("#btn_agregar_gestion").fadeOut(1500);
         $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
         $("#div_formulario_gestion").fadeIn(1500);
-        cargarFormularioCliente(-1);
+        cargarFormularioGestion(-1);
 }
         
 function agregarDivListaGestiones(){
@@ -491,7 +491,65 @@ function agregarDivListaGestiones(){
     $("#btn_agregar_gestion").fadeIn(1500);
     $("#div_listado_gestion").fadeIn(1500);
     //$("#btn_agregar_cliente").html('Agregar <i class="fa fa-list"></i>');
-    cargarFormularioCliente(-1);
+    cargarFormularioGestion(-1);
+}
+
+function cargarFormularioGestion(una_gestion){
+    if(una_gestion != -1){
+        //combo_tipo_gestion
+        //txt_descripcion_gestion
+        //txt_fecha_inicio_gestion
+        //txt_fecha_fin_gestion
+       /* id_gestion;  
+    private $fecha_inicio;
+    private $fecha_fin;
+    private $estado;
+    private $id_tipo_gestion;
+    private $id_grupo;
+    private $id_usuario;*/
+        $("#txt_nombre_cliente").val(una_gestion.descripcion);
+        $("#txt_apellido_cliente").val(un_cliente.apellido);
+        $("#txt_ci_cliente").val(un_cliente.ci);
+        $("#txt_email_cliente").val(un_cliente.email);
+        $("#txt_telefono_cliente").val(un_cliente.telefono);
+        $("#txt_direccion_cliente").val(un_cliente.direccion);
+        $("#txt_direccion_cliente").attr("locked","true");
+        //var accion_para_tipo_de_adjunto = traerAccionParaTipoDeAdjunto(un_cliente.adjunto_tipo);
+        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=' + accion_para_tipo_de_adjunto + '"></iframe>');
+        $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
+        $('#div_ci_cliente').fadeIn(1500);         
+    }
+    else{
+        $("#txt_descripcion_gestion").val("");
+        $("#txt_apellido_cliente").val("");
+        $("#txt_ci_cliente").val("");
+        $("#txt_email_cliente").val("");
+        $("#txt_telefono_cliente").val("");
+        $("#txt_direccion_cliente").val("");
+        $("#txt_ci_cliente").val(""); 
+        $('#div_ci_cliente').fadeOut(1500);
+    }
+}
+
+function finalizarGestion(){
+    //if($.trim($("#span_id_gestion").text())!=""){
+        
+    //}
+    //else{
+        if($("#btn_finalizar_gestion").text()== "Finalizar"){      
+            $("#btn_finalizar_gestion").text("Re-abrir");
+            $(".fecha-fin-gestion").fadeIn(1500);
+            var myDate = new Date();
+            var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();
+            $( ".fecha-fin-gestion" ).val(prettyDate);
+            //$( ".fecha-fin" ).datepicker('setDate', 'today');
+        }
+        else{
+            $("#btn_finalizar_gestion").text("Finalizar");
+            $(".fecha-fin-gestion").fadeOut(1500);
+        }
+         
+    //}
 }
 
 
