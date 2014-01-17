@@ -59,69 +59,29 @@
         <h1>Plantillas</h1>
         <button id="btn_agregar_plantilla" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_plantillas" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
-        <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_plantilla"></div>
-        <div id="div_formulario_tramite">
-            <h3>Datos del trámite</h3>
+        <div id="div_formulario_plantilla">
+            <h3>Datos de la plantilla</h3>
             <div class="form-group">
-                <label for="lbl_descripcion_tramite">Descripción</label>
-                <input type="hidden" class="form-control" id="txt_id_tramite">                
-                <input enabled="false" type="text" class="form-control" id="txt_descripcion_tramite" placeholder="Ingresar Descripción">                
+                <label for="lbl_descripcion_plantilla">Descripción</label>
+                <input enabled="false" type="text" class="form-control" id="txt_descripcion_plantilla" placeholder="Ingresar Descripción">                
             </div>            
-            <div class="form-group float-left">
-                <label for="lbl_tipo_tramite">Tipo de trámite</label>  <br />              
-                <select class='form-control' id='combo_tipo_tramite'>
+            <div class="form-group">
+                <label for="lbl_tipo_gestion_pl">Tipo de gestion</label>  <br />              
+                <select class='form-control' id='combo_tipo_gestion_pl'>
                     <option>No se cargaron las opcione</option>
                 </select>
             </div> 
-            <div class="button-group float-left" style="margin-top:30px;margin-left:20px;">
+            <div class="button-group" style="margin-top:30px;margin-left:20px;">
                 <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Plantilla <i class="fa fa-list"></i></button>        
             </div>   
-            <br /><br /><br /><br /><br />
-            <div class="form-group fecha fecha-inicio">                
-                <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
-                <input type="text" class="form-control datepicker" id="txt_fecha_inicio" placeholder="Fecha de inicio">    
-                            
-            </div>  
-            <div class="form-group fecha fecha-fin">
-                <label for="lbl_fecha_fin">Fecha de finalización</label><br />                
-                <input type="text" class="form-control datepicker" id="txt_fecha_fin" placeholder="Fecha de finalizacion">
-            </div>
-            <br/><br/><br/><br/><br/>
-            <div class="form-group" id="div_estado_transaccion">
-                <label for="lbl_esado_tramite">Estado</label> <br/>
-                <button id="btn_finalizar_tramite" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
-                </select>                
-            </div><br/>
-            <div class="button-group">
-                <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div>
-            </div>
-            <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
-                    <br />
-                    <label>Nombre del adjunto: </label>
-                    <input type="text" class="form-control" id="txt_nombre_adjunto" name="txt_nombre_adjunto" placeholder="Nombre del adjunto"><br/><br/>   
-                    <label for="input_file_adjunto">Adjunto</label>
-                    <input type="file" class="archivo" id="input_file_adjunto" name="input_file_adjunto">
-                    <p class="help-block retorno_del_file_agregar_elemento">Agregar adjunto.</p>
-                    <button type="button" class="subir_archivo_tramite btn btn-info btn-sm">Subir adjunto <i class="fa fa-cloud-upload"></i></button> 
-            </form>
+
             <div id="dialog_plantilla" title="Llene la plantilla" style="display:none;">
-                    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+                    <p>Texto aquí.</p>
             </div>
-            <div id="dialog_adjunto" title="Archivo adjunto" style="display:none;"></div>
-            <br/><br/>
-            <div id="div_no_hay_adjuntos_tramite">
-                    <h3> - No hay adjuntos - </h3>
-                </div>
-            <div id="div_archivos_adjuntos">
-                <h3>Lista de adjuntos</h3>
-                <table class="table table-hover" >
-                    <thead><tr><th>#</th><th>Nombre de ajunto</th><th>Acciones</th></tr></thead>
-                    <tbody id="div_listado_adjuntos"></tbody>
-                </table>
-            </div>
+            <br /><br />
+            <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_plantilla"></div>
         </div>
-        
-        <div id="div_listado_tramite">     - No hay adjuntos -       
+        <div id="div_listado_plantillas">     - No hay plantillas -       
         </div>
       </div>
     </div>

@@ -12,8 +12,13 @@ if(!isset($_GLOBALS['allTiposTramite']))
   */  
 switch($consulta){
     case "traer_todos":
-        echo crearListaTramites(traerTodos());
+        echo crearListaPlantillas(traerTodos());
         break;
+    
+    case "traer_tipos_gestion":
+        $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
+        echo crearSelectTiposGestion($listaTiposGestion);
+        break; 
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
@@ -147,29 +152,15 @@ function cargarUnValor($variable){
 }
 
 function traerTodos(){   
-    $todos_los_tramites = Fachada::getInstancia()->getTramites();
-    return $todos_los_tramites;
-}
-
-function traerTramiteElegido($id_tramite){
-    $lista_tramites = traerTodos();
-    foreach($lista_tramites as $un_tramite){
-        if($un_tramite->getId() == $id_tramite){
-            return $un_tramite;
-        }
-    }
-}
-
-function crearListaTramites($lista){
-    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0; 
-    foreach ($lista as $t)
+    $listaTiposTramites=array();
+    $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
+    foreach ($listaTiposGestion as $tg) 
     {        
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
-    }   
-
-    return $retorno;
-    
+        //$retorno .= '<option value="'.$tg->getIdTiposGestion().'">'.$tg->getDescripcion().'</option>';
+        $listaTiposTramites = array_merge($listaTiposTramites, Fachada::getInstancia()->getTiposTramiteByGestion($tg->getIdTiposGestion()));
+        //$listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByGestion($tg->getIdTiposGestion());
+    }
+    return $listaTiposTramites;
 }
 
 function seleccionarPorID($id_tramite)
@@ -237,14 +228,28 @@ function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
     }
 }
 
-function cargarAdjuntos(){
-    session_start();
-    if(isset($_SESSION['adjunto'])){        
-        return $arrayDatosAdjuntos = $_SESSION['adjunto'];
+
+/*nuevos métodos*/
+
+function crearSelectTiposGestion($lista){
+    $retorno = '';
+    foreach ($lista as $tg) 
+    {        
+        $retorno .= '<option value="'.$tg->getIdTiposGestion().'">'.$tg->getDescripcion().'</option>';
     }
-    else{
-        return -1;
-    }
+    return $retorno;
+}
+
+function crearListaPlantillas($lista){
+    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripción</th><th>Tipo de Gestión</th><th>Plantilla</th><th>Acciones</th></tr></thead><tbody>';
+    $numero = 0; 
+    foreach ($lista as $t)
+    {        
+        $retorno .= '<tr><td class="dato_mostrado_tipo_tramite">'.$t->getIdTiposTramite().'</td><td id="'.$t->getIdTiposTramite().'" class="dato_mostrado_tipo_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.'plantilla'.'</td><td><p><i class="btn_ver_tipo_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+    }   
+
+    return $retorno;
+    
 }
 
 ?>

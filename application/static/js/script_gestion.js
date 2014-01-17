@@ -29,7 +29,7 @@ function iniEventos() {
             }
             else{
                 if(url == '/gestion/plantillas' || url == '/gestion/plantillas.php'){
-                    $("#div_listado_plantilla").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                    $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
                     //$(".subir_archivo").click(subirElArchivo);
                     $(":file").change(cambioElFile);
                 }
@@ -55,7 +55,6 @@ $(document).on("change",":file",cambioElFile);
 $(document).on("click",".btn_ver_adjunto_de_un_cliente",ver_adjunto_seleccionado_del_cliente);
 $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_seleccionado_del_cliente);
 
-
 /*asignar eventos GESTIONES*/
 $(document).on("click","#btn_agregar_gestion",agregarDivDatosGestion);
 $(document).on("click","#btn_mostrar_lista_gestiones",agregarDivListaGestiones);
@@ -79,7 +78,13 @@ $(document).on("click",".btn_eliminar_tramite",eliminarTramiteElegido);
 $(document).on("click",".btn_ver_adjunto",ver_adjunto_seleccionado);
 $(document).on("click",".btn_eliminar_adjunto",eliminar_adjunto_seleccionado);
 
-
+/*asignar eventos PLANTILLAS*/
+$(document).on("click","#btn_agregar_plantilla",agregarDivDatosPlantilla);
+$(document).on("click","#btn_mostrar_lista_plantillas",agregarDivListaPlantillas);
+$(document).on("click","#btn_finalizar_gestion",finalizarGestion);
+$(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
+$(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
+$(document).on("click","#btn_guardar_gestion",guardarGestion);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -979,5 +984,70 @@ function eliminar_adjunto_seleccionado(){
                     traerTramitePorId(id_tramite);
                 }             
             }, "json");
+    }
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS DE GESTION
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function agregarDivDatosPlantilla(){    
+        $("#div_listado_plantillas").fadeOut(1500);        
+        $("#btn_agregar_plantilla").fadeOut(1500);
+        $("#btn_mostrar_lista_plantillas").fadeIn(1500);        
+        $("#div_formulario_plantilla").fadeIn(1500);
+        $('#combo_tipo_gestion_pl').load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_tipos_gestion"});
+        //$('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
+    
+        cargarFormularioPlantilla(-1);
+}
+        
+function agregarDivListaPlantillas(){
+    $("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"});
+    $("#div_formulario_gestion").fadeOut(1500);
+    $("#btn_mostrar_lista_gestiones").fadeOut(1500);
+    $("#div_formulario_adjuntos_gestion").fadeOut(1500);
+    $("#btn_agregar_gestion").fadeIn(1500);
+    $("#div_listado_gestion").fadeIn(1500);
+    //$("#btn_agregar_cliente").html('Agregar <i class="fa fa-list"></i>');
+    cargarFormularioPlantilla(-1);
+}
+
+function cargarFormularioPlantilla(una_plantilla){
+    if(una_gestion != -1){
+        //combo_tipo_gestion
+        //txt_descripcion_gestion
+        //txt_fecha_inicio_gestion
+        //txt_fecha_fin_gestion
+       /* id_gestion;  
+    private $fecha_inicio;
+    private $fecha_fin;
+    private $estado;
+    private $id_tipo_gestion;
+    private $id_grupo;
+    private $id_usuario;*/
+        $("#txt_nombre_cliente").val(una_gestion.descripcion);
+        $("#txt_apellido_cliente").val(un_cliente.apellido);
+        $("#txt_ci_cliente").val(un_cliente.ci);
+        $("#txt_email_cliente").val(un_cliente.email);
+        $("#txt_telefono_cliente").val(un_cliente.telefono);
+        $("#txt_direccion_cliente").val(un_cliente.direccion);
+        $("#txt_direccion_cliente").attr("locked","true");
+        //var accion_para_tipo_de_adjunto = traerAccionParaTipoDeAdjunto(un_cliente.adjunto_tipo);
+        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=' + accion_para_tipo_de_adjunto + '"></iframe>');
+        $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
+        $('#div_ci_cliente').fadeIn(1500);         
+    }
+    else{
+        $("#txt_descripcion_gestion").val("");
+        $("#txt_apellido_cliente").val("");
+        $("#txt_ci_cliente").val("");
+        $("#txt_email_cliente").val("");
+        $("#txt_telefono_cliente").val("");
+        $("#txt_direccion_cliente").val("");
+        $("#txt_ci_cliente").val(""); 
+        $('#div_ci_cliente').fadeOut(1500);
     }
 }
