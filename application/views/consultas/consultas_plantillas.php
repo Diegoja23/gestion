@@ -65,11 +65,11 @@ switch($consulta){
         break;
         
     case "traer_por_id":
-        $id_tramite = cargarUnValor('id_tramite'); 
-        $un_tramite = traerTramiteElegido($id_tramite);
+        $id_tipo_tramite = cargarUnValor('id_tipo_tramite'); 
+        $un_tipo_tramite = traerTipoTramiteElegido($id_tipo_tramite);
         //$un_tramite = seleccionarPorID($id_tramite);
-        if($un_tramite != false){
-            $array_tramite = $un_tramite->convertirArray();            
+        if($un_tipo_tramite != false){
+            $array_tramite = $un_tipo_tramite->convertirArray();            
             echo json_encode($array_tramite);
         }
         else{
@@ -250,6 +250,15 @@ function crearListaPlantillas($lista){
 
     return $retorno;
     
+}
+
+function traerTipoTramiteElegido($id_tipo_tramite){
+    $lista_tipos_tramites = traerTodos();
+    foreach($lista_tipos_tramites as $un_tipo_tramite){
+        if($un_tipo_tramite->getIdTiposTramite() == $id_tipo_tramite){
+            return $un_tipo_tramite;
+        }
+    }
 }
 
 ?>

@@ -2,6 +2,7 @@
 var globalUrl = "http://"+document.domain;
 var plantilla;
 var GLOBAL_id_tramite;
+var GLOBAL_id_tipo_tramite;
 var GLOBAL_documento_cliente;
 var GLOBAL_id_cliente;
 $(document).ready(iniEventos);
@@ -85,7 +86,7 @@ $(document).on("click","#btn_finalizar_gestion",finalizarGestion);
 $(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
 $(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
 $(document).on("click","#btn_guardar_gestion",guardarGestion);
-
+$(document).on("click",".dato_mostrado_tipo_tramite",traerTipoTramiteElegido);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -1050,4 +1051,19 @@ function cargarFormularioPlantilla(una_plantilla){
         $("#txt_ci_cliente").val(""); 
         $('#div_ci_cliente').fadeOut(1500);
     }
+}
+
+function traerTipoTramiteElegido(){
+    var id_tipo_tramite = $(this).parent().children()[1].id;
+    GLOBAL_id_tipo_tramite = id_tipo_tramite;
+    traerTipoTramitePorId(id_tipo_tramite);
+}
+
+function traerTipoTramitePorId(id_tipo_tramite){
+    $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "traer_por_id",id_tipo_tramite: id_tipo_tramite})
+            .done(function(data) {            
+                agregarDivDatosTramite();                
+                var un_tramite = jQuery.parseJSON(data);
+                cargarFormularioTramite(un_tramite);      
+        }, "json");  
 }
