@@ -79,7 +79,7 @@
                     <textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>
             </div>
             <br /><br />
-            <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_plantilla"></div>
+            <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_plantillas"></div><div id="retorno_borrado_plantilla"></div>
         </div>
         <div id="div_listado_plantillas">     - No hay plantillas -       
         </div>

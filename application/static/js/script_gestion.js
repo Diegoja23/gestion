@@ -1020,13 +1020,19 @@ function agregarDivListaPlantillas(){
 
 function cargarFormularioTipoTramite(un_tipo_tramite){
     if(un_tipo_tramite !== -1){
-        $("#txt_descripcion_plantilla").val(un_tipo_tramite.descripcion);
-        $("#combo_tipo_gestion_pl").val(un_tipo_tramite.tipo_gestion);
-        //$("#dialog_plantilla").val(un_tipo_tramite.plantilla);
-        plantilla = un_tipo_tramite.plantilla;
-        var una_plantilla = '<textarea id="editorTT" name="editorTT">'+un_tipo_tramite.plantilla;
-        una_plantilla += '</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
-        $("#dialog_plantilla_tt").html(una_plantilla);
+        if(un_tipo_tramite !== -2){
+            $("#txt_descripcion_plantilla").val(un_tipo_tramite.descripcion);
+            $("#combo_tipo_gestion_pl").val(un_tipo_tramite.tipo_gestion);
+            //$("#dialog_plantilla").val(un_tipo_tramite.plantilla);
+            plantilla = un_tipo_tramite.plantilla;
+            var una_plantilla = '<textarea id="editorTT" name="editorTT">'+un_tipo_tramite.plantilla;
+            una_plantilla += '</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
+            $("#dialog_plantilla_tt").html(una_plantilla);
+        }
+        else{
+            var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
+            $("#dialog_plantilla_tt").html(una_plantilla_nueva);
+        }
     }
     else{
         $("#txt_descripcion_plantilla").val("");
@@ -1051,6 +1057,13 @@ function traerTipoTramitePorId(id_tipo_tramite){
 }
 
 function mostrarDialogPlantilla_tt(){
+    var id_tipo_tramite = GLOBAL_id_tipo_tramite;
+    if(id_tipo_tramite > 0){
+        traerTipoTramitePorId(id_tipo_tramite);
+    }
+    else{
+        cargarFormularioTipoTramite(-2);
+    }
     $("#dialog_plantilla_tt").dialog({width: 800,modal: true,
     buttons: {
                 DelUser:{ 
@@ -1077,15 +1090,15 @@ function guardarTipoTramite(){
     var vid_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(vdescripcion != ''){
         if(vid_tipo_tramite > 0){
-            console.log("aquí se modifica el tramite");
+            console.log("aquí se modifica el tipo tramite");
             $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla_modificada:vplantilla})
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
-                            $("#retorno_borrado_tramite").html("<span style='color:green'><strong>La plantilla y tipo trámite fueron modificados exitosamente!</strong></span>");
+                            $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La plantilla y tipo trámite fueron modificados exitosamente!</strong></span>");
                         }
                         else{
-                            $("#retorno_borrado_tramite").html("<span style='color:red'><strong>¡La plantilla y tipo trámite fueron no modificados!</strong></span>");
+                            $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>¡La plantilla y tipo trámite fueron no modificados!</strong></span>");
                         }
             });      	
         }
@@ -1094,15 +1107,15 @@ function guardarTipoTramite(){
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
-                            $("#retorno_borrado_tramite").html("<span style='color:green'><strong>La plantilla y tipo trámite fueron agregados exitosamente</strong></span>");
+                            $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La plantilla y tipo trámite fueron agregados exitosamente</strong></span>");
                         }
                         else{
-                            $("#retorno_borrado_tramite").html("<span style='color:red'><strong>La plantilla y tipo trámite no fueron agregados</strong></span>");
+                            $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>La plantilla y tipo trámite no fueron agregados</strong></span>");
                         }
             });    	
         }
     }
     else{
-        alert(vdescripcion);
+        alert('Debe llenar el campo Descripción para poder guardar esta Plantilla y Tipo de Trámite');
     }
 }

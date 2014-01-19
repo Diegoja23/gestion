@@ -29,6 +29,7 @@ switch($consulta){
 
     case "agregar_tipo_tramite": 
         $un_tipo_tramite_array = cargarValoresTipoTramite();  
+        var_dump($un_tipo_tramite_array);die();
         $retorno = Fachada::getInstancia()->agregarTipoTramite($un_tipo_tramite_array);
         if($retorno){
             echo 1;
@@ -40,22 +41,16 @@ switch($consulta){
         
     case "modificar_tipo_tramite":        
         $un_tipo_tramite_array = cargarValoresTipoTramite();  
-        $un_tramite_array['id_tramite']=$_POST['id_tramite'];
-        $Tramite = new Tramite(array
-                                    (
-                                        'id_tramite'=>$un_tramite_array['id_tramite'],
-                                        'descripcion'=>$un_tramite_array['descripcion'],
-                                        'fecha_inicio'=>$un_tramite_array['fecha_inicio'],
-                                        //'fecha_fin'=>$un_tramite_array['fecha_fin'],
-                                        'estado'=>$un_tramite_array['estado'],
-                                        'id_tipo_tramite'=>$un_tramite_array['id_tipo_tramite'],
-                                        'id_gestion'=>$un_tramite_array['id_gestion'],
-                                        'documento'=>$un_tramite_array['documento'],
-                                    )
-                               );
-        /*$Tramite->setDescripcion($un_tramite_array['descripcion']);
-        $Tramite->setDocumento($un_tramite_array['documento']);*/
-        $retorno = Fachada::getInstancia()->modificarTramite($Tramite);
+        //$un_tramite_array['id_tramite']=$_POST['id_tipo_tramite'];
+        $tipo_tramite = new TipoTramite(array
+                                            (
+                                                'id_tipo_tramite'=>$un_tipo_tramite_array['id_tipo_tramite'],
+                                                'descripcion'=>$un_tipo_tramite_array['descripcion'],
+                                                'tipo_gestion'=>$un_tipo_tramite_array['tipo_gestion'],
+                                                'plantilla'=>$un_tipo_tramite_array['plantilla']
+                                            )
+                                        );
+        $retorno = Fachada::getInstancia()->modificarTipoTramite($tipo_tramite);
         if($retorno){
             echo 1;
         }
