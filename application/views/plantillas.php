@@ -72,11 +72,11 @@
                 </select>
             </div> 
             <div class="button-group" style="margin-top:30px;margin-left:20px;">
-                <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Plantilla <i class="fa fa-list"></i></button>        
+                <button id="btn_mostrar_dialog_plantilla_tt" type="button" class="btn btn-primary btn-xs">Plantilla <i class="fa fa-list"></i></button>        
             </div>   
 
-            <div id="dialog_plantilla" title="Llene la plantilla" style="display:none;">
-                    <p>Texto aquí.</p>
+            <div id="dialog_plantilla_tt" title="Llene la plantilla" style="display:none;">
+                    <textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>
             </div>
             <br /><br />
             <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_plantilla"></div>

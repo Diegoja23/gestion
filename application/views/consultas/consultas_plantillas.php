@@ -27,9 +27,9 @@ switch($consulta){
         echo crearSelectTiposTramites($listaTiposTramites);
         break;
 
-    case "agregar_tramite": 
-        $un_tramite_array = cargarValoresTramite();  
-        $retorno = Fachada::getInstancia()->agregarTramite($un_tramite_array);
+    case "agregar_tipo_tramite": 
+        $un_tipo_tramite_array = cargarValoresTipoTramite();  
+        $retorno = Fachada::getInstancia()->agregarTipoTramite($un_tipo_tramite_array);
         if($retorno){
             echo 1;
         }
@@ -38,8 +38,8 @@ switch($consulta){
         }
         break;
         
-    case "modificar_tramite":        
-        $un_tramite_array = cargarValoresTramite();  
+    case "modificar_tipo_tramite":        
+        $un_tipo_tramite_array = cargarValoresTipoTramite();  
         $un_tramite_array['id_tramite']=$_POST['id_tramite'];
         $Tramite = new Tramite(array
                                     (
@@ -168,16 +168,12 @@ function seleccionarPorID($id_tramite)
     return Fachada::getInstancia()->getTramiteById($id_tramite);
 }
 
-function cargarValoresTramite(){
+function cargarValoresTipoTramite(){
     $paramsCliente=array();
-    $paramsCliente['descripcion']=$_POST['descripcion'];
     $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
-    $paramsCliente['documento']= $_POST['plantilla_modificada'];
-    $paramsCliente['estado']=0;
-    $paramsCliente['id_gestion']=intval($_POST['id_gestion']);
-    
-    $a= str_replace("/", "-", $_POST['fecha_inicio']);
-    $paramsCliente['fecha_inicio'] = DateTime::createFromFormat('d-m-Y', $a)->format('Y-m-d');
+    $paramsCliente['descripcion']=$_POST['descripcion'];
+    $paramsCliente['tipo_gestion']= $_POST['tipo_gestion'];
+    $paramsCliente['plantilla']=intval($_POST['plantilla']);
 
     return $paramsCliente;
 }

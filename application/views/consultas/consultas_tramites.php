@@ -61,10 +61,12 @@ switch($consulta){
         
     case "traer_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
-        $un_tramite = traerTramiteElegido($id_tramite);
+        $un_tramite = traerTramiteElegido($id_tramite);        
         //$un_tramite = seleccionarPorID($id_tramite);
         if($un_tramite != false){
-            $array_tramite = $un_tramite->convertirArray();            
+            $array_tramite = $un_tramite->convertirArray();
+            //var_dump($array_tramite);die();
+            $array_tramite['tipo_tramite'] = $array_tramite['tipo_tramite']->convertirArray();
             echo json_encode($array_tramite);
         }
         else{
