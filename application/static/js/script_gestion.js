@@ -87,6 +87,8 @@ $(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelect
 $(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
 $(document).on("click","#btn_guardar_gestion",guardarGestion);
 $(document).on("click",".dato_mostrado_tipo_tramite",traerTipoTramiteElegido);
+$(document).on("click",".btn_ver_tipo_tramite",traerTipoTramiteElegido); 
+$(document).on("click",".btn_eliminar_tipo_tramite",eliminarTipoTramiteElegido); 
 $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla_tt);
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
@@ -742,6 +744,9 @@ function limpiarFormularioAgregarTramite(){
 
 function traerTramiteElegido(){
     var id_tramite = $(this).parent().children()[1].id;
+    if(id_tramite == ''){
+        id_tramite = $($(this).parent().parent().parent().children()[0]).text(); 
+    }
     GLOBAL_id_tramite = id_tramite;
     traerTramitePorId(id_tramite);
 }
@@ -880,7 +885,7 @@ function eliminarTramiteElegido(){
     var confirmado = confirm("¿Seguro que desea eliminar este trámite?");
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
-        var id_tramite = $($(this).parent().parent().parent().children()[2]).text();  
+        var id_tramite = $($(this).parent().parent().parent().children()[0]).text();  
         $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "eliminar_por_id",id_tramite: id_tramite})
                 .done(function(data) {
                     $("#retorno_borrado_tramite").html(data);
@@ -1043,6 +1048,10 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
 
 function traerTipoTramiteElegido(){
     var id_tipo_tramite = $(this).parent().children()[1].id;
+    //if(id_tipo_tramite !== ""){
+    if(!id_tipo_tramite){
+        id_tipo_tramite = $($(this).parent().parent().parent().children()[0]).text();
+    }
     GLOBAL_id_tipo_tramite = id_tipo_tramite;
     traerTipoTramitePorId(id_tipo_tramite);
 }
@@ -1091,7 +1100,7 @@ function guardarTipoTramite(){
     if(vdescripcion != ''){
         if(vid_tipo_tramite > 0){
             console.log("aquí se modifica el tipo tramite");
-            $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla_modificada:vplantilla})
+            $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
@@ -1117,5 +1126,22 @@ function guardarTipoTramite(){
     }
     else{
         alert('Debe llenar el campo Descripción para poder guardar esta Plantilla y Tipo de Trámite');
+    }
+}
+
+function eliminarTipoTramiteElegido(){
+    var confirmado = confirm("¿Seguro que desea eliminar este tipo de trámite?");
+    if(confirmado){
+        //var documento = $($(this).parent().children()[2]).text(); 
+        //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
+        var id_tipo_tramite = $($(this).parent().parent().parent().children()[0]).text();  
+        $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "eliminar_por_id",id_tipo_tramite: id_tipo_tramite})
+                .done(function(data) {
+                    $("#retorno_ajax_plantillas").html(data);
+                    //$('#content').append(un_cliente);
+            }, "json");
+        //$("input").prop('disable', true);
+        //ocultamos el borrado
+        $(this).parent().parent().parent().fadeOut(1500);       
     }
 }

@@ -28,8 +28,7 @@ switch($consulta){
         break;
 
     case "agregar_tipo_tramite": 
-        $un_tipo_tramite_array = cargarValoresTipoTramite();  
-        var_dump($un_tipo_tramite_array);die();
+        $un_tipo_tramite_array = cargarValoresTipoTramite();         
         $retorno = Fachada::getInstancia()->agregarTipoTramite($un_tipo_tramite_array);
         if($retorno){
             echo 1;
@@ -40,7 +39,7 @@ switch($consulta){
         break;
         
     case "modificar_tipo_tramite":        
-        $un_tipo_tramite_array = cargarValoresTipoTramite();  
+        $un_tipo_tramite_array = cargarValoresTipoTramite(); 
         //$un_tramite_array['id_tramite']=$_POST['id_tipo_tramite'];
         $tipo_tramite = new TipoTramite(array
                                             (
@@ -87,54 +86,17 @@ switch($consulta){
        //$file = $_FILES['archivo']['name'];
         //echo $file;
         break;
-
-   
-   case "agregar_adjunto_al_tramite":
-       $id_tramite = cargarUnValor('id_tramite');
-       /*tener en cuenta que cargarAdjuntos esta preparado para poder cargar un array de adjuntos en el caso de que se quieran 
-        * subir varios. En este caso hay que llamar a la posición 0 del array porque queremos subir uno sólo. O sea,
-        * esta funcion se llama con cada click del botón "Subir adjunto" por lo que, a nivel de UI, no permite subir varios a la vez
-        * pero sí está soportado a nivel de dominio.
-       */
-       $posibles_adjuntos = cargarAdjuntos(); 
-       
-       /*echo json_encode(array('id_adjunto' => 34,'tipo' => $posibles_adjuntos[0]['tipo']));*/      
-       
-       $el_adjunto = $posibles_adjuntos[0];
-       
-       //esto ya está hecho, solo falta todo lo del dominio
-       $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
-       if($id_adjunto > 0){
-            echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
-       }
-       else{
-           echo -1;
-       }              
-       break;
-   
-   case "modificar_tramite":
-       /*$id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjuntoTramite($id_adjunto);
-       echo $retorno;*/
-       break;
-       
-       
-    case "eliminar_adjunto_por_id":
-       $id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjuntoTramite($id_adjunto);
-       echo $retorno;
-       break; 
-       
+        
    case "eliminar_por_id":
-        $id_tramite = cargarUnValor('id_tramite');
+        $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
         //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
         //$borrado = Fachada::getInstancia()->eliminarByID_tramite($id_tramite);
        $borrado = true;
         if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$id_tramite." fue exitosamente borrado!";
+            echo "<strong style='color:green;'>El cliente de cédula ".$id_tipo_tramite." fue exitosamente borrado!";
         }
         else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$id_tramite." no se pudo borrar";
+            echo "<strong style='color:red;'>El cliente de cédula ".$id_tipo_tramite." no se pudo borrar";
         }
         break;
     
@@ -165,10 +127,12 @@ function seleccionarPorID($id_tramite)
 
 function cargarValoresTipoTramite(){
     $paramsCliente=array();
-    $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
+    if(isset($_POST['id_tipo_tramite'])){
+        $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
+    }
     $paramsCliente['descripcion']=$_POST['descripcion'];
     $paramsCliente['tipo_gestion']= $_POST['tipo_gestion'];
-    $paramsCliente['plantilla']=intval($_POST['plantilla']);
+    $paramsCliente['plantilla']=$_POST['plantilla'];
 
     return $paramsCliente;
 }
