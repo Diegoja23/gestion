@@ -1,6 +1,7 @@
 //var fileExtension = "";
 var globalUrl = "http://"+document.domain;
 var plantilla;
+var GLOBAL_id_gestion;
 var GLOBAL_id_tramite;
 var GLOBAL_id_tipo_tramite;
 var GLOBAL_documento_cliente;
@@ -82,10 +83,6 @@ $(document).on("click",".btn_eliminar_adjunto",eliminar_adjunto_seleccionado);
 /*asignar eventos PLANTILLAS*/
 $(document).on("click","#btn_agregar_plantilla",agregarDivDatosPlantilla);
 $(document).on("click","#btn_mostrar_lista_plantillas",agregarDivListaPlantillas);
-$(document).on("click","#btn_finalizar_gestion",finalizarGestion);
-$(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
-$(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
-$(document).on("click","#btn_guardar_gestion",guardarGestion);
 $(document).on("click",".dato_mostrado_tipo_tramite",traerTipoTramiteElegido);
 $(document).on("click",".btn_ver_tipo_tramite",traerTipoTramiteElegido); 
 $(document).on("click",".btn_eliminar_tipo_tramite",eliminarTipoTramiteElegido); 
@@ -623,7 +620,47 @@ function borrarElementoDeSelector(id_elemento, lista){
 }
 
 function guardarGestion(){
+    var vdescripcion = $("#txt_descripcion_gestion").val();
+    var vtipo_gestion = $("#combo_tipo_gestion").val();
+    var vfecha_inicio = $("#txt_fecha_inicio_gestion").val();    
+    var vfecha_fin = -1;
+    if($("#btn_finalizar_gestion").text()!= "Finalizar"){      
+            vfecha_fin = $("#txt_fecha_fin_gestion").val();
+    }
+    var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
     
+    var vid_gestion = GLOBAL_id_gestion;
+    if(vdescripcion != ''){
+        if(vid_gestion > 0){
+            console.log("aquí se modifica la gestión");
+            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, lista_clientes_seleccionados:lista_clientes_seleccionados})
+                    .done(function(data) {            
+                        var retorno = parseInt(data);
+                        if(retorno==1){
+                            $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La gestión fue modificada exitosamente!</strong></span>");
+                        }
+                        else{
+                            $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>¡La gestión no fue modificada!</strong></span>");
+                        }
+            },"json");      	
+        }
+        else{
+            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_gestion", descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, lista_clientes_seleccionados:lista_clientes_seleccionados})
+                    .done(function(data) {            
+                        var retorno = parseInt(data);
+                        if(retorno==1){
+                            $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
+                        }
+                        else{
+                            $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>¡La gestión no fue agregada!</strong></span>");
+                        }
+            });    	
+        }
+    }
+    else{
+        alert('Debe llenar el campo Descripción para poder guardar esta Gestión');
+    }
+
 }
 
 

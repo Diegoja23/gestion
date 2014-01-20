@@ -8,7 +8,7 @@ switch($consulta){
         echo crearSelectTiposTramites($listaTiposTramites);
         break;
 
-    case "agregar_cliente": 
+    case "agregar_gestion": 
         $un_cliente_array = cargarValores();
         $adjunto_array = cargarAdjunto();
         
