@@ -62,8 +62,8 @@
         <div id="div_formulario_plantilla">
             <h3>Datos de la plantilla</h3>
             <div class="form-group">
-                <label for="lbl_descripcion_plantilla">Descripción</label>
-                <input enabled="false" type="text" class="form-control" id="txt_descripcion_plantilla" placeholder="Ingresar Descripción">                
+                <label for="lbl_descripcion_plantilla">Nombre del nuevo tipo de trámite</label>
+                <input enabled="false" type="text" class="form-control" id="txt_descripcion_plantilla" placeholder="Nombre tipo trámite">                
             </div>            
             <div class="form-group">
                 <label for="lbl_tipo_gestion_pl">Tipo de gestion</label>  <br />              
