@@ -60,7 +60,10 @@ class ServiciosGestion
             $paramsGestion["id_grupo"] = $g->id_grupo;
             $paramsGestion["id_usuario"] = $g->id_usuario;
             
-            //$TipoGestion = 
+            $TipoGestion = new TipoGestion(array('id_tipos_gestion' => $g->id_tipo_gestion)); 
+            $TipoGestion->getById();
+            
+            $paramsGestion["tipo_gestion"] = $TipoGestion;
 
             $Gestion = new Gestion($paramsGestion);   
             $arrayGestiones[] = $Gestion;

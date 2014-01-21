@@ -24,6 +24,13 @@ class Gestiones extends CI_Model
         $query = $this->db->query($sql);                   
         return $query->result();          
     }
+    
+    function getTipoById($id_tipo_gestion)
+    {
+        $query = $this->db->get_where('tipos_gestion', array('id_tipos_gestion' => $id_tipo_gestion));
+        if ($query->num_rows > 0) return $query->result();
+        return false;            
+    }
                 
     function insert_gestion($gestionParams)
     {

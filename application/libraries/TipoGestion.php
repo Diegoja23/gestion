@@ -35,10 +35,10 @@ class TipoGestion
     
     public function setDescripcion($vdescripcion) { $this->descripcion = $vdescripcion; }    
     
-   /* public function getById()
+    public function getById()
     {
-        $array_tramite = $this->myci->tramites->getById($this->id_tramite);        
-        $this->materializar($array_tramite[0]);
+        $array_tipo_gestion = $this->myci->gestiones->getTipoById($this->id_tipos_gestion);        
+        $this->materializar($array_tipo_gestion[0]);
     }    
     
     public function materializar($params)
@@ -47,7 +47,7 @@ class TipoGestion
             $this->$att = $key;   
         }
     }    
-    */
+    
      
     
   
