@@ -14,6 +14,7 @@ class Gestion
     private $fecha_fin;
     private $estado;
     private $id_tipo_gestion;
+    private $tipo_gestion;
     private $id_grupo;
     private $id_usuario;
     
@@ -86,7 +87,7 @@ class Gestion
 
     public function attNotDistinctToTable($att)
     {
-        return ($att != 'myci');
+        return ($att != 'myci' && $att != 'tipo_gestion');
     }  
 
 }
