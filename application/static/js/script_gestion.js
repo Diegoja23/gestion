@@ -1039,6 +1039,7 @@ function eliminar_adjunto_seleccionado(){
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
 function agregarDivDatosPlantilla(){
+    plantilla = 'Agregue el texto de la plantilla aquí.';
     $("#div_listado_plantillas").fadeOut(1500);        
     $("#btn_agregar_plantilla").fadeOut(1500);
     $("#btn_mostrar_lista_plantillas").fadeIn(1500);        
@@ -1072,7 +1073,7 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
             $("#dialog_plantilla_tt").html(una_plantilla);
         }
         else{
-            var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
+            var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">'+plantilla+'</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
             $("#dialog_plantilla_tt").html(una_plantilla_nueva);
         }
     }
@@ -1112,7 +1113,7 @@ function mostrarDialogPlantilla_tt(){
     }
     $("#dialog_plantilla_tt").dialog({width: 800,modal: true,
     buttons: {
-                DelUser:{ 
+                /*DelUser:{ 
                     class: 'leftButton',
                     text: 'Guardar',
                     click : function (){
@@ -1121,8 +1122,9 @@ function mostrarDialogPlantilla_tt(){
                         //alert(planilla_llena);
                         $(this).dialog("close");
                     }
-                },
-                Cerrar: function () {
+                },*/
+                Aceptar: function () {
+                    plantilla = CKEDITOR.instances.editorTT.getData();
                     $(this).dialog("close");
                 }
             }
