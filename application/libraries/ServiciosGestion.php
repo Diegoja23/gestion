@@ -42,6 +42,29 @@ class ServiciosGestion
 
         return $arrayTipos;
     }  
+    
+    public function getGestiones()
+    {
+        $arrayGestiones = array();
+        $paramsGestion = array();
+        $ci =& get_instance();                      
+        $data = $ci->gestiones->get_gestiones();
+        foreach($data as $g)
+        {                            
+            $paramsGestion["id_gestion"] = $g->id_gestion;   
+            $paramsGestion["fecha_inicio"] = $g->fecha_inicio;    
+            $paramsGestion["fecha_fin"] = $g->fecha_fin;
+            $paramsGestion["estado"] = $g->estado;
+            $paramsGestion["id_tipo_gestion"] = $g->id_tipo_gestion;
+            $paramsGestion["id_grupo"] = $g->id_grupo;
+            $paramsGestion["id_usuario"] = $g->id_usuario;
+
+            $Gestion = new Gestion($paramsGestion);   
+            $arrayGestiones[] = $Gestion;
+        }
+
+        return $arrayGestiones;
+    }     
 
     public function getTiposTramiteByGestion($id_tipos_gestion)
     {
