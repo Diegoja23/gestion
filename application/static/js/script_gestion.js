@@ -725,13 +725,20 @@ function guardarTramite(){
     var vdescripcion = $("#txt_descripcion_tramite").val();
     var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
     var vfecha_inicio = $("#txt_fecha_inicio").val();
+    var vestado = 0;
+    var vfecha_fin = null;
+    if($("#btn_finalizar_gestion").text() != "Finalizar"){
+        vestado = 1;
+        vfecha_fin = $("#txt_fecha_fin").val();
+    }
+    
     var vid_gestion = $.trim($("#span_id_gestion").text());
     var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
     var vplantilla = plantilla;
     if(vid_tramite > 0)
     {
     	console.log("aqui se modifica el tramite");
-	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla})
+	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
 	            .done(function(data) {            
 	                var retorno = parseInt(data);
 	                if(retorno==1){
@@ -744,7 +751,7 @@ function guardarTramite(){
     }
     else
     {
-	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla})
+	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
 	            .done(function(data) {            
 	                var retorno = parseInt(data);
 	                if(retorno==1){
