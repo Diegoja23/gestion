@@ -87,8 +87,9 @@ function crearListaGestiones($lista){
     $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Gestión</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>';
     //$numero = 0; 
     foreach ($lista as $g)
-    {        
-        $retorno .= '<tr><td class="dato_mostrado_gestion">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion">'.$g->getEstado().'</td><td><p><i class="btn_ver_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_gestion fa fa-ban fa-2x"></i></p></td></tr>';
+    {
+        $TipoGestion = $g->getTipoGestion();                
+        $retorno .= '<tr><td class="dato_mostrado_gestion">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion">Tipo: '.$TipoGestion->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion">'.$g->getEstado().'</td><td><p><i class="btn_ver_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_gestion fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
     return $retorno;
@@ -106,10 +107,9 @@ function crearSelectTiposGestion($lista){
 
 function crearSelectPersonas($listaPersonas){
     $retorno = '';
-    foreach ($listaPersonas as $c){
-        $TipoGestion = $c->getTipoGestion();
+    foreach ($listaPersonas as $c){      
         //echo $TipoGestion->getDescripcion();
-        $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
+       // $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
     }
     return $retorno;
 }
