@@ -4,8 +4,8 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        echo crearListaTramites(traerTodos());
-        echo crearSelectTiposTramites($listaTiposTramites);
+        echo crearListaGestiones(traerTodos());
+        //echo crearSelectTiposTramites($listaTiposTramites);
         break;
 
     case "agregar_gestion": 
@@ -69,8 +69,8 @@ function traerTodos(){
     /*$todas_las_gestiones = Fachada::getInstancia()->getGestiones();
     return $todas_las_gestiones;*/
     
-    $todos_los_tramites = Fachada::getInstancia()->getTramites();
-    return $todos_los_tramites;
+    $todas_las_gestiones = Fachada::getInstancia()->getGestiones();
+    return $todas_las_gestiones;
 }
 
 function crearListaClientes($lista){
@@ -83,12 +83,13 @@ function crearListaClientes($lista){
     return $retorno;
 }
 
-function crearListaTramites($lista){
-    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0; 
-    foreach ($lista as $t)
+function crearListaGestiones($lista){
+    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Gestión</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>';
+    //$numero = 0; 
+    if(count(lista)>0)
+    foreach ($lista as $g)
     {        
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_gestion">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getTipoGestion()->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion">'.$g->getEstado().'</td><td><p><i class="btn_ver_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_gestion fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
     return $retorno;
