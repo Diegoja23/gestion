@@ -11,6 +11,7 @@
     private $id_tipo_tramite;
     private $descripcion;
     private $plantilla;
+    private $id_tipos_gestion;
     
     // Instancia codeIgniters
     private $myci;

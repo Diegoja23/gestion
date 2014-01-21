@@ -26,7 +26,7 @@ class Tramites extends CI_Model
     }    
     
     function insert_tipo_tramite($tipoTramiteParams)
-    {
+    {        
         $id_tipo_tramite = 0;
         $this->db->insert('tipos_tramite', $tipoTramiteParams);   
         $id_tipo_tramite = $this->db->insert_id();
