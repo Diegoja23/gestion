@@ -41,7 +41,7 @@ switch($consulta){
                                         'id_tramite'=>$un_tramite_array['id_tramite'],
                                         'descripcion'=>$un_tramite_array['descripcion'],
                                         'fecha_inicio'=>$un_tramite_array['fecha_inicio'],
-                                        //'fecha_fin'=>$un_tramite_array['fecha_fin'],
+                                        'fecha_fin'=>$un_tramite_array['fecha_fin'],
                                         'estado'=>$un_tramite_array['estado'],
                                         'id_tipo_tramite'=>$un_tramite_array['id_tipo_tramite'],
                                         'id_gestion'=>$un_tramite_array['id_gestion'],
@@ -67,6 +67,7 @@ switch($consulta){
             $array_tramite = $un_tramite->convertirArray();
             //var_dump($array_tramite);die();
             $array_tramite['tipo_tramite'] = $array_tramite['tipo_tramite']->convertirArray();
+            $array_tramite['plantilla'] = traerPlantillaTramite($id_tramite);
             echo json_encode($array_tramite);
         }
         else{
@@ -114,13 +115,7 @@ switch($consulta){
        }              
        break;
    
-   case "modificar_tramite":
-       /*$id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjuntoTramite($id_adjunto);
-       echo $retorno;*/
-       break;
-       
-       
+      
     case "eliminar_adjunto_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
        $retorno = Fachada::getInstancia()->eliminarAdjuntoTramite($id_adjunto);
@@ -184,12 +179,25 @@ function cargarValoresTramite(){
     $paramsCliente['descripcion']=$_POST['descripcion'];
     $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
     $paramsCliente['documento']= $_POST['plantilla_modificada'];
-    $paramsCliente['estado']=0;
+    $paramsCliente['estado']=$_POST['estado'];
+    
     $paramsCliente['id_gestion']=intval($_POST['id_gestion']);
     
     $a= str_replace("/", "-", $_POST['fecha_inicio']);
     $paramsCliente['fecha_inicio'] = DateTime::createFromFormat('d-m-Y', $a)->format('Y-m-d');
-
+    if($_POST['estado'] == 1){ 
+        if($_POST['fecha_fin'] != -1){
+            $b= str_replace("/", "-", $_POST['fecha_fin']);
+            $paramsCliente['fecha_fin'] = DateTime::createFromFormat('d-m-Y', $b)->format('Y-m-d');
+        }
+        else{
+            $paramsCliente['fecha_fin'] = date('Y-m-d');
+        }
+    }
+    else{
+        $paramsCliente['fecha_fin'] = null;
+    }
+    //var_dump($paramsCliente['fecha_fin']);
     return $paramsCliente;
 }
 

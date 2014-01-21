@@ -552,7 +552,7 @@ function finalizarGestion(){
         
     //}
     //else{
-        if($("#btn_finalizar_gestion").text()== "Finalizar"){      
+        if($("#btn_finalizar_gestion").text()== "Finalizar"){              
             $("#btn_finalizar_gestion").text("Re-abrir");
             $(".fecha-fin-gestion").fadeIn(1500);
             var myDate = new Date();
@@ -624,7 +624,7 @@ function guardarGestion(){
     var vtipo_gestion = $("#combo_tipo_gestion").val();
     var vfecha_inicio = $("#txt_fecha_inicio_gestion").val();    
     var vfecha_fin = -1;
-    if($("#btn_finalizar_gestion").text()!= "Finalizar"){      
+    if($("#btn_finalizar_gestion").text()== "Re-abrir"){      
             vfecha_fin = $("#txt_fecha_fin_gestion").val();
     }
     var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
@@ -726,10 +726,13 @@ function guardarTramite(){
     var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
     var vfecha_inicio = $("#txt_fecha_inicio").val();
     var vestado = 0;
-    var vfecha_fin = null;
-    if($("#btn_finalizar_gestion").text() != "Finalizar"){
+    var vfecha_fin = -1;
+    //var a =$("#btn_finalizar_gestion").text();
+    if($("#btn_finalizar_tramite").text() != "Finalizar"){
         vestado = 1;
-        vfecha_fin = $("#txt_fecha_fin").val();
+        if($("#txt_fecha_fin").val() != ''){
+            vfecha_fin = $("#txt_fecha_fin").val();
+        }
     }
     
     var vid_gestion = $.trim($("#span_id_gestion").text());
@@ -840,12 +843,14 @@ function cargarFormularioTramite(un_tramite){
         $("#txt_descripcion_tramite").val(un_tramite.descripcion);
         $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
         $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
+        plantilla = un_tramite.plantilla;
         if(un_tramite.fecha_fin != null){
             $(".fecha-fin").fadeIn(1500);
-            $(".fecha-fin").val(un_tramite.fecha_fin);
+            $("#txt_fecha_fin").val(un_tramite.fecha_fin);
         }
         if(un_tramite.estado == 1){
             $("#btn_finalizar_tramite").text("Re-abrir");
+            $('.fecha-fin').css('display','bock');
         }
         $("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
