@@ -45,7 +45,7 @@ switch($consulta){
                                             (
                                                 'id_tipo_tramite'=>$un_tipo_tramite_array['id_tipo_tramite'],
                                                 'descripcion'=>$un_tipo_tramite_array['descripcion'],
-                                                'tipo_gestion'=>$un_tipo_tramite_array['tipo_gestion'],
+                                                'id_tipos_gestion'=>$un_tipo_tramite_array['id_tipos_gestion'],
                                                 'plantilla'=>$un_tipo_tramite_array['plantilla']
                                             )
                                         );
@@ -131,7 +131,7 @@ function cargarValoresTipoTramite(){
         $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
     }
     $paramsCliente['descripcion']=$_POST['descripcion'];
-    $paramsCliente['tipo_gestion']= $_POST['tipo_gestion'];
+    $paramsCliente['id_tipos_gestion']= $_POST['tipo_gestion'];
     $paramsCliente['plantilla']=$_POST['plantilla'];
 
     return $paramsCliente;
