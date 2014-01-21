@@ -25,6 +25,26 @@ class Grupo
         $this->myci =& get_instance();       
     }
     
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    
+    public function add()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsGrupo = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsGrupo[$key] = $value;
+             
+        return $this->myci->grupos->insert_grupo($fieldsGrupo, $this->clientes, $this->participantes);         
+    }
+    
+    public function attNotDistinctToTable($att)
+    {
+        return ($att != 'myci' && $att != 'clientes' && $att != 'participantes');
+    }      
   
 }
 

@@ -85,6 +85,45 @@
     $Fachada->modificarTipoTramite($TipoTramite);
     
     
+    /************************************ 
+     * *********************************AGREGAR GESTION * ***********************************
+     *                                                    *******************************************/
+    
+    $paramsGestion = array();
+    $paramsGestion['descripcion'] =  "Descripcion de gestion";
+    $paramsGestion['fecha_inicio'] = "2014-01-21";    
+    $paramsGestion['estado'] = 0;
+    $paramsGestion['id_tipo_gestion'] = 1;
+    $paramsGestion['id_usuario'] = 1;
+    
+    //Clientes 
+    $Cliente1 = new Cliente(array('id_persona' => 24));
+    $Cliente2 = new Cliente(array('id_persona' => 25));
+    
+    $clientes = array();
+    array_push($clientes, $Cliente1);
+    array_push($clientes, $Cliente2);
+    
+    //Participantes
+    $Participante1 = new Participante(array('id_persona' => 3));
+    $Participante2 = new Participante(array('id_persona' => 13));
+    
+    $participantes = array();
+    array_push($participantes, $Participante1);
+    array_push($participantes, $Participante2);    
+    
+    $grupo = new Grupo(array('descripcion' => "Descripcion de grupo es opcional",
+                             'clientes' => $clientes,
+                             'participantes' => $participantes));
+                             
+     echo "<br><br><br>";
+    
+     echo "Gestion agregada: ".$Fachada->agregarGestion($paramsGestion, $grupo);
+     
+    /************************************ 
+     * *********************************FIN AGREGAR GESTION * ***********************************
+     *                                                    *******************************************/     
+    
     
     
     

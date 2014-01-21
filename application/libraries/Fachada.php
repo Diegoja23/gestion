@@ -77,6 +77,11 @@ class Fachada
 
     /* GESTIONES */
     
+    public function agregarGestion($paramsGestion, $grupo)
+    {
+        return $this->sg->agregarGestion($paramsGestion, $grupo);
+    }
+    
     public function getTiposGestion()
     {
         return $this->sg->getTiposGestion();
@@ -91,11 +96,6 @@ class Fachada
     {        
         return $this->sg->getTiposTramiteByGestion($id_tipos_gestion);
     }      
-    
-    public function agregarGestion($paramsGestion) 
-    {
-        return $this->sg->agregarGestion($paramsGestion);    
-    }
       
     public function agregarTramite($paramsTramite, $paramsAdjuntos=array())  
     {
