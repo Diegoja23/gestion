@@ -516,18 +516,18 @@ function cargarFormularioGestion(una_gestion){
     if(una_gestion != -1){
     	//$("#txt_id_tramite").val(un_tramite.id_tramite);
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
-        $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
-        $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
-        plantilla = un_tramite.plantilla;
-        if(un_tramite.fecha_fin != null){
-            $(".fecha-fin").fadeIn(1500);
-            $("#txt_fecha_fin").val(un_tramite.fecha_fin);
+        $("#combo_tipo_gestion option:selected").val(una_gestion.id_tipo_gestion);
+        $("#txt_fecha_inicio_gestion").val(una_gestion.fecha_inicio);
+        //plantilla = un_tramite.plantilla;
+        if(una_gestion.fecha_fin != null){
+            $(".fecha-fin-gestion").fadeIn(1500);
+            $("#txt_fecha_fin-gestion").val(una_gestion.fecha_fin);
         }
-        if(un_tramite.estado == 1){
+        if(una_gestion.estado == 1){
             $("#btn_finalizar_tramite").text("Re-abrir");
-            $('.fecha-fin').css('display','bock');
+            $('.fecha-fin-gestion').css('display','bock');
         }
-        $("#span_id_gestion").text(un_tramite.id_gestion);
+        /*$("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
         $("#span_id_tramite").text(un_tramite.id_tramite);        
         
@@ -539,7 +539,7 @@ function cargarFormularioGestion(una_gestion){
         else{
             $("#div_no_hay_adjuntos_tramite").fadeIn(1500);
             $("#div_archivos_adjuntos").fadeOut(1500);
-        }
+        }*/
         //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
         //$('#div_ci_cliente').fadeIn(1500);         
     }
