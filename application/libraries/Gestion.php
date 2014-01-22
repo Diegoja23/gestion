@@ -4,6 +4,7 @@
  * autor: gestion
  * 
  */
+require_once('Grupo.php');
 
 class Gestion
 {
@@ -16,6 +17,7 @@ class Gestion
     private $id_tipo_gestion;
     private $tipo_gestion;
     private $id_grupo;
+    private $grupo;
     private $id_usuario;
     
     private $myci;
@@ -66,7 +68,19 @@ class Gestion
     {
         return $this->id_usuario;
     }
+    
+    /* setters */
+    public function setGrupo($grupo)
+    {
+        $this->grupo = $grupo;
+    }
 
+    public function validar()
+    {
+        //TODO
+        return true;    
+    }
+    
     public function add()
     {
         $object_vars=get_object_vars($this);       
@@ -74,20 +88,21 @@ class Gestion
         foreach($object_vars as $key => $value)        
             if($this->attNotDistinctToTable($key))
                 $fieldsGestion[$key] = $value;
-             
-        return $this->myci->gestiones->insert_gestion($fieldsGestion);            
-        //$id_persona = $this->myci->personas->insert_persona($fieldsGestion);             
-        /*if(!empty($this->adjuntos) && $id_persona > 0)
-            foreach($this->adjuntos as $adjunto)            
-                if(!$this->myci->datos_complementarios->add($adjunto, $id_persona)) return false;            
-          */                                                    
-        //return true;
+                                
+        $id_grupo = $this->grupo->add();      
+        if($id_grupo > 0)            
+        {
+            $fieldsGestion['id_grupo'] = $id_grupo;   
+            return $this->myci->gestiones->insert_gestion($fieldsGestion);            
+        }        
+        return false;                       
 
     }
 
     public function attNotDistinctToTable($att)
     {
-        return ($att != 'myci' && $att != 'tipo_gestion');
+        //return ($att != 'myci' && $att != 'tipo_gestion');
+        return ($att != 'myci' && $att != 'tipo_gestion' && $att != 'grupo');
     }
     
     public function convertirArray(){
@@ -103,7 +118,6 @@ class Gestion
         }
         return $fieldsTipoTramite;
     }
-
 }
 
 ?>

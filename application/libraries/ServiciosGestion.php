@@ -92,9 +92,11 @@ class ServiciosGestion
         return $arrayTipos;
     }      
     
-    public function agregarGestion($paramsGestion) 
+    public function agregarGestion($paramsGestion, $grupo) 
     {
         $Gestion = new Gestion($paramsGestion);
+        $Gestion->setGrupo($grupo);
+        
         if($Gestion->validar()) 
             return $Gestion->add();            
         else 

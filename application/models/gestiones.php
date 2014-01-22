@@ -34,7 +34,8 @@ class Gestiones extends CI_Model
                 
     function insert_gestion($gestionParams)
     {
-         
+        $this->db->insert('gestiones', $gestionParams);   
+        return $this->db->insert_id();         
     }   
     
                  
