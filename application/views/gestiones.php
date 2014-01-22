@@ -89,26 +89,51 @@
                 <label for="lbl_esado_tramite">Estado</label> <br/>
                 <button id="btn_finalizar_gestion" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
                 </select>                
-            </div><br/>            
-            <div class="form-group float-left">
-                <label for="lbl_lista_clientes">Seleccionar grupo</label>  <br />              
-                <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_personas'>
-                    <option>No se cargaron las opcione</option>
-                </select>
-            </div> 
+            </div><br/>    
+            <div id="selectores_grupo_clientes">
+                <div class="form-group float-left">
+                    <label for="lbl_lista_clientes">Seleccionar grupo</label>  <br />              
+                    <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_personas'>
+                        <option>No se cargaron las opcione</option>
+                    </select>
+                </div> 
+
+                <div class="form-group float-left">
+                    <br/>
+                    <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_cliente" id="btn_agregar_cliente_a_grupo"><i class="fa fa-arrow-right"></i></button>
+                    <br/>
+                    <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_cliente" id="btn_quitar_cliente_a_grupo"><i class="fa fa-arrow-left"></i></button>
+               </div>
+
+                <div class="form-group float-left">
+                    <label for="lbl_lista_clientes">Clientes elegidos</label>  <br />              
+                    <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_clientes_elegidos'>
+                        <option value="-1">No hay clientes elegidos</option>
+                    </select>
+                </div>
+            </div><br/><br/>
             
-            <div class="form-group float-left">
-                <br/>
-                <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_cliente" id="btn_agregar_cliente_a_grupo"><i class="fa fa-arrow-right"></i></button>
-                <br/>
-                <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_cliente" id="btn_quitar_cliente_a_grupo"><i class="fa fa-arrow-left"></i></button>
-           </div>
-            
-            <div class="form-group float-left">
-                <label for="lbl_lista_clientes">Clientes elegidos</label>  <br />              
-                <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_clientes_elegidos'>
-                    <option value="-1">No hay clientes elegidos</option>
-                </select>
+            <div id="selectores_grupo_participantes">
+                <div class="form-group float-left">
+                    <label for="lbl_lista_clientes">Seleccionar grupo de participantes</label>  <br />              
+                    <select multiple="5" class="form-control select_sumar_quitar_participante" id='combo_lista_personas2'>
+                        <option>No se cargaron las opcione</option>
+                    </select>
+                </div> 
+                
+                <div class="form-group float-left">
+                    <br/>
+                    <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_participante" id="btn_agregar_participante_a_grupo"><i class="fa fa-arrow-right"></i></button>
+                    <br/>
+                    <button type="button" class="btn btn-primary btn-sm btn_sumar_quitar_participante" id="btn_quitar_participante_a_grupo"><i class="fa fa-arrow-left"></i></button>
+               </div>
+
+                <div class="form-group float-left">
+                    <label for="lbl_lista_clientes">Participantes elegidos</label>  <br />              
+                    <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_participantes_elegidos'>
+                        <option value="-1">No hay clientes elegidos</option>
+                    </select>
+                </div>
             </div>
             
             <div class="button-group">
