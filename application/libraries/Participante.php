@@ -114,6 +114,31 @@ class Participante extends Persona
         return $arrayParticipantes;
     }  
     
+    public function convertirArray($conAdjuntos=true){
+        $object_vars=get_object_vars($this);
+        $fieldsParticipante = array();
+        foreach($object_vars as $key => $value){                   
+            if($key != 'myci'){
+                if($key == 'adjuntos' && $conAdjuntos){                    
+                    $value = $this->traerAdjuntosDelArray($value);
+                }
+                $fieldsParticipante[$key] = $value;   
+            } 
+        }
+        return $fieldsParticipante;
+    }    
+    
+    function traerAdjuntosDelArray($lista_de_adjuntos)
+    {
+        $retorno = array();
+        foreach($lista_de_adjuntos as $un_adjuntos){
+            foreach($un_adjuntos as $un_adjunto){            
+            array_push($retorno, $un_adjunto->convertirArray());
+            }            
+        }
+        return $retorno;
+    }    
+    
         
             
 }

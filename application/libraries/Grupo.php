@@ -45,6 +45,37 @@ class Grupo
     {
         return ($att != 'myci' && $att != 'clientes' && $att != 'participantes');
     }      
+    
+    public function attNotDistinctToTable($att)
+    {       
+        return ($att != 'myci');
+    }
+        
+    public function convertirArray()
+    {
+        $object_vars=get_object_vars($this);        
+        $fieldsGrupo = array();
+        $arrayClientes = array();
+        $arrayParticipantes = array();
+        foreach($object_vars as $key => $value)
+        {                   
+            if($this->attNotDistinctToTable($key))
+                $fieldsGrupo[$key] = $value;    
+            else if($key=='clientes')
+            {
+                foreach($this->clientes as $cliente)                
+                    $arrayClientes[] = $cliente->convertirArray(false);                               
+                $fieldsGrupo[$key] = $arrayClientes;                
+            }
+            else if($key=='participantes')
+            {
+                foreach($this->participantes as $participante)                
+                    $arrayParticipantes[] = $participante->convertirArray(false);                               
+                $fieldsGrupo[$key] = $arrayParticipantes;                
+            }                       
+        }
+        return $fieldsGrupo;
+    }    
   
 }
 

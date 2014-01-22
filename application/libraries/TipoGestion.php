@@ -48,6 +48,21 @@ class TipoGestion
         }
     }    
     
+    public function attNotDistinctToTable($att)
+    {       
+        return ($att != 'myci');
+    }
+        
+    public function convertirArray(){
+        $object_vars=get_object_vars($this);        
+        $fieldsTipoGestion = array();
+        foreach($object_vars as $key => $value){                   
+            if($this->attNotDistinctToTable($key))
+                $fieldsTipoGestion[$key] = $value;               
+        }
+        return $fieldsTipoGestion;
+    }
+    
      
     
   

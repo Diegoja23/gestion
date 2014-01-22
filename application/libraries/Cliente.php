@@ -97,33 +97,8 @@ class Cliente extends Participante
         return ($this->myci->datos_complementarios->add($Adjunto, $this->id_persona));     
     }
         
-    public function convertirArray(){
-        $object_vars=get_object_vars($this);
-        $fieldsParticipante = array();
-        foreach($object_vars as $key => $value){       
-            //if($this->attNotDistinctToTable($key))
-            if($key != 'myci'){
-                if($key == 'adjuntos'){
-                    //var_dump($value);die();
-                    $value = $this->traerAdjuntosDelArray($value);
-                }
-                $fieldsParticipante[$key] = $value;   
-            } 
-        }
-        return $fieldsParticipante;
-    }
     
-    function traerAdjuntosDelArray($lista_de_adjuntos)
-    {
-        $retorno = array();
-        foreach($lista_de_adjuntos as $un_adjuntos){
-            foreach($un_adjuntos as $un_adjunto){
-            //var_dump($un_adjunto);die();
-            array_push($retorno, $un_adjunto->convertirArray());
-            }            
-        }
-        return $retorno;
-    }
+
 }
 
 
