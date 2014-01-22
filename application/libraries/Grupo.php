@@ -45,11 +45,6 @@ class Grupo
     {
         return ($att != 'myci' && $att != 'clientes' && $att != 'participantes');
     }      
-    
-    public function attNotDistinctToTable($att)
-    {       
-        return ($att != 'myci');
-    }
         
     public function convertirArray()
     {
