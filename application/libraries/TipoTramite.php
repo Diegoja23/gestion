@@ -92,9 +92,6 @@
         $fieldsTipoTramite = array();
         foreach($object_vars as $key => $value){                   
             if($key != 'myci'){
-                /*if($key == 'adjuntos'){
-                    $value = $this->traerAdjuntosDelArray($value);
-                }*/
                 $fieldsTipoTramite[$key] = $value;   
             } 
         }

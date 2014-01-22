@@ -135,11 +135,6 @@ class Tramite
                 if($key == 'adjuntos'){
                     $value = $this->traerAdjuntosDelArray($value);
                 }
-                /*if($key == 'tipo_tramite'){
-                    //$value = $this->$value->getById();
-                    var_dump($value);die();
-                    $value = $this->$value->convertirArray();
-                }*/
                 $fieldsTramite[$key] = $value;   
             } 
         }

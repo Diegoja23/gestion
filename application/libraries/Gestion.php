@@ -107,16 +107,18 @@ class Gestion
     
     public function convertirArray(){
         $object_vars=get_object_vars($this);        
-        $fieldsTipoTramite = array();
-        foreach($object_vars as $key => $value){                   
-            if($key != 'myci'){
-                /*if($key == 'adjuntos'){
-                    $value = $this->traerAdjuntosDelArray($value);
-                }*/
-                $fieldsTipoTramite[$key] = $value;   
-            } 
+        $fieldsGestion = array();
+        foreach($object_vars as $key => $value)
+        {                   
+            if($this->attNotDistinctToTable($key))
+                $fieldsGestion[$key] = $value;   
+            else if($key=='tipo_gestion')
+                $fieldsGestion[$key] = $this->tipo_gestion->convertirArray();
+            else if($key=='grupo')
+                $fieldsGestion[$key] = $this->grupo->convertirArray();
+            
         }
-        return $fieldsTipoTramite;
+        return $fieldsGestion;
     }
 }
 
