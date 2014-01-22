@@ -71,6 +71,20 @@ class Grupo
         }
         return $fieldsGrupo;
     }    
+
+    public function fill()
+    {
+        $array_grupo = $this->myci->grupos->get_grupo_by_id($this->id_grupo);     
+        $this->materializar($array_grupo[0]);   
+    }
+    
+    private function materializar($params)
+    {
+        foreach ($params as $att => $key){
+            $this->$att = $key;   
+        }
+    }
+          
   
 }
 

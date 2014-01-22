@@ -64,6 +64,13 @@ class ServiciosGestion
             $TipoGestion->getById();
             
             $paramsGestion["tipo_gestion"] = $TipoGestion;
+            
+            $Grupo = new Grupo(array('id_grupo' => $g->id_grupo));
+            $Grupo->fill();
+            
+            $paramsGestion['grupo'] = $Grupo;
+            
+            //$tramites = $ci->tramites->get_tramites($g->id_gestion);
 
             $Gestion = new Gestion($paramsGestion);   
             $arrayGestiones[] = $Gestion;

@@ -20,6 +20,8 @@ class Gestion
     private $grupo;
     private $id_usuario;
     
+    private $tramites;
+    
     private $myci;
     
     /* Constructor */
@@ -100,9 +102,8 @@ class Gestion
     }
 
     public function attNotDistinctToTable($att)
-    {
-        //return ($att != 'myci' && $att != 'tipo_gestion');
-        return ($att != 'myci' && $att != 'tipo_gestion' && $att != 'grupo');
+    {        
+        return ($att != 'myci' && $att != 'tipo_gestion' && $att != 'grupo' && $att != 'tramites');
     }
     
     public function convertirArray(){
