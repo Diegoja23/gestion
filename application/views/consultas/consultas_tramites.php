@@ -272,4 +272,15 @@ function cargarAdjuntos(){
     }
 }
 
+function traerTramitesPorGestion($id_gestion){
+    $lista_retorno = array();
+    $lista_tramites = traerTodos();
+    foreach($lista_tramites as $un_tramite){
+        if($un_tramite->getIdGestion() == $id_gestion){
+            array_push($lista_retorno,$un_tramite);
+        }
+    }
+    return $lista_retorno;
+}
+
 ?>
