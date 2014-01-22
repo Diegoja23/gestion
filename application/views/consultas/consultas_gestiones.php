@@ -109,7 +109,8 @@ function crearSelectPersonas($listaPersonas){
     $retorno = '';
     foreach ($listaPersonas as $c){      
         //echo $TipoGestion->getDescripcion();
-       // $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
+        //$retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
+        $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$c->getCI().'</option>';
     }
     return $retorno;
 }
