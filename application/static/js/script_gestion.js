@@ -64,6 +64,8 @@ $(document).on("click","#btn_finalizar_gestion",finalizarGestion);
 $(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
 $(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
 $(document).on("click","#btn_guardar_gestion",guardarGestion);
+$(document).on("click",".dato_mostrado_gestion",traerGestionElegidaClicNombre);
+$(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
@@ -512,38 +514,42 @@ function agregarDivListaGestiones(){
 
 function cargarFormularioGestion(una_gestion){
     if(una_gestion != -1){
-        //combo_tipo_gestion
-        //txt_descripcion_gestion
-        //txt_fecha_inicio_gestion
-        //txt_fecha_fin_gestion
-       /* id_gestion;  
-    private $fecha_inicio;
-    private $fecha_fin;
-    private $estado;
-    private $id_tipo_gestion;
-    private $id_grupo;
-    private $id_usuario;*/
-        $("#txt_nombre_cliente").val(una_gestion.descripcion);
-        $("#txt_apellido_cliente").val(un_cliente.apellido);
-        $("#txt_ci_cliente").val(un_cliente.ci);
-        $("#txt_email_cliente").val(un_cliente.email);
-        $("#txt_telefono_cliente").val(un_cliente.telefono);
-        $("#txt_direccion_cliente").val(un_cliente.direccion);
-        $("#txt_direccion_cliente").attr("locked","true");
-        //var accion_para_tipo_de_adjunto = traerAccionParaTipoDeAdjunto(un_cliente.adjunto_tipo);
-        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=' + accion_para_tipo_de_adjunto + '"></iframe>');
-        $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
-        $('#div_ci_cliente').fadeIn(1500);         
+    	//$("#txt_id_tramite").val(un_tramite.id_tramite);
+        $("#txt_descripcion_gestion").val(una_gestion.descripcion);
+        $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
+        $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
+        plantilla = un_tramite.plantilla;
+        if(un_tramite.fecha_fin != null){
+            $(".fecha-fin").fadeIn(1500);
+            $("#txt_fecha_fin").val(un_tramite.fecha_fin);
+        }
+        if(un_tramite.estado == 1){
+            $("#btn_finalizar_tramite").text("Re-abrir");
+            $('.fecha-fin').css('display','bock');
+        }
+        $("#span_id_gestion").text(un_tramite.id_gestion);
+        $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
+        $("#span_id_tramite").text(un_tramite.id_tramite);        
+        
+        if(un_tramite.adjuntos.length > 0){
+            $("#div_no_hay_adjuntos_tramite").fadeOut(1500);
+            $("#div_archivos_adjuntos").fadeIn(1500);            
+            agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
+        }
+        else{
+            $("#div_no_hay_adjuntos_tramite").fadeIn(1500);
+            $("#div_archivos_adjuntos").fadeOut(1500);
+        }
+        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
+        //$('#div_ci_cliente').fadeIn(1500);         
     }
     else{
-        $("#txt_descripcion_gestion").val("");
-        $("#txt_apellido_cliente").val("");
-        $("#txt_ci_cliente").val("");
-        $("#txt_email_cliente").val("");
-        $("#txt_telefono_cliente").val("");
-        $("#txt_direccion_cliente").val("");
-        $("#txt_ci_cliente").val(""); 
-        $('#div_ci_cliente').fadeOut(1500);
+        $("#txt_descripcion_tramite").val("");
+        $("#combo_tipo_tramite option:selected").val("");
+        $("#txt_fecha_inicio").val();
+        $("#span_id_gestion").text("");
+        $("#span_id_tipo_gestion").text("");
+        $("#span_id_tramite").text("un_tramite.id_tramite");
     }
 }
 
@@ -663,6 +669,28 @@ function guardarGestion(){
 
 }
 
+function traerGestionElegidaClicNombre(){
+    //var documento = $($(this).parent().children()[2]).text();
+    var id_gestion = $($(this).parent().children()[0]).text();    
+    traerGestionElegida(id_gestion);
+}
+
+function traerGestionElegidaClicIcono(){
+    var id_gestion = $($(this).parent().parent().parent().children()[0]).text();    
+    traerGestionElegida(id_gestion);
+}
+
+function traerGestionElegida(id_gestion){  
+    GLOBAL_id_gestion = id_gestion;
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "traer_por_id", id_gestion: id_gestion})
+            .done(function(data) {            
+                agregarDivDatosGestion();
+                var una_gestion = jQuery.parseJSON(data);
+                cargarFormularioGestion(una_gestion);
+                //$('#div_ci_cliente').append(data);                
+        }, "json");
+        //$("input").prop('disable', true);
+}
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------

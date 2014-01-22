@@ -88,7 +88,21 @@ class Gestion
     public function attNotDistinctToTable($att)
     {
         return ($att != 'myci' && $att != 'tipo_gestion');
-    }  
+    }
+    
+    public function convertirArray(){
+        $object_vars=get_object_vars($this);        
+        $fieldsTipoTramite = array();
+        foreach($object_vars as $key => $value){                   
+            if($key != 'myci'){
+                /*if($key == 'adjuntos'){
+                    $value = $this->traerAdjuntosDelArray($value);
+                }*/
+                $fieldsTipoTramite[$key] = $value;   
+            } 
+        }
+        return $fieldsTipoTramite;
+    }
 
 }
 

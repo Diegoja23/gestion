@@ -30,9 +30,9 @@ switch($consulta){
         
     case "traer_por_id":
         
-        $ci = cargarUnValor('ci');        
-        $un_cliente = Fachada::getInstancia()->getByCI($ci);
-        echo json_encode($un_cliente->convertirArray());
+        $id_gestion = cargarUnValor('id_gestion');        
+        $una_gestion = traerGestionPorID($id_gestion);
+        echo json_encode($una_gestion->convertirArray());
         break;
     
    case "traer_tipos_gestion":
@@ -89,7 +89,7 @@ function crearListaGestiones($lista){
     foreach ($lista as $g)
     {
         $TipoGestion = $g->getTipoGestion();                
-        $retorno .= '<tr><td class="dato_mostrado_gestion">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion">Tipo: '.$TipoGestion->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion">'.$g->getEstado().'</td><td><p><i class="btn_ver_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_gestion fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_gestion">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion"><em>Tipo</em>: '.$TipoGestion->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion">'.$g->getEstado().'</td><td><p><i class="btn_ver_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_gestion fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
     return $retorno;
@@ -110,6 +110,17 @@ function crearSelectPersonas($listaPersonas){
     foreach ($listaPersonas as $c){      
         //echo $TipoGestion->getDescripcion();
        // $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
+    }
+    return $retorno;
+}
+
+function traerGestionPorID($id_gestion){
+    $lista_gestiones = traerTodos();
+    $retorno = null;
+    foreach($lista_gestiones as $una_gestion){
+        if($una_gestion->getId() == $id_gestion){
+            return $una_gestion;
+        }
     }
     return $retorno;
 }
