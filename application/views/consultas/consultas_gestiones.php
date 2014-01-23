@@ -47,7 +47,7 @@ switch($consulta){
         break; 
     
    case "traer_lista_personas":
-        $listaPersonas = Fachada::getInstancia()->getClientes(); 
+        $listaPersonas = Fachada::getInstancia()->getParticipantes(); 
         echo crearSelectPersonas($listaPersonas);
         break;  
     

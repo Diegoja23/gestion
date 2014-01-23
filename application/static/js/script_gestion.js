@@ -519,7 +519,9 @@ function cargarFormularioGestion(una_gestion){
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
         //$("#combo_tipo_gestion option:selected").val(una_gestion.id_tipo_gestion);
         //$("#combo_tipo_gestion").val('2');
-        $('#combo_tipo_gestion option[value=2]').attr('selected',true);
+        //$('#combo_tipo_gestion option[value=2]').attr('selected',true);
+        //$('#combo_tipo_gestion option[value="' + 2 + '"]').prop('selected', true);
+        $('#combo_tipo_gestion option[value=2]').attr('selected','selected');
         $("#txt_fecha_inicio_gestion").val(una_gestion.fecha_inicio);
         //plantilla = un_tramite.plantilla;
         if(una_gestion.fecha_fin != null){
