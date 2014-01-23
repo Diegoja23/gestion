@@ -113,7 +113,8 @@ class Gestion
     
     public function convertirArray(){
         $object_vars=get_object_vars($this);        
-        $fieldsGestion = $arrayTramites = array();
+        $fieldsGestion = array();
+        $arrayTramites = array();
         foreach($object_vars as $key => $value)
         {                   
             if($this->attNotDistinctToTable($key))
