@@ -135,10 +135,10 @@ switch($consulta){
         }
         break;
         
-    case "traer_tramites_por_id_gestion":
+    /*case "traer_tramites_por_id_gestion":
         $id_gestion = cargarUnValor('id_gestion');
         echo crearListaTramitesParaGestion(traerTramitesPorGestion($id_gestion));
-        break;
+        break;*/
     
     default:        
         break;
@@ -172,7 +172,7 @@ function crearListaTramites($lista){
     return $retorno;
 }
 
-function crearListaTramitesParaGestion($lista){
+/*function crearListaTramitesParaGestion($lista){
     $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0; 
     foreach ($lista as $t)
@@ -182,7 +182,7 @@ function crearListaTramitesParaGestion($lista){
 
     return $retorno;
     
-}
+}*/
 
 function seleccionarPorID($id_tramite)
 {

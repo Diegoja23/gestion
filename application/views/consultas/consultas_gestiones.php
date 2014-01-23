@@ -42,13 +42,15 @@ switch($consulta){
         break;   
    
    case "traer_lista_clientes":
-        $listaPersonas = Fachada::getInstancia()->getClientes(); 
-        echo crearSelectPersonas($listaPersonas);
+        $listaClientes = Fachada::getInstancia()->getClientes(); 
+        echo crearSelectPersonas($listaClientes);
         break; 
     
    case "traer_lista_personas":
-        $listaPersonas = Fachada::getInstancia()->getParticipantes(); 
-        echo crearSelectPersonas($listaPersonas);
+        $listaParticipantes = Fachada::getInstancia()->getParticipantes();
+        $listaClientes = Fachada::getInstancia()->getClientes();
+        $lista_total = array_merge($listaParticipantes,$listaClientes);
+        echo crearSelectPersonas($lista_total);
         break;  
     
    case "eliminar_por_ci":

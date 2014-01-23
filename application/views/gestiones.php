@@ -139,16 +139,21 @@
             <div class="button-group">
                 <button type="button" class="btn btn-success" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
             </div>
-            <div id="div_listado_tramites_de_gestion">            
+            <div id="div_listado_tramites_de_gestion_vacio">
+                    <h3> - No hay trámites - </h3>
             </div>
+            <div id="div_listado_tramites_de_gestion_contenedor">
+                <h3>Lista de trámites</h3>
+                <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody id="listado_tramites_de_gestion"></tbody></table>
+            </div>  
         </div>
         <div id="div_listado_gestion">            
-        </div>
-      </div>
+        </div>      
     </div>
     <div id="footer">
       <p>Copyright &copy; Girasol | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
     </div>
+  </div>
   </div>
 </body>
 </html>
