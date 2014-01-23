@@ -74,7 +74,12 @@ class Tramite
     public function getDocumento()
     {
         return $this->documento;
-    }    
+    }   
+    
+    public function getIdGestion()
+    {
+        return $this->id_gestion;
+    }
     
     public function getAdjuntos(){return $this->adjuntos;}
     

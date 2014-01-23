@@ -496,7 +496,8 @@ function agregarDivDatosGestion(){
         $("#div_formulario_gestion").fadeIn(1500);
         $(".fecha-fin-gestion").css("display","none");
         $('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
-        $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
+        $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes"});
+        $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
     
         cargarFormularioGestion(-1);
 }
@@ -527,6 +528,8 @@ function cargarFormularioGestion(una_gestion){
             $("#btn_finalizar_tramite").text("Re-abrir");
             $('.fecha-fin-gestion').css('display','bock');
         }
+        
+        traerTramitesDeLaGestion(una_gestion.id_gestion);
         /*$("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
         $("#span_id_tramite").text(un_tramite.id_tramite);        
@@ -551,6 +554,10 @@ function cargarFormularioGestion(una_gestion){
         $("#span_id_tipo_gestion").text("");
         $("#span_id_tramite").text("un_tramite.id_tramite");
     }
+}
+
+function traerTramitesDeLaGestion(id_gestion){
+    $("#div_listado_tramites_de_gestion").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tramites_por_id_gestion", id_gestion: id_gestion});
 }
 
 function finalizarGestion(){

@@ -426,7 +426,7 @@ table tr td
     margin-top:7px;
 }
 
-.select_sumar_quitar_cliente{
+.select_sumar_quitar_cliente, .select_sumar_quitar_participante{
     height:120px !important;
     width: 239px !important;
 }

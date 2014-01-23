@@ -32,6 +32,7 @@ switch($consulta){
         
         $id_gestion = cargarUnValor('id_gestion');        
         $una_gestion = traerGestionPorID($id_gestion);
+        //var_dump($una_gestion);die();
         echo json_encode($una_gestion->convertirArray());
         break;
     
@@ -39,8 +40,13 @@ switch($consulta){
         $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
         echo crearSelectTiposGestion($listaTiposGestion);
         break;   
+   
+   case "traer_lista_clientes":
+        $listaPersonas = Fachada::getInstancia()->getClientes(); 
+        echo crearSelectPersonas($listaPersonas);
+        break; 
     
-    case "traer_lista_personas":
+   case "traer_lista_personas":
         $listaPersonas = Fachada::getInstancia()->getClientes(); 
         echo crearSelectPersonas($listaPersonas);
         break;  

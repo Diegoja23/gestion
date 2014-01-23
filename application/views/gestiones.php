@@ -138,7 +138,9 @@
             
             <div class="button-group">
                 <button type="button" class="btn btn-success" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
-            </div>  
+            </div>
+            <div id="div_listado_tramites_de_gestion">            
+            </div>
         </div>
         <div id="div_listado_gestion">            
         </div>
