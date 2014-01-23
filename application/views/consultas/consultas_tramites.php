@@ -66,7 +66,7 @@ switch($consulta){
         if($un_tramite != false){
             $array_tramite = $un_tramite->convertirArray();
             //var_dump($array_tramite);die();
-            $array_tramite['tipo_tramite'] = $array_tramite['tipo_tramite']->convertirArray();
+            //$array_tramite['tipo_tramite'] = $array_tramite['tipo_tramite']->convertirArray();
             $array_tramite['plantilla'] = traerPlantillaTramite($id_tramite);
             echo json_encode($array_tramite);
         }

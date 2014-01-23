@@ -517,11 +517,12 @@ function cargarFormularioGestion(una_gestion){
     if(una_gestion != -1){
     	//$("#txt_id_tramite").val(un_tramite.id_tramite);
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
-        //$("#combo_tipo_gestion option:selected").val(una_gestion.id_tipo_gestion);
+        $("#combo_tipo_gestion option:selected").val(una_gestion.id_tipo_gestion);
         //$("#combo_tipo_gestion").val('2');
         //$('#combo_tipo_gestion option[value=2]').attr('selected',true);
         //$('#combo_tipo_gestion option[value="' + 2 + '"]').prop('selected', true);
-        $('#combo_tipo_gestion option[value=2]').attr('selected','selected');
+        //$('#combo_tipo_gestion option[value=2]').attr('selected','selected');
+        
         $("#txt_fecha_inicio_gestion").val(una_gestion.fecha_inicio);
         //plantilla = un_tramite.plantilla;
         if(una_gestion.fecha_fin != null){
@@ -534,26 +535,12 @@ function cargarFormularioGestion(una_gestion){
         }
         
         cargarListaTramitesDeGestion(una_gestion.tramites);
-        //traerTramitesDeLaGestion(una_gestion.id_gestion);
-        /*$("#span_id_gestion").text(un_tramite.id_gestion);
-        $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
-        $("#span_id_tramite").text(un_tramite.id_tramite);        
-        
-        if(un_tramite.adjuntos.length > 0){
-            $("#div_no_hay_adjuntos_tramite").fadeOut(1500);
-            $("#div_archivos_adjuntos").fadeIn(1500);            
-            agregarAdjuntosAlTramiteCargado(un_tramite.adjuntos);
-        }
-        else{
-            $("#div_no_hay_adjuntos_tramite").fadeIn(1500);
-            $("#div_archivos_adjuntos").fadeOut(1500);
-        }*/
-        //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
-        //$('#div_ci_cliente').fadeIn(1500);         
+        //agregarGrupoClientes();
+        //agregarGrupoParticipantes();
     }
     else{
         $("#txt_descripcion_tramite").val("");
-        $("#combo_tipo_tramite option:selected").val("");
+        //$("#combo_tipo_tramite option:selected").val("");
         $("#txt_fecha_inicio").val();
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
@@ -562,13 +549,21 @@ function cargarFormularioGestion(una_gestion){
 }
 
 function cargarListaTramitesDeGestion(tramites){
+    if(tramites.lengt>0){
+        $('#div_listado_tramites_de_gestion_vacio').css('display','block');
+        $('#div_listado_tramites_de_gestion_contenedor').css('display','none');
+    }
+    else{
+        $('#div_listado_tramites_de_gestion_vacio').css('display','none');
+        $('#div_listado_tramites_de_gestion_contenedor').css('display','block');
+    }
     var lista_tramites= '';
     jQuery.each(tramites,function(num,data){
         if(data.fecha_fin != null){
-            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite">' + data.fecha_fin + '</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite">' + data.fecha_fin + '</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
         }
         else{
-            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite"></td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite"></td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
         }
     });
     $('#listado_tramites_de_gestion').append(lista_tramites);
