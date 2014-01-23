@@ -184,6 +184,10 @@ class ServiciosGestion
                 }                 
             }
             
+            $TipoTramite = new TipoTramite(array('id_tipo_tramite' => $t->id_tipo_tramite));
+            $TipoTramite->getById();
+            $paramsTramite['tipo_tramite'] = $TipoTramite;
+            
             $Tipo = new Tramite($paramsTramite);   
             $arrayTramites[] = $Tipo;
         }

@@ -18,7 +18,7 @@ class Tramite
     
     private $id_tipo_tramite;
     
-    private $tipo_tramite;//Objecto TipoTramite
+    private $tipo_tramite;//Objeto TipoTramite
     private $id_gestion;
     
     private $documento;    
@@ -137,9 +137,10 @@ class Tramite
         $fieldsTramite = array();
         foreach($object_vars as $key => $value){                   
             if($key != 'myci'){
-                if($key == 'adjuntos'){
+                if($key == 'adjuntos')
                     $value = $this->traerAdjuntosDelArray($value);
-                }
+                else if($key=='tipo_tramite')
+                    $value = $this->tipo_tramite->convertirArray();
                 $fieldsTramite[$key] = $value;   
             } 
         }
