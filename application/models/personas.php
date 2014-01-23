@@ -34,6 +34,13 @@ class Personas extends CI_Model
         return false;
     }
     
+    public function getById($id_persona)
+    {
+        $query = $this->db->get_where('personas', array('id_persona' => $id_persona));
+        if ($query->num_rows > 0) return $query->result();
+        return false;        
+    }
+    
     public function getByCI($ci){        
         $query = $this->db->get_where('personas', array('ci' => $ci));
         if ($query->num_rows > 0) return $query->result();

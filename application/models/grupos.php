@@ -48,6 +48,13 @@ class Grupos extends CI_Model
         if ($query->num_rows > 0) return $query->result();
         return false;              
     }
+    
+    public function get_id_personas_by_grupo($id_grupo)
+    {
+        $sql = "SELECT id_persona FROM pertenece WHERE id_grupo=".$id_grupo;
+        $query = $this->db->query($sql);                   
+        return $query->result();              
+    }    
 
                  
 }

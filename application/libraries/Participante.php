@@ -31,7 +31,7 @@ class Participante extends Persona
     
     public function getAdjuntos(){return $this->adjuntos;}
     
-    /* Setters */
+    /* Setters */   
     
     public function validar()
     {
@@ -43,6 +43,11 @@ class Participante extends Persona
     {
         return $this->myci->personas->exists_persona($this->ci);    
     }
+    
+    public function esCliente()
+    {
+        return $this->es_cliente;
+    }    
     
     public function add()
     {
@@ -79,7 +84,11 @@ class Participante extends Persona
         return ($att != 'myci' && $att != 'adjuntos');
     }    
 
-    
+    public function fillById(){
+        $array_con_datos_cliente = $this->myci->personas->getById($this->id_persona);        
+        $this->materializar($array_con_datos_cliente[0]);
+    }
+        
     public function getByCI(){
         $array_con_datos_cliente = $this->myci->personas->getByCI($this->getCI());        
         $this->materializar($array_con_datos_cliente[0]);

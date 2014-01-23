@@ -47,6 +47,12 @@ class ServiciosPersona
         return $un_cliente;
     }
     
+    public function getById($id_persona){
+        $un_cliente = new Cliente(array('id_persona'=>$id_persona)); 
+        $un_cliente->fillById();
+        return $un_cliente;
+    }
+        
     public function eliminarByCI($ci){        
         $un_cliente = new Cliente(array('ci'=>$ci));        
         return $un_cliente->eliminarByCI();        
