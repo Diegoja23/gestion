@@ -71,6 +71,11 @@ class Gestion
         return $this->id_usuario;
     }
     
+    public function getTramites()
+    {
+        return $this->tramites;
+    }
+    
     /* setters */
     public function setGrupo($grupo)
     {
