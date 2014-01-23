@@ -59,18 +59,17 @@ class ServiciosGestion
             $paramsGestion["id_tipo_gestion"] = $g->id_tipo_gestion;
             $paramsGestion["id_grupo"] = $g->id_grupo;
             $paramsGestion["id_usuario"] = $g->id_usuario;
-            
+            /* Objeto grupo de TipoGestion para gestion */
             $TipoGestion = new TipoGestion(array('id_tipos_gestion' => $g->id_tipo_gestion)); 
-            $TipoGestion->getById();
-            
+            $TipoGestion->getById();            
             $paramsGestion["tipo_gestion"] = $TipoGestion;
-            
+            /* Objeto grupo de Grupo para gestion */
             $Grupo = new Grupo(array('id_grupo' => $g->id_grupo));
-            $Grupo->fill();
-            
+            $Grupo->fill();            
             $paramsGestion['grupo'] = $Grupo;
-            
-            //$tramites = $ci->tramites->get_tramites($g->id_gestion);
+            /* lista de tramites perteneciente al adjunto, false en segundo parámetro para q no cargue los adjuntos, 
+             * no los necesitamos para e listado de trámties dentro de gestiones*/
+            $paramsGestion['tramites'] = $this->getTramites($g->id_gestion, false);                        
 
             $Gestion = new Gestion($paramsGestion);   
             $arrayGestiones[] = $Gestion;
@@ -145,7 +144,7 @@ class ServiciosGestion
     }
     
         
-    public function getTramites($id_gestion = 0)
+    public function getTramites($id_gestion = 0, $adjuntos=true)
     {
         $arrayTramites = array();
         $paramsTramite = array();
@@ -163,13 +162,16 @@ class ServiciosGestion
             $paramsTramite["documento"] = $t->documento;     
             $paramsTramite["adjuntos"] = array();
             
-            $adjuntos = $ci->adjuntos->get_adjuntos($t->id_tramite);               
-            foreach ($adjuntos as $a) 
+            if($adjuntos)
             {
-                $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'adjuntos');
-                $Adjunto = new Adjunto($attsAdjuntos);               
-                array_push($paramsTramite["adjuntos"],$Adjunto);
-            } 
+                $adjuntos = $ci->adjuntos->get_adjuntos($t->id_tramite);               
+                foreach ($adjuntos as $a) 
+                {
+                    $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'adjuntos');
+                    $Adjunto = new Adjunto($attsAdjuntos);               
+                    array_push($paramsTramite["adjuntos"],$Adjunto);
+                }                 
+            }
             
             $Tipo = new Tramite($paramsTramite);   
             $arrayTramites[] = $Tipo;

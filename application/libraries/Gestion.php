@@ -108,7 +108,7 @@ class Gestion
     
     public function convertirArray(){
         $object_vars=get_object_vars($this);        
-        $fieldsGestion = array();
+        $fieldsGestion = $arrayTramites = array();
         foreach($object_vars as $key => $value)
         {                   
             if($this->attNotDistinctToTable($key))
@@ -117,6 +117,10 @@ class Gestion
                 $fieldsGestion[$key] = $this->tipo_gestion->convertirArray();
             else if($key=='grupo')
                 $fieldsGestion[$key] = $this->grupo->convertirArray();
+            else if($key=='tramites')
+                foreach($this->tramites as $tramite)                
+                    $arrayTramites[] = $tramite->convertirArray();                               
+                    $fieldsGestion[$key] = $arrayTramites;   
             
         }
         return $fieldsGestion;
