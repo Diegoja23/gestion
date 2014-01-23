@@ -109,6 +109,17 @@ class ServiciosGestion
             return false;        
     }    
     
+    public function agregarTipoGestion($paramsTipoGestion) 
+    {
+        $TipoGestion = new TipoGestion($paramsTipoGestion);
+        
+        if($TipoGestion->validar()) 
+            return $TipoGestion->add();            
+        else 
+            return false;        
+    }    
+        
+    
     public function agregarTramite($paramsTramite, $paramsAdjuntos = array()) 
     {
         $paramsTramite['adjuntos'] = array();

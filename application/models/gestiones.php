@@ -38,6 +38,14 @@ class Gestiones extends CI_Model
         return $this->db->insert_id();         
     }   
     
+    function insert_tipo_gestion($tipoGParams)
+    {
+        $id_tipos_gestion = 0;
+        $this->db->insert('tipos_gestion', $tipoGParams);   
+        $id_tipos_gestion = $this->db->insert_id();
+        return $id_tipos_gestion;
+    }      
+    
                  
 }
 

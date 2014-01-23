@@ -142,6 +142,11 @@ class Fachada
         return $this->sg->agregarTipoTramite($paramsTipoTramite);
     }
    
+    public function agregarTipoGestion($paramsTipoGestion)
+    {
+        return $this->sg->agregarTipoGestion($paramsTipoGestion);
+    }
+       
     public function modificarTipoTramite($unTipoTramite)
     {
         return $this->sg->modificarTipoTramite($unTipoTramite);     

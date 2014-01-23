@@ -35,6 +35,23 @@ class TipoGestion
     
     public function setDescripcion($vdescripcion) { $this->descripcion = $vdescripcion; }    
     
+    public function validar()
+    {
+        //TODO
+        return true;    
+    }
+    
+    public function add()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsTipoGestion = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsTipoGestion[$key] = $value;
+             
+        return $this->myci->gestiones->insert_tipo_gestion($fieldsTipoGestion);            
+    }
+        
     public function getById()
     {
         $array_tipo_gestion = $this->myci->gestiones->getTipoById($this->id_tipos_gestion);        
