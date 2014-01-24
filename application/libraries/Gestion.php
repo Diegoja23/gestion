@@ -66,6 +66,11 @@ class Gestion
         return $this->id_grupo;
     }
     
+    public function getGrupo()
+    {
+        return $this->grupo;
+    }
+    
     public function getIdUsuario()
     {
         return $this->id_usuario;

@@ -495,9 +495,13 @@ function agregarDivDatosGestion(){
         $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
         $("#div_formulario_gestion").fadeIn(1500);
         $(".fecha-fin-gestion").css("display","none");
+        var id_gestion = GLOBAL_id_gestion;
+        if(id_gestion == undefined){
+            var id_gestion = -1;
+        }
         $('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
-        $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes"});
-        $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
+        $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
+        $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
     
         cargarFormularioGestion(-1);
 }
@@ -515,16 +519,11 @@ function agregarDivListaGestiones(){
 
 function cargarFormularioGestion(una_gestion){
     if(una_gestion != -1){
-    	//$("#txt_id_tramite").val(un_tramite.id_tramite);
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
         $("#combo_tipo_gestion option:selected").val(una_gestion.id_tipo_gestion);
-        //$("#combo_tipo_gestion").val('2');
-        //$('#combo_tipo_gestion option[value=2]').attr('selected',true);
-        //$('#combo_tipo_gestion option[value="' + 2 + '"]').prop('selected', true);
-        //$('#combo_tipo_gestion option[value=2]').attr('selected','selected');
         
         $("#txt_fecha_inicio_gestion").val(una_gestion.fecha_inicio);
-        //plantilla = un_tramite.plantilla;
+
         if(una_gestion.fecha_fin != null){
             $(".fecha-fin-gestion").fadeIn(1500);
             $("#txt_fecha_fin-gestion").val(una_gestion.fecha_fin);
@@ -535,8 +534,8 @@ function cargarFormularioGestion(una_gestion){
         }
         
         cargarListaTramitesDeGestion(una_gestion.tramites);
-        //agregarGrupoClientes();
-        //agregarGrupoParticipantes();
+        agregarGrupoClientes(una_gestion.grupo.clientes);
+        agregarGrupoParticipantes(una_gestion.grupo.participantes);
     }
     else{
         $("#txt_descripcion_tramite").val("");
@@ -546,6 +545,28 @@ function cargarFormularioGestion(una_gestion){
         $("#span_id_tipo_gestion").text("");
         $("#span_id_tramite").text("un_tramite.id_tramite");
     }
+}
+
+function agregarGrupoClientes(lista_clientes){
+    var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
+    borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+    var option_agregar = '';
+    
+    jQuery.each(lista_clientes,function(num,data){
+        option_agregar += '<option value="' + data.id_persona + '">' + data.nombre + ' ' + data.apellido + ' - ' + data.ci + '</option>';
+    });
+    $('#combo_lista_clientes_elegidos').append(option_agregar);    
+}
+
+function agregarGrupoParticipantes(lista_participantes){    
+    var lista_clientes_seleccionados = $('#combo_lista_participantes_elegidos')[0];
+    borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+    var option_agregar = '';
+    
+    jQuery.each(lista_participantes,function(num,data){
+        option_agregar += '<option value="' + data.id_persona + '">' + data.nombre + ' ' + data.apellido + ' - ' + data.ci + '</option>';
+    });
+    $('#combo_lista_participantes_elegidos').append(option_agregar);
 }
 
 function cargarListaTramitesDeGestion(tramites){

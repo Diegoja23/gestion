@@ -30,6 +30,16 @@ class Grupo
         return $this->descripcion;
     }
     
+    public function getClientes()
+    {
+        return $this->clientes;
+    }
+    
+    public function getParticipantes()
+    {
+        return $this->participantes;
+    }
+    
     public function add()
     {
         $object_vars=get_object_vars($this);       

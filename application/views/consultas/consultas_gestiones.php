@@ -42,15 +42,20 @@ switch($consulta){
         break;   
    
    case "traer_lista_clientes":
+        $id_gestion = cargarUnValor('id_gestion'); 
+       $una_gestion = traerGestionPorID($id_gestion);
         $listaClientes = Fachada::getInstancia()->getClientes(); 
-        echo crearSelectPersonas($listaClientes);
+        echo crearSelectPersonas($listaClientes,$una_gestion->getGrupo()->getClientes());
         break; 
     
    case "traer_lista_personas":
+       $id_gestion = cargarUnValor('id_gestion'); 
+       $una_gestion = traerGestionPorID($id_gestion);
         $listaParticipantes = Fachada::getInstancia()->getParticipantes();
         $listaClientes = Fachada::getInstancia()->getClientes();
         $lista_total = array_merge($listaParticipantes,$listaClientes);
-        echo crearSelectPersonas($lista_total);
+        $lista_excluidos = array_merge($una_gestion->getGrupo()->getClientes(),$una_gestion->getGrupo()->getParticipantes());
+        echo crearSelectPersonas($lista_total,$lista_excluidos);
         break;  
     
    case "eliminar_por_ci":
@@ -113,14 +118,25 @@ function crearSelectTiposGestion($lista){
     return $retorno;
 }
 
-function crearSelectPersonas($listaPersonas){
+function crearSelectPersonas($listaPersonas,$lista_personas_excluidas){
     $retorno = '';
     foreach ($listaPersonas as $c){      
         //echo $TipoGestion->getDescripcion();
         //$retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
-        $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$c->getCI().'</option>';
+        if(personaSirve($c,$lista_personas_excluidas)){
+            $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$c->getCI().'</option>';
+        }
     }
     return $retorno;
+}
+
+function personaSirve($c,$lista_clientes){
+    foreach($lista_clientes as $un_cliente){
+        if($c->getId()==$un_cliente->getId()){
+            return false;
+        }
+    }
+    return true;
 }
 
 function traerGestionPorID($id_gestion){
