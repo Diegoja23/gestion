@@ -59,6 +59,7 @@
         <h1>Gestiones</h1>
         <button id="btn_agregar_gestion" type="button" class="btn btn-primary">Agregar nueva <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_gestiones" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <button id="btn_agregar_div_tipo_gestion" type="button" class="btn btn-primary">Tipos de Gestiones <i class="fa fa-caret-square-o-down"></i></button>
         <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
         
         
