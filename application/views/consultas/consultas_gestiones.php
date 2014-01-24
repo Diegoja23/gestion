@@ -43,19 +43,37 @@ switch($consulta){
    
    case "traer_lista_clientes":
         $id_gestion = cargarUnValor('id_gestion'); 
-        $una_gestion = traerGestionPorID($id_gestion);
-        $listaClientes = Fachada::getInstancia()->getClientes(); 
-        echo crearSelectPersonas($listaClientes,$una_gestion->getGrupo()->getClientes());
+        if($id_gestion > 0){
+            $una_gestion = traerGestionPorID($id_gestion);
+            $listaClientes = Fachada::getInstancia()->getClientes();
+            $lista = crearSelectPersonas($listaClientes,$una_gestion->getGrupo()->getClientes());         
+        }
+        else{
+            $lista_vacia=array();
+            $listaClientes = Fachada::getInstancia()->getClientes();
+            $lista = crearSelectPersonas($listaClientes,$lista_vacia); 
+        }
+        echo $lista;
         break; 
     
    case "traer_lista_personas":
-       $id_gestion = cargarUnValor('id_gestion'); 
-       $una_gestion = traerGestionPorID($id_gestion);
-        $listaParticipantes = Fachada::getInstancia()->getParticipantes();
-        $listaClientes = Fachada::getInstancia()->getClientes();
-        $lista_total = array_merge($listaParticipantes,$listaClientes);
-        $lista_excluidos = array_merge($una_gestion->getGrupo()->getClientes(),$una_gestion->getGrupo()->getParticipantes());
-        echo crearSelectPersonas($lista_total,$lista_excluidos);
+        $id_gestion = cargarUnValor('id_gestion'); 
+        if($id_gestion > 0){
+            $una_gestion = traerGestionPorID($id_gestion);
+            $listaParticipantes = Fachada::getInstancia()->getParticipantes();
+            $listaClientes = Fachada::getInstancia()->getClientes();
+            $lista_total = array_merge($listaParticipantes,$listaClientes);
+            $lista_excluidos = array_merge($una_gestion->getGrupo()->getClientes(),$una_gestion->getGrupo()->getParticipantes());
+            $lista = crearSelectPersonas($lista_total,$lista_excluidos);
+        }
+        else{
+            $lista_vacia=array();
+            $listaParticipantes = Fachada::getInstancia()->getParticipantes();
+            $listaClientes = Fachada::getInstancia()->getClientes();
+            $lista_total = array_merge($listaParticipantes,$listaClientes);
+            $lista = crearSelectPersonas($lista_total,$lista_vacia);
+        }
+        echo $lista;
         break;  
     
    case "eliminar_por_ci":
@@ -121,8 +139,6 @@ function crearSelectTiposGestion($lista){
 function crearSelectPersonas($listaPersonas,$lista_personas_excluidas){
     $retorno = '';
     foreach ($listaPersonas as $c){      
-        //echo $TipoGestion->getDescripcion();
-        //$retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$TipoGestion->getDescripcion().'</option>';
         if(personaSirve($c,$lista_personas_excluidas)){
             $retorno .= '<option value="'.$c->getId().'">'.$c->getNombre().' '.$c->getApellido().' - CI:'.$c->getCI().'</option>';
         }
@@ -131,9 +147,11 @@ function crearSelectPersonas($listaPersonas,$lista_personas_excluidas){
 }
 
 function personaSirve($c,$lista_clientes){
-    foreach($lista_clientes as $un_cliente){
-        if($c->getId()==$un_cliente->getId()){
-            return false;
+    if(count($lista_clientes)>0){
+        foreach($lista_clientes as $un_cliente){
+            if($c->getId()==$un_cliente->getId()){
+                return false;
+            }
         }
     }
     return true;

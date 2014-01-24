@@ -445,7 +445,7 @@ table tr td
     display: none;
 }
 
-#formulario_agregar_participante{
+#formulario_agregar_participante, #formulario_agregar_tipo_gestion{
     border: 2px solid #888;
     padding: 10px;
     margin:10px;

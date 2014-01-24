@@ -74,7 +74,20 @@
                 <select class='form-control' id='combo_tipo_gestion'>
                     <option>No se cargaron las opcione</option>
                 </select>
+                <button id="btn_crear_tipo_gestion" type="button" class="btn btn-primary btn-sm" value="1">Crear Gestión <i class="fa fa-plus-circle"></i></button>
             </div> 
+            
+            
+            <div id="formulario_agregar_tipo_gestion">
+                        <h3>Datos de Tipo de Gestión nuevo</h3>
+                        <div class="form-group">
+                            <label for="txt_descripcion_tipo_gestion">Descripción</label>
+                            <input type="text" class="form-control" id="txt_descripcion_tipo_gestion" placeholder="Ingresar Descripción">                
+                        </div>                        
+                        <button type="button" class="btn btn-success btn-sm" id="btn_guardar_tipo_gestion">Guardar Tipo Gestión <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
+            </div>
+            
+            
             <div class="form-group fecha fecha-inicio-gestion">                
                 <label for="lbl_fecha_inicio">Fecha de inicio</label><br />
                 <input type="text" class="form-control datepicker" id="txt_fecha_inicio_gestion" placeholder="Fecha de inicio">    
