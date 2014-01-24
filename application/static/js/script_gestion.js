@@ -64,6 +64,7 @@ $(document).on("click","#btn_finalizar_gestion",finalizarGestion);
 $(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
 $(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
 $(document).on("click","#btn_agregar_participante_a_grupo",agregarParticipanteAGrupoSelector);
+$(document).on("click","#btn_guardar_participante",guardarParticipanteGestion);
 $(document).on("click","#btn_quitar_participante_a_grupo",quitarParticipanteAGrupoSelector);
 $(document).on("click","#btn_agregar_participante",agregarParticipanteALista);
 $(document).on("click","#btn_guardar_gestion",guardarGestion);
@@ -758,7 +759,16 @@ function guardarGestion(){
 }
 
 function agregarParticipanteALista(){
-    alert(';;');
+    if($('#formulario_agregar_participante').css('display')=='none'){
+        $('#formulario_agregar_participante').fadeIn(1500);
+    }
+    else{
+        $('#formulario_agregar_participante').fadeOut(1500);
+    }
+}
+
+function guardarParticipanteGestion(){
+    alert('todavía no guarda participante');
 }
 
 function traerGestionElegidaClicNombre(){
