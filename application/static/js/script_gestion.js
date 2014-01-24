@@ -102,6 +102,9 @@ $(document).on("click","#btn_guardar_gestion",guardarGestion);
 $(document).on("click",".dato_mostrado_gestion",traerGestionElegidaClicNombre);
 $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 
+/*asignar eventos GESTIONES*/
+$(document).on("click","#btn_crear_tipo_gestion",agregarDivCrearTipoGestion);
+
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
 $(document).on("click","#btn_mostrar_lista_tramites",agregarDivListaTramite);
@@ -833,6 +836,23 @@ function traerGestionElegida(id_gestion){
         }, "json");
         //$("input").prop('disable', true);
 }
+
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS DE TIPO GESTION
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function agregarDivCrearTipoGestion(){    
+    if($('#formulario_agregar_tipo_gestion').css('display')=='none'){
+        $('#formulario_agregar_tipo_gestion').fadeIn(1500);
+    }
+    else{
+        $('#formulario_agregar_tipo_gestion').fadeOut(1500);
+    }
+}
+
+
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
