@@ -2,6 +2,10 @@
 
 $consulta = $_POST['consulta'];
 
+if(isset($_GET['id']) && $_GET['id'] > 0)
+{
+    $consulta = 'traer_por_id';
+}
 
 //if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
 
@@ -11,7 +15,7 @@ if(!isset($_GLOBALS['allTiposTramite']))
     $_GLOBALS['allTiposTramite'] = array();
   */  
 switch($consulta){
-    case "traer_todos":
+    case "traer_todos":        
         echo crearListaTramites(traerTodos());
         break;
     

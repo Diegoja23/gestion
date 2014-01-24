@@ -22,8 +22,9 @@ function iniEventos() {
         }
         else{
             if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
+        	 	$urlParams = getParamsPart(window.location.href);
                 if(listar()){
-                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});
                     //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
                     $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
                 }    
@@ -41,6 +42,36 @@ function iniEventos() {
 
 }
 
+function getParamsPart(url)
+{
+	var queryParams = url.split('?');
+	return queryParams[1];	
+}
+
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = {}, i, n, v, nv;
+
+    if (query === url || query === "") {
+        return;
+    }
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=");
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) {
+            parms[n] = [];
+        }
+
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
 
 /*asignar eventos CLIENTES*/
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
