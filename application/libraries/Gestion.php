@@ -138,5 +138,4 @@ class Gestion
         return $fieldsGestion;
     }
 }
-
 ?>

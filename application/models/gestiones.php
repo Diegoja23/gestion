@@ -45,8 +45,7 @@ class Gestiones extends CI_Model
         $id_tipos_gestion = $this->db->insert_id();
         return $id_tipos_gestion;
     }      
-    
-                 
+                     
 }
 
 ?>

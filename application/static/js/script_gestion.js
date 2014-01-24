@@ -95,7 +95,7 @@ $(document).on("click",".btn_eliminar_tipo_tramite",eliminarTipoTramiteElegido);
 $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla_tt);
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
-
+$(document).on("click",".btn_tramite_detail",goToTramite);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -493,6 +493,15 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
   MÉTODOS DE GESTION
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
+ 
+function goToTramite() 
+{
+	$id_tramite = $(this).attr("id");
+	window.location.href="tramites?id="+$id_tramite;
+	
+	console.log("id "+$id_tramite);	
+}
+
 function agregarDivDatosGestion(){    
         $("#div_listado_gestion").fadeOut(1500);        
         $("#btn_agregar_gestion").fadeOut(1500);
@@ -585,10 +594,10 @@ function cargarListaTramitesDeGestion(tramites){
     var lista_tramites= '';
     jQuery.each(tramites,function(num,data){
         if(data.fecha_fin != null){
-            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite">' + data.fecha_fin + '</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite id_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite">' + data.fecha_fin + '</td><td><p><i class="btn_ver_tramite btn_tramite_detail fa fa-pencil-square-o fa-2x" id="'+ data.id_tramite +'"> </i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
         }
         else{
-            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite"></td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite id_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite"></td><td><p><i class="btn_ver_tramite btn_tramite_detail fa fa-pencil-square-o fa-2x" id="'+ data.id_tramite +'"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
         }
     });
     $('#listado_tramites_de_gestion').append(lista_tramites);

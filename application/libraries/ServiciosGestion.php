@@ -182,8 +182,7 @@ class ServiciosGestion
                     $Adjunto = new Adjunto($attsAdjuntos);               
                     array_push($paramsTramite["adjuntos"],$Adjunto);
                 }                 
-            }
-            
+            }            
             $TipoTramite = new TipoTramite(array('id_tipo_tramite' => $t->id_tipo_tramite));
             $TipoTramite->getById();
             $paramsTramite['tipo_tramite'] = $TipoTramite;

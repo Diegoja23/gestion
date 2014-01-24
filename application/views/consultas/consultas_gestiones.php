@@ -43,7 +43,7 @@ switch($consulta){
    
    case "traer_lista_clientes":
         $id_gestion = cargarUnValor('id_gestion'); 
-       $una_gestion = traerGestionPorID($id_gestion);
+        $una_gestion = traerGestionPorID($id_gestion);
         $listaClientes = Fachada::getInstancia()->getClientes(); 
         echo crearSelectPersonas($listaClientes,$una_gestion->getGrupo()->getClientes());
         break; 
