@@ -74,7 +74,7 @@
                 <select class='form-control' id='combo_tipo_gestion'>
                     <option>No se cargaron las opcione</option>
                 </select>
-                <button id="btn_crear_tipo_gestion" type="button" class="btn btn-primary btn-sm" value="1">Crear Gestión <i class="fa fa-plus-circle"></i></button>
+                <button id="btn_crear_tipo_gestion" type="button" class="btn btn-primary btn-sm" value="1">Crear Tipo Gestión <i class="fa fa-plus-circle"></i></button>
             </div> 
             
             
