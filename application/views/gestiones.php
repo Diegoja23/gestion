@@ -133,7 +133,15 @@
                     <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_participantes_elegidos'>
                         <option value="-1">No hay clientes elegidos</option>
                     </select>
-                </div>
+                </div> 
+            </div>
+            
+            <div class="form-group" id="div_agregar_participante">
+                    <button type="button" class="btn btn-primary btn-sm" id="btn_agregar_participante">Agregar participante <i class="fa fa-plus-circle"></i></button>
+                    <div id="formulario_agregar_participante">
+                        
+                        
+                    </div>
             </div>
             
             <div class="button-group">

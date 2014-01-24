@@ -63,6 +63,9 @@ $(document).on("click","#btn_mostrar_lista_gestiones",agregarDivListaGestiones);
 $(document).on("click","#btn_finalizar_gestion",finalizarGestion);
 $(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
 $(document).on("click","#btn_quitar_cliente_a_grupo",quitarClienteAGrupoSelector);
+$(document).on("click","#btn_agregar_participante_a_grupo",agregarParticipanteAGrupoSelector);
+$(document).on("click","#btn_quitar_participante_a_grupo",quitarParticipanteAGrupoSelector);
+$(document).on("click","#btn_agregar_participante",agregarParticipanteALista);
 $(document).on("click","#btn_guardar_gestion",guardarGestion);
 $(document).on("click",".dato_mostrado_gestion",traerGestionElegidaClicNombre);
 $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
@@ -618,12 +621,14 @@ function finalizarGestion(){
 function agregarClienteAGrupoSelector(){
     var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
     var lista_personas = $('#combo_lista_personas')[0];
+    var lista_personas_abajo = $('#combo_lista_personas2')[0];
     var persona_elegida_id = $('#combo_lista_personas').val();
     var persona_elegida_contenido = $('#combo_lista_personas').find(":selected").text();
     var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
     //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
     borrarElementoDeSelector(-1,lista_clientes_seleccionados);
     borrarElementoDeSelector(persona_elegida_id,lista_personas);
+    borrarElementoDeSelector(persona_elegida_id,lista_personas_abajo);    
     if(persona_elegida_id == null){
         alert("Debe seleccionar a una persona para poder agregarla al grupo");
     }
@@ -639,7 +644,7 @@ function agregarClienteAGrupoSelector(){
 function quitarClienteAGrupoSelector(){
     var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
     //var lista_personas = $('#combo_lista_personas')[0];
-    var persona_elegida_id = $('#combo_lista_clientes_elegidos').val();
+    var persona_elegida_id = $('#combo_lista_clientes_elegidos').val();    
     var persona_elegida_contenido = $('#combo_lista_clientes_elegidos').find(":selected").text();
     var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
     //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
@@ -652,6 +657,48 @@ function quitarClienteAGrupoSelector(){
         //combo_lista_clientes_elegidos
         
         $('#combo_lista_personas').append(option_agregar);
+        $('#combo_lista_personas2').append(option_agregar);
+    }
+    //var persona_elegida = $('#combo_lista_personas').find(":selected").text();
+    //alert(persona_elegida);
+}
+
+function agregarParticipanteAGrupoSelector(){
+    var lista_clientes_seleccionados = $('#combo_lista_participantes_elegidos')[0];
+    var lista_personas = $('#combo_lista_personas2')[0];
+    //var lista_personas_arriba = $('#combo_lista_personas')[0];
+    var persona_elegida_id = $('#combo_lista_personas2').val();
+    var persona_elegida_contenido = $('#combo_lista_personas2').find(":selected").text();
+    var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
+    //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
+    borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+    borrarElementoDeSelector(persona_elegida_id,lista_personas);
+    //borrarElementoDeSelector(persona_elegida_id,lista_personas_arriba);    
+    if(persona_elegida_id == null){
+        alert("Debe seleccionar a una persona para poder agregarla al grupo");
+    }
+    else{
+        $('#combo_lista_participantes_elegidos').append(option_agregar);
+    }
+}
+
+function quitarParticipanteAGrupoSelector(){
+    var lista_personas_seleccionadas = $('#combo_lista_participantes_elegidos')[0];
+    //var lista_personas = $('#combo_lista_personas')[0];
+    var persona_elegida_id = $('#combo_lista_participantes_elegidos').val();    
+    var persona_elegida_contenido = $('#combo_lista_participantes_elegidos').find(":selected").text();
+    var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
+    //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
+    //borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+    borrarElementoDeSelector(persona_elegida_id,lista_personas_seleccionadas);
+    if(persona_elegida_id == null){
+        alert("Debe seleccionar a una persona para poder quitarla del grupo");
+    }
+    else{
+        //combo_lista_clientes_elegidos
+        
+        //$('#combo_lista_personas').append(option_agregar);
+        $('#combo_lista_personas2').append(option_agregar);
     }
     //var persona_elegida = $('#combo_lista_personas').find(":selected").text();
     //alert(persona_elegida);
@@ -708,6 +755,10 @@ function guardarGestion(){
         alert('Debe llenar el campo Descripción para poder guardar esta Gestión');
     }
 
+}
+
+function agregarParticipanteALista(){
+    alert(';;');
 }
 
 function traerGestionElegidaClicNombre(){

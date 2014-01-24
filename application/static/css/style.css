@@ -422,7 +422,7 @@ table tr td
     cursor:pointer;
 }
 
-.btn_sumar_quitar_cliente{
+.btn_sumar_quitar_cliente, .btn_sumar_quitar_participante{
     margin-top:7px;
 }
 
