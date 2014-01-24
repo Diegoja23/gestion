@@ -82,6 +82,16 @@ class Fachada
         return $this->sg->agregarGestion($paramsGestion, $grupo);
     }
     
+    public function modificarGestion($paramsGestion, $grupo = array()) 
+    {
+        return $this->sg->modificarGestion($paramsGestion, $grupo);
+    }
+    
+    public function eliminarGestion($paramsGestion) 
+    {
+        return $this->sg->eliminarGestion($paramsGestion);
+    }    
+        
     public function getTiposGestion()
     {
         return $this->sg->getTiposGestion();

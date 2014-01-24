@@ -51,6 +51,22 @@ class Grupo
         return $this->myci->grupos->insert_grupo($fieldsGrupo, $this->clientes, $this->participantes);         
     }
     
+    public function replace()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsGrupo = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsGrupo[$key] = $value;
+             
+        return $this->myci->grupos->replace_grupo($fieldsGrupo, $this->clientes, $this->participantes);         
+    }    
+    
+    public function eliminar()
+    {
+        return $this->myci->grupos->eliminar_grupo($this->id_grupo);
+    }
+    
     public function attNotDistinctToTable($att)
     {
         return ($att != 'myci' && $att != 'clientes' && $att != 'participantes');

@@ -111,6 +111,29 @@ class Gestion
 
     }
 
+    public function modificar()
+    {
+        $continue=true;
+        $object_vars=get_object_vars($this);       
+        $fieldsGestion = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsGestion[$key] = $value;
+             
+        if(!empty($this->grupo))             
+            if (!$this->grupo->replace()) $continue=false;            
+            
+        if($continue) return $this->myci->gestiones->modificar_gestion($fieldsGestion);             
+        return false;             
+    } 
+    
+    public function eliminar()
+    {
+        if($this->grupo->eliminar())
+            return $this->myci->gestiones->eliminar_gestion($this->id_gestion);
+        return false;
+    }
+    
     public function attNotDistinctToTable($att)
     {        
         return ($att != 'myci' && $att != 'tipo_gestion' && $att != 'grupo' && $att != 'tramites');

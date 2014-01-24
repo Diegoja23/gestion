@@ -109,6 +109,23 @@ class ServiciosGestion
             return false;        
     }    
     
+    public function modificarGestion($paramsGestion, $grupo = array()) 
+    {
+        $Gestion = new Gestion($paramsGestion);
+        $Gestion->setGrupo($grupo);
+        
+        if($Gestion->validar()) 
+            return $Gestion->modificar();            
+        else 
+            return false;        
+    }     
+    
+    public function eliminarGestion($paramsGestion)
+    {
+        $Gestion = new Gestion($paramsGestion);        
+        return $Gestion->eliminar();                   
+    }
+    
     public function agregarTipoGestion($paramsTipoGestion) 
     {
         $TipoGestion = new TipoGestion($paramsTipoGestion);
