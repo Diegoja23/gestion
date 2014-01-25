@@ -12,7 +12,7 @@
             
             if(isset($_POST['email']) && isset($_POST['contrasenia']))
             {  
-                $Usuario = Fachada::getInstancia()->login($_POST['email'], $_POST['contrasenia']);
+                $Usuario = Fachada::getInstancia()->login($_POST['email'], md5($_POST['contrasenia']));
                 
                 if($Usuario)
                 {    
