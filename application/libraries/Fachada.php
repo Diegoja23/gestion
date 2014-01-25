@@ -45,6 +45,11 @@ class Fachada
         return $this->sp->getClientes($limit, $offset);
     }
     
+    public function agregarParticipante($paramsParticipante) 
+    {
+        return $this->sp->agregarParticipante($paramsParticipante);    
+    }
+        
     public function getParticipantes($limit = 0, $offset = -1) 
     {
         return $this->sp->getParticipantes($limit, $offset);

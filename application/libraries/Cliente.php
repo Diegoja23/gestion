@@ -77,21 +77,6 @@ class Cliente extends Participante
         return parent::update();
     }
     
-    /*public function getAdjuntos() {
-        return $this->adjuntos;
-        $ci =& get_instance();
-        return $ci->datos_complementarios->get_adjuntos($this->id_persona); 
-    }*/
-
-    /*public function convertirArray(){
-        $object_vars=get_object_vars($this);
-        $fieldsParticipante = array();
-        foreach($object_vars as $key => $value)        
-            if($this->attNotDistinctToTable($key))
-                $fieldsParticipante[$key] = $value; 
-            
-        return $fieldsParticipante;
-    }*/
     public function addAdjunto($Adjunto)
     {
         return ($this->myci->datos_complementarios->add($Adjunto, $this->id_persona));     

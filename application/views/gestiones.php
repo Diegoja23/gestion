@@ -153,31 +153,32 @@
             <div class="form-group" id="div_agregar_participante">
                     <button type="button" class="btn btn-primary btn-sm" id="btn_agregar_participante">Agregar participante <i class="fa fa-plus-circle"></i></button>
                     <div id="formulario_agregar_participante">
+                        <div id="retorno_participante"></div>
                         <h3>Datos de participante nuevo</h3>
                         <div class="form-group">
                             <label for="txt_nombre_participante_gestion">Nombre</label>
-                            <input type="text" class="form-control" id="txt_nombre_participante_gestion" placeholder="Ingresar Nombre">                
+                            <input type="text" class="form-control input-par" id="txt_nombre_participante_gestion" placeholder="Ingresar Nombre">                
                         </div>
                         <div class="form-group">
                             <label for="txt_apellido_participante_gestion">Apellido</label>
-                            <input enabled="false" type="text" class="form-control" id="txt_apellido_participante_gestion" placeholder="Ingresar Apellido">                
+                            <input enabled="false" type="text" class="form-control input-par" id="txt_apellido_participante_gestion" placeholder="Ingresar Apellido">                
                         </div>
                         <div class="form-group">                
                             <label for="txt_ci_participante_gestion">Cédula de Identidad</label>
-                            <input type="text" class="form-control" id="txt_participante_gestion" placeholder="Ingresar Céldula">    
+                            <input type="text" class="form-control input-par" id="txt_ci_participante_gestion" placeholder="Ingresar Céldula">    
                         </div>  
                         <div class="form-group">
                             <label for="txt_email_participante_gestion">Email</label>                
-                            <input type="email" class="form-control" id="txt_email_participante_gestion" placeholder="E-mail">
+                            <input type="email" class="form-control input-par" id="txt_email_participante_gestion" placeholder="E-mail">
                         </div>
 
                         <div class="form-group">
                             <label for="txt_telefono_participante_gestion">Teléfono</label>
-                            <input type="text" class="form-control" id="txt_telefono_participante_gestion" placeholder="Ingresar Teléfono">                
+                            <input type="text" class="form-control input-par" id="txt_telefono_participante_gestion" placeholder="Ingresar Teléfono">                
                         </div>
                         <div class="form-group">
                             <label for="txt_direccion_participante_gestion">Dirección</label>
-                            <input type="text" class="form-control" id="txt_direccion_participante_gestion" placeholder="Ingresar Dirección">                
+                            <input type="text" class="form-control input-par" id="txt_direccion_participante_gestion" placeholder="Ingresar Dirección">                
                         </div>
                         <button type="button" class="btn btn-success btn-sm" id="btn_guardar_participante">Guardar participante <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
                     </div>

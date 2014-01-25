@@ -76,19 +76,27 @@ switch($consulta){
         echo $lista;
         break;  
     
-   case "eliminar_por_ci":
-        $ci = cargarUnValor('ci');
-        $borrado = Fachada::getInstancia()->eliminarByCI($ci);
-        if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$ci." fue exitosamente borrado!";
-        }
-        else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$ci." no se pudo borrar";
-        }
+    case "agregar_participante": 
+        $un_participante_array = cargarValoresParticipante();                
+        $retorno = Fachada::getInstancia()->agregarParticipante($un_participante_array);        
+        if($retorno) echo $retorno; else echo 0;             
+
         break;
     
     default:        
         break;
+}
+
+function cargarValoresParticipante(){ 
+    $paramsParticipante=array();
+    $paramsParticipante['nombre']=$_POST['nombre'];
+    $paramsParticipante['apellido']=$_POST['apellido'];
+    $paramsParticipante['ci']=$_POST['ci'];
+    $paramsParticipante['email']=$_POST['email'];
+    $paramsParticipante['telefono']=$_POST['telefono'];
+    $paramsParticipante['direccion']=$_POST['direccion']; 
+    //$paramsCliente['ci_escaneada']=$_POST['ci_escaneada'];
+    return $paramsParticipante;
 }
 
 function cargarUnValor($variable){

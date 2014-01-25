@@ -36,7 +36,7 @@ class Participante extends Persona
     public function validar()
     {
         //TODO -- aqui hay que validar los datos del participante, asi como asegurarnos de que no exista previamente
-        return !$this->exists();
+        return ($this->nombre!='' && $this->apellido!='' && $this->email!='' && $this->direccion!='' && $this->ci!='' && !$this->exists());      
     }
     
     public function exists()
@@ -63,7 +63,7 @@ class Participante extends Persona
             foreach($this->adjuntos as $adjunto)            
                 if(!$this->myci->datos_complementarios->add($adjunto, $id_persona)) return false;            
                                                               
-        return true;
+        return $id_persona;
 
     }
     

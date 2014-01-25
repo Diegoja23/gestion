@@ -28,9 +28,7 @@ class ServiciosPersona
             array_push($paramsCliente['adjuntos'], $Adjunto);  
            
         }
-        //var_dump($paramsCliente);die();
         $Cliente = new Cliente($paramsCliente);
-        //var_dump($Cliente);die();
         if($Cliente->validar()) 
             return $Cliente->add();            
         else 
@@ -70,6 +68,14 @@ class ServiciosPersona
         return Participante::getAll($limit, $offset);
     }       
 
+    public function agregarParticipante($paramsParticipante)
+    {
+        $Participante = new Participante($paramsParticipante);
+        if($Participante->validar()) 
+            return $Participante->add();            
+        else 
+            return false;          
+    }
 
     public function getBlob($id)
     {

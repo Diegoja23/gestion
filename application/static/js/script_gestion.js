@@ -843,7 +843,26 @@ function agregarParticipanteALista(){
 }
 
 function guardarParticipanteGestion(){
-    alert('todavía no guarda participante');
+    var nombre_par = $.trim($("#txt_nombre_participante_gestion").val());
+    var apellido_par = $.trim($("#txt_apellido_participante_gestion").val());
+    var ci_par = $.trim($("#txt_ci_participante_gestion").val());
+    var email_par = $.trim($("#txt_email_participante_gestion").val());
+    var telefono_par = $.trim($("#txt_telefono_participante_gestion").val());
+    var direccion_par = $.trim($("#txt_direccion_participante_gestion").val());
+
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_participante",nombre: nombre_par, apellido: apellido_par, ci: ci_par, email: email_par, telefono: telefono_par, direccion: direccion_par})
+        .done(function(data) {
+        if(parseInt(data) > 0){       
+		   $("#retorno_participante").html("<span style='color:green'></span>");
+           $(".input-par").val("");
+           $("#formulario_agregar_participante").css("display","none");
+           $('#combo_lista_personas2').append($("<option />").val(parseInt(data)).text(nombre_par+" "+apellido_par+" - CI:"+ci_par));          
+        }
+        else{        	
+			$("#retorno_participante").html("<span style='color:red'><strong>El participante no ha sido agregado, verifique los datos!</strong></span>");
+        }
+    });
+
 }
 
 function traerGestionElegidaClicNombre(){
