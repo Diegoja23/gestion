@@ -21,11 +21,14 @@ function iniEventos() {
                 $(":file").change(cambioElFile);
         }
         else{
-            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
+            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){            	
         	 	$urlParams = getParamsPart(window.location.href);
+				if (typeof $urlParams === 'undefined') {
+					$urlParams='';
+				}             	 	
                 if(listar()){
-                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});
-                    $urlVars = parseURLParams(window.location.href);
+                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});                    
+                    $urlVars = parseURLParams(window.location.href);                 
                     if($urlVars.id > 0)
                     {                    	
                     	$id_tramite=parseInt($urlVars.id);
@@ -63,7 +66,7 @@ function parseURLParams(url) {
         parms = {}, i, n, v, nv;
 
     if (query === url || query === "") {
-        return;
+        return false;
     }
 
     for (i = 0; i < pairs.length; i++) {
@@ -1136,7 +1139,7 @@ function agregarAdjuntosAlTramiteCargado(lista_adjuntos){
 function cambioTipoTramite(){
     var tipo_tramite = $("#combo_tipo_tramite option:selected").text();
     //$("#dialog_plantilla").attr("title",tipo_tramite);
-    $( "#dialog_plantilla" ).dialog( "option", "title", tipo_tramite );
+   // $( "#dialog_plantilla" ).dialog( "option", "title", tipo_tramite );
     //alert(tipo_tramite);
 }
 

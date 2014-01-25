@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('fachada');
+$autoload['libraries'] = array('fachada','session');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('personas', 'datos_complementarios', 'gestiones', 'tramites', 'adjuntos', 'grupos');
+$autoload['model'] = array('personas', 'datos_complementarios', 'gestiones', 'tramites', 'adjuntos', 'grupos', 'usuarios');
 
 
 /* End of file autoload.php */

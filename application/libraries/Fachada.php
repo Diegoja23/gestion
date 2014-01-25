@@ -74,6 +74,12 @@ class Fachada
     {
         return $this->sp->eliminarAdjuntoCliente($id_adjunto);    
     }    
+    
+    public function login($email, $contrasenia)
+    {
+        return $this->sp->login($email, $contrasenia);         
+    }
+    
 
     /* GESTIONES */
     
@@ -159,9 +165,9 @@ class Fachada
        
     public function modificarTipoTramite($unTipoTramite)
     {
-        return $this->sg->modificarTipoTramite($unTipoTramite);     
-        
+        return $this->sg->modificarTipoTramite($unTipoTramite);             
     }
+    
 
 }
 

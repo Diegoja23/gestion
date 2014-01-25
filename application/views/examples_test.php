@@ -25,7 +25,7 @@
           <li class="current"><a href="examples_test.php">Examples</a></li>
           <li><a href="page_test.php">A Page</a></li>
           <li><a href="another_page_test.php">Another Page</a></li>
-          <li><a href="contact_test.php">Contact Us</a></li>
+          <li><a href="contact_test.php">Salir</a></li>
         </ul>
       </div>
     </div>

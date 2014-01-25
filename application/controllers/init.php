@@ -6,21 +6,28 @@
         {            
             parent::__construct();                  
             $this->load->library('form_validation');  
-            $this->load->database();      
+            $this->load->database();     
+            $this->load->helper('url'); 
                             
         }
                         
-        public function index($page = 'home', $id = -1)
+        public function index($page = 'index', $id = -1)
         {
-            /*if (!$this->session->userdata('login'))
+            if (!$this->session->userdata('login'))
             {           
-                //$this->myLogin();                   
-            } */          
-            $this->showContent($page, $id);                                                                 
+                //$this->myLogin();          
+                $this->showContent('login', $id);                
+            }
+            else 
+            {
+                if($page=='login')$page='index';
+                $this->showContent($page, $id);       
+            }           
+                                                                      
         }
         
 
-        function showContent($page = 'home', $id = -1)
+        function showContent($page = 'index', $id = -1)
         {
             $data = array();
             

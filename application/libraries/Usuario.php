@@ -27,6 +27,8 @@ class Usuario extends Persona
     
     public function getCI(){return $this->ci;}
     
+    public function getRol(){return $this->rol;}
+    
     /* Setters */
 
     
@@ -35,6 +37,8 @@ class Usuario extends Persona
         //TODO
         return false;
     }            
+    
+ 
 }
 
 

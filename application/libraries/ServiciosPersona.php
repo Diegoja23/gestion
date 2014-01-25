@@ -1,4 +1,5 @@
 <?php
+require_once('Usuario.php');
 require_once('Cliente.php');
 require_once('Adjunto.php');
 /**
@@ -91,6 +92,28 @@ class ServiciosPersona
         return $Cliente->addAdjunto($Adjunto);        
     }  
  
+    /* El login retorna un objeto usuario, si es vacio pues, el login es incorrecto */
+    public function login($email, $contrasenia)
+    {
+        $paramsUsuario=array();
+        $ci =& get_instance();                      
+        $data = $ci->usuarios->login($email,$contrasenia);
+        if($data)
+        {
+            foreach($data as $u)
+            {
+                $paramsUsuario["id_persona"] = $u->id_usuario;   
+                $paramsUsuario["nombre"] = $u->nombre;    
+                $paramsUsuario["apellido"] = $u->apellido;    
+                $paramsUsuario["email"] = $u->email;  
+                $paramsUsuario["rol"] = $u->rol;  
+            }             
+            return new Usuario($paramsUsuario);
+        }
+        return false;
+
+    }
+    
 }
 
 
