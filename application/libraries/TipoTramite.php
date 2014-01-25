@@ -31,6 +31,8 @@
     public function getDescripcion(){return $this->descripcion;}
     
     public function getPlantilla(){return $this->plantilla;}
+    
+    public function getIdTipoGestion(){return $this->id_tipos_gestion;}
       
     /* Setters */
     

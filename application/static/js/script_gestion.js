@@ -143,6 +143,17 @@ $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
 $(document).on("click",".btn_tramite_detail",goToTramite);
 
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS GENERALES
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function seleccionarComboConValor(id_elemento_dom,id_seleccionado){
+    var elemento = id_elemento_dom + " option[value=" + id_seleccionado + "]";
+    $(elemento).attr('selected','selected');   
+}
+
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
   MÉTODOS DE CLIENTE
@@ -577,6 +588,7 @@ function agregarDivListaGestiones(){
     $("#btn_agregar_gestion").fadeIn(1500);
     $("#btn_agregar_div_tipo_gestion").fadeIn(1500);    
     $("#div_listado_gestion").fadeIn(1500);
+    //cargarTipoGestion('#combo_tipo_gestion','combo');
     //$("#btn_agregar_cliente").html('Agregar <i class="fa fa-list"></i>');
     cargarFormularioGestion(-1);
 }
@@ -584,8 +596,11 @@ function agregarDivListaGestiones(){
 function cargarFormularioGestion(una_gestion){
     if(una_gestion != -1){
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
-        $("#combo_tipo_gestion option:selected").val(una_gestion.id_tipo_gestion);
-        
+        //cargarTipoGestion('#combo_tipo_gestion','combo');
+        setTimeout(function(){            
+            seleccionarComboConValor("#combo_tipo_gestion",una_gestion.id_tipo_gestion);
+        }, 1000);
+
         $("#txt_fecha_inicio_gestion").val(una_gestion.fecha_inicio);
 
         if(una_gestion.fecha_fin != null){
@@ -1105,7 +1120,12 @@ function cargarFormularioTramite(un_tramite){
     if(un_tramite != -1){
     	$("#txt_id_tramite").val(un_tramite.id_tramite);
         $("#txt_descripcion_tramite").val(un_tramite.descripcion);
-        $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
+        
+        setTimeout(function(){            
+            seleccionarComboConValor("#combo_tipo_tramite",un_tramite.id_tipo_tramite);
+        }, 1000);
+        
+       // $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
         $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
         plantilla = un_tramite.plantilla;
         if(un_tramite.fecha_fin != null){
