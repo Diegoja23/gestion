@@ -112,7 +112,7 @@ $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 /*asignar eventos GESTIONES*/
 $(document).on("click","#btn_agregar_div_tipo_gestion",agregarDivManejoTipoGestion);
 $(document).on("click","#btn_crear_tipo_gestion",agregarDivCrearTipoGestion);
-$(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
+//$(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
