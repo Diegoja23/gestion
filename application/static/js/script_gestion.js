@@ -25,6 +25,13 @@ function iniEventos() {
         	 	$urlParams = getParamsPart(window.location.href);
                 if(listar()){
                     $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});
+                    $urlVars = parseURLParams(window.location.href);
+                    if($urlVars.id > 0)
+                    {                    	
+                    	$id_tramite=parseInt($urlVars.id);
+						$(document).ready(traerTramitePorIdUrl($id_tramite));						
+                    }
+                    
                     //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
                     $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
                 }    
@@ -827,7 +834,7 @@ function traerGestionElegidaClicIcono(){
 
 function traerGestionElegida(id_gestion){  
     GLOBAL_id_gestion = id_gestion;
-    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "traer_por_id", id_gestion: id_gestion})
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "matchear_por_id", id_gestion: id_gestion})
             .done(function(data) {            
                 agregarDivDatosGestion();
                 var una_gestion = jQuery.parseJSON(data);
@@ -988,8 +995,17 @@ function traerTramiteElegido(){
     traerTramitePorId(id_tramite);
 }
 
-function traerTramitePorId(id_tramite){
+function traerTramitePorIdUrl(id_tramite){
     $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "traer_por_id",id_tramite: id_tramite})
+            .done(function(data) {            
+                agregarDivDatosTramite();                
+                var un_tramite = jQuery.parseJSON(data);
+                cargarFormularioTramite(un_tramite);      
+        }, "json");  
+}
+
+function traerTramitePorId(id_tramite){
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "matchear_por_id",id_tramite: id_tramite})
             .done(function(data) {            
                 agregarDivDatosTramite();                
                 var un_tramite = jQuery.parseJSON(data);
@@ -1297,7 +1313,7 @@ function traerTipoTramiteElegido(){
 }
 
 function traerTipoTramitePorId(id_tipo_tramite){
-    $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "traer_por_id",id_tipo_tramite: id_tipo_tramite})
+    $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "matchear_por_id",id_tipo_tramite: id_tipo_tramite})
             .done(function(data) {            
                 agregarDivDatosPlantilla();                
                 var un_tipo_tramite = jQuery.parseJSON(data);

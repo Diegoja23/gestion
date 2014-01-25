@@ -150,7 +150,18 @@ class Tramite
     public function getById()
     {
         $array_tramite = $this->myci->tramites->getById($this->id_tramite);        
-        $this->materializar($array_tramite[0]);
+        $this->materializar($array_tramite[0]);        
+        $adjuntos = $this->myci->adjuntos->get_adjuntos($this->id_tramite);               
+        foreach ($adjuntos as $a) 
+        {
+            $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'adjuntos');
+            $Adjunto = new Adjunto($attsAdjuntos);               
+            array_push($this->adjuntos,$Adjunto);
+        }                 
+            
+        $TipoTramite = new TipoTramite(array('id_tipo_tramite' => $this->id_tipo_tramite));
+        $TipoTramite->getById();
+        $this->tipo_tramite = $TipoTramite;                    
     }    
     
     public function materializar($params)
