@@ -42,8 +42,8 @@
       <div id="sidebar_container" style="float:left; margin-left: 35px">
           Ingresar al sistema
         <form action="/gestion/login" method="post">
-            <input name ="email"><br>
-            <input name ="contrasenia" type="password"><br>
+            Email:<input name ="email"><br>
+            Contraseña:<input name ="contrasenia" type="password"><br>
             <input type="submit" value="Ingresar">
         </form>
       </div>        
