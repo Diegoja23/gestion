@@ -115,6 +115,8 @@ $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 /*asignar eventos GESTIONES*/
 $(document).on("click","#btn_agregar_div_tipo_gestion",agregarDivManejoTipoGestion);
 $(document).on("click","#btn_crear_tipo_gestion",agregarDivCrearTipoGestion);
+$(document).on("click","#btn_guardar_tipo_gestion",agregarTipoGestionGestion);
+
 //$(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
 
 /*asignar eventos TRÁMITES*/
@@ -1459,7 +1461,6 @@ function guardarTipoTramite(){
     var vid_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(vdescripcion != ''){
         if(vid_tipo_tramite > 0){
-            console.log("aquí se modifica el tipo tramite");
             $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
                     .done(function(data) {            
                         var retorno = parseInt(data);
@@ -1505,3 +1506,21 @@ function eliminarTipoTramiteElegido(){
         $(this).parent().parent().parent().fadeOut(1500);       
     }
 }
+
+function agregarTipoGestionGestion()
+{
+	var descripcion_tipo_gestion = $.trim($("#txt_descripcion_tipo_gestion").val());
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+        .done(function(data) {
+        if(parseInt(data) > 0){       
+		   $("#retorno_tipo_gestion").html("<span style='color:green'></span>");
+           $("#txt_descripcion_tipo_gestion").val("");
+           $("#formulario_agregar_tipo_gestion").css("display","none");
+           $('#combo_tipo_gestion').append($("<option />").val(parseInt(data)).text(descripcion_tipo_gestion));          
+        }
+        else{        	
+			$("#retorno_tipo_gestion").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
+        }
+    });
+}
+

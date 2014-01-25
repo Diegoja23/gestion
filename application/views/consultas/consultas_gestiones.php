@@ -82,9 +82,21 @@ switch($consulta){
         if($retorno) echo $retorno; else echo 0;             
 
         break;
+    case "agregar_tipo_gestion":
+        $un_TG_array = cargarValoresTipoGestion();                
+        $retorno = Fachada::getInstancia()->agregarTipoGestion($un_TG_array);        
+        if($retorno) echo $retorno; else echo 0;                 
+        break;
     
     default:        
         break;
+}
+
+function cargarValoresTipoGestion()
+{
+    $paramsTG=array();
+    $paramsTG['descripcion']=$_POST['descripcion'];    
+    return $paramsTG;
 }
 
 function cargarValoresParticipante(){ 
