@@ -46,6 +46,13 @@ class Gestiones extends CI_Model
         return $id_tipos_gestion;
     }      
     
+    function modificar_tipo_gestion($tipoGParams)
+    {
+        $this->db->where('id_tipos_gestion', $tipoGParams['id_tipos_gestion']);
+        $this->db->update('tipos_gestion', $tipoGParams);
+        return($this->db->affected_rows() > 0);
+    }      
+    
     function modificar_gestion($gestionParams)
     {
         $this->db->where('id_gestion', $gestionParams['id_gestion']);

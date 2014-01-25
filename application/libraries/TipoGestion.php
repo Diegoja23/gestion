@@ -38,7 +38,7 @@ class TipoGestion
     public function validar()
     {
         //TODO
-        return true;    
+        return $this->descripcion != '';    
     }
     
     public function add()
@@ -52,6 +52,17 @@ class TipoGestion
         return $this->myci->gestiones->insert_tipo_gestion($fieldsTipoGestion);            
     }
         
+    public function modificar()
+    {
+        $object_vars=get_object_vars($this);       
+        $fieldsTipoGestion = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsTipoGestion[$key] = $value;
+             
+        return $this->myci->gestiones->modificar_tipo_gestion($fieldsTipoGestion);            
+    }
+            
     public function getById()
     {
         $array_tipo_gestion = $this->myci->gestiones->getTipoById($this->id_tipos_gestion);        

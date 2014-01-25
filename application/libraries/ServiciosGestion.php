@@ -136,6 +136,16 @@ class ServiciosGestion
         else 
             return false;        
     }    
+    
+    public function modificarTipoGestion($paramsTipoGestion) 
+    {
+        $TipoGestion = new TipoGestion($paramsTipoGestion);
+        
+        if($TipoGestion->validar()) 
+            return $TipoGestion->modificar();            
+        else 
+            return false;        
+    }      
         
     
     public function agregarTramite($paramsTramite, $paramsAdjuntos = array()) 
