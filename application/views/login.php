@@ -44,15 +44,15 @@
         <div class="slogan">Sistema de Gesti&oacute;n Notarial</div>
       </div>
     </div>
-    <div id="site_content">
+    <div id="site_content_login">
         
-      <div id="sidebar_container" style="float:left; margin-left: 35px">
-          Ingresar al sistema<br>
+      <div id="sidebar_container_login">
+          <h2 style="color:#555;letter-spacing:1px"><strong>Ingresar al sistema</strong></h2><br>
           <?php if($failLogin) echo "<p style='color:red'>email o contraseña inválidos</p>" ?>
         <form action="/gestion/login" method="post">
-            Email:<input name ="email"><br>
-            Contraseña:<input name ="contrasenia" type="password"><br>
-            <input type="submit" value="Ingresar">
+            Email: <input name ="email" class="form-control"><br>
+            Contraseña: <input name ="contrasenia" type="password" class="form-control"><br><br>
+            <input type="submit" value="Ingresar" class="btn btn-info">
         </form>
       </div>        
 
