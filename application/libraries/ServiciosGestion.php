@@ -89,7 +89,8 @@ class ServiciosGestion
         {
             $paramsTipo["id_tipo_tramite"] = $t->id_tipo_tramite;   
             $paramsTipo["descripcion"] = $t->descripcion;    
-            $paramsTipo["plantilla"] = $t->plantilla;    
+            $paramsTipo["plantilla"] = $t->plantilla;
+            $paramsTipo["id_tipos_gestion"] = $id_tipos_gestion;                
 
             $Tipo = new TipoTramite($paramsTipo); 
             $arrayTipos[] = $Tipo;
