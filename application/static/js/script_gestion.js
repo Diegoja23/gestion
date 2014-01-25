@@ -2,6 +2,7 @@
 var globalUrl = "http://"+document.domain;
 var plantilla;
 var GLOBAL_id_gestion;
+var GLOBAL_id_tipo_gestion;
 var GLOBAL_id_tramite;
 var GLOBAL_id_tipo_tramite;
 var GLOBAL_documento_cliente;
@@ -52,36 +53,6 @@ function iniEventos() {
 
 }
 
-function getParamsPart(url)
-{
-	var queryParams = url.split('?');
-	return queryParams[1];	
-}
-
-function parseURLParams(url) {
-    var queryStart = url.indexOf("?") + 1,
-        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
-        query = url.slice(queryStart, queryEnd - 1),
-        pairs = query.replace(/\+/g, " ").split("&"),
-        parms = {}, i, n, v, nv;
-
-    if (query === url || query === "") {
-        return false;
-    }
-
-    for (i = 0; i < pairs.length; i++) {
-        nv = pairs[i].split("=");
-        n = decodeURIComponent(nv[0]);
-        v = decodeURIComponent(nv[1]);
-
-        if (!parms.hasOwnProperty(n)) {
-            parms[n] = [];
-        }
-
-        parms[n].push(nv.length === 2 ? v : null);
-    }
-    return parms;
-}
 
 /*asignar eventos CLIENTES*/
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
@@ -112,12 +83,12 @@ $(document).on("click","#btn_guardar_gestion",guardarGestion);
 $(document).on("click",".dato_mostrado_gestion",traerGestionElegidaClicNombre);
 $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 
-/*asignar eventos GESTIONES*/
+/*asignar eventos TIPOS GESTIONES*/
 $(document).on("click","#btn_agregar_div_tipo_gestion",agregarDivManejoTipoGestion);
+$(document).on("click","#btn_volver_a_gestiones",volverAGestiones);
 $(document).on("click","#btn_crear_tipo_gestion",agregarDivCrearTipoGestion);
 $(document).on("click","#btn_guardar_tipo_gestion",agregarTipoGestionGestion);
-
-//$(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
+$(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
@@ -151,6 +122,37 @@ $(document).on("click",".btn_tramite_detail",goToTramite);
   MÉTODOS GENERALES
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
+function getParamsPart(url)
+{
+	var queryParams = url.split('?');
+	return queryParams[1];	
+}
+
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = {}, i, n, v, nv;
+
+    if (query === url || query === "") {
+        return false;
+    }
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=");
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) {
+            parms[n] = [];
+        }
+
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
+
 function seleccionarComboConValor(id_elemento_dom,id_seleccionado){
     var elemento = id_elemento_dom + " option[value=" + id_seleccionado + "]";
     $(elemento).attr('selected','selected');   
@@ -564,7 +566,7 @@ function goToTramite()
 function agregarDivDatosGestion(){    
         $("#div_listado_gestion").fadeOut(1500);        
         $("#btn_agregar_gestion").fadeOut(1500);
-        $("#btn_agregar_div_tipo_gestion").fadeOut(1500);
+        $("#btn_agregar_div_tipo_gestion").fadeIn(1500);
         $("#div_manejo_tipos_gestiones").fadeOut(1500);
         $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
         $("#div_formulario_gestion").fadeIn(1500);
@@ -908,15 +910,37 @@ function agregarDivCrearTipoGestion(){
 function agregarDivManejoTipoGestion(){    
         $("#div_listado_gestion").fadeOut(1500);
         $("#btn_agregar_div_tipo_gestion").fadeOut(1500);        
-        $("#div_formulario_gestion").fadeOut(1500);    
-        $("#div_manejo_tipos_gestiones").fadeIn(1500);
-        $("#btn_mostrar_lista_gestiones").fadeIn(1500); 
-        $("#btn_agregar_gestion").fadeIn(1500);
+        $("#div_formulario_gestion").fadeOut(1500);
+        $("#btn_mostrar_lista_gestiones").fadeOut(1500); 
+        $("#btn_agregar_gestion").fadeOut(1500);
+        $("#formulario_agregar_tipo_gestion2").fadeOut(1500);
+        $("#btn_volver_a_gestiones").fadeIn(1500);        
+        $("#div_manejo_tipos_gestiones").fadeIn(1500);        
         cargarTipoGestion('#listado_tipos_de_gestion','tabla');
         //$('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
         //$('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
     
         //cargarFormularioGestion(-1);
+}
+
+function agregarDivDatosTipoGestion(){    
+        $("#formulario_agregar_tipo_gestion2").fadeIn(1500);
+        $("#div_lista_tipos_gestion").fadeOut(1500);     
+        cargarFormularioTipoGestion(-1);
+}
+
+function cargarFormularioTipoGestion(un_tipo_gestion){
+    if(un_tipo_gestion != -1){
+        $("#txt_descripcion_tipo_gestion2").val(un_tipo_gestion.descripcion);        
+    }
+    else{
+        $("#txt_descripcion_tipo_gestion2").val("");
+    }
+}
+
+function volverAGestiones(){
+    $("#btn_volver_a_gestiones").fadeOut(1500);
+    agregarDivListaGestiones();
 }
 
 
@@ -948,10 +972,51 @@ function cargarTablaConLista(lista_tipos_gestiones,id_elemento_dom){
     $(id_elemento_dom).html('');
     var item;
     jQuery.each(lista_tipos_gestiones,function(num,data){
-             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td>' + data.descripcion + '</td><td><p><i class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
+             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td class="dato_mostrado_tipo_gestion">' + data.descripcion + '</td><td class="dato_mostrado_tipo_gestion"><p><i class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
              $(id_elemento_dom).append(item);
         }
     );
+}
+
+
+function agregarTipoGestionGestion(){
+	var descripcion_tipo_gestion = $.trim($("#txt_descripcion_tipo_gestion").val());
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+        .done(function(data) {
+        if(parseInt(data) > 0){       
+		   $("#retorno_tipo_gestion").html("<span style='color:green'></span>");
+           $("#txt_descripcion_tipo_gestion").val("");
+           $("#formulario_agregar_tipo_gestion").fadeOut(1500);
+           $('#combo_tipo_gestion').append($("<option />").val(parseInt(data)).text(descripcion_tipo_gestion));          
+        }
+        else{        	
+			$("#retorno_tipo_gestion").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
+        }
+    });
+}
+
+function traerTipoGestionElegidaClicNombre(){
+    //var documento = $($(this).parent().children()[2]).text();
+    var id_tipo_gestion = $($(this).parent().children()[0]).text();    
+    traerTipoGestionElegido(id_tipo_gestion);
+}
+
+
+function traerGestionElegidaClicIcono(){
+    var id_tipo_gestion = $($(this).parent().parent().parent().children()[0]).text();    
+    traerTipoGestionElegido(id_tipo_gestion);
+}
+
+function traerTipoGestionElegido(id_tipo_gestion){  
+    GLOBAL_id_tipo_gestion = id_tipo_gestion;
+    $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "matchear_por_id", id_tipo_gestion: id_tipo_gestion})
+            .done(function(data) {            
+                agregarDivDatosTipoGestion();
+                var un_tipo_gestion = jQuery.parseJSON(data);
+                cargarFormularioTipoGestion(un_tipo_gestion);
+                //$('#div_ci_cliente').append(data);                
+        }, "json");
+        //$("input").prop('disable', true);
 }
     
 
@@ -1506,21 +1571,3 @@ function eliminarTipoTramiteElegido(){
         $(this).parent().parent().parent().fadeOut(1500);       
     }
 }
-
-function agregarTipoGestionGestion()
-{
-	var descripcion_tipo_gestion = $.trim($("#txt_descripcion_tipo_gestion").val());
-    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
-        .done(function(data) {
-        if(parseInt(data) > 0){       
-		   $("#retorno_tipo_gestion").html("<span style='color:green'></span>");
-           $("#txt_descripcion_tipo_gestion").val("");
-           $("#formulario_agregar_tipo_gestion").css("display","none");
-           $('#combo_tipo_gestion').append($("<option />").val(parseInt(data)).text(descripcion_tipo_gestion));          
-        }
-        else{        	
-			$("#retorno_tipo_gestion").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
-        }
-    });
-}
-

@@ -60,6 +60,7 @@
         <button id="btn_agregar_gestion" type="button" class="btn btn-primary">Agregar nueva <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_gestiones" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <button id="btn_agregar_div_tipo_gestion" type="button" class="btn btn-primary">Tipos de Gestiones <i class="fa fa-caret-square-o-down"></i></button>
+        <button id="btn_volver_a_gestiones" type="button" style="display: none;" class="btn btn-primary">Volver a gestiones <i class="fa fa-reply"></i></button>
         <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
         
         
@@ -197,9 +198,19 @@
         <div id="div_listado_gestion">            
         </div>
         <div id="div_manejo_tipos_gestiones">
-            <h3>Lista de Tipos de Gestion</h3>
+            <div id="div_lista_tipos_gestion">
+                <h3>Lista de Tipos de Gestion</h3>
                 <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Acciones</th></tr></thead><tbody id="listado_tipos_de_gestion"></tbody></table>
-            
+            </div>
+            <div id="formulario_agregar_tipo_gestion2">
+                <div id="retorno_tipo_gestion"></div>
+                <h3>Datos de Tipo de Gestión nuevo</h3>
+                <div class="form-group">
+                    <label for="txt_descripcion_tipo_gestion2">Descripción</label>
+                    <input type="text" class="form-control" id="txt_descripcion_tipo_gestion" placeholder="Ingresar Descripción">                
+                </div>                        
+                <button type="button" class="btn btn-success btn-sm" id="btn_guardar_tipo_gestion">Guardar Tipo Gestión <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
+            </div>
         </div> 
     </div>
     <div id="footer">
