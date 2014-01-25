@@ -28,7 +28,7 @@ switch($consulta){
         }
         break;
         
-    case "traer_por_id":
+    case "matchear_por_id":
         
         $id_gestion = cargarUnValor('id_gestion');        
         $una_gestion = traerGestionPorID($id_gestion);

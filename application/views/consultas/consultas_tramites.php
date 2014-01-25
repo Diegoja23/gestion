@@ -2,7 +2,6 @@
 
 $consulta = $_POST['consulta'];
 
-
 //if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
 
 //$allTiposTramiteByGestion = array();
@@ -11,7 +10,7 @@ if(!isset($_GLOBALS['allTiposTramite']))
     $_GLOBALS['allTiposTramite'] = array();
   */  
 switch($consulta){
-    case "traer_todos":
+    case "traer_todos":        
         echo crearListaTramites(traerTodos());
         break;
     
@@ -58,8 +57,19 @@ switch($consulta){
             echo 0;
         }
         break;
-        
     case "traer_por_id":
+        $id_tramite = cargarUnValor('id_tramite'); 
+        $un_tramite = traerPorId($id_tramite);
+        if($un_tramite != false){
+            $array_tramite = $un_tramite->convertirArray();            
+            $array_tramite['plantilla'] = traerPlantillaTramiteO($un_tramite);
+            echo json_encode($array_tramite);
+        }
+        else{
+            return -1;
+        }                
+    break;        
+    case "matchear_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
         $un_tramite = traerTramiteElegido($id_tramite);        
         //$un_tramite = seleccionarPorID($id_tramite);
@@ -142,6 +152,11 @@ switch($consulta){
     
     default:        
         break;
+}
+
+function traerPorId($id_tramite)
+{
+    return Fachada::getInstancia()->getTramiteById($id_tramite);
 }
 
 function cargarUnValor($variable){
@@ -234,6 +249,11 @@ function traerPlantillaDelTipoTraite($id_tt,$id_tipo_gestion){
     return $elTipoTramite->getPlantilla();
 }
 
+function traerPlantillaTramiteO($el_tramite){
+
+    return $el_tramite->getDocumento();
+
+}
 function traerPlantillaTramite($id_tramite){
 
     $el_tramite = traerTramiteElegido($id_tramite);

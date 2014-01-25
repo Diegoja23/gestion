@@ -23,6 +23,7 @@
         function showContent($page = 'home', $id = -1)
         {
             $data = array();
+            
             $data['title'] = '';
             $page = str_replace("-", "_", $page);
             $title_part = explode("_", $page);

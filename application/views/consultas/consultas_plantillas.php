@@ -58,7 +58,7 @@ switch($consulta){
         }
         break;
         
-    case "traer_por_id":
+    case "matchear_por_id":
         $id_tipo_tramite = cargarUnValor('id_tipo_tramite'); 
         $un_tipo_tramite = traerTipoTramiteElegido($id_tipo_tramite);
         //$un_tramite = seleccionarPorID($id_tramite);

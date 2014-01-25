@@ -20,7 +20,10 @@
 
         function showContent($page = 'home', $id = -1)
         {
+            //var_dump($id);
+            //var_dump($_GET);
             $data = array();
+            $data['id'] = $id;
             $data['title'] = '';
             $page = str_replace("-", "_", $page);
             $title_part = explode("_", $page);

@@ -22,8 +22,16 @@ function iniEventos() {
         }
         else{
             if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){
+        	 	$urlParams = getParamsPart(window.location.href);
                 if(listar()){
-                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});
+                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});
+                    $urlVars = parseURLParams(window.location.href);
+                    if($urlVars.id > 0)
+                    {                    	
+                    	$id_tramite=parseInt($urlVars.id);
+						$(document).ready(traerTramitePorIdUrl($id_tramite));						
+                    }
+                    
                     //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
                     $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
                 }    
@@ -41,6 +49,36 @@ function iniEventos() {
 
 }
 
+function getParamsPart(url)
+{
+	var queryParams = url.split('?');
+	return queryParams[1];	
+}
+
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = {}, i, n, v, nv;
+
+    if (query === url || query === "") {
+        return;
+    }
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=");
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) {
+            parms[n] = [];
+        }
+
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
 
 /*asignar eventos CLIENTES*/
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
@@ -803,7 +841,7 @@ function traerGestionElegidaClicIcono(){
 
 function traerGestionElegida(id_gestion){  
     GLOBAL_id_gestion = id_gestion;
-    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "traer_por_id", id_gestion: id_gestion})
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "matchear_por_id", id_gestion: id_gestion})
             .done(function(data) {            
                 agregarDivDatosGestion();
                 var una_gestion = jQuery.parseJSON(data);
@@ -1012,8 +1050,17 @@ function traerTramiteElegido(){
     traerTramitePorId(id_tramite);
 }
 
-function traerTramitePorId(id_tramite){
+function traerTramitePorIdUrl(id_tramite){
     $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "traer_por_id",id_tramite: id_tramite})
+            .done(function(data) {            
+                agregarDivDatosTramite();                
+                var un_tramite = jQuery.parseJSON(data);
+                cargarFormularioTramite(un_tramite);      
+        }, "json");  
+}
+
+function traerTramitePorId(id_tramite){
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "matchear_por_id",id_tramite: id_tramite})
             .done(function(data) {            
                 agregarDivDatosTramite();                
                 var un_tramite = jQuery.parseJSON(data);
@@ -1322,7 +1369,7 @@ function traerTipoTramiteElegido(){
 }
 
 function traerTipoTramitePorId(id_tipo_tramite){
-    $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "traer_por_id",id_tipo_tramite: id_tipo_tramite})
+    $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "matchear_por_id",id_tipo_tramite: id_tipo_tramite})
             .done(function(data) {            
                 agregarDivDatosPlantilla();                
                 var un_tipo_tramite = jQuery.parseJSON(data);
