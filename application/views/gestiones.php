@@ -195,7 +195,12 @@
             </div>  
         </div>
         <div id="div_listado_gestion">            
-        </div>      
+        </div>
+        <div id="div_manejo_tipos_gestiones">
+            <h3>Lista de Tipos de Gestion</h3>
+                <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Acciones</th></tr></thead><tbody id="listado_tipos_de_gestion"></tbody></table>
+            
+        </div> 
     </div>
     <div id="footer">
       <p>Copyright &copy; Girasol | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>

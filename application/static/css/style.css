@@ -335,7 +335,7 @@ table tr td
   color: #111;
   border-top: 1px solid #FFF;}
 
-#div_formulario_cliente, #div_formulario_gestion{
+#div_formulario_cliente, #div_formulario_gestion, #div_manejo_tipos_gestiones{
     display:none;
     margin:15px;
 }
