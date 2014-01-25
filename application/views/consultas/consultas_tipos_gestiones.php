@@ -15,10 +15,11 @@ switch($consulta){
         echo crearListaPlantillas(traerTodos());
         break;
     
-    /*case "traer_tipos_gestion":
+    case "traer_tipos_gestion":
         $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
-        echo crearSelectTiposGestion($listaTiposGestion);
-        break;*/ 
+        //echo crearSelectTiposGestion($listaTiposGestion);
+        echo json_encode(convertirArrayLista($listaTiposGestion));
+        break; 
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
@@ -58,7 +59,7 @@ switch($consulta){
         }
         break;
         
-    case "matchear_por_id":
+    case "traer_por_id":
         $id_tipo_tramite = cargarUnValor('id_tipo_tramite'); 
         $un_tipo_tramite = traerTipoTramiteElegido($id_tipo_tramite);
         //$un_tramite = seleccionarPorID($id_tramite);
@@ -186,14 +187,14 @@ function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
 
 /*nuevos métodos*/
 
-/*function crearSelectTiposGestion($lista){
+function crearSelectTiposGestion($lista){
     $retorno = '';
     foreach ($lista as $tg) 
     {        
         $retorno .= '<option value="'.$tg->getIdTiposGestion().'">'.$tg->getDescripcion().'</option>';
     }
     return $retorno;
-}*/
+}
 
 function crearListaPlantillas($lista){
     $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripción</th><th>Tipo de Gestión</th><th>Plantilla</th><th>Acciones</th></tr></thead><tbody>';
@@ -214,6 +215,14 @@ function traerTipoTramiteElegido($id_tipo_tramite){
             return $un_tipo_tramite;
         }
     }
+}
+
+function convertirArrayLista($listaTiposGestion){
+     $lista_array = array();
+    foreach($listaTiposGestion as $un_tipo_gestion){
+        array_push($lista_array, $un_tipo_gestion->convertirArray());
+    }
+    return $lista_array;
 }
 
 ?>
