@@ -7,6 +7,9 @@
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />  
 
 <?php  
+            
+            $failLogin = false;
+            
             if(isset($_POST['email']) && isset($_POST['contrasenia']))
             {  
                 $Usuario = Fachada::getInstancia()->login($_POST['email'], $_POST['contrasenia']);
@@ -25,7 +28,10 @@
                     $this->session->set_userdata($usrdata);   
                     
                     redirect('index', 'refresh');               
-                }                
+                }
+                else
+                    $failLogin = true;    
+                             
             }
                       
 ?>  
@@ -39,8 +45,10 @@
       </div>
     </div>
     <div id="site_content">
+        
       <div id="sidebar_container" style="float:left; margin-left: 35px">
-          Ingresar al sistema
+          Ingresar al sistema<br>
+          <?php if($failLogin) echo "<p style='color:red'>email o contraseña inválidos</p>" ?>
         <form action="/gestion/login" method="post">
             Email:<input name ="email"><br>
             Contraseña:<input name ="contrasenia" type="password"><br>
