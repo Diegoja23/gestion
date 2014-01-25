@@ -87,7 +87,7 @@ ol
 ol li
 { margin: 0 0 11px 0;}
 
-#main, #header, #logo, #menubar, #site_content, #footer
+#main, #header, #logo, #menubar, #site_content, #site_content_login, #footer
 { margin-left: auto; 
   margin-right: auto;}
 
@@ -459,15 +459,20 @@ table tr td
 }
 
 #site_content_login{
-    text-align:center;
+	text-align:center;
+	 width: 450px;
+  overflow: hidden;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  background: #fff;
+  border: 1px solid #E7E7E7;  
 }
 
 #sidebar_container_login{
     /*margin:auto; 
-    width:218px;*/
+    width:218px; position: absolute;*/
     top: 39%;
     left: 42%;
-    position: absolute;
     background-color: white;
     padding: 30px;
     border: 3px solid #999;
