@@ -1364,7 +1364,7 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
             $("#txt_descripcion_plantilla").val(un_tipo_tramite.descripcion);
             
             setTimeout(function(){            
-                seleccionarComboConValor("#combo_tipo_gestion_pl",un_tipo_tramite.id_tipo_gestion);
+                seleccionarComboConValor("#combo_tipo_gestion_pl",un_tipo_tramite.id_tipos_gestion);
             }, 1000);
             
             //$("#combo_tipo_gestion_pl").val(un_tipo_tramite.tipo_gestion);
