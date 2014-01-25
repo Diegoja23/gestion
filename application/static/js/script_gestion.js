@@ -74,6 +74,7 @@ $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 /*asignar eventos GESTIONES*/
 $(document).on("click","#btn_agregar_div_tipo_gestion",agregarDivManejoTipoGestion);
 $(document).on("click","#btn_crear_tipo_gestion",agregarDivCrearTipoGestion);
+$(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
@@ -509,7 +510,8 @@ function goToTramite()
 function agregarDivDatosGestion(){    
         $("#div_listado_gestion").fadeOut(1500);        
         $("#btn_agregar_gestion").fadeOut(1500);
-        $("#btn_agregar_div_tipo_gestion").fadeOut(1500);  
+        $("#btn_agregar_div_tipo_gestion").fadeOut(1500);
+        $("#div_manejo_tipos_gestiones").fadeOut(1500);
         $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
         $("#div_formulario_gestion").fadeIn(1500);
         $(".fecha-fin-gestion").css("display","none");
@@ -518,7 +520,7 @@ function agregarDivDatosGestion(){
             var id_gestion = -1;
         }
         //$('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
-        cargarComboTipoGestion('#combo_tipo_gestion');
+        cargarTipoGestion('#combo_tipo_gestion','combo');
         $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
         $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
     
@@ -528,6 +530,7 @@ function agregarDivDatosGestion(){
 function agregarDivListaGestiones(){
     $("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"});
     $("#div_formulario_gestion").fadeOut(1500);
+    $("#div_manejo_tipos_gestiones").fadeOut(1500);    
     $("#btn_mostrar_lista_gestiones").fadeOut(1500);
     $("#div_formulario_adjuntos_gestion").fadeOut(1500);
     $("#btn_agregar_gestion").fadeIn(1500);
@@ -826,30 +829,31 @@ function agregarDivCrearTipoGestion(){
 }
 
 function agregarDivManejoTipoGestion(){    
-        /*$("#div_listado_gestion").fadeOut(1500);        
-        $("#btn_agregar_gestion").fadeOut(1500);
-        $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
-        $("#div_formulario_gestion").fadeIn(1500);
-        $(".fecha-fin-gestion").css("display","none");
-        var id_gestion = GLOBAL_id_gestion;
-        if(id_gestion == undefined){
-            var id_gestion = -1;
-        }
-        $('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
-        $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
-        $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
+        $("#div_listado_gestion").fadeOut(1500);
+        $("#btn_agregar_div_tipo_gestion").fadeOut(1500);        
+        $("#div_formulario_gestion").fadeOut(1500);    
+        $("#div_manejo_tipos_gestiones").fadeIn(1500);
+        $("#btn_mostrar_lista_gestiones").fadeIn(1500); 
+        $("#btn_agregar_gestion").fadeIn(1500);
+        cargarTipoGestion('#listado_tipos_de_gestion','tabla');
+        //$('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
+        //$('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
     
-        cargarFormularioGestion(-1);*/
+        //cargarFormularioGestion(-1);
 }
 
 
-function cargarComboTipoGestion(id_elemento_dom){
+function cargarTipoGestion(id_elemento_dom,tipo){
     $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "traer_tipos_gestion"})
                     .done(function(data) {            
                         
                      var lista_tipos_gestiones = jQuery.parseJSON(data);
-                     cargarComboConLista(lista_tipos_gestiones,id_elemento_dom);
-                        
+                     if(tipo=='combo'){
+                        cargarComboConLista(lista_tipos_gestiones,id_elemento_dom);
+                     }
+                     else{
+                         cargarTablaConLista(lista_tipos_gestiones,id_elemento_dom);
+                     }
             },"json");
 }
 
@@ -858,6 +862,16 @@ function cargarComboConLista(lista_tipos_gestiones,id_elemento_dom){
     var item;
     jQuery.each(lista_tipos_gestiones,function(num,data){
              item = '<option value="'+ data.id_tipos_gestion +'">' + data.descripcion + '</option>';
+             $(id_elemento_dom).append(item);
+        }
+    );
+}
+
+function cargarTablaConLista(lista_tipos_gestiones,id_elemento_dom){
+    $(id_elemento_dom).html('');
+    var item;
+    jQuery.each(lista_tipos_gestiones,function(num,data){
+             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td>' + data.descripcion + '</td><td><p><i class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
              $(id_elemento_dom).append(item);
         }
     );
@@ -1257,7 +1271,7 @@ function agregarDivDatosPlantilla(){
     $("#btn_mostrar_lista_plantillas").fadeIn(1500);        
     $("#div_formulario_plantilla").fadeIn(1500);
     //$('#combo_tipo_gestion_pl').load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_tipos_gestion"});
-    cargarComboTipoGestion('#combo_tipo_gestion_pl')
+    cargarTipoGestion('#combo_tipo_gestion_pl','combo')
         //$('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
     cargarFormularioTipoTramite(-1);
         
