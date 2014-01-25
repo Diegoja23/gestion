@@ -200,9 +200,9 @@ function crearListaPlantillas($lista){
     $numero = 0; 
     foreach ($lista as $t)
     {      
-        $tipo_gestion = new TipoGestion(array('id_tipo_gestion' => $t->getIdTipoGestion()));
+        $tipo_gestion = new TipoGestion(array('id_tipos_gestion' => $t->getIdTipoGestion()));
         //$tipo_gestion->setIdTiposGestion();
-        //$tipo_gestion->getById();
+        $tipo_gestion->getById();
         $retorno .= '<tr><td class="dato_mostrado_tipo_tramite">'.$t->getIdTiposTramite().'</td><td id="'.$t->getIdTiposTramite().'" class="dato_mostrado_tipo_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.$tipo_gestion->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.'plantilla'.'</td><td><p><i class="btn_ver_tipo_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
