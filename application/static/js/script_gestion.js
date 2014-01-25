@@ -1362,7 +1362,12 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
     if(un_tipo_tramite !== -1){
         if(un_tipo_tramite !== -2){
             $("#txt_descripcion_plantilla").val(un_tipo_tramite.descripcion);
-            $("#combo_tipo_gestion_pl").val(un_tipo_tramite.tipo_gestion);
+            
+            setTimeout(function(){            
+                seleccionarComboConValor("#combo_tipo_gestion_pl",un_tipo_tramite.id_tipos_gestion);
+            }, 1000);
+            
+            //$("#combo_tipo_gestion_pl").val(un_tipo_tramite.tipo_gestion);
             //$("#dialog_plantilla").val(un_tipo_tramite.plantilla);
             plantilla = un_tipo_tramite.plantilla;
             var una_plantilla = '<textarea id="editorTT" name="editorTT">'+un_tipo_tramite.plantilla;
