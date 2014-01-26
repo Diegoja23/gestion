@@ -239,7 +239,9 @@
                     <h3>Lista de típos de trámites</h3>
                     <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Plantilla</th><th>Acciones</th></tr></thead><tbody id="listado_tipos_tramites_de_tipo_gestion"></tbody></table>
                 </div>    
-                
+                <div id="dialog_plantilla_tt" title="Plantilla" style="display:none;">
+                    <textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>
+                </div>
             </div>
         </div> 
     </div>

@@ -1596,13 +1596,16 @@ function traerTipoTramiteElegido(){
         id_tipo_tramite = $($(this).parent().parent().parent().children()[0]).text();
     }
     GLOBAL_id_tipo_tramite = id_tipo_tramite;
-    traerTipoTramitePorId(id_tipo_tramite);
+    var solo_plantilla = false;
+    traerTipoTramitePorId(id_tipo_tramite, solo_plantilla);
 }
 
-function traerTipoTramitePorId(id_tipo_tramite){
+function traerTipoTramitePorId(id_tipo_tramite,solo_plantilla){
     $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "matchear_por_id",id_tipo_tramite: id_tipo_tramite})
-            .done(function(data) {            
-                agregarDivDatosPlantilla();                
+            .done(function(data) {     
+                if(!solo_plantilla){
+                    agregarDivDatosPlantilla();
+                }
                 var un_tipo_tramite = jQuery.parseJSON(data);
                 cargarFormularioTipoTramite(un_tipo_tramite);      
         }, "json");  
@@ -1611,7 +1614,8 @@ function traerTipoTramitePorId(id_tipo_tramite){
 function mostrarDialogPlantilla_tt(){
     var id_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(id_tipo_tramite > 0){
-        traerTipoTramitePorId(id_tipo_tramite);
+        var solo_plantilla = false;
+        traerTipoTramitePorId(id_tipo_tramite, solo_plantilla);
     }
     else{
         cargarFormularioTipoTramite(-2);
@@ -1640,7 +1644,8 @@ function mostrarDialogPlantilla_tg(){
     var id_tipo_tramite = $(this).val();
     //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(id_tipo_tramite > 0){
-        traerTipoTramitePorId(id_tipo_tramite);
+        var solo_plantilla = true;
+        traerTipoTramitePorId(id_tipo_tramite,solo_plantilla);
     }
     else{
         cargarFormularioTipoTramite(-2);

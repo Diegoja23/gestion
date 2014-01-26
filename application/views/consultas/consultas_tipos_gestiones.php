@@ -58,7 +58,9 @@ switch($consulta){
     case "matchear_por_id":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion'); 
         $un_tipo_gestion = traerTipoGestionElegido($id_tipo_gestion);
+        $lista_tipos_tramite = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
         //$un_tramite = seleccionarPorID($id_tramite);
+        //$lista_tipos_tramite = $a;
         if($un_tipo_gestion != false){
             $array_tipo_gestion = $un_tipo_gestion->convertirArray();            
             echo json_encode($array_tipo_gestion);
