@@ -93,7 +93,7 @@ $(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClic
 $(document).on("click",".btn_ver_tipo_gestion",traerTipoGestionElegidaClicIcono);
 $(document).on("click","#btn_nuevo_tipo_gestion_manejo",agregarDivDatosTipoGestion);
 $(document).on("click","#btn_guardar_tipo_gestion2",agregarTipoGestion2);
-$(document).on("click","#btn_eliminar_tipo_gestion",eliminarTipoGestion);
+$(document).on("click",".btn_eliminar_tipo_gestion",eliminarTipoGestion);
  
 
 /*asignar eventos TRÁMITES*/
@@ -958,7 +958,7 @@ function agregarDivDatosTipoGestion(){
 
 function cargarFormularioTipoGestion(un_tipo_gestion){    
     if(un_tipo_gestion != -1){
-        GLOBAL_id_tipo_gestion = un_tipo_gestion.id_tipo_gestion;
+        GLOBAL_id_tipo_gestion = un_tipo_gestion.id_tipos_gestion;
         $("#txt_descripcion_tipo_gestion2").val(un_tipo_gestion.descripcion);        
     }
     else{
@@ -1000,7 +1000,7 @@ function cargarTablaConLista(lista_tipos_gestiones,id_elemento_dom){
     $(id_elemento_dom).html('');
     var item;
     jQuery.each(lista_tipos_gestiones,function(num,data){
-             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td class="dato_mostrado_tipo_gestion">' + data.descripcion + '</td><td class="dato_mostrado_tipo_gestion"><p><i class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
+             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td class="dato_mostrado_tipo_gestion">' + data.descripcion + '</td><td><p><i class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
              $(id_elemento_dom).append(item);
         }
     );
