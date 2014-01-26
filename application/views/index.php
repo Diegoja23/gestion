@@ -7,7 +7,10 @@
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />  
 
 </head>
-
+<?php
+     var_dump($this->session->userdata("id_usuario"));  
+     var_dump($this->session->all_userdata());   
+?>
 <body>
   <div id="main">
     <div id="header">

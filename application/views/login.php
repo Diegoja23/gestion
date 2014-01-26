@@ -9,13 +9,13 @@
 <?php  
             
             $failLogin = false;
-            
+
             if(isset($_POST['email']) && isset($_POST['contrasenia']))
             {  
                 $Usuario = Fachada::getInstancia()->login($_POST['email'], md5($_POST['contrasenia']));
                 
                 if($Usuario)
-                {    
+                {     
                     $usrdata = array(
                                        'id_usuario' => $Usuario->getId(),
                                        'nombre'     => $Usuario->getNombre(),
@@ -24,7 +24,7 @@
                                        'rol'        => $Usuario->getRol(),
                                        'login' => TRUE
                                    );
-                    
+    
                     $this->session->set_userdata($usrdata);   
                     
                     redirect('index', 'refresh');               

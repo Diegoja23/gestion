@@ -96,7 +96,7 @@ function cargarValoresGestion()
     $paramsVG['fecha_inicio']= Common::fromUsrToSqlDate($_POST['fecha_inicio']);
     $paramsVG['fecha_fin']=Common::fromUsrToSqlDate($_POST['fecha_fin']);
     $paramsVG['estado']=$_POST['estado'];
-    $paramsVG['id_usuario']=1;
+    $paramsVG['id_usuario']=$_SESSION["id_usuario"];
     return $paramsVG;
 }
 

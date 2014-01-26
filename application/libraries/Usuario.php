@@ -9,14 +9,14 @@ require_once('Persona.php');
 class Usuario extends Persona
 {
     
-    private $contrasenia;
-    private $rol;
-    private $ci;
+    protected $contrasenia;
+    protected $rol;
+    protected $ci;
     
     /* Constructor */
-    public function __construct($attr = array())
+    public function __construct($params = array())
     {
-        //TODO
+        parent::__construct($params);  
     }
     
     

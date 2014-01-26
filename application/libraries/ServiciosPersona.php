@@ -113,8 +113,9 @@ class ServiciosPersona
                 $paramsUsuario["apellido"] = $u->apellido;    
                 $paramsUsuario["email"] = $u->email;  
                 $paramsUsuario["rol"] = $u->rol;  
-            }             
-            return new Usuario($paramsUsuario);
+            }            
+            $Usuario = new Usuario($paramsUsuario);
+            return $Usuario;
         }
         return false;
 

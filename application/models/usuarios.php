@@ -15,7 +15,6 @@ class Usuarios extends CI_Model
         return false;        
     }
  
-            
 }
 
 ?>
