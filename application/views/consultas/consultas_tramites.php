@@ -17,7 +17,7 @@ switch($consulta){
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
         //define('TIPOS_TRAMITE_BY_GESTION', Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion)); 
-        $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
+        $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByTipoGestion($id_tipo_gestion);
         echo crearSelectTiposTramites($listaTiposTramites);
         break;
 
@@ -273,7 +273,7 @@ La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que ademÃ
 }
 
 function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
-    $todos_los_tipo_tramtie = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);;
+    $todos_los_tipo_tramtie = Fachada::getInstancia()->getTiposTramiteByTipoGestion($id_tipo_gestion);;
     //var_dump($todos_los_tipo_tramtie); die();
     foreach($todos_los_tipo_tramtie as $un_tt){
         if($un_tt->getIdTiposTramite() == $id_tt){

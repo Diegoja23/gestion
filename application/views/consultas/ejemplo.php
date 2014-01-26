@@ -98,7 +98,7 @@
     {        
         echo $t->getDescripcion()."<br>";                
         echo "Tipos de Tramite para gestion ".$t->getDescripcion().": <br>";
-        $tipos = $Fachada->getTiposTramiteByGestion($t->getIdTiposGestion());
+        $tipos = $Fachada->getTiposTramiteByTipoGestion($t->getIdTiposGestion());
         foreach($tipos as $t)        
         {
             echo $t->getDescripcion();

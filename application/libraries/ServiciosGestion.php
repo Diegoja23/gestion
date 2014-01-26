@@ -78,13 +78,13 @@ class ServiciosGestion
         return $arrayGestiones;
     }     
 
-    public function getTiposTramiteByGestion($id_tipos_gestion)
+    public function getTiposTramiteByTipoGestion($id_tipos_gestion)
     {
         $arrayTipos = array();
         $paramsTipo = array();
         $ci =& get_instance(); 
         
-        $data = $ci->tramites->get_tipos_tramite_by_gestion($id_tipos_gestion);        
+        $data = $ci->tramites->get_tipos_tramite_by_tipos_gestion($id_tipos_gestion);        
         foreach($data as $t)
         {
             $paramsTipo["id_tipo_tramite"] = $t->id_tipo_tramite;   

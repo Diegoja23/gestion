@@ -113,9 +113,9 @@ class Fachada
         return $this->sg->getGestiones();
     }    
     
-    public function getTiposTramiteByGestion($id_tipos_gestion)
+    public function getTiposTramiteByTipoGestion($id_tipos_gestion)
     {        
-        return $this->sg->getTiposTramiteByGestion($id_tipos_gestion);
+        return $this->sg->getTiposTramiteByTipoGestion($id_tipos_gestion);
     }      
       
     public function agregarTramite($paramsTramite, $paramsAdjuntos=array())  
