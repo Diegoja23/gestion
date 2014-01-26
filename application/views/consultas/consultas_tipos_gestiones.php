@@ -84,16 +84,42 @@ switch($consulta){
         //echo $file;
         break;*/
         
+   case "modificar_tipo_gestion":        
+        $un_tramite_array = cargarValoresTipoGestion();  
+        $un_tramite_array['id_tramite']=$_POST['id_tramite'];
+        $Tramite = new Tramite(array
+                                    (
+                                        'id_tramite'=>$un_tramite_array['id_tramite'],
+                                        'descripcion'=>$un_tramite_array['descripcion'],
+                                        'fecha_inicio'=>$un_tramite_array['fecha_inicio'],
+                                        'fecha_fin'=>$un_tramite_array['fecha_fin'],
+                                        'estado'=>$un_tramite_array['estado'],
+                                        'id_tipo_tramite'=>$un_tramite_array['id_tipo_tramite'],
+                                        'id_gestion'=>$un_tramite_array['id_gestion'],
+                                        'documento'=>$un_tramite_array['documento'],
+                                    )
+                               );
+        /*$Tramite->setDescripcion($un_tramite_array['descripcion']);
+        $Tramite->setDocumento($un_tramite_array['documento']);*/
+        $retorno = Fachada::getInstancia()->modificarTramite($Tramite);
+        if($retorno){
+            echo 1;
+        }
+        else{
+            echo 0;
+        }
+        break;
+        
    case "eliminar_por_id":
-        $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
+        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');
         //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
         //$borrado = Fachada::getInstancia()->eliminarByID_tipo_tramite($id_tipo_tramite);
        $borrado = true;
         if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$id_tipo_tramite." fue exitosamente borrado!";
+            echo "<strong style='color:green;'>El tipo de gestión número ".$id_tipo_gestion." fue exitosamente borrado!";
         }
         else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$id_tipo_tramite." no se pudo borrar";
+            echo "<strong style='color:red;'>El típo de gestión número ".$id_tipo_gestion." no se pudo borrar";
         }
         break;
     
@@ -112,9 +138,9 @@ function traerTodos(){
 /*function seleccionarPorID($id_tramite)
 {
     return Fachada::getInstancia()->getTramiteById($id_tramite);
-}
+}*/
 
-function cargarValoresTipoTramite(){
+function cargarValoresTipoGestion(){
     $paramsCliente=array();
     if(isset($_POST['id_tipo_tramite'])){
         $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
@@ -126,7 +152,7 @@ function cargarValoresTipoTramite(){
     return $paramsCliente;
 }
 
-function crearSelectTiposTramites($lista){
+/*function crearSelectTiposTramites($lista){
     $retorno = '';
     //$numero = 0;    
     foreach ($lista as $tt) 
