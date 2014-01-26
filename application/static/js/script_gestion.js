@@ -582,11 +582,11 @@ function agregarDivDatosGestion(){
             var id_gestion = -1;
         }
         //$('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
+        cargarFormularioGestion(-1);
         cargarTipoGestion('#combo_tipo_gestion','combo');
         $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
-        $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
-    
-        cargarFormularioGestion(-1);
+        $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});    
+        
 }
         
 function agregarDivListaGestiones(){
@@ -628,11 +628,13 @@ function cargarFormularioGestion(una_gestion){
     }
     else{
         $("#txt_descripcion_tramite").val("");
-        //$("#combo_tipo_tramite option:selected").val("");
+        $("#combo_lista_clientes_elegidos").html("");
+        $("#combo_lista_participantes_elegidos").html("");        
         $("#txt_fecha_inicio").val();
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
-        $("#span_id_tramite").text("un_tramite.id_tramite");
+        //$("#span_id_tramite").text("un_tramite.id_tramite");
+        
     }
 }
 
