@@ -198,6 +198,9 @@
         <div id="div_listado_gestion">            
         </div>
         <div id="div_manejo_tipos_gestiones">
+            <button id="btn_nuevo_tipo_gestion_manejo" type="button" class="btn btn-info btn-xs" value="1">Agregar Tipo de Gestión <i class="fa fa-plus-circle"></i></button>
+            <button id="btn_ver_lista_tipos_gestion_manejo" type="button" class="btn btn-info btn-xs" value="1">Mostrar Lista <i class="fa fa-list"></i></button>
+            <div id="retorno_tipo_gestion2"></div>
             <div id="div_lista_tipos_gestion">
                 <h3>Lista de Tipos de Gestion</h3>
                 <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Acciones</th></tr></thead><tbody id="listado_tipos_de_gestion"></tbody></table>
@@ -207,9 +210,9 @@
                 <h3>Datos de Tipo de Gestión nuevo</h3>
                 <div class="form-group">
                     <label for="txt_descripcion_tipo_gestion2">Descripción</label>
-                    <input type="text" class="form-control" id="txt_descripcion_tipo_gestion" placeholder="Ingresar Descripción">                
+                    <input type="text" class="form-control" id="txt_descripcion_tipo_gestion2" placeholder="Ingresar Descripción">                
                 </div>                        
-                <button type="button" class="btn btn-success btn-sm" id="btn_guardar_tipo_gestion">Guardar Tipo Gestión <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
+                <button type="button" class="btn btn-success btn-sm" id="btn_guardar_tipo_gestion2">Guardar Tipo Gestión <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
             </div>
         </div> 
     </div>

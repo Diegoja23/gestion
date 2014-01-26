@@ -85,10 +85,16 @@ $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
 
 /*asignar eventos TIPOS GESTIONES*/
 $(document).on("click","#btn_agregar_div_tipo_gestion",agregarDivManejoTipoGestion);
+$(document).on("click","#btn_ver_lista_tipos_gestion_manejo",agregarDivManejoTipoGestion);
 $(document).on("click","#btn_volver_a_gestiones",volverAGestiones);
 $(document).on("click","#btn_crear_tipo_gestion",agregarDivCrearTipoGestion);
 $(document).on("click","#btn_guardar_tipo_gestion",agregarTipoGestionGestion);
 $(document).on("click",".dato_mostrado_tipo_gestion",traerTipoGestionElegidaClicNombre);
+$(document).on("click",".btn_ver_tipo_gestion",traerTipoGestionElegidaClicIcono);
+$(document).on("click","#btn_nuevo_tipo_gestion_manejo",agregarDivDatosTipoGestion);
+$(document).on("click","#btn_guardar_tipo_gestion2",agregarTipoGestion2);
+$(document).on("click","#btn_eliminar_tipo_gestion",eliminarTipoGestion);
+ 
 
 /*asignar eventos TRÁMITES*/
 $(document).on("click","#btn_agregar_tramite",agregarDivDatosTramite);
@@ -914,6 +920,9 @@ function agregarDivManejoTipoGestion(){
         $("#btn_mostrar_lista_gestiones").fadeOut(1500); 
         $("#btn_agregar_gestion").fadeOut(1500);
         $("#formulario_agregar_tipo_gestion2").fadeOut(1500);
+        $("#btn_ver_lista_tipos_gestion_manejo").fadeOut(1500);
+        $("#div_lista_tipos_gestion").fadeIn(1500);
+        $("#btn_nuevo_tipo_gestion_manejo").fadeIn(1500);        
         $("#btn_volver_a_gestiones").fadeIn(1500);        
         $("#div_manejo_tipos_gestiones").fadeIn(1500);        
         cargarTipoGestion('#listado_tipos_de_gestion','tabla');
@@ -925,6 +934,8 @@ function agregarDivManejoTipoGestion(){
 
 function agregarDivDatosTipoGestion(){    
         $("#formulario_agregar_tipo_gestion2").fadeIn(1500);
+        $("#btn_ver_lista_tipos_gestion_manejo").fadeIn(1500);
+        $("#btn_nuevo_tipo_gestion_manejo").fadeOut(1500);        
         $("#div_lista_tipos_gestion").fadeOut(1500);     
         cargarFormularioTipoGestion(-1);
 }
@@ -995,6 +1006,32 @@ function agregarTipoGestionGestion(){
     });
 }
 
+function agregarTipoGestion2(){
+    var descripcion_tipo_gestion = $.trim($("#txt_descripcion_tipo_gestion2").val());
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+        .done(function(data) {
+        if(parseInt(data) > 0){       
+            $("#retorno_tipo_gestion2").html("<span style='color:green'></span>");
+            agregarDivManejoTipoGestion();
+        }
+        else{
+            $("#retorno_tipo_gestion2").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
+        }
+    });
+}
+
+function eliminarTipoGestion(){
+    var confirmado = confirm("¿Seguro que desea eliminar el tipo de gestión?");
+    if(confirmado){
+        var id_tipo_gestion = $($(this).parent().parent().parent().children()[0]).text();  
+        $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "eliminar_por_id",id_tipo_gestion: id_tipo_gestion})
+                .done(function(data) {
+                    $("#retorno_tipo_gestion2").html(data);
+            }, "json");
+        $(this).parent().parent().parent().fadeOut(1500);       
+    }
+}
+
 function traerTipoGestionElegidaClicNombre(){
     //var documento = $($(this).parent().children()[2]).text();
     var id_tipo_gestion = $($(this).parent().children()[0]).text();    
@@ -1002,7 +1039,7 @@ function traerTipoGestionElegidaClicNombre(){
 }
 
 
-function traerGestionElegidaClicIcono(){
+function traerTipoGestionElegidaClicIcono(){
     var id_tipo_gestion = $($(this).parent().parent().parent().children()[0]).text();    
     traerTipoGestionElegido(id_tipo_gestion);
 }
