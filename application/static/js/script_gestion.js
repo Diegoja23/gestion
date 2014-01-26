@@ -1028,7 +1028,7 @@ function agregarTipoGestion2(){
     var vid_tipo_gestion = GLOBAL_id_tipo_gestion;
     if(vid_tipo_gestion > 0)
     {
-        $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_tipo_gestion",descripcion: descripcion_tipo_gestion,id_tipo_gestion:vid_tipo_gestion})
+        $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "modificar_tipo_gestion",descripcion: descripcion_tipo_gestion,id_tipo_gestion:vid_tipo_gestion})
             .done(function(data) {
             if(parseInt(data) > 0){       
                 $("#retorno_tipo_gestion2").html("<span style='color:green'>Tipo Gestión modificado exitosamente</span>");
@@ -1041,7 +1041,7 @@ function agregarTipoGestion2(){
     }
     else
     {
-        $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+        $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
             .done(function(data) {
             if(parseInt(data) > 0){       
                 $("#retorno_tipo_gestion2").html("<span style='color:green'>Tipo Gestión agregado exitosamente</span>");
@@ -1052,15 +1052,6 @@ function agregarTipoGestion2(){
             }
         });    	
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
 
 function eliminarTipoGestion(){

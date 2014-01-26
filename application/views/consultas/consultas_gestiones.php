@@ -83,13 +83,7 @@ switch($consulta){
         $retorno = Fachada::getInstancia()->agregarParticipante($un_participante_array);        
         if($retorno) echo $retorno; else echo 0;             
 
-        break;
-    case "agregar_tipo_gestion":
-        $un_TG_array = cargarValoresTipoGestion();                
-        $retorno = Fachada::getInstancia()->agregarTipoGestion($un_TG_array);        
-        if($retorno) echo $retorno; else echo 0;                 
-        break;
-    
+        break;    
     default:        
         break;
 }
@@ -104,13 +98,6 @@ function cargarValoresGestion()
     $paramsVG['estado']=$_POST['estado'];
     $paramsVG['id_usuario']=1;
     return $paramsVG;
-}
-
-function cargarValoresTipoGestion()
-{
-    $paramsTG=array();
-    $paramsTG['descripcion']=$_POST['descripcion'];    
-    return $paramsTG;
 }
 
 function cargarValoresParticipante(){ 

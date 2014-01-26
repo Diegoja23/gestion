@@ -69,7 +69,12 @@ switch($consulta){
         //$un_tramite = Fachada::getInstancia()->getTramiteByID($id_tramite);
         //echo json_encode($un_tramite->convertirArray());
         break;
-    
+   
+   case "agregar_tipo_gestion":
+        $un_TG_array = cargarValoresTipoGestion();                
+        $retorno = Fachada::getInstancia()->agregarTipoGestion($un_TG_array);        
+        if($retorno) echo $retorno; else echo 0;                 
+        break;
    /*case "get_plantilla_por_id_tipo_tramite":
        $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');
@@ -140,16 +145,14 @@ function traerTodos(){
     return Fachada::getInstancia()->getTramiteById($id_tramite);
 }*/
 
-function cargarValoresTipoGestion(){
-    $paramsCliente=array();
-    if(isset($_POST['id_tipo_tramite'])){
-        $paramsCliente['id_tipo_tramite']=intval($_POST['id_tipo_tramite']);
+function cargarValoresTipoGestion()
+{
+    $paramsTG=array();
+    if(isset($_POST['id_tipo_gestion'])){
+        $paramsCliente['id_tipo_gestion']=intval($_POST['id_tipo_gestion']);
     }
-    $paramsCliente['descripcion']=$_POST['descripcion'];
-    $paramsCliente['id_tipos_gestion']= $_POST['tipo_gestion'];
-    $paramsCliente['plantilla']=$_POST['plantilla'];
-
-    return $paramsCliente;
+    $paramsTG['descripcion']=$_POST['descripcion'];    
+    return $paramsTG;
 }
 
 /*function crearSelectTiposTramites($lista){
