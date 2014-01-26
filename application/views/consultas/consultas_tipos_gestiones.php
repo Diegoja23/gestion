@@ -10,18 +10,14 @@ $consulta = $_POST['consulta'];
 if(!isset($_GLOBALS['allTiposTramite']))
     $_GLOBALS['allTiposTramite'] = array();
   */  
-switch($consulta){
-    case "traer_todos":
-        echo crearListaPlantillas(traerTodos());
-        break;
-    
+switch($consulta){   
     case "traer_tipos_gestion":
-        $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
+        $listaTiposGestion = traerTodos();
         //echo crearSelectTiposGestion($listaTiposGestion);
         echo json_encode(convertirArrayLista($listaTiposGestion));
         break; 
     
-    case "traer_tipos_tramite":
+    /*case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
         //define('TIPOS_TRAMITE_BY_GESTION', Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion)); 
         $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
@@ -57,15 +53,15 @@ switch($consulta){
         else{
             echo 0;
         }
-        break;
+        break;*/
         
-    case "traer_por_id":
-        $id_tipo_tramite = cargarUnValor('id_tipo_tramite'); 
-        $un_tipo_tramite = traerTipoTramiteElegido($id_tipo_tramite);
+    case "matchear_por_id":
+        $id_tipo_gestion = cargarUnValor('id_tipo_gestion'); 
+        $un_tipo_gestion = traerTipoGestionElegido($id_tipo_gestion);
         //$un_tramite = seleccionarPorID($id_tramite);
-        if($un_tipo_tramite != false){
-            $array_tramite = $un_tipo_tramite->convertirArray();            
-            echo json_encode($array_tramite);
+        if($un_tipo_gestion != false){
+            $array_tipo_gestion = $un_tipo_gestion->convertirArray();            
+            echo json_encode($array_tipo_gestion);
         }
         else{
             return -1;
@@ -74,7 +70,7 @@ switch($consulta){
         //echo json_encode($un_tramite->convertirArray());
         break;
     
-   case "get_plantilla_por_id_tipo_tramite":
+   /*case "get_plantilla_por_id_tipo_tramite":
        $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');
        $id_tramite = cargarUnValor('id_tramite');
@@ -86,7 +82,7 @@ switch($consulta){
        }       
        //$file = $_FILES['archivo']['name'];
         //echo $file;
-        break;
+        break;*/
         
    case "eliminar_por_id":
         $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
@@ -110,18 +106,10 @@ function cargarUnValor($variable){
 }
 
 function traerTodos(){   
-    $listaTiposTramites=array();
-    $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
-    foreach ($listaTiposGestion as $tg) 
-    {        
-        //$retorno .= '<option value="'.$tg->getIdTiposGestion().'">'.$tg->getDescripcion().'</option>';
-        $listaTiposTramites = array_merge($listaTiposTramites, Fachada::getInstancia()->getTiposTramiteByGestion($tg->getIdTiposGestion()));
-        //$listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByGestion($tg->getIdTiposGestion());
-    }
-    return $listaTiposTramites;
+    return Fachada::getInstancia()->getTiposGestion();
 }
 
-function seleccionarPorID($id_tramite)
+/*function seleccionarPorID($id_tramite)
 {
     return Fachada::getInstancia()->getTramiteById($id_tramite);
 }
@@ -159,22 +147,12 @@ function traerPlantillaDelTipoTraite($id_tt,$id_tipo_gestion){
 function traerPlantillaTramite($id_tramite){
 
     $el_tramite = traerTramiteElegido($id_tramite);
-    /*$textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
-    return $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';*/
     return $el_tramite->getDocumento();
-/*
-    $el_tramite = traerTramiteElegido($id_tramite);
-    //var_dump($el_tramite);    
-    $textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
-    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
-    return $textarea;
-    /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
-<p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
-La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
 
-}
 
-function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
+}*/
+
+/*function traerTipoGestionPorId($id_tt,$id_tipo_gestion){
     $todos_los_tipo_tramtie = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);;
     //var_dump($todos_los_tipo_tramtie); die();
     foreach($todos_los_tipo_tramtie as $un_tt){
@@ -182,7 +160,7 @@ function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
             return $un_tt;
         }
     }
-}
+}*/
 
 
 /*nuevos métodos*/
@@ -196,7 +174,7 @@ function crearSelectTiposGestion($lista){
     return $retorno;
 }
 
-function crearListaPlantillas($lista){
+/*function crearListaPlantillas($lista){
     $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripción</th><th>Tipo de Gestión</th><th>Plantilla</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0; 
     foreach ($lista as $t)
@@ -206,15 +184,16 @@ function crearListaPlantillas($lista){
 
     return $retorno;
     
-}
+}*/
 
-function traerTipoTramiteElegido($id_tipo_tramite){
-    $lista_tipos_tramites = traerTodos();
-    foreach($lista_tipos_tramites as $un_tipo_tramite){
-        if($un_tipo_tramite->getIdTiposTramite() == $id_tipo_tramite){
-            return $un_tipo_tramite;
+function traerTipoGestionElegido($id_tipo_gestion){
+    $lista_tipos_gestion = traerTodos();
+    foreach($lista_tipos_gestion as $un_tipo_gestion){
+        if($un_tipo_gestion->getIdTiposGestion() == $id_tipo_gestion){
+            return $un_tipo_gestion;
         }
     }
+    return false;
 }
 
 function convertirArrayLista($listaTiposGestion){
