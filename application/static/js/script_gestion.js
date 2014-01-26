@@ -118,6 +118,7 @@ $(document).on("click",".dato_mostrado_tipo_tramite",traerTipoTramiteElegido);
 $(document).on("click",".btn_ver_tipo_tramite",traerTipoTramiteElegido); 
 $(document).on("click",".btn_eliminar_tipo_tramite",eliminarTipoTramiteElegido); 
 $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla_tt);
+$(document).on("click","#btn_ver_plantilla_desde_lista",mostrarDialogPlantilla_tg);
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
 $(document).on("click",".btn_tramite_detail",goToTramite);
@@ -1582,6 +1583,35 @@ function traerTipoTramitePorId(id_tipo_tramite){
 
 function mostrarDialogPlantilla_tt(){
     var id_tipo_tramite = GLOBAL_id_tipo_tramite;
+    if(id_tipo_tramite > 0){
+        traerTipoTramitePorId(id_tipo_tramite);
+    }
+    else{
+        cargarFormularioTipoTramite(-2);
+    }
+    $("#dialog_plantilla_tt").dialog({width: 800,modal: true,
+    buttons: {
+                /*DelUser:{ 
+                    class: 'leftButton',
+                    text: 'Guardar',
+                    click : function (){
+                        plantilla = CKEDITOR.instances.editorTT.getData();
+                        guardarTipoTramite();
+                        //alert(planilla_llena);
+                        $(this).dialog("close");
+                    }
+                },*/
+                Aceptar: function () {
+                    plantilla = CKEDITOR.instances.editorTT.getData();
+                    $(this).dialog("close");
+                }
+            }
+        });
+}
+
+function mostrarDialogPlantilla_tg(){
+    var id_tipo_tramite = $(this).val();
+    //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(id_tipo_tramite > 0){
         traerTipoTramitePorId(id_tipo_tramite);
     }
