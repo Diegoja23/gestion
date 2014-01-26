@@ -37,13 +37,14 @@
             <img style="margin-top: 10px;" class="float-right" src="<?=APPPATH?>static/images/admin.jpg" alt="admin picture" />
             <h3>Hola <?php echo $el_usuario['nombre'];?></h3> 
             <br/>
-            <p>
+            <p style="padding-bottom: 0px;">
                 Usuario: <em><?php echo $el_usuario['nombre'].' '.$el_usuario['apellido'];?></em>
             <br/>
                 E-mail: <em><?php echo $el_usuario['email'];?></em>
             <br/>
                 Rol: <em><?php if($el_usuario['rol']==1){echo 'Administrador';} else{if($el_usuario['rol']==2){echo 'Editor';}};?></em>
             </p>
+            <a href="logout" class="btn btn-warning btn-xs float-right">Salir</a>
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
