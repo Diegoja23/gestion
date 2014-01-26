@@ -120,6 +120,9 @@ $(document).on("click",".btn_eliminar_tramite",eliminarTramiteElegido);
 $(document).on("click",".btn_ver_adjunto",ver_adjunto_seleccionado);
 $(document).on("click",".btn_eliminar_adjunto",eliminar_adjunto_seleccionado);
 
+$(document).on("click",".btn_tramite_detail",goToTramite);
+$(document).on("click",".btn_agregar_tramite_gestion",addNewTramiteByGestion);
+
 /*asignar eventos PLANTILLAS*/
 $(document).on("click","#btn_agregar_plantilla",agregarDivDatosPlantilla);
 $(document).on("click","#btn_mostrar_lista_plantillas",agregarDivListaPlantillas);
@@ -130,9 +133,7 @@ $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla
 $(document).on("click","#btn_ver_plantilla_desde_lista",mostrarDialogPlantilla_tg);
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
-$(document).on("click",".btn_tramite_detail",goToTramite);
-$(document).on("click",".btn_agregar_tramite_gestion",addNewTramiteByGestion);
-
+$(document).on("click","#btn_agregar_tipo_tramite_tipo_gestion",addNewTipoTramiteByTipoGestion);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -1008,6 +1009,8 @@ function cargarFormularioTipoGestion(un_tipo_gestion){
     if(un_tipo_gestion != -1){
         GLOBAL_id_tipo_gestion = un_tipo_gestion.id_tipos_gestion;
         $("#txt_descripcion_tipo_gestion2").val(un_tipo_gestion.descripcion);
+        $("#btn_agregar_tipo_tramite_tipo_gestion").val(un_tipo_gestion.id_tipos_gestion); 
+        btn_agregar_tipo_tramite_tipo_gestion
         var lista_tt = un_tipo_gestion.tipos_tramites;
         if(lista_tt.length > 0){
             $('#div_listado_tipos_tramites_de_tipo_gestion_contenedor').fadeIn(1500);
@@ -1019,6 +1022,7 @@ function cargarFormularioTipoGestion(un_tipo_gestion){
     }
     else{
         $("#txt_descripcion_tipo_gestion2").val("");
+        $("#btn_agregar_tipo_tramite_tipo_gestion").val(-1); 
     }
 }
 
@@ -1559,12 +1563,14 @@ function eliminar_adjunto_seleccionado(){
         
 function addNewTipoTramiteByTipoGestion() 
 {
-	$idsBtn = $(this).attr("id");
+    var id_tipo_gestion = $('#btn_agregar_tipo_tramite_tipo_gestion').val();
+	/*$idsBtn = $(this).attr("id");
 	$ids = $idsBtn.split("|");
 	$id_gestion=$ids[0];
 	$id_tipo_gestion=$ids[1];
-	window.location.href="tramites?id_gestion="+$id_gestion+"&id_tipo_gestion="+$id_tipo_gestion;
-	//window.open(globalUrl+"/gestion/tramites?id_tramite="+$id_tramite,'_newtab');
+	window.location.href="tramites?id_gestion="+$id_gestion+"&id_tipo_gestion="+$id_tipo_gestion;*/
+    window.location.href="plantillas?id_tipo_gestion="+id_tipo_gestion;
+        //alert('todavía no está implementada');
 
 }
 
