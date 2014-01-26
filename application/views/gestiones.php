@@ -199,7 +199,7 @@
                     <button type="button" class="btn btn-danger" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button>
                 </div>
                 <div class="float-right">
-                    <button type="button" class="btn btn-success" id="btn_agregar_tramite_gestion">Agregar nuevo trámite <i class="fa fa-file-o"></i></button>
+                    <button type="button" class="btn btn-success btn_agregar_tramite_gestion">Agregar nuevo trámite <i class="fa fa-file-o"></i></button>
                 </div>
                 <div id="retorno_ajax"></div>
             </div>

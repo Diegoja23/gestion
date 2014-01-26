@@ -30,11 +30,20 @@ function iniEventos() {
                 if(listar()){
                     $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});                    
                     $urlVars = parseURLParams(window.location.href);                 
-                    if($urlVars.id > 0)
+                    if($urlVars.id_tramite > 0)
                     {                    	
-                    	$id_tramite=parseInt($urlVars.id);
+                    	$id_tramite=parseInt($urlVars.id_tramite);
 						$(document).ready(traerTramitePorIdUrl($id_tramite));						
                     }
+                    else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
+                    {
+                    	//$('.span_id_gestion').text($urlVars.id_gestion);
+                    	//$('.span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
+                    	
+                    	$(document).ready($('#span_id_gestion').text($urlVars.id_gestion), 
+                    					  $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion),
+											agregarDivDatosTramite());	
+                    }                    	
                     
                     //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
                     $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
@@ -121,6 +130,8 @@ $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
 $(document).on("click",".btn_tramite_detail",goToTramite);
+$(document).on("click",".btn_agregar_tramite_gestion",addNewTramiteByGestion);
+
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -564,9 +575,20 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
 function goToTramite() 
 {
 	$id_tramite = $(this).attr("id");
-	window.location.href="tramites?id="+$id_tramite;
-	
-	console.log("id "+$id_tramite);	
+	//window.location.href="tramites?id_tramite="+$id_tramite;
+	window.open(globalUrl+"/gestion/tramites?id_tramite="+$id_tramite,'_newtab');
+
+}
+
+function addNewTramiteByGestion() 
+{
+	$idsBtn = $(this).attr("id");
+	$ids = $idsBtn.split("|");
+	$id_gestion=$ids[0];
+	$id_tipo_gestion=$ids[1];
+	window.location.href="tramites?id_gestion="+$id_gestion+"&id_tipo_gestion="+$id_tipo_gestion;
+	//window.open(globalUrl+"/gestion/tramites?id_tramite="+$id_tramite,'_newtab');
+
 }
 
 function agregarDivDatosGestionSinLista(){
@@ -588,6 +610,7 @@ function agregarDivDatosGestion(){
         if(id_gestion == undefined){
             var id_gestion = -1;
         }
+     
         //$('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});        
         cargarTipoGestion('#combo_tipo_gestion','combo');
         $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
@@ -627,10 +650,11 @@ function cargarFormularioGestion(una_gestion){
             $("#btn_finalizar_tramite").text("Re-abrir");
             $('.fecha-fin-gestion').css('display','bock');
         }
-        
+        $(".btn_agregar_tramite_gestion").attr("id", una_gestion.id_gestion+"|"+una_gestion.id_tipo_gestion);
         cargarListaTramitesDeGestion(una_gestion.tramites);
         agregarGrupoClientes(una_gestion.grupo.clientes);
         agregarGrupoParticipantes(una_gestion.grupo.participantes);
+       
     }
     else{
         $("#txt_descripcion_gestion").val("");
