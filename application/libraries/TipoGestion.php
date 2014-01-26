@@ -62,6 +62,11 @@ class TipoGestion
              
         return $this->myci->gestiones->modificar_tipo_gestion($fieldsTipoGestion);            
     }
+    
+    public function eliminar()
+    {
+        return $this->myci->gestiones->eliminar_tipo_gestion($this->id_tipos_gestion);   
+    }
             
     public function getById()
     {

@@ -178,6 +178,11 @@ class Fachada
         return $this->sg->modificarTipoGestion($paramsTipoGestion);             
     }    
     
+    public function eliminarTipoGestion($id_tipo_gestion)
+    {
+        return $this->sg->eliminarTipoGestion($id_tipo_gestion);             
+    }      
+    
 
 }
 

@@ -62,9 +62,15 @@ class Gestiones extends CI_Model
     
     function eliminar_gestion($id_gestion)
     {
-        $this->db->delete('gestiones', array('id_gestion' => $id_gestion));      
+        $this->db->delete('gestiones', array('id_gestion' => $id_gestion));
+        return($this->db->affected_rows() > 0);        
     }
                      
+    public function eliminar_tipo_gestion($id_tipo_gestion)                     
+    {
+        $this->db->delete('tipos_gestion', array('id_tipos_gestion' => $id_tipo_gestion));
+        return($this->db->affected_rows() > 0);        
+    }
 }
 
 ?>
