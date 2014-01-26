@@ -70,7 +70,7 @@ $(document).on("click",".btn_ver_adjunto_de_un_cliente",ver_adjunto_seleccionado
 $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_seleccionado_del_cliente);
 
 /*asignar eventos GESTIONES*/
-$(document).on("click","#btn_agregar_gestion",agregarDivDatosGestion);
+$(document).on("click","#btn_agregar_gestion",agregarDivDatosGestionSinLista);
 $(document).on("click","#btn_mostrar_lista_gestiones",agregarDivListaGestiones);
 $(document).on("click","#btn_finalizar_gestion",finalizarGestion);
 $(document).on("click","#btn_agregar_cliente_a_grupo",agregarClienteAGrupoSelector);
@@ -569,24 +569,30 @@ function goToTramite()
 	console.log("id "+$id_tramite);	
 }
 
+function agregarDivDatosGestionSinLista(){
+    $("#div_listado_tramites_de_gestion_contenedor").fadeOut(1500);
+    agregarDivDatosGestion();
+}
+
 function agregarDivDatosGestion(){    
         $("#div_listado_gestion").fadeOut(1500);        
-        $("#btn_agregar_gestion").fadeOut(1500);
-        $("#btn_agregar_div_tipo_gestion").fadeIn(1500);
+        $("#btn_agregar_gestion").fadeOut(1500);               
         $("#div_manejo_tipos_gestiones").fadeOut(1500);
-        $("#btn_mostrar_lista_gestiones").fadeIn(1500);        
+        //$("#div_listado_tramites_de_gestion_contenedor").fadeOut(1500);
+        $("#btn_mostrar_lista_gestiones").fadeIn(1500); 
+        $("#btn_agregar_div_tipo_gestion").fadeIn(1500);
+        $("#div_listado_tramites_de_gestion_vacio").fadeIn(1500); 
         $("#div_formulario_gestion").fadeIn(1500);
         $(".fecha-fin-gestion").css("display","none");
         var id_gestion = GLOBAL_id_gestion;
         if(id_gestion == undefined){
             var id_gestion = -1;
         }
-        //$('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});
-        cargarFormularioGestion(-1);
+        //$('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});        
         cargarTipoGestion('#combo_tipo_gestion','combo');
         $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
         $('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});    
-        
+        cargarFormularioGestion(-1);
 }
         
 function agregarDivListaGestiones(){
@@ -627,10 +633,14 @@ function cargarFormularioGestion(una_gestion){
         agregarGrupoParticipantes(una_gestion.grupo.participantes);
     }
     else{
-        $("#txt_descripcion_tramite").val("");
+        $("#txt_descripcion_gestion").val("");
         $("#combo_lista_clientes_elegidos").html("");
         $("#combo_lista_participantes_elegidos").html("");        
-        $("#txt_fecha_inicio").val();
+        $("#txt_fecha_inicio_gestion").val("");
+        $("#txt_fecha_fin-gestion").val("");
+        $("#btn_finalizar_tramite").text("Finalizar");        
+        $("#listado_tramites_de_gestion").html("");
+        
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
         //$("#span_id_tramite").text("un_tramite.id_tramite");
@@ -659,6 +669,8 @@ function agregarGrupoParticipantes(lista_participantes){
     });
     $('#combo_lista_participantes_elegidos').append(option_agregar);
 }
+
+
 
 function cargarListaTramitesDeGestion(tramites){
     if(tramites.lengt>0){
@@ -1237,7 +1249,8 @@ function traerTramitePorIdUrl(id_tramite){
 }
 
 function traerTramitePorId(id_tramite){
-    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "matchear_por_id",id_tramite: id_tramite})
+    //$.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "matchear_por_id",id_tramite: id_tramite})
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "traer_por_id",id_tramite: id_tramite})    
             .done(function(data) {            
                 agregarDivDatosTramite();                
                 var un_tramite = jQuery.parseJSON(data);

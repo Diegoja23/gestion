@@ -184,16 +184,25 @@
                         <button type="button" class="btn btn-success btn-sm" id="btn_guardar_participante">Guardar participante <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
                     </div>
             </div>
-            
+            <br/>
             <div class="button-group">
-                <button type="button" class="btn btn-success" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
+                <div class="float-left">
+                    <button type="button" class="btn btn-danger" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button>
+                </div>
+                <div class="float-right">
+                    <button type="button" class="btn btn-success" id="btn_agregar_tramite_gestion">Agregar nuevo trámite <i class="fa fa-file-o"></i></button>
+                </div>
+                <div id="retorno_ajax"></div>
             </div>
+            <br/><br/><br/>
             <div id="div_listado_tramites_de_gestion_vacio">
+                <hr/>
                     <h3> - No hay trámites - </h3>
             </div>
             <div id="div_listado_tramites_de_gestion_contenedor">
-                <h3>Lista de trámites</h3>
-                <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody id="listado_tramites_de_gestion"></tbody></table>
+                <hr/>
+                    <h3>Lista de trámites</h3>
+                    <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody id="listado_tramites_de_gestion"></tbody></table>
             </div>  
         </div>
         <div id="div_listado_gestion">            
