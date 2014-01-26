@@ -9,24 +9,26 @@ switch($consulta){
         break;
 
     case "agregar_gestion": 
-        $un_cliente_array = cargarValores();
-        $adjunto_array = cargarAdjunto();
-        
-        if($adjunto_array != -1){
-            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array,$adjunto_array);
-        }
-        else{
-            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array);
-        }
-        if($retorno){
-            /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
-            echo 1;
-        }
-        else{
-            /*echo "El cliente ". $un_cliente['nombre']." no pudo ser ingresado. Verifique los datos<br>"; */
-            echo 0;
-        }
-        break;
+    $paramsGestion = cargarValoresGestion();      
+          
+    $lista_id_clientes=$_POST['lista_id_clientes'];
+    $lista_id_participantes=$_POST['lista_id_participantes'];      
+      
+    $clientes =array();
+    $participantes=array();
+    
+    foreach($lista_id_clientes as $id_persona)    
+        array_push($clientes, new Cliente(array('id_persona' => $id_persona)));    
+    foreach($lista_id_participantes as $id_persona)    
+        array_push($participantes, new Participante(array('id_persona' => $id_persona)));     
+
+    $grupo = new Grupo(array('descripcion' => "Descripcion de grupo es opcional",
+                             'clientes' => $clientes,
+                             'participantes' => $participantes));
+                                 
+    echo Fachada::getInstancia()->agregarGestion($paramsGestion, $grupo);        
+
+    break;
         
     case "matchear_por_id":
         
@@ -90,6 +92,18 @@ switch($consulta){
     
     default:        
         break;
+}
+
+function cargarValoresGestion()
+{
+    $paramsVG=array();
+    $paramsVG['descripcion']=$_POST['descripcion'];
+    $paramsVG['id_tipo_gestion']=$_POST['tipo_gestion'];
+    $paramsVG['fecha_inicio']= Common::fromUsrToSqlDate($_POST['fecha_inicio']);
+    $paramsVG['fecha_fin']=Common::fromUsrToSqlDate($_POST['fecha_fin']);
+    $paramsVG['estado']=$_POST['estado'];
+    $paramsVG['id_usuario']=1;
+    return $paramsVG;
 }
 
 function cargarValoresTipoGestion()

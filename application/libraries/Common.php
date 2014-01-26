@@ -39,6 +39,16 @@ class Common
 
    }
 
+   public static function fromUsrToSqlDate($date, $delimiter = "-")
+   {
+       if($date != NULL && $date != '')
+       {
+           $dateUsrExp = explode("/", $date);
+           return $dateUsrExp[2].$delimiter.$dateUsrExp[1].$delimiter.$dateUsrExp[0];           
+       }
+       return NULL;
+
+   }
 
     public static function shortenText(&$source_text, $word_count) 
     { 
