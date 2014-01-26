@@ -90,23 +90,15 @@ switch($consulta){
         break;*/
         
    case "modificar_tipo_gestion":        
-        $un_tramite_array = cargarValoresTipoGestion();  
-        $un_tramite_array['id_tramite']=$_POST['id_tramite'];
-        $Tramite = new Tramite(array
+        $un_TG_array = cargarValoresTipoGestion(); 
+        $un_tipo_gestion = new TipoGestion(array
                                     (
-                                        'id_tramite'=>$un_tramite_array['id_tramite'],
-                                        'descripcion'=>$un_tramite_array['descripcion'],
-                                        'fecha_inicio'=>$un_tramite_array['fecha_inicio'],
-                                        'fecha_fin'=>$un_tramite_array['fecha_fin'],
-                                        'estado'=>$un_tramite_array['estado'],
-                                        'id_tipo_tramite'=>$un_tramite_array['id_tipo_tramite'],
-                                        'id_gestion'=>$un_tramite_array['id_gestion'],
-                                        'documento'=>$un_tramite_array['documento'],
+                                        'id_tipos_gestion'=>$un_TG_array['id_tipo_gestion'],
+                                        'descripcion'=>$un_TG_array['descripcion']                                       
                                     )
                                );
-        /*$Tramite->setDescripcion($un_tramite_array['descripcion']);
-        $Tramite->setDocumento($un_tramite_array['documento']);*/
-        $retorno = Fachada::getInstancia()->modificarTramite($Tramite);
+                             //  var_dump($un_tipo_gestion);die();
+        $retorno = Fachada::getInstancia()->modificarTipoGestion($un_tipo_gestion);
         if($retorno){
             echo 1;
         }
@@ -117,9 +109,7 @@ switch($consulta){
         
    case "eliminar_por_id":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');
-        //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
-        //$borrado = Fachada::getInstancia()->eliminarByID_tipo_tramite($id_tipo_tramite);
-       $borrado = true;
+       $borrado = Fachada::getInstancia()->eliminarTipoGestion($id_tipo_gestion);
         if($borrado){
             echo "<strong style='color:green;'>El tipo de gestión número ".$id_tipo_gestion." fue exitosamente borrado!";
         }
@@ -149,7 +139,7 @@ function cargarValoresTipoGestion()
 {
     $paramsTG=array();
     if(isset($_POST['id_tipo_gestion'])){
-        $paramsCliente['id_tipo_gestion']=intval($_POST['id_tipo_gestion']);
+        $paramsTG['id_tipo_gestion']=intval($_POST['id_tipo_gestion']);
     }
     $paramsTG['descripcion']=$_POST['descripcion'];    
     return $paramsTG;
