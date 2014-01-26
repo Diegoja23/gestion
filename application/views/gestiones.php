@@ -6,7 +6,9 @@
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
 
 </head>
-
+<?php
+     $el_usuario = $this->session->all_userdata();
+?>
 <body>
   <div id="main">
     <div id="header">
@@ -31,11 +33,17 @@
       <div id="sidebar_container">
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
-        <!-- insert your sidebar items here -->
-        <h3>Latest News</h3>
-        <h4>What's the News?</h4>
-        <h5>1st July 2011</h5>
-        <p>Put your latest news item here, or anything else you would like in the sidebar!<br /><a href="#">Read more</a></p>
+            <!-- insert your sidebar items here -->
+            <img style="margin-top: 10px;" class="float-right" src="<?=APPPATH?>static/images/admin.jpg" alt="admin picture" />
+            <h3>Hola <?php echo $el_usuario['nombre'];?></h3> 
+            <br/>
+            <p>
+                Usuario: <em><?php echo $el_usuario['nombre'].' '.$el_usuario['apellido'];?></em>
+            <br/>
+                E-mail: <em><?php echo $el_usuario['email'];?></em>
+            <br/>
+                Rol: <em><?php if($el_usuario['rol']==1){echo 'Administrador';} else{if($el_usuario['rol']==2){echo 'Editor';}};?></em>
+            </p>
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
