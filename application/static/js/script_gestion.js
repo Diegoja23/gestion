@@ -127,6 +127,7 @@ $(document).on("click",".dato_mostrado_tipo_tramite",traerTipoTramiteElegido);
 $(document).on("click",".btn_ver_tipo_tramite",traerTipoTramiteElegido); 
 $(document).on("click",".btn_eliminar_tipo_tramite",eliminarTipoTramiteElegido); 
 $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla_tt);
+$(document).on("click","#btn_ver_plantilla_desde_lista",mostrarDialogPlantilla_tg);
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
 $(document).on("click",".btn_tramite_detail",goToTramite);
@@ -593,6 +594,7 @@ function addNewTramiteByGestion()
 
 function agregarDivDatosGestionSinLista(){
     $("#div_listado_tramites_de_gestion_contenedor").fadeOut(1500);
+    $("#btn_agregar_tramite_gestion").fadeOut(1500);    
     agregarDivDatosGestion();
 }
 
@@ -632,7 +634,8 @@ function agregarDivListaGestiones(){
     cargarFormularioGestion(-1);
 }
 
-function cargarFormularioGestion(una_gestion){
+function cargarFormularioGestion(una_gestion){    
+    $("#retorno_gestion").html("");
     if(una_gestion != -1){
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
         //cargarTipoGestion('#combo_tipo_gestion','combo');
@@ -650,7 +653,10 @@ function cargarFormularioGestion(una_gestion){
             $("#btn_finalizar_tramite").text("Re-abrir");
             $('.fecha-fin-gestion').css('display','bock');
         }
+
         $(".btn_agregar_tramite_gestion").attr("id", una_gestion.id_gestion+"|"+una_gestion.id_tipo_gestion);
+        $(".btn_agregar_tramite_gestion").fadeIn(1500); 
+
         cargarListaTramitesDeGestion(una_gestion.tramites);
         agregarGrupoClientes(una_gestion.grupo.clientes);
         agregarGrupoParticipantes(una_gestion.grupo.participantes);
@@ -882,6 +888,7 @@ function guardarGestion(){
                         var retorno = parseInt(data);
                         if(retorno>0){
                             $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
+                            $("#btn_agregar_tramite_gestion").fadeIn(1500);                            
                             $("#btn_mostrar_lista_gestiones").trigger("click");
                         }
                         else{
@@ -1603,6 +1610,35 @@ function traerTipoTramitePorId(id_tipo_tramite){
 
 function mostrarDialogPlantilla_tt(){
     var id_tipo_tramite = GLOBAL_id_tipo_tramite;
+    if(id_tipo_tramite > 0){
+        traerTipoTramitePorId(id_tipo_tramite);
+    }
+    else{
+        cargarFormularioTipoTramite(-2);
+    }
+    $("#dialog_plantilla_tt").dialog({width: 800,modal: true,
+    buttons: {
+                /*DelUser:{ 
+                    class: 'leftButton',
+                    text: 'Guardar',
+                    click : function (){
+                        plantilla = CKEDITOR.instances.editorTT.getData();
+                        guardarTipoTramite();
+                        //alert(planilla_llena);
+                        $(this).dialog("close");
+                    }
+                },*/
+                Aceptar: function () {
+                    plantilla = CKEDITOR.instances.editorTT.getData();
+                    $(this).dialog("close");
+                }
+            }
+        });
+}
+
+function mostrarDialogPlantilla_tg(){
+    var id_tipo_tramite = $(this).val();
+    //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(id_tipo_tramite > 0){
         traerTipoTramitePorId(id_tipo_tramite);
     }

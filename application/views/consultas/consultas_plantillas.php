@@ -203,7 +203,7 @@ function crearListaPlantillas($lista){
         $tipo_gestion = new TipoGestion(array('id_tipos_gestion' => $t->getIdTipoGestion()));
         //$tipo_gestion->setIdTiposGestion();
         $tipo_gestion->getById();
-        $retorno .= '<tr><td class="dato_mostrado_tipo_tramite">'.$t->getIdTiposTramite().'</td><td id="'.$t->getIdTiposTramite().'" class="dato_mostrado_tipo_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.$tipo_gestion->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.'plantilla'.'</td><td><p><i class="btn_ver_tipo_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_tipo_tramite">'.$t->getIdTiposTramite().'</td><td id="'.$t->getIdTiposTramite().'" class="dato_mostrado_tipo_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tipo_tramite">'.$tipo_gestion->getDescripcion().'</td><td>'.'<button id="btn_ver_plantilla_desde_lista" type="button" class="btn btn-success btn-xs" value="'.$t->getIdTiposTramite().'">Ver</button>'.'</td><td><p><i class="btn_ver_tipo_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
     }   
 
     return $retorno;

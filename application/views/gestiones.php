@@ -231,7 +231,15 @@
                     <label for="txt_descripcion_tipo_gestion2">Descripción</label>
                     <input type="text" class="form-control" id="txt_descripcion_tipo_gestion2" placeholder="Ingresar Descripción">                
                 </div>                        
-                <button type="button" class="btn btn-success btn-sm" id="btn_guardar_tipo_gestion2">Guardar Tipo Gestión <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_participante_gestion"></div>
+                <button type="button" class="btn btn-success btn-sm" id="btn_guardar_tipo_gestion2">Guardar Tipo Gestión <i class="fa fa-floppy-o"></i></button>
+                <div id="retorno_ajax_manejo_tipo_gestion"></div>
+                
+                <div id="div_listado_tipos_tramites_de_tipo_gestion_contenedor">
+                    <hr/>
+                    <h3>Lista de típos de trámites</h3>
+                    <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Plantilla</th><th>Acciones</th></tr></thead><tbody id="listado_tipos_tramites_de_tipo_gestion"></tbody></table>
+                </div>    
+                
             </div>
         </div> 
     </div>
