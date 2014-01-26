@@ -800,20 +800,34 @@ function borrarElementoDeSelector(id_elemento, lista){
 }
 
 function guardarGestion(){
+	
     var vdescripcion = $("#txt_descripcion_gestion").val();
     var vtipo_gestion = $("#combo_tipo_gestion").val();
     var vfecha_inicio = $("#txt_fecha_inicio_gestion").val();    
-    var vfecha_fin = -1;
+    var vfecha_fin = null;
+    var vestado=0;
     if($("#btn_finalizar_gestion").text()== "Re-abrir"){      
             vfecha_fin = $("#txt_fecha_fin_gestion").val();
     }
-    var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
     
+	var lista_id_clientes = new Array();
+    var lista_id_participantes = new Array();
+    
+	  var cId=document.getElementById("combo_lista_clientes_elegidos");
+	  for (var i = 0; i < cId.options.length; i++) {
+	  		lista_id_clientes[i] = cId.options[i].value;		          
+	  }    
+    
+	  var pId=document.getElementById("combo_lista_participantes_elegidos");
+	  for (var i = 0; i < pId.options.length; i++) {
+	  		lista_id_participantes[i] = pId.options[i].value;
+	  }
+   
     var vid_gestion = GLOBAL_id_gestion;
+     
     if(vdescripcion != ''){
-        if(vid_gestion > 0){
-            console.log("aquí se modifica la gestión");
-            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, lista_clientes_seleccionados:lista_clientes_seleccionados})
+        if(vid_gestion > 0){           
+            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, estado:vestado, lista_id_clientes:lista_id_clientes, lista_id_participantes:lista_id_participantes})
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
@@ -825,14 +839,15 @@ function guardarGestion(){
             },"json");      	
         }
         else{
-            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_gestion", descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, lista_clientes_seleccionados:lista_clientes_seleccionados})
+            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_gestion", descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, estado:vestado, lista_id_clientes:lista_id_clientes, lista_id_participantes:lista_id_participantes})
                     .done(function(data) {            
                         var retorno = parseInt(data);
-                        if(retorno==1){
-                            $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
+                        if(retorno>0){
+                            $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
+                            $("#btn_mostrar_lista_gestiones").trigger("click");
                         }
                         else{
-                            $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>¡La gestión no fue agregada!</strong></span>");
+                            $("#retorno_gestion").html("<span style='color:red'><strong>¡La gestión no fue agregada!</strong></span>");
                         }
             });    	
         }

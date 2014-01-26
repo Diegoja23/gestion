@@ -265,6 +265,11 @@ class ServiciosGestion
             return false;                 
     }
      
+    public function eliminarTipoGestion($id_tipo_gestion)
+    {
+        $TipoGestion = new TipoGestion(array('id_tipos_gestion' => $id_tipo_gestion));
+        return $TipoGestion->eliminar();  
+    }       
             
 }
 

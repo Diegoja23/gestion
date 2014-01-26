@@ -66,6 +66,7 @@
         
         <div id="div_formulario_gestion">
             <h3>Datos de gestión</h3>
+            <div id="retorno_gestion"></div>
             <div class="form-group">
                 <label for="txt_descripcion_gestion">Descripción</label>
                 <input type="text" class="form-control" id="txt_descripcion_gestion" placeholder="Ingresar Descripción">                
