@@ -54,13 +54,19 @@ function iniEventos() {
 					urlParams='0';
 				}
                     var urlVars = parseURLParams(window.location.href);                 
-                    if(urlVars.id_tipo_gestion > 0){                    	
-                    	var id_tipo_gestion =parseInt(urlVars.id_tipo_gestion);
-                        traerTipoTramiteElegidoPorId(id_tipo_gestion);
+                    if(urlVars.id_tipo_tramite > 0){                    	
+                    	var id_tipo_tramite =parseInt(urlVars.id_tipo_tramite);
+                        traerTipoTramiteElegidoPorId(id_tipo_tramite);
 						//$(document).ready(traerTramitePorIdUrl($id_tramite));						
                     }
                     else{
-                        $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                        if(urlVars.id_tipo_gestion > 0){ 
+                            agregarDivDatosPlantilla();
+                        }
+                        else{
+                            $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                        
+                        }
                     }
                     
                     //$(".subir_archivo").click(subirElArchivo);
@@ -144,6 +150,8 @@ $(document).on("click","#btn_ver_plantilla_desde_lista",mostrarDialogPlantilla_t
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
 $(document).on("click","#btn_agregar_tipo_tramite_tipo_gestion",addNewTipoTramiteByTipoGestion);
+$(document).on("click",".dato_mostrado_tipo_tramite_TG",traerTipoTramiteByTipoGestion);
+
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -1044,7 +1052,7 @@ function cargarFormularioTipoGestion(un_tipo_gestion){
 function llenarListaTiposTramiteDeTipoGestion(lista_tt){
     var item='';
     jQuery.each(lista_tt,function(num,data){
-             item = '<tr><td class="dato_mostrado_tipo_tramite_TG">' + data.id_tipo_tramite + '</td><td id="' + data.id_tipo_tramite + '" class="dato_mostrado_tipo_tramite">' + data.descripcion + '</td><td><button id="btn_ver_plantilla_desde_lista" type="button" class="btn btn-success btn-xs" value="' + data.id_tipo_tramite + '">Ver</button></td><td><p><i class="btn_ver_tipo_tramite_TG fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+             item = '<tr><td class="dato_mostrado_tipo_tramite_TG">' + data.id_tipo_tramite + '</td><td id="' + data.id_tipo_tramite + '" class="dato_mostrado_tipo_tramite_TG">' + data.descripcion + '</td><td><button id="btn_ver_plantilla_desde_lista" type="button" class="btn btn-success btn-xs" value="' + data.id_tipo_tramite + '">Ver</button></td><td><p><i class="btn_ver_tipo_tramite_TG fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
              $('#listado_tipos_tramites_de_tipo_gestion').append(item);
         }
     );
@@ -1579,7 +1587,17 @@ function eliminar_adjunto_seleccionado(){
 function addNewTipoTramiteByTipoGestion() 
 {
     var id_tipo_gestion = $('#btn_agregar_tipo_tramite_tipo_gestion').val();
-    window.location.href="plantillas?id_tipo_gestion="+id_tipo_gestion;
+    window.location.href="plantillas?id_tipo_gestion="+id_tipo_gestion+"&id_tipo_tramite=-1";
+}
+
+function traerTipoTramiteByTipoGestion(){
+    var id_tipo_tramite = $(this).parent().children()[1].id;
+    //if(id_tipo_tramite !== ""){
+    if(!id_tipo_tramite){
+        id_tipo_tramite = $($(this).parent().parent().parent().children()[0]).text();
+    }
+    var id_tipo_gestion = $('#btn_agregar_tipo_tramite_tipo_gestion').val();
+    window.location.href="plantillas?id_tipo_gestion="+id_tipo_gestion+"&id_tipo_tramite="+id_tipo_tramite;
 }
 
 function agregarDivDatosPlantilla(){
