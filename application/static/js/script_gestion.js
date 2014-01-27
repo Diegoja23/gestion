@@ -735,11 +735,14 @@ function finalizarGestion(){
             $(".fecha-fin-gestion").fadeIn(1500);
             var myDate = new Date();
             var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();
-            $( ".fecha-fin-gestion" ).val(prettyDate);
+           // $( ".fecha-fin-gestion" ).val(prettyDate);
+             $("#txt_fecha_fin_gestion").val(prettyDate);
+            
             //$( ".fecha-fin" ).datepicker('setDate', 'today');
         }
         else{
             $("#btn_finalizar_gestion").text("Finalizar");
+            $("#txt_fecha_fin_gestion").val(null);
             $(".fecha-fin-gestion").fadeOut(1500);
         }
          
@@ -846,10 +849,11 @@ function guardarGestion(){
     var vdescripcion = $("#txt_descripcion_gestion").val();
     var vtipo_gestion = $("#combo_tipo_gestion").val();
     var vfecha_inicio = $("#txt_fecha_inicio_gestion").val();    
-    var vfecha_fin = null;
+    var vfecha_fin = $("#txt_fecha_fin_gestion").val();
+   
     var vestado=0;
-    if($("#btn_finalizar_gestion").text()== "Re-abrir"){      
-            vfecha_fin = $("#txt_fecha_fin_gestion").val();
+    if(vfecha_fin != ''){      
+            vestado = 1;
     }
     
 	var lista_id_clientes = new Array();
