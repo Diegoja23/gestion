@@ -53,8 +53,8 @@ class ServiciosGestion
         {                            
             $paramsGestion["id_gestion"] = $g->id_gestion;   
             $paramsGestion["descripcion"] = $g->descripcion;    
-            $paramsGestion["fecha_inicio"] = $g->fecha_inicio;    
-            $paramsGestion["fecha_fin"] = $g->fecha_fin;
+            $paramsGestion["fecha_inicio"] = Common::fromSqlToUsrDate($g->fecha_inicio);    
+            $paramsGestion["fecha_fin"] = Common::fromSqlToUsrDate($g->fecha_fin); 
             $paramsGestion["estado"] = $g->estado;
             $paramsGestion["id_tipo_gestion"] = $g->id_tipo_gestion;
             $paramsGestion["id_grupo"] = $g->id_grupo;
