@@ -23,7 +23,7 @@
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
           <li class="current" ><a href="index">Inicio</a></li>
-          <li><a href="clientes">Clientes</a></li>
+          <li><a href="personas">Personas</a></li>
           <li><a href="gestiones">Gestiones</a></li>
           <li><a href="tramites">Trámites</a></li>
           <li><a href="plantillas">Plantillas</a></li>
