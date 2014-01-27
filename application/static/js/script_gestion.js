@@ -663,6 +663,7 @@ function agregarDivListaGestiones(){
 function cargarFormularioGestion(una_gestion){    
     $("#retorno_gestion").html("");
     if(una_gestion != -1){
+    	$("#txt_id_gestion").val(una_gestion.id_gestion);
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
         //cargarTipoGestion('#combo_tipo_gestion','combo');
         setTimeout(function(){            
@@ -685,6 +686,8 @@ function cargarFormularioGestion(una_gestion){
         $(".btn_agregar_tramite_gestion").attr("id", una_gestion.id_gestion+"|"+una_gestion.id_tipo_gestion);
         $(".btn_agregar_tramite_gestion").fadeIn(1500); 
 
+		$("#txt_id_grupo").val(una_gestion.grupo.id_grupo);
+		
         cargarListaTramitesDeGestion(una_gestion.tramites);
         agregarGrupoClientes(una_gestion.grupo.clientes);
         agregarGrupoParticipantes(una_gestion.grupo.participantes);
@@ -869,7 +872,7 @@ function borrarElementoDeSelector(id_elemento, lista){
 }
 
 function guardarGestion(){
-	
+	//var vid_gestion = $("#txt_id_gestion").val();
     var vdescripcion = $("#txt_descripcion_gestion").val();
     var vtipo_gestion = $("#combo_tipo_gestion").val();
     var vfecha_inicio = $("#txt_fecha_inicio_gestion").val();    
@@ -880,6 +883,7 @@ function guardarGestion(){
             vestado = 1;
     }
     
+    var vid_grupo = $("#txt_id_grupo").val();
 	var lista_id_clientes = new Array();
     var lista_id_participantes = new Array();
     
@@ -897,14 +901,15 @@ function guardarGestion(){
      
     if(vdescripcion != ''){
         if(vid_gestion > 0){           
-            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, estado:vestado, lista_id_clientes:lista_id_clientes, lista_id_participantes:lista_id_participantes})
+            $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, estado:vestado, id_grupo:vid_grupo, lista_id_clientes:lista_id_clientes, lista_id_participantes:lista_id_participantes})
                     .done(function(data) {            
                         var retorno = parseInt(data);
-                        if(retorno>0){
+                        if(retorno==1){
                             $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue modificada exitosamente!</strong></span>");
                             $("#btn_mostrar_lista_gestiones").trigger("click");
                         }
                         else{
+                        	console.log(retorno);
                             $("#retorno_gestion").html("<span style='color:red'><strong>¡La gestión no fue modificada, revise los datos ingresados!</strong></span>");
                         }
             },"json");      	

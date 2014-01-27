@@ -12,13 +12,13 @@ switch($consulta){
     $paramsGestion = cargarValoresGestion();      
           
     $lista_id_clientes=$_POST['lista_id_clientes'];
-    $lista_id_participantes=$_POST['lista_id_participantes'];      
+    $lista_id_participantes = (isset($_POST['lista_id_participantes'])) ? $_POST['lista_id_participantes'] : array();        
       
     $clientes =array();
     $participantes=array();
     
     foreach($lista_id_clientes as $id_persona)    
-        array_push($clientes, new Cliente(array('id_persona' => $id_persona)));    
+        array_push($clientes, new Cliente(array('id_persona' => $id_persona)));     
     foreach($lista_id_participantes as $id_persona)    
         array_push($participantes, new Participante(array('id_persona' => $id_persona)));     
 
@@ -31,20 +31,21 @@ switch($consulta){
     break;
     
     case "modificar_gestion":
-        $paramsGestion = cargarValoresGestion();      
-              
+        $paramsGestion = cargarValoresGestion();          
+        $id_grupo=$_POST['id_grupo'];              
         $lista_id_clientes=$_POST['lista_id_clientes'];
-        $lista_id_participantes=$_POST['lista_id_participantes'];      
-          
+        $lista_id_participantes = (isset($_POST['lista_id_participantes'])) ? $_POST['lista_id_participantes'] : array();     
+       
         $clientes =array();
         $participantes=array();
         
         foreach($lista_id_clientes as $id_persona)    
-            array_push($clientes, new Cliente(array('id_persona' => $id_persona)));    
+            array_push($clientes, new Cliente(array('id_persona' => $id_persona)));  
         foreach($lista_id_participantes as $id_persona)    
             array_push($participantes, new Participante(array('id_persona' => $id_persona)));     
     
-        $grupo = new Grupo(array('descripcion' => "Descripcion de grupo es opcional",
+        $grupo = new Grupo(array('id_grupo' => $id_grupo,
+                                 'descripcion' => "Descripcion de grupo es opcional",
                                  'clientes' => $clientes,
                                  'participantes' => $participantes));       
         echo Fachada::getInstancia()->modificarGestion($paramsGestion, $grupo);                                    
@@ -112,12 +113,14 @@ switch($consulta){
 function cargarValoresGestion()
 {
     $paramsVG=array();
+    $paramsVG['id_gestion'] = (isset($_POST['id_gestion'])) ? $_POST['id_gestion'] : null;     
     $paramsVG['descripcion']=$_POST['descripcion'];
     $paramsVG['id_tipo_gestion']=$_POST['tipo_gestion'];
     $paramsVG['fecha_inicio']= Common::fromUsrToSqlDate($_POST['fecha_inicio']);
     $paramsVG['fecha_fin']=Common::fromUsrToSqlDate($_POST['fecha_fin']);
     $paramsVG['estado']=$_POST['estado'];
     $paramsVG['id_usuario']=$_SESSION["id_usuario"];
+    $paramsVG['id_grupo']=(isset($_POST['id_grupo'])) ? $_POST['id_grupo'] : null;  
     return $paramsVG;
 }
 
