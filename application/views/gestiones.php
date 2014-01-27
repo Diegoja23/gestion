@@ -238,9 +238,8 @@
                 
                 <br /><br />
                 <div id="retorno_ajax_manejo_tipo_gestion"></div>
-                
-                <div id="div_listado_tipos_tramites_de_tipo_gestion_contenedor">                    
-                    <hr/>                    
+                <hr/> 
+                <div id="div_listado_tipos_tramites_de_tipo_gestion_contenedor">
                     <h3>Lista de típos de trámites</h3>
                     <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Plantilla</th><th>Acciones</th></tr></thead><tbody id="listado_tipos_tramites_de_tipo_gestion"></tbody></table>
                 </div>
