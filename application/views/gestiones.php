@@ -77,6 +77,7 @@
             <h3>Datos de gestión</h3>
             <div id="retorno_gestion"></div>
             <div class="form-group">
+                <input type="hidden" class="form-control datepicker" id="txt_id_gestion" >    
                 <label for="txt_descripcion_gestion">Descripción</label>
                 <input type="text" class="form-control" id="txt_descripcion_gestion" placeholder="Ingresar Descripción">                
             </div>
@@ -112,9 +113,10 @@
             <div class="form-group" id="div_estado_gestion">
                 <label for="lbl_esado_tramite">Estado</label> <div style="display: inline-block;" id="gestion_estado"><span style='color:green'><strong>En curso</strong></span></div> <br/><br/>
                 <button id="btn_finalizar_gestion" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
-                </select>                
+                </select>                                
             </div><br/>    
             <div id="selectores_grupo_clientes">
+                <input type="hidden" class="form-control datepicker" id="txt_id_grupo" >    
                 <div class="form-group float-left">
                     <label for="lbl_lista_clientes">Seleccionar grupo</label>  <br />              
                     <select multiple="5" class="form-control select_sumar_quitar_cliente" id='combo_lista_personas'>
