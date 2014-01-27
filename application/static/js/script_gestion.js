@@ -36,10 +36,7 @@ function iniEventos() {
 						$(document).ready(traerTramitePorIdUrl($id_tramite));						
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
-                    {
-                    	//$('.span_id_gestion').text($urlVars.id_gestion);
-                    	//$('.span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
-                    	
+                    {                    	
                     	$(document).ready($('#span_id_gestion').text($urlVars.id_gestion), 
                     					  $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion),
 											agregarDivDatosTramite());	
