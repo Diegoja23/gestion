@@ -117,7 +117,7 @@ class Gestion
         $object_vars=get_object_vars($this);       
         $fieldsGestion = array();
         foreach($object_vars as $key => $value)        
-            if($this->attNotDistinctToTable($key) && $att != 'id_tipo_gestion')//el tipo de gestion no es modificable ya que de este dependen la lista de tramites
+            if($this->attNotDistinctToTable($key) && $key != 'id_tipo_gestion')//el tipo de gestion no es modificable ya que de este dependen la lista de tramites
                 $fieldsGestion[$key] = $value;
              
         if(!empty($this->grupo))             

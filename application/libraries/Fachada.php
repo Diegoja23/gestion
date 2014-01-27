@@ -183,7 +183,11 @@ class Fachada
         return $this->sg->eliminarTipoGestion($id_tipo_gestion);             
     }      
     
-
+    public function eliminarTipoTramite($id_tipo_tramite)
+    {
+        return $this->sg->eliminarTipoTramite($id_tipo_tramite);             
+    }          
+        
 }
 
 ?>

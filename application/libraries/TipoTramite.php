@@ -71,6 +71,11 @@
         return $this->myci->tramites->modificar_tipo_tramite($fieldsTipoTramite);                           
     }     
     
+    public function eliminar()
+    {
+        return $this->myci->tramites->eliminar_tipo_tramite($this->id_tipo_tramite);   
+    }
+        
     public function attNotDistinctToTable($att)
     {
         return ($att != 'myci');
