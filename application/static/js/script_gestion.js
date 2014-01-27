@@ -61,7 +61,11 @@ function iniEventos() {
                     }
                     else{
                         if(urlVars.id_tipo_gestion > 0){ 
-                            agregarDivDatosPlantilla();
+                            var id_tipo_gestion =parseInt(urlVars.id_tipo_gestion);
+                            agregarDivDatosPlantilla();                            
+                            setTimeout(function(){            
+                                seleccionarComboConValor("#combo_tipo_gestion_pl",id_tipo_gestion);
+                            }, 1000);
                         }
                         else{
                             $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
@@ -151,6 +155,8 @@ $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
 $(document).on("click","#btn_agregar_tipo_tramite_tipo_gestion",addNewTipoTramiteByTipoGestion);
 $(document).on("click",".dato_mostrado_tipo_tramite_TG",traerTipoTramiteByTipoGestion);
+$(document).on("click",".btn_ver_tipo_tramite_TG",traerTipoTramiteByTipoGestion);
+ 
 
 
 
