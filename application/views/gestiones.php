@@ -198,9 +198,7 @@
                 <div class="float-left">
                     <button type="button" class="btn btn-danger" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button>
                 </div>
-                <div class="float-right">
-                    <button type="button" class="btn btn-success btn_agregar_tramite_gestion">Agregar nuevo trámite <i class="fa fa-file-o"></i></button>
-                </div>
+                
                 <div id="retorno_ajax"></div>
             </div>
             <br/><br/><br/>
@@ -212,7 +210,11 @@
                 <hr/>
                     <h3>Lista de trámites</h3>
                     <table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody id="listado_tramites_de_gestion"></tbody></table>
-            </div>  
+            </div>
+            <div class="float-right">
+                    <button type="button" class="btn btn-success btn_agregar_tramite_gestion">Agregar trámite <i class="fa fa-file-o"></i></button>
+            </div>
+            <br/><br/>
         </div>
         <div id="div_listado_gestion">            
         </div>
