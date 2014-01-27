@@ -90,8 +90,8 @@ switch($consulta){
    case "eliminar_por_id":
         $id_tipo_tramite = cargarUnValor('id_tipo_tramite');
         //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
-        //$borrado = Fachada::getInstancia()->eliminarByID_tipo_tramite($id_tipo_tramite);
-       $borrado = true;
+        $borrado = Fachada::getInstancia()->eliminarTipoTramite($id_tipo_tramite);
+       //$borrado = true;
         if($borrado){
             echo "<strong style='color:green;'>La plantilla ".$id_tipo_tramite." fue exitosamente borrada!";
         }

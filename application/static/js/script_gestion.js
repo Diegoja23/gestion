@@ -628,6 +628,7 @@ function agregarDivDatosGestion(){
         $("#btn_agregar_gestion").fadeOut(1500);               
         $("#div_manejo_tipos_gestiones").fadeOut(1500);
         //$("#div_listado_tramites_de_gestion_contenedor").fadeOut(1500);
+        $(".btn_agregar_tramite_gestion").fadeOut(1500);        
         $("#btn_mostrar_lista_gestiones").fadeIn(1500); 
         $("#btn_agregar_div_tipo_gestion").fadeIn(1500);
         $("#div_listado_tramites_de_gestion_vacio").fadeIn(1500); 
@@ -1784,7 +1785,7 @@ function guardarTipoTramite(){
 }
 
 function eliminarTipoTramiteElegido(){
-    var confirmado = confirm("¿Seguro que desea eliminar este tipo de trámite?");
+    var confirmado = confirm("¿Seguro que desea eliminar este tipo de trámite? No se pueden eliminar tipos de trámite que estén asociados a trámites.");
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text(); 
         //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
