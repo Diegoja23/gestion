@@ -270,6 +270,12 @@ class ServiciosGestion
         $TipoGestion = new TipoGestion(array('id_tipos_gestion' => $id_tipo_gestion));
         return $TipoGestion->eliminar();  
     }       
+    
+    public function eliminarTipoTramite($id_tipo_tramite)
+    {
+        $TipoTramite = new TipoTramite(array('id_tipo_tramite' => $id_tipo_tramite));
+        return $TipoTramite->eliminar();  
+    }      
             
 }
 
