@@ -1780,7 +1780,7 @@ function guardarTipoTramite(){
 }
 
 function eliminarTipoTramiteElegido(){
-    var confirmado = confirm("¿Seguro que desea eliminar este tipo de trámite?");
+    var confirmado = confirm("¿Seguro que desea eliminar este tipo de trámite? No se pueden eliminar tipos de trámite que estén asociados a trámites.");
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text(); 
         //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
