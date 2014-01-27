@@ -29,6 +29,27 @@ switch($consulta){
     echo Fachada::getInstancia()->agregarGestion($paramsGestion, $grupo);        
 
     break;
+    
+    case "modificar_gestion":
+        $paramsGestion = cargarValoresGestion();      
+              
+        $lista_id_clientes=$_POST['lista_id_clientes'];
+        $lista_id_participantes=$_POST['lista_id_participantes'];      
+          
+        $clientes =array();
+        $participantes=array();
+        
+        foreach($lista_id_clientes as $id_persona)    
+            array_push($clientes, new Cliente(array('id_persona' => $id_persona)));    
+        foreach($lista_id_participantes as $id_persona)    
+            array_push($participantes, new Participante(array('id_persona' => $id_persona)));     
+    
+        $grupo = new Grupo(array('descripcion' => "Descripcion de grupo es opcional",
+                                 'clientes' => $clientes,
+                                 'participantes' => $participantes));       
+        echo Fachada::getInstancia()->modificarGestion($paramsGestion, $grupo);                                    
+        
+    break;
         
     case "matchear_por_id":
         

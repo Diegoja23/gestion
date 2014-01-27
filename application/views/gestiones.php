@@ -110,7 +110,7 @@
             </div>
             <br/><br/><br/><br/><br/>
             <div class="form-group" id="div_estado_gestion">
-                <label for="lbl_esado_tramite">Estado</label> <span id="gestion_estado"> En curso</span> <br/><br/>
+                <label for="lbl_esado_tramite">Estado</label> <div style="display: inline-block;" id="gestion_estado"><span style='color:green'><strong>En curso</strong></span></div> <br/><br/>
                 <button id="btn_finalizar_gestion" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
                 </select>                
             </div><br/>    
