@@ -58,11 +58,12 @@ switch($consulta){
     case "matchear_por_id":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion'); 
         $un_tipo_gestion = traerTipoGestionElegido($id_tipo_gestion);
-        $lista_tipos_tramite = Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion);
+        $lista_tipos_tramite = Fachada::getInstancia()->getTiposTramiteByTipoGestion($id_tipo_gestion);
         //$un_tramite = seleccionarPorID($id_tramite);
-        //$lista_tipos_tramite = $a;
+        $lista_tipos_tramite_array = convertirLaListaTTEnArray($lista_tipos_tramite);
         if($un_tipo_gestion != false){
-            $array_tipo_gestion = $un_tipo_gestion->convertirArray();            
+            $array_tipo_gestion = $un_tipo_gestion->convertirArray();
+            $array_tipo_gestion['tipos_tramites'] = $lista_tipos_tramite_array;
             echo json_encode($array_tipo_gestion);
         }
         else{
@@ -223,6 +224,16 @@ function convertirArrayLista($listaTiposGestion){
         array_push($lista_array, $un_tipo_gestion->convertirArray());
     }
     return $lista_array;
+}
+
+function convertirLaListaTTEnArray($lista_tipos_tramite){
+    $lista = array();    
+    if(count($lista_tipos_tramite)>0){
+        foreach($lista_tipos_tramite as $un_tipo_tramite){
+            array_push($lista, $un_tipo_tramite->convertirArray());
+        }
+    }
+    return $lista;
 }
 
 ?>

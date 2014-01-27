@@ -117,6 +117,9 @@ $(document).on("click",".btn_eliminar_tramite",eliminarTramiteElegido);
 $(document).on("click",".btn_ver_adjunto",ver_adjunto_seleccionado);
 $(document).on("click",".btn_eliminar_adjunto",eliminar_adjunto_seleccionado);
 
+$(document).on("click",".btn_tramite_detail",goToTramite);
+$(document).on("click",".btn_agregar_tramite_gestion",addNewTramiteByGestion);
+
 /*asignar eventos PLANTILLAS*/
 $(document).on("click","#btn_agregar_plantilla",agregarDivDatosPlantilla);
 $(document).on("click","#btn_mostrar_lista_plantillas",agregarDivListaPlantillas);
@@ -127,9 +130,7 @@ $(document).on("click","#btn_mostrar_dialog_plantilla_tt",mostrarDialogPlantilla
 $(document).on("click","#btn_ver_plantilla_desde_lista",mostrarDialogPlantilla_tg);
 $(document).on("click","#btn_guardar_plantilla",guardarTipoTramite);
 
-$(document).on("click",".btn_tramite_detail",goToTramite);
-$(document).on("click",".btn_agregar_tramite_gestion",addNewTramiteByGestion);
-
+$(document).on("click","#btn_agregar_tipo_tramite_tipo_gestion",addNewTipoTramiteByTipoGestion);
 
 
 /*---------------------------------------------------------------------------------------------------------------
@@ -983,6 +984,9 @@ function agregarDivManejoTipoGestion(){
         $("#btn_volver_a_gestiones").fadeIn(1500);        
         $("#div_manejo_tipos_gestiones").fadeIn(1500);        
         cargarTipoGestion('#listado_tipos_de_gestion','tabla');
+        
+        $("#listado_tipos_tramites_de_tipo_gestion").html('');
+       
         //$('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
         //$('#combo_lista_personas2').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas", id_gestion:id_gestion});
     
@@ -1001,18 +1005,37 @@ function agregarDivDatosTipoGestion(){
 function cargarFormularioTipoGestion(un_tipo_gestion){    
     if(un_tipo_gestion != -1){
         GLOBAL_id_tipo_gestion = un_tipo_gestion.id_tipos_gestion;
-        $("#txt_descripcion_tipo_gestion2").val(un_tipo_gestion.descripcion);        
+        $("#txt_descripcion_tipo_gestion2").val(un_tipo_gestion.descripcion);
+        $("#btn_agregar_tipo_tramite_tipo_gestion").val(un_tipo_gestion.id_tipos_gestion); 
+        btn_agregar_tipo_tramite_tipo_gestion
+        var lista_tt = un_tipo_gestion.tipos_tramites;
+        if(lista_tt.length > 0){
+            $('#div_listado_tipos_tramites_de_tipo_gestion_contenedor').fadeIn(1500);
+            llenarListaTiposTramiteDeTipoGestion(lista_tt);
+        }
+        else{
+            $('#div_listado_tipos_tramites_de_tipo_gestion_contenedor').fadeOut(1500);
+        }
     }
     else{
         $("#txt_descripcion_tipo_gestion2").val("");
+        $("#btn_agregar_tipo_tramite_tipo_gestion").val(-1); 
     }
+}
+
+function llenarListaTiposTramiteDeTipoGestion(lista_tt){
+    var item='';
+    jQuery.each(lista_tt,function(num,data){
+             item = '<tr><td class="dato_mostrado_tipo_tramite_TG">' + data.id_tipo_tramite + '</td><td id="' + data.id_tipo_tramite + '" class="dato_mostrado_tipo_tramite">' + data.descripcion + '</td><td><button id="btn_ver_plantilla_desde_lista" type="button" class="btn btn-success btn-xs" value="' + data.id_tipo_tramite + '">Ver</button></td><td><p><i class="btn_ver_tipo_tramite_TG fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+             $('#listado_tipos_tramites_de_tipo_gestion').append(item);
+        }
+    );
 }
 
 function volverAGestiones(){
     $("#btn_volver_a_gestiones").fadeOut(1500);
     agregarDivListaGestiones();
 }
-
 
 function cargarTipoGestion(id_elemento_dom,tipo){
     $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "traer_tipos_gestion"})
@@ -1534,6 +1557,20 @@ function eliminar_adjunto_seleccionado(){
   MÉTODOS DE PLANTILLAS
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
+        
+function addNewTipoTramiteByTipoGestion() 
+{
+    var id_tipo_gestion = $('#btn_agregar_tipo_tramite_tipo_gestion').val();
+	/*$idsBtn = $(this).attr("id");
+	$ids = $idsBtn.split("|");
+	$id_gestion=$ids[0];
+	$id_tipo_gestion=$ids[1];
+	window.location.href="tramites?id_gestion="+$id_gestion+"&id_tipo_gestion="+$id_tipo_gestion;*/
+    window.location.href="plantillas?id_tipo_gestion="+id_tipo_gestion;
+        //alert('todavía no está implementada');
+
+}
+
 function agregarDivDatosPlantilla(){
     plantilla = 'Agregue el texto de la plantilla aquí.';
     $("#div_listado_plantillas").fadeOut(1500);        
