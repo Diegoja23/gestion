@@ -93,10 +93,10 @@ switch($consulta){
         //$borrado = Fachada::getInstancia()->eliminarByID_tipo_tramite($id_tipo_tramite);
        $borrado = true;
         if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$id_tipo_tramite." fue exitosamente borrado!";
+            echo "<strong style='color:green;'>La plantilla ".$id_tipo_tramite." fue exitosamente borrada!";
         }
         else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$id_tipo_tramite." no se pudo borrar";
+            echo "<strong style='color:red;'>La plantilla ".$id_tipo_tramite." no se pudo borrar";
         }
         break;
     
