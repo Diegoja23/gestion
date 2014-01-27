@@ -23,7 +23,7 @@
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
           <li class="current" ><a href="index">Inicio</a></li>
-          <li><a href="clientes">Clientes</a></li>
+          <li><a href="personas">Personas</a></li>
           <li><a href="gestiones">Gestiones</a></li>
           <li><a href="tramites">Trámites</a></li>
           <li><a href="plantillas">Plantillas</a></li>
@@ -48,6 +48,28 @@
                 Rol: <em><?php if($el_usuario['rol']==1){echo 'Administrador';} else{if($el_usuario['rol']==2){echo 'Editor';}};?></em>
             </p>
             <a href="logout" class="btn btn-warning btn-xs float-right">Salir</a>
+            
+            <ul class="nav nav-tabs" id="barraFiltros">                            
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                        Curso<span class="caret"></span>
+                    </a>
+                <ul id='menuCurso' class="dropdown-menu">
+
+                </ul>
+                </li>                         
+                <li class="dropdown">
+                    <a class="dropdown-toggle" style='margin-right: 10px;' data-toggle="dropdown" href="">
+                        Año<span class="caret"></span>
+                    </a>
+                    <ul id='menuFecha' class="dropdown-menu">
+
+                    </ul>
+                </li>
+                    <input type="text" class="form-control casilla" id="txtEmail" placeholder="E-mail" size="30" value=""/> 
+                    <button type="button" id='btnBuscar' class="btn btn-primary">Buscar</button>
+            </ul>
+            
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">

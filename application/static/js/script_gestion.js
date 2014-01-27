@@ -1463,17 +1463,15 @@ function mostrarDialogPlantilla(){
     buttons: {
                 DelUser:{ 
                     class: 'leftButton',
-                    text: 'Guardar',
+                    text: 'Aceptar',
                     click : function (){
                         plantilla = CKEDITOR.instances.editor1.getData();
-                        guardarTramite();
+                        //guardarTramite();
                         //alert(planilla_llena);
                         $(this).dialog("close");
                     }
-                },
-                Cerrar: function () {
-                    $(this).dialog("close");
                 }
+
             }
         });
 }

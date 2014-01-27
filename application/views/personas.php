@@ -20,7 +20,7 @@
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="index">Inicio</a></li>
-          <li class="current"><a href="clientes.php">Clientes</a></li>
+          <li class="current"><a href="clientes.php">Personas</a></li>
           <li><a href="gestiones">Gestiones</a></li>
           <li><a href="tramites">Trámites</a></li>
           <li><a href="plantillas">Plantillas</a></li>
@@ -66,11 +66,18 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Clientes</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
+        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar cliente <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_clientes" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
+        
+        <select class="form-control float-right" id="combo_lista_personas">
+            <option value="1">Todos</option>
+            <option value="2">Clientes</option>
+            <option value="3">Participantes</option>
+        </select>
+        
         <div id="div_formulario_cliente">
-            <h3>Datos del cliente</h3>
+            <h3>Datos del cliente</h3>           
             <div class="form-group">
                 <label for="txt_nombre_cliente">Nombre</label>
                 <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                
