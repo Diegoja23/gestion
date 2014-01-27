@@ -49,7 +49,20 @@ function iniEventos() {
             }
             else{
                 if(url == '/gestion/plantillas' || url == '/gestion/plantillas.php'){
-                    $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                    var urlParams = getParamsPart(window.location.href);
+				if (typeof urlParams === 'undefined') {
+					urlParams='0';
+				}
+                    var urlVars = parseURLParams(window.location.href);                 
+                    if(urlVars.id_tipo_gestion > 0){                    	
+                    	var id_tipo_gestion =parseInt(urlVars.id_tipo_gestion);
+                        traerTipoTramiteElegidoPorId(id_tipo_gestion);
+						//$(document).ready(traerTramitePorIdUrl($id_tramite));						
+                    }
+                    else{
+                        $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                    }
+                    
                     //$(".subir_archivo").click(subirElArchivo);
                     $(":file").change(cambioElFile);
                 }
@@ -1629,6 +1642,12 @@ function traerTipoTramiteElegido(){
     if(!id_tipo_tramite){
         id_tipo_tramite = $($(this).parent().parent().parent().children()[0]).text();
     }
+    GLOBAL_id_tipo_tramite = id_tipo_tramite;
+    var solo_plantilla = false;
+    traerTipoTramitePorId(id_tipo_tramite, solo_plantilla);
+}
+
+function traerTipoTramiteElegidoPorId(id_tipo_tramite){
     GLOBAL_id_tipo_tramite = id_tipo_tramite;
     var solo_plantilla = false;
     traerTipoTramitePorId(id_tipo_tramite, solo_plantilla);
