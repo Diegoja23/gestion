@@ -1562,14 +1562,7 @@ function eliminar_adjunto_seleccionado(){
 function addNewTipoTramiteByTipoGestion() 
 {
     var id_tipo_gestion = $('#btn_agregar_tipo_tramite_tipo_gestion').val();
-	/*$idsBtn = $(this).attr("id");
-	$ids = $idsBtn.split("|");
-	$id_gestion=$ids[0];
-	$id_tipo_gestion=$ids[1];
-	window.location.href="tramites?id_gestion="+$id_gestion+"&id_tipo_gestion="+$id_tipo_gestion;*/
     window.location.href="plantillas?id_tipo_gestion="+id_tipo_gestion;
-        //alert('todavía no está implementada');
-
 }
 
 function agregarDivDatosPlantilla(){
