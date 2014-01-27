@@ -1010,8 +1010,8 @@ function cargarFormularioTipoGestion(un_tipo_gestion){
     if(un_tipo_gestion != -1){
         GLOBAL_id_tipo_gestion = un_tipo_gestion.id_tipos_gestion;
         $("#txt_descripcion_tipo_gestion2").val(un_tipo_gestion.descripcion);
-        $("#btn_agregar_tipo_tramite_tipo_gestion").val(un_tipo_gestion.id_tipos_gestion); 
-        btn_agregar_tipo_tramite_tipo_gestion
+        $("#btn_agregar_tipo_tramite_tipo_gestion").val(un_tipo_gestion.id_tipos_gestion);         
+        $("#btn_agregar_tipo_tramite_tipo_gestion").css('display','block');
         var lista_tt = un_tipo_gestion.tipos_tramites;
         if(lista_tt.length > 0){
             $('#div_listado_tipos_tramites_de_tipo_gestion_contenedor').fadeIn(1500);
@@ -1023,7 +1023,8 @@ function cargarFormularioTipoGestion(un_tipo_gestion){
     }
     else{
         $("#txt_descripcion_tipo_gestion2").val("");
-        $("#btn_agregar_tipo_tramite_tipo_gestion").val(-1); 
+        $("#btn_agregar_tipo_tramite_tipo_gestion").val(-1);
+        $("#btn_agregar_tipo_tramite_tipo_gestion").css('display','none');
     }
 }
 
