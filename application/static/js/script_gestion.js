@@ -661,10 +661,10 @@ function cargarFormularioGestion(una_gestion){
             $("#txt_fecha_fin_gestion").val(una_gestion.fecha_fin);
         }
         if(una_gestion.estado == 1){        	
-        	$("#gestion_estado").text("Finalizado");
+        	$("#gestion_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");
             $("#btn_finalizar_gestion").text("Re-abrir");
             $('.fecha-fin-gestion').css('display','block');           
-        }else $("#gestion_estado").text("En curso");
+        }else $("#gestion_estado").html("<span style='color:green'><strong>En curso</strong></span>");
         
 
         $(".btn_agregar_tramite_gestion").attr("id", una_gestion.id_gestion+"|"+una_gestion.id_tipo_gestion);
@@ -740,28 +740,22 @@ function traerTramitesDeLaGestion(id_gestion){
 }
 
 function finalizarGestion(){
-    //if($.trim($("#span_id_gestion").text())!=""){
-        
-    //}
-    //else{
+
         if($("#btn_finalizar_gestion").text()== "Finalizar"){              
             $("#btn_finalizar_gestion").text("Re-abrir");
             $(".fecha-fin-gestion").fadeIn(1500);
             var myDate = new Date();
             var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();           	
-           	$("#gestion_estado").text("Finalizado");
+           	$("#gestion_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");
             $("#txt_fecha_fin_gestion").val(prettyDate);
-            
-            //$( ".fecha-fin" ).datepicker('setDate', 'today');
         }
         else{
-        	$("#gestion_estado").text("En curso");
+        	$("#gestion_estado").html("<span style='color:green'><strong>En curso</strong></span>");
             $("#btn_finalizar_gestion").text("Finalizar");
             $("#txt_fecha_fin_gestion").val(null);
             $(".fecha-fin-gestion").fadeOut(1500);
         }
-         
-    //}
+
 }
 
 function agregarClienteAGrupoSelector(){
@@ -892,10 +886,11 @@ function guardarGestion(){
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
-                            $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La gestión fue modificada exitosamente!</strong></span>");
+                            $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue modificada exitosamente!</strong></span>");
+                            $("#btn_mostrar_lista_gestiones").trigger("click");
                         }
                         else{
-                            $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>¡La gestión no fue modificada!</strong></span>");
+                            $("#retorno_gestion").html("<span style='color:red'><strong>¡La gestión no fue modificada!</strong></span>");
                         }
             },"json");      	
         }
@@ -904,7 +899,7 @@ function guardarGestion(){
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno>0){
-                            $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
+                            $f("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
                             $("#btn_agregar_tramite_gestion").fadeIn(1500);                            
                             $("#btn_mostrar_lista_gestiones").trigger("click");
                         }
