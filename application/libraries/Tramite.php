@@ -167,7 +167,10 @@ class Tramite
     public function materializar($params)
     {
         foreach ($params as $att => $key){
-            $this->$att = $key;   
+            if($att == 'fecha_inicio' || $att=='fecha_fin')
+                $this->$att = Common::fromSqlToUsrDate($key);
+            else 
+                $this->$att = $key;              
         }
     }
     

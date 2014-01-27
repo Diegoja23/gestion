@@ -1349,17 +1349,21 @@ function finalizarTramite(){
         
     }
     else{
-        if($("#btn_finalizar_tramite").text()== "Finalizar"){      
+        if($("#btn_finalizar_tramite").text()== "Finalizar"){   
+        	$("#tramite_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");   
             $("#btn_finalizar_tramite").text("Re-abrir");
             $(".fecha-fin").fadeIn(1500);
             var myDate = new Date();
             var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();
             $( ".fecha-fin" ).val(prettyDate);
+            $("#txt_fecha_fin").val(prettyDate);
             //$( ".fecha-fin" ).datepicker('setDate', 'today');
         }
         else{
+        	$("#tramite_estado").html("<span style='color:green'><strong>En curso</strong></span>");
             $("#btn_finalizar_tramite").text("Finalizar");
             $(".fecha-fin").fadeOut(1500);
+            $("#txt_fecha_fin").val(null);
         }
          
     }
@@ -1393,7 +1397,9 @@ function cargarFormularioTramite(un_tramite){
         if(un_tramite.estado == 1){
             $("#btn_finalizar_tramite").text("Re-abrir");
             $('.fecha-fin').css('display','bock');
-        }
+            $("#tramite_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");
+        }else $("#tramite_estado").html("<span style='color:green'><strong>En curso</strong></span>");
+        
         $("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
         $("#span_id_tramite").text(un_tramite.id_tramite);        

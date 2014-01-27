@@ -66,7 +66,7 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Trámites</h1>
-        <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
+        <!-- <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button> -->
         <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
         <div id="div_formulario_tramite">
@@ -97,7 +97,7 @@
             </div>
             <br/><br/><br/><br/><br/>
             <div class="form-group" id="div_estado_transaccion">
-                <label for="lbl_esado_tramite">Estado</label> <br/>
+                <label for="lbl_esado_tramite">Estado</label> <div style="display: inline-block;" id="tramite_estado"><span style='color:green'><strong>En curso</strong></span></div> <br/><br/>
                 <button id="btn_finalizar_tramite" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
                 </select>                
             </div><br/>
