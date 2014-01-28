@@ -165,6 +165,33 @@ class Gestion
         $array_gestion = $this->myci->gestiones->getById($this->id_gestion);  
         $this->materializar($array_gestion[0]); 
         
+        $tramites_data = $this->myci->tramites->get_tramites($this->id_gestion);
+        $arrayTramites = array();
+        foreach($tramites_data as $t)
+        {
+            $paramsTramite["id_tramite"] = $t->id_tramite;   
+            $paramsTramite["descripcion"] = $t->descripcion;    
+            $paramsTramite["fecha_inicio"] = Common::fromSqlToUsrDate($t->fecha_inicio);   
+            $paramsTramite["fecha_fin"] = Common::fromSqlToUsrDate($t->fecha_fin);   
+            $paramsTramite["estado"] = $t->estado;   
+            $paramsTramite["id_tipo_tramite"] = $t->id_tipo_tramite;    
+            $paramsTramite["id_gestion"] = $t->id_gestion;   
+            $paramsTramite["documento"] = $t->documento;     
+            $paramsTramite["adjuntos"] = array();
+                       
+            $TipoTramite = new TipoTramite(array('id_tipo_tramite' => $t->id_tipo_tramite));
+            $TipoTramite->getById();
+            $paramsTramite['tipo_tramite'] = $TipoTramite;
+            
+            $Tramite = new Tramite($paramsTramite);   
+            $arrayTramites[] = $Tramite;
+        }        
+        $this->tramites = $arrayTramites;
+        
+        $Grupo = new Grupo(array('id_grupo' => $this->id_grupo));
+        $Grupo->fill();            
+        $this->grupo = $Grupo;
+        
         $TipoGestion = new TipoGestion(array('id_tipos_gestion' => $this->id_tipo_gestion));
         $TipoGestion->getById();
         

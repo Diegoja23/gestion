@@ -59,6 +59,18 @@ switch($consulta){
         //var_dump($una_gestion);die();
         echo json_encode($una_gestion->convertirArray());
         break;
+        
+    case "traer_por_id":
+        $id_gestion = cargarUnValor('id_gestion'); 
+        $una_gestion = traerPorId($id_gestion);
+        if($una_gestion != false){
+            $array_gestion = $una_gestion->convertirArray();                        
+            echo json_encode($array_gestion);
+        }
+        else{
+            return -1;
+        }         
+        break;        
     
    case "traer_tipos_gestion":
         $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
@@ -108,6 +120,11 @@ switch($consulta){
         break;    
     default:        
         break;
+}
+
+function traerPorId($id_gestion)
+{
+    return Fachada::getInstancia()->getGestionById($id_gestion);
 }
 
 function cargarValoresGestion()

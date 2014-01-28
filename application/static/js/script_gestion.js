@@ -12,7 +12,17 @@ $(document).ready(iniEventos);
 function iniEventos() {
     var url = window.location.pathname;
     if(url == '/gestion/gestiones' || url == '/gestion/gestiones.php'){
-            $("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
+				$urlVars = parseURLParams(window.location.href); 	
+                if($urlVars.id_gestion > 0)
+                {                    	
+                	$id_gestion=parseInt($urlVars.id_gestion);
+					$(document).ready(traerGestionPorIdUrl($id_gestion));						
+                }
+                else
+                {
+                	$("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
+                }				
+            
             $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});
     }
     else{
@@ -22,13 +32,8 @@ function iniEventos() {
                 $(":file").change(cambioElFile);
         }
         else{
-            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){            	
-        	 	$urlParams = getParamsPart(window.location.href);
-				if (typeof $urlParams === 'undefined') {
-					$urlParams='';
-				}             	 	
-                if(listar()){
-                    $("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php?"+$urlParams,{consulta: "traer_todos"});                    
+            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){            					             	 	
+                if(listar()){                                       
                     $urlVars = parseURLParams(window.location.href);                 
                     if($urlVars.id_tramite > 0)
                     {                    	
@@ -37,17 +42,17 @@ function iniEventos() {
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
                     {                    	
-                    	/*$(document).ready($('#span_id_gestion').text($urlVars.id_gestion), 
-                    					  $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion),
-											agregarDivDatosTramite());*/
 						$id_gestion=parseInt($urlVars.id_gestion);
 						getGestionByTramite($id_gestion);
                         $('#span_id_gestion').text($urlVars.id_gestion);
                         $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
                         agregarDivDatosTramite();
-                    }                    	
-                    
-                    //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
+                    }            
+                    else
+                    {
+                    	$("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});	
+                    }        	
+                                        
                     $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
                 }    
                 //agregarDivDatosTramite();
@@ -625,9 +630,14 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
 function goToTramite() 
 {
 	$id_tramite = $(this).attr("id");
-	//window.location.href="tramites?id_tramite="+$id_tramite;
-	window.open(globalUrl+"/gestion/tramites?id_tramite="+$id_tramite,'_newtab');
+	window.location.href="tramites?id_tramite="+$id_tramite;
+	//window.open(globalUrl+"/gestion/tramites?id_tramite="+$id_tramite,'_newtab');
 
+}
+
+function goToGestion($id_gestion)
+{
+	window.location.href="gestiones?id_gestion="+$id_gestion;
 }
 
 function addNewTramiteByGestion() 
@@ -991,6 +1001,15 @@ function guardarParticipanteGestion(){
 
 }
 
+function traerGestionPorIdUrl($id_gestion){   	  
+    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "traer_por_id",id_gestion: $id_gestion})
+            .done(function(data) {        
+                agregarDivDatosGestion();
+                var una_gestion = jQuery.parseJSON(data);
+                cargarFormularioGestion(una_gestion);        
+        }, "json");  
+}
+
 function traerGestionElegidaClicNombre(){
     //var documento = $($(this).parent().children()[2]).text();
     var id_gestion = $($(this).parent().children()[0]).text();        
@@ -1290,16 +1309,16 @@ function guardarTramite(){
     var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
     var vplantilla = plantilla;
     if(vid_tramite > 0)
-    {
-    	console.log("aqui se modifica el tramite");
+    {    	
 	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
 	            .done(function(data) {            
 	                var retorno = parseInt(data);
 	                if(retorno==1){
-	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente!</strong></span>");
+	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente! Ud. será redirigido a la gestión</strong></span>");
+	                    setTimeout(function(){goToGestion(vid_gestion)},3000);	    
 	                }
 	                else{
-	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado !</strong></span>");
+	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado ! Revise los datos</strong></span>");
 	                }
 	        });      	
     }
@@ -1309,10 +1328,11 @@ function guardarTramite(){
 	            .done(function(data) {            
 	                var retorno = parseInt(data);
 	                if(retorno==1){
-	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
+	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente! Ud. será redirigido a la gestión</strong></span>");
+	                    setTimeout(function(){goToGestion(vid_gestion)},3000);	                    
 	                }
 	                else{
-	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
+	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no agregado ! Revise los datos</strong></span>");
 	                }
 	        });    	
     }
