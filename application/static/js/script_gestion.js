@@ -32,8 +32,7 @@ function iniEventos() {
                 $(":file").change(cambioElFile);
         }
         else{
-            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){            					             	 	
-                if(listar()){                                       
+            if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){            					             	 	                                       
                     $urlVars = parseURLParams(window.location.href);                 
                     if($urlVars.id_tramite > 0)
                     {                    	
@@ -54,8 +53,7 @@ function iniEventos() {
                     	$("#div_listado_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"});	
                     }        	
                                         
-                    $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});  
-                }    
+                    $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});                  
                 //agregarDivDatosTramite();
             }
             else{
@@ -1253,10 +1251,15 @@ function agregarDivDatosTramite(){
         
     //$("#combo_estado_tramite").css("display","none");
     $(".fecha-fin").css("display","none");
+                
+	var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
+    $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
         
-        
-        var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
-        $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
+    if(GLOBAL_id_tramite === undefined || GLOBAL_id_tramite <= 0)
+    {
+    	$("#btn_agregar_adjunto").css("display","none");
+    	$("#info_adjuntos").html("<span style='color:grey'><strong>*Para agregar adjuntos al trámite, edite el mismo a posterori de agregarlo</strong></span>");
+    } 
         //cargarFormulario(-1);
         //$("input").prop('disable', false);
     //}
@@ -1470,7 +1473,7 @@ function cargarFormularioTramite(un_tramite){
         $("#txt_fecha_inicio").val();
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
-        $("#span_id_tramite").text("un_tramite.id_tramite");
+        $("#span_id_tramite").text("un_tramite.id_tramite");       
     }
 }
 
@@ -1565,7 +1568,7 @@ function subirElArchivo_tramite(){
 			//necesario para subir archivos via ajax
 			cache: false,
                         //contentType: 'image/jpeg',
-                        contentType: false,
+            contentType: false,
 			processData: false,
                         
 			//mientras enviamos el archivo
