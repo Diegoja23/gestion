@@ -16,7 +16,7 @@ function iniEventos() {
             $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});
     }
     else{
-        if(url == '/gestion/clientes' || url == '/gestion/clientes.php'){
+        if(url == '/gestion/personas' || url == '/gestion/personas.php'){
                 $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
                 //$(".subir_archivo").click(subirElArchivo);
                 $(":file").change(cambioElFile);
@@ -1308,7 +1308,7 @@ function agregarDivListaTramite(){
 
 function limpiarFormularioAgregarTramite(){
     GLOBAL_id_tramite = -1;
-    plantilla = '';
+    plantilla = undefined;
     $("#txt_descripcion_tramite").val('');
     $("#txt_fecha_inicio").val('');
     $("#txt_fecha_fin").val('');
@@ -1389,7 +1389,7 @@ function cargarFormularioTramite(un_tramite){
         
        // $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
         $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
-        plantilla = un_tramite.plantilla;
+        //plantilla = un_tramite.plantilla;
         if(un_tramite.fecha_fin != null){
             $(".fecha-fin").fadeIn(1500);
             $("#txt_fecha_fin").val(un_tramite.fecha_fin);
@@ -1442,6 +1442,7 @@ function cambioTipoTramite(){
 }
 
 function mostrarDialogPlantilla(){
+    if(typeof plantilla === 'undefined'){
     var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
     
     //$("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
@@ -1458,7 +1459,7 @@ function mostrarDialogPlantilla(){
         una_plantilla += '</textarea><script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
         $("#dialog_plantilla").html(una_plantilla);
             });
-    
+    }
     $("#dialog_plantilla").dialog({width: 800,modal: true,
     buttons: {
                 DelUser:{ 
