@@ -68,7 +68,7 @@
         <h1>Trámites</h1>
         <!-- <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button> -->
         <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
-        <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
+        <div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
         <div id="div_formulario_tramite">
             <h3>Datos del trámite perteneciente a Gestion <div style="display: inline-block" id="nombre_gestion_trammite"></div></h3>
             <div class="form-group">
@@ -102,8 +102,9 @@
                 </select>                
             </div><br/>
             <div class="button-group">
-                <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div>
+                <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div><div id="info_adjuntos"></div>
             </div>
+            <button type="button" style="display: inline-block;" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button>
             <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
                     <br />
                     <label>Nombre del adjunto: </label>
