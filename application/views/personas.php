@@ -70,7 +70,7 @@
         <button id="btn_mostrar_lista_clientes" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
         
-        <select class="form-control float-right" id="combo_lista_personas">
+        <select class="form-control float-right" id="combo_lista_personas_personas">
             <option value="1">Todos</option>
             <option value="2">Clientes</option>
             <option value="3">Participantes</option>

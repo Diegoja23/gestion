@@ -114,9 +114,7 @@
                 <label for="lbl_esado_tramite">Estado</label> <div style="display: inline-block;" id="gestion_estado"><span style='color:green'><strong>En curso</strong></span></div> <br/><br/>
                 <button id="btn_finalizar_gestion" type="button" class="btn btn-primary btn-xs" value="1">Finalizar</button>
                 </select>                                
-            </div>
-            
-           
+            </div><br/>    
             <div id="selectores_grupo_clientes">
                 <input type="hidden" class="form-control datepicker" id="txt_id_grupo" >    
                 <div class="form-group float-left">
@@ -139,8 +137,8 @@
                         <option value="-1">No hay clientes elegidos</option>
                     </select>
                 </div>
-            </div>
-            <div style="clear:both;margin-bottom: -50px"></div>
+            </div><br/><br/>
+            
             <div id="selectores_grupo_participantes">
                 <div class="form-group float-left">
                     <label for="lbl_lista_clientes">Seleccionar grupo de participantes</label>  <br />              
