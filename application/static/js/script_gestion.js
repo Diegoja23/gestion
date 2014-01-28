@@ -38,8 +38,12 @@ function iniEventos() {
                     if($urlVars.id_tramite > 0)
                     {                    	
                     	$id_tramite=parseInt($urlVars.id_tramite);
-						$(document).ready(traerTramitePorIdUrl($id_tramite));	
-						GLOBAL_id_tramite = $id_tramite;					
+			//$(document).ready(traerTramitePorIdUrl($id_tramite));	
+                        traerTramitePorIdUrl($id_tramite);
+			GLOBAL_id_tramite = $id_tramite;
+                        /*setTimeout(function(){
+                        cargarPlantilla();
+                }, 1000);*/
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
                     {                    	
@@ -48,6 +52,11 @@ function iniEventos() {
                         $('#span_id_gestion').text($urlVars.id_gestion);
                         $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
                         agregarDivDatosTramite();
+                        setTimeout(function(){           
+                                cargarPlantilla();
+                                //mostrarDialogPlantilla();
+                        }, 1000);
+                        
                     }            
                     else
                     {
@@ -1375,8 +1384,14 @@ function traerTramitePorIdUrl(id_tramite){
             .done(function(data) {            
                 agregarDivDatosTramite();                
                 var un_tramite = jQuery.parseJSON(data);
-                cargarFormularioTramite(un_tramite);      
+                cargarFormularioTramite(un_tramite);
+                /*setTimeout(function(){
+                    cargarPlantilla();
+                }, 1000);*/
         }, "json");  
+        setTimeout(function(){            
+                    cargarPlantilla();
+                }, 1000);
 }
 
 function traerTramitePorId(id_tramite){
@@ -1385,8 +1400,13 @@ function traerTramitePorId(id_tramite){
             .done(function(data) {            
                 agregarDivDatosTramite();                
                 var un_tramite = jQuery.parseJSON(data);
-                cargarFormularioTramite(un_tramite);      
+                cargarFormularioTramite(un_tramite);  
+                //setTimeout(function(){            
+                    //cargarPlantilla();
+                //}, 1000);
+                //cargarPlantilla();
         }, "json");  
+        
 }
 
 function finalizarTramite(){
@@ -1437,6 +1457,7 @@ function cargarFormularioTramite(un_tramite){
        // $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
         $("#txt_fecha_inicio").val(un_tramite.fecha_inicio);
         //plantilla = un_tramite.plantilla;
+        
         if(un_tramite.fecha_fin != null){
             $(".fecha-fin").fadeIn(1500);
             $("#txt_fecha_fin").val(un_tramite.fecha_fin);
@@ -1461,6 +1482,7 @@ function cargarFormularioTramite(un_tramite){
             $("#div_no_hay_adjuntos_tramite").fadeIn(1500);
             $("#div_archivos_adjuntos").fadeOut(1500);
         }
+        cargarPlantilla();
         //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
         //$('#div_ci_cliente').fadeIn(1500);         
     }
@@ -1499,8 +1521,8 @@ function cambioTipoTramite(){
     //alert(tipo_tramite);
 }
 
-function mostrarDialogPlantilla(){
-    if(typeof plantilla === 'undefined'){
+function cargarPlantilla(){
+     if(typeof plantilla === 'undefined'){
     var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
     
     //$("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
@@ -1518,6 +1540,22 @@ function mostrarDialogPlantilla(){
         $("#dialog_plantilla").html(una_plantilla);
             });
     }
+}
+
+function mostrarDialogPlantilla(){    
+    if(typeof plantilla === 'undefined'){
+        cargarPlantilla();
+    }
+    else{
+        var una_plantilla = '<textarea id="editor1" name="editor1">'+plantilla;
+        una_plantilla += '</textarea><script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
+        $("#dialog_plantilla").html(una_plantilla);
+    }
+    mostrarDialogPlantilla_mismo();
+}
+
+function mostrarDialogPlantilla_mismo(){
+   
     $("#dialog_plantilla").dialog({width: 800,modal: true,
     buttons: {
                 DelUser:{ 

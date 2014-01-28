@@ -62,7 +62,7 @@ switch($consulta){
         $un_tramite = traerPorId($id_tramite);
         if($un_tramite != false){
             $array_tramite = $un_tramite->convertirArray();            
-            $array_tramite['plantilla'] = traerPlantillaTramiteO($un_tramite);
+            //$array_tramite['plantilla'] = traerPlantillaTramiteO($un_tramite);
             echo json_encode($array_tramite);
         }
         else{
