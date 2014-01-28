@@ -100,6 +100,8 @@ $(document).on("click",".subir_archivo_adjunto_cliente",subirElArchivoAdjuntoPar
 $(document).on("change",":file",cambioElFile);
 $(document).on("click",".btn_ver_adjunto_de_un_cliente",ver_adjunto_seleccionado_del_cliente);
 $(document).on("click",".btn_eliminar_adjunto_de_un_cliente",eliminar_adjunto_seleccionado_del_cliente);
+$(document).on("click","#combo_lista_personas_personas",cambiar_lista_a_opcion_seleccionada);
+
 
 /*asignar eventos GESTIONES*/
 $(document).on("click","#btn_agregar_gestion",agregarDivDatosGestionSinLista);
@@ -578,6 +580,21 @@ function eliminar_adjunto_seleccionado_del_cliente(){
     }
 }
 
+function cambiar_lista_a_opcion_seleccionada(){
+    var opcion = $('#combo_lista_personas_personas').val();
+    if(opcion == 1){
+        $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+    }
+    else{
+        if(opcion == 2){
+            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_clientes"}); 
+        }
+        else{
+            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_participantes"}); 
+        }
+    }
+    //alert(opcion);
+}
 
 function agregarAdjuntoALosDelCliente(nombre_adjunto){
     var vdocumento_cliente = GLOBAL_documento_cliente;

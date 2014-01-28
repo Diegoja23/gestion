@@ -3,7 +3,20 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        echo crearListaClientes(traerTodos());
+        $listaParticipantes = Fachada::getInstancia()->getParticipantes();
+        $listaClientes = Fachada::getInstancia()->getClientes();
+        $lista_total = array_merge($listaParticipantes,$listaClientes);
+        echo crearListaParaPersonas($lista_total);
+        break;
+    
+    case "traer_clientes":
+        $listaClientes = Fachada::getInstancia()->getClientes();
+        echo crearListaParaPersonas($listaClientes);
+        break;
+    
+    case "traer_participantes":
+        $listaParticipantes = Fachada::getInstancia()->getParticipantes();
+        echo crearListaParaPersonas($listaParticipantes);
         break;
 
     case "agregar_cliente": 
@@ -143,7 +156,7 @@ function traerTodos(){
     return $todas_las_gestiones;
 }
 
-function crearListaClientes($lista){
+function crearListaParaPersonas($lista){
     $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0;    
     foreach ($lista as $c) 
