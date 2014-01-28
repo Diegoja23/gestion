@@ -79,7 +79,7 @@
             <div class="form-group float-left">
                 <label for="lbl_tipo_tramite">Tipo de trámite</label>  <br />              
                 <select class='form-control' id='combo_tipo_tramite'>
-                    <option>No se cargaron las opcione</option>
+                    <option>No se cargaron las opciones</option>
                 </select>
             </div> 
             <div class="button-group float-left" style="margin-top:30px;margin-left:20px;">
