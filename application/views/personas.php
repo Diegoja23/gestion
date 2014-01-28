@@ -119,6 +119,8 @@
         </div>
         <br/>
         <div id="div_formulario_adjuntos_cliente">
+            <div id="div_form_agregar_adjunto_persona">
+            <h3><em>Adjuntos</em></h3>
             <h3 id="nombre_cliente_adjunto">Nombre del cliente</h3>
             <form enctype="multipart/form-data" class="formulario_archivo_para_adjunto" id="div_formulario_subir_adjunto">
                     <br />
@@ -129,6 +131,7 @@
                     <p class="help-block retorno_del_file_agregar_elemento_adjunto">Agregar adjunto del cliente.</p>
                     <button type="button" class="subir_archivo_adjunto_cliente btn btn-info btn-sm">Subir adjunto</button> 
             </form>
+            </div>
             <br/>
             <hr/>
             <br/>

@@ -413,6 +413,7 @@ function traerClienteElegidoClicIcono(){
 function traerListaAdjuntosDeCliente(){
     var documento = $($(this).parent().parent().parent().children()[2]).text();
     var id_cliente = $($(this).parent().parent().parent().children()[0]).text();
+    $('#combo_lista_personas_personas').fadeOut(1500);
     traerDatosComplementariosDeClienteElegido(documento,id_cliente);
 }
 
