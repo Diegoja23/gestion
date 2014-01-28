@@ -75,6 +75,11 @@ class Fachada
         return $this->sp->agregarAdjuntoAlCliente($id_cliente,$el_adjunto);        
     }    
     
+    public function agregarAdjuntoAlParticipante($id_cliente,$el_adjunto)
+    {
+        return $this->sg->agregarAdjuntoAlParticipante($id_cliente,$el_adjunto);
+    }        
+        
     public function eliminarAdjuntoCliente($id_adjunto)
     {
         return $this->sp->eliminarAdjuntoCliente($id_adjunto);    
@@ -147,7 +152,7 @@ class Fachada
     {
         return $this->sg->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
     }
-    
+
     public function getBlobAdjunto($id)
     {
         return $this->sg->getBlob($id);    

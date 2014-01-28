@@ -97,6 +97,14 @@ class ServiciosPersona
         $Adjunto = new Adjunto($attsAdjuntos);
         return $Cliente->addAdjunto($Adjunto);        
     }  
+    
+    public function agregarAdjuntoAlParticipante($id_persona,$el_adjunto)
+    {
+        $Participante = new Participante(array('id_persona' => $id_persona));        
+        $attsAdjuntos = array('nombre' => $el_adjunto['nombre'], 'archivo' => $el_adjunto['archivo'], 'tipo' => $el_adjunto['tipo']);
+        $Adjunto = new Adjunto($attsAdjuntos);
+        return $Participante->addAdjunto($Adjunto);        
+    }     
  
     /* El login retorna un objeto usuario, si es vacio pues, el login es incorrecto */
     public function login($email, $contrasenia)

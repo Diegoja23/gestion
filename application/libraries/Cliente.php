@@ -75,14 +75,8 @@ class Cliente extends Participante
     public function update()
     {
         return parent::update();
-    }
-    
-    public function addAdjunto($Adjunto)
-    {
-        return ($this->myci->datos_complementarios->add($Adjunto, $this->id_persona));     
-    }
-        
-    
+    }    
+            
 
 }
 
