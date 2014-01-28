@@ -148,7 +148,10 @@ class Participante extends Persona
         return $retorno;
     }    
     
-        
+    public function addAdjunto($Adjunto)
+    {
+        return ($this->myci->datos_complementarios->add($Adjunto, $this->id_persona));     
+    }
             
 }
 
