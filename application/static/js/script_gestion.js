@@ -40,6 +40,8 @@ function iniEventos() {
                     	/*$(document).ready($('#span_id_gestion').text($urlVars.id_gestion), 
                     					  $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion),
 											agregarDivDatosTramite());*/
+						$id_gestion=parseInt($urlVars.id_gestion);
+						getGestionByTramite($id_gestion);
                         $('#span_id_gestion').text($urlVars.id_gestion);
                         $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
                         agregarDivDatosTramite();
@@ -1383,6 +1385,8 @@ function visibilidadFormularioSubirAdjunto(){
 
 function cargarFormularioTramite(un_tramite){
     if(un_tramite != -1){
+    	var gestionDelTramite = getGestionByTramite(un_tramite.id_gestion);
+    	
     	$("#txt_id_tramite").val(un_tramite.id_tramite);
         $("#txt_descripcion_tramite").val(un_tramite.descripcion);
         
@@ -1405,6 +1409,7 @@ function cargarFormularioTramite(un_tramite){
         
         $("#span_id_gestion").text(un_tramite.id_gestion);
         $("#span_id_tipo_gestion").text(un_tramite.id_tipo_gestion);
+        $("#nombre_gestion_trammite").text("oola");
         $("#span_id_tramite").text(un_tramite.id_tramite);        
         
         if(un_tramite.adjuntos.length > 0){
@@ -1427,6 +1432,16 @@ function cargarFormularioTramite(un_tramite){
         $("#span_id_tipo_gestion").text("");
         $("#span_id_tramite").text("un_tramite.id_tramite");
     }
+}
+
+function getGestionByTramite(id_gestion)
+{
+    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"gestion_por_tramite", id_gestion:id_gestion})
+            .done(function(data) {    
+            	var gestion = jQuery.parseJSON(data);        	         	
+            	$("#nombre_gestion_trammite").html("<strong>"+gestion.descripcion+"</strong>");
+        		
+            }, "json");	
 }
 
 function agregarAdjuntosAlTramiteCargado(lista_adjuntos){

@@ -70,7 +70,7 @@
         <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <button type="button" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
         <div id="div_formulario_tramite">
-            <h3>Datos del trámite</h3>
+            <h3>Datos del trámite perteneciente a Gestion <div style="display: inline-block" id="nombre_gestion_trammite"></div></h3>
             <div class="form-group">
                 <label for="lbl_descripcion_tramite">Descripción</label>
                 <input type="hidden" class="form-control" id="txt_id_tramite">                
@@ -83,7 +83,7 @@
                 </select>
             </div> 
             <div class="button-group float-left" style="margin-top:30px;margin-left:20px;">
-                <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Plantilla <i class="fa fa-list"></i></button>        
+                <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Plantilla<i class="fa fa-list"></i></button>        
             </div>   
             <br /><br /><br /><br /><br />
             <div class="form-group fecha fecha-inicio">                

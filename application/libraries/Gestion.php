@@ -148,17 +148,37 @@ class Gestion
                 $fieldsGestion[$key] = $value;   
             else if($key=='tipo_gestion')
                 $fieldsGestion[$key] = $this->tipo_gestion->convertirArray();
-            else if($key=='grupo')
+            else if($key=='grupo' && is_object($this->grupo))
                 $fieldsGestion[$key] = $this->grupo->convertirArray();
-            else if($key=='tramites')
+            else if($key=='tramites' && is_array($this->tramites))
             {
                 foreach($this->tramites as $tramite)                
                     $arrayTramites[] = $tramite->convertirArray();                               
                     $fieldsGestion[$key] = $arrayTramites;                  
-            }
-            
+            }            
         }
         return $fieldsGestion;
     }
+    
+    public function getById()
+    {
+        $array_gestion = $this->myci->gestiones->getById($this->id_gestion);  
+        $this->materializar($array_gestion[0]); 
+        
+        $TipoGestion = new TipoGestion(array('id_tipos_gestion' => $this->id_tipo_gestion));
+        $TipoGestion->getById();
+        
+        $this->tipo_gestion=$TipoGestion;
+    }
+    
+    public function materializar($params)
+    {
+        foreach ($params as $att => $key){
+            if($att == 'fecha_inicio' || $att=='fecha_fin')
+                $this->$att = Common::fromSqlToUsrDate($key);
+            else 
+                $this->$att = $key;              
+        }
+    }    
 }
 ?>

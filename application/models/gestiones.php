@@ -71,6 +71,13 @@ class Gestiones extends CI_Model
         $this->db->delete('tipos_gestion', array('id_tipos_gestion' => $id_tipo_gestion));
         return($this->db->affected_rows() > 0);        
     }
+
+    function getById($id_gestion)
+    {
+        $query = $this->db->get_where('gestiones', array('id_gestion' => $id_gestion));
+        if ($query->num_rows > 0) return $query->result();
+        return false;        
+    }    
 }
 
 ?>

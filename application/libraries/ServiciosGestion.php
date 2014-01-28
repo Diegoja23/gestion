@@ -127,6 +127,13 @@ class ServiciosGestion
         return $Gestion->eliminar();                   
     }
     
+    public function getGestionById($id_gestion)
+    {
+        $Gestion = new Gestion(array('id_gestion' => $id_gestion));
+        $Gestion->getById();
+        return $Gestion;
+    }
+    
     public function agregarTipoGestion($paramsTipoGestion) 
     {
         $TipoGestion = new TipoGestion($paramsTipoGestion);

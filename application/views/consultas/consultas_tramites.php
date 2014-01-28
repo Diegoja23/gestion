@@ -144,6 +144,10 @@ switch($consulta){
             echo "<strong style='color:red;'>El cliente de cédula ".$id_tramite." no se pudo borrar";
         }
         break;
+   case "gestion_por_tramite":
+       $id_gestion = cargarUnValor('id_gestion');
+       echo json_encode(getGestionByTramite($id_gestion,true));
+       break;
         
     /*case "traer_tramites_por_id_gestion":
         $id_gestion = cargarUnValor('id_gestion');
@@ -178,15 +182,23 @@ function traerTramiteElegido($id_tramite){
 }
 
 function crearListaTramites($lista){
-    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
+    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Gestion</th><th>Tipo Gestion</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0; 
     foreach ($lista as $t)
-    {        
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+    {
+        $Gestion=getGestionByTramite($t->getIdGestion());
+        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getTipoGestion()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
     }   
     return $retorno;
 }
 
+function getGestionByTramite($id_gestion,$array=false)
+{
+    $Gestion = Fachada::getInstancia()->getGestionById($id_gestion);
+    if($array)
+        return $Gestion->convertirArray();
+    return $Gestion;
+}
 /*function crearListaTramitesParaGestion($lista){
     $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0; 
