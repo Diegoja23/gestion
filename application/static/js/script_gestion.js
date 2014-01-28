@@ -215,6 +215,7 @@ function agregarDivDatosCliente(){
     //if($("#div_formulario_cliente").css("display") == "none"){        
         $("#div_listado_cliente").fadeOut(1500);        
         $("#btn_agregar_cliente").fadeOut(1500);
+        $('#combo_lista_personas_personas').fadeOut(1500);
         $("#btn_mostrar_lista_clientes").fadeIn(1500);        
         $("#div_formulario_cliente").fadeIn(1500);
         //$("#btn_agregar_cliente").text("Mostrar Lista"); 
@@ -241,6 +242,7 @@ function agregarDivListaClientes(){
     $("#div_formulario_cliente").fadeOut(1500);
     $("#btn_mostrar_lista_clientes").fadeOut(1500);
     $("#div_formulario_adjuntos_cliente").fadeOut(1500);
+    $('#combo_lista_personas_personas').fadeIn(1500);
     $("#btn_agregar_cliente").fadeIn(1500);
     $("#div_listado_cliente").fadeIn(1500);
     //$("#btn_agregar_cliente").html('Agregar <i class="fa fa-list"></i>');
