@@ -37,9 +37,12 @@ function iniEventos() {
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
                     {                    	
-                    	$(document).ready($('#span_id_gestion').text($urlVars.id_gestion), 
+                    	/*$(document).ready($('#span_id_gestion').text($urlVars.id_gestion), 
                     					  $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion),
-											agregarDivDatosTramite());	
+											agregarDivDatosTramite());*/
+                        $('#span_id_gestion').text($urlVars.id_gestion);
+                        $('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
+                        agregarDivDatosTramite();
                     }                    	
                     
                     //$("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
