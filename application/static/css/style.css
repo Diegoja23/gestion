@@ -448,7 +448,13 @@ table tr td
 }
 
 #div_formulario_adjuntos_cliente{
-    display: none;
+    display: none;    
+}
+
+#div_form_agregar_adjunto_persona{
+    margin: 10px;
+    border: 3px solid #777;
+    padding: 20px;
 }
 
 #formulario_agregar_participante, #formulario_agregar_tipo_gestion{
