@@ -197,7 +197,7 @@
             </div>
             <br/>
             <div class="button-group">
-                <div class="float-left">
+                <div class="float-right">
                     <button type="button" class="btn btn-danger" id="btn_guardar_gestion">Guardar <i class="fa fa-floppy-o"></i></button>
                 </div>
                 
