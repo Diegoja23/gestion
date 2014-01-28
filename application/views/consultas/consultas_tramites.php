@@ -295,7 +295,7 @@ function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
 }
 
 function cargarAdjuntos(){
-    session_start();
+    //session_start();
     if(isset($_SESSION['adjunto'])){        
         return $arrayDatosAdjuntos = $_SESSION['adjunto'];
     }

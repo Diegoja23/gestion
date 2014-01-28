@@ -24,7 +24,7 @@
                                         'tipo' => $tipo)
                                );                                          
     //array_push($arrayDatosAdjuntos, $nombre_adjunto);                                           
-    session_start();
+    //session_start();
     unset($_SESSION['adjunto']);
     $_SESSION['adjunto'] = $arrayDatosAdjuntos;    
     

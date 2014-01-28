@@ -38,7 +38,8 @@ function iniEventos() {
                     if($urlVars.id_tramite > 0)
                     {                    	
                     	$id_tramite=parseInt($urlVars.id_tramite);
-						$(document).ready(traerTramitePorIdUrl($id_tramite));						
+						$(document).ready(traerTramitePorIdUrl($id_tramite));	
+						GLOBAL_id_tramite = $id_tramite;					
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
                     {                    	
