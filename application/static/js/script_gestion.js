@@ -443,7 +443,7 @@ function traerDatosComplementariosDeClienteElegido(documento, id_cliente){
 }
 
 function eliminarClienteElegido(){
-    var confirmado = confirm("¿Seguro que desea eliminar este cliente?");
+    var confirmado = confirm("¿Seguro que desea eliminar esta persona?");
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
         var documento = $($(this).parent().parent().parent().children()[2]).text();  
