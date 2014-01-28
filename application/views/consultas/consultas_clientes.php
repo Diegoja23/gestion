@@ -64,11 +64,17 @@ switch($consulta){
     case "traer_por_ci":
         $ci = cargarUnValor('ci'); 
         $un_cliente = Fachada::getInstancia()->getByCI($ci);
+        //var_dump($un_cliente);die();
         $a = traerPrimerAdjunto($un_cliente);
-        $array = $un_cliente->convertirArray();        
-        $array['adjunto_tipo'] = $a->getTipo();
+        $array = $un_cliente->convertirArray();
+        if($a != null){
+            $array['adjunto_tipo'] = $a->getTipo();
                 //'<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>'; 
-        $array['adjunto_id'] = $a->getId();
+            $array['adjunto_id'] = $a->getId();
+        }
+        /*else{
+            
+        }*/
         echo json_encode($array);
         break;
     
@@ -143,7 +149,12 @@ function cargarCiDelCliente(){
 function traerPrimerAdjunto($un_cliente){
     $listaAdjuntos = $un_cliente->getAdjuntos();
     $listaSola = $listaAdjuntos['adjuntos'];
-    return $listaSola[0];
+    if(count($listaSola)>0){
+        return $listaSola[0];
+    }
+    else{
+        return null;
+    }
 }
 
 function cargarUnValor($variable){
