@@ -91,9 +91,9 @@ class Fachada
         return $this->sp->eliminarAdjuntoCliente($id_adjunto);    
     }    
     
-    public function login($email, $contrasenia)
+    public function login($email, $contraseña)
     {
-        return $this->sp->login($email, $contrasenia);         
+        return $this->sp->login($email, $contraseña);         
     }
     
     public function getUsuarios($limit = 0, $offset = -1) 

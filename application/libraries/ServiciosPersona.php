@@ -115,11 +115,11 @@ class ServiciosPersona
     /* USUARIOS */
     
     /* El login retorna un objeto usuario, si es vacio pues, el login es incorrecto */
-    public function login($email, $contrasenia)
+    public function login($email, $contraseña)
     {
         $paramsUsuario=array();
         $ci =& get_instance();                      
-        $data = $ci->usuarios->login($email,$contrasenia);
+        $data = $ci->usuarios->login($email,$contraseña);
         if($data)
         {
             foreach($data as $u)

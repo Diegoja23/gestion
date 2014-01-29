@@ -8,9 +8,9 @@ class Usuarios extends CI_Model
     }
     
     
-    public function login($email, $contrasenia)
+    public function login($email, $contraseña)
     {
-        $query = $this->db->get_where('usuario', array('email' => $email, 'contraseña' => $contrasenia));
+        $query = $this->db->get_where('usuario', array('email' => $email, 'contraseña' => $contraseña));
         if ($query->num_rows > 0) return $query->result();
         return false;        
     }
@@ -27,7 +27,13 @@ class Usuarios extends CI_Model
         return $query->result();              
     }
     
-    //insert_usuario
+    function insert_usuario($usuarioParams)
+    {
+        $id_usuario = 0;
+        $this->db->insert('usuario', $usuarioParams);   
+        $id_usuario = $this->db->insert_id();
+        return $id_usuario;   
+    }    
  
 }
 

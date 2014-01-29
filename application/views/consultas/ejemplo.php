@@ -150,9 +150,19 @@
     foreach ($usuarios as $u) 
     {
         echo $u->getNombre()."<br>";
+        var_dump($u->convertirArray());
        
     }  
     
+    $paramsUsuario=array();
+    $paramsUsuario['nombre']='Amanda';
+    $paramsUsuario['apellido']='Peterson';
+    $paramsUsuario['email']='c.peterson@gmail.com';
+    $paramsUsuario['contraseña']='qwerty';
     
+    if($Fachada->agregarUsuario($paramsUsuario))
+        echo "El usuario ". $paramsUsuario['nombre']." se ingresó con éxito<br>";
+    else
+        echo "El usuario ". $paramsUsuario['nombre']." no pudo ser ingresado. Verifique los datos<br>";       
     
 ?>
