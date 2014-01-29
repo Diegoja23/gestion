@@ -72,6 +72,11 @@ class ServiciosPersona
     {
         return Participante::getAll($limit, $offset);
     }       
+    
+    public function getUsuarios($limit = 0, $offset = -1)
+    {
+        return Usuario::getAll($limit, $offset);
+    }
 
     public function agregarParticipante($paramsParticipante)
     {
@@ -111,6 +116,9 @@ class ServiciosPersona
         return $Participante->addAdjunto($Adjunto);        
     }     
  
+ 
+    /* USUARIOS */
+    
     /* El login retorna un objeto usuario, si es vacio pues, el login es incorrecto */
     public function login($email, $contrasenia)
     {

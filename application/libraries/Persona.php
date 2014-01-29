@@ -11,8 +11,7 @@ abstract class Persona
     protected $id_persona;
     protected $nombre;
     protected $apellido;
-    protected $email;
-    protected $adjuntos = array();
+    protected $email;    
     
     // Instancia codeIgniters
     protected $myci;

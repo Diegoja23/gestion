@@ -59,6 +59,11 @@ class Fachada
     {
         return $this->sp->getParticipantes($limit, $offset);
     }
+
+    public function getUsuarios($limit = 0, $offset = -1) 
+    {
+        return $this->sp->getUsuarios($limit, $offset);
+    }        
         
     public function getByCI($ci)
     {
@@ -93,6 +98,11 @@ class Fachada
     public function login($email, $contrasenia)
     {
         return $this->sp->login($email, $contrasenia);         
+    }
+    
+    public function getUsuarios($limit = 0, $offset = -1) 
+    {
+        return $this->sp->getUsuarios($limit, $offset);
     }
     
 
