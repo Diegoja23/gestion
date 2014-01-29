@@ -28,7 +28,7 @@
           <li><a href="tramites">Trámites</a></li>
           <li><a href="plantillas">Plantillas</a></li>
           <!--li><a href="another_page_test.php">Another Page</a></li-->
-          <li><a href="logout">Salir</a></li>
+          <li><a href="usuarios">Usuarios</a></li>
         </ul>
       </div>
     </div>
