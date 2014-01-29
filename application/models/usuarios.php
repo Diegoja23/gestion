@@ -26,6 +26,8 @@ class Usuarios extends CI_Model
         $query = $this->db->query($sql);                   
         return $query->result();              
     }
+    
+    //insert_usuario
  
 }
 

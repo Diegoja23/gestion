@@ -37,13 +37,7 @@ class Usuario extends Persona
         //TODO
         return false;
     }            
-    
-    public function validar()
-    {
-        //TODO validar usuarios
-        return true;
-    }
-    
+
     public static function getAll($limit = 0, $offset = -1)
     {
         $arrayUsuarios = array();
@@ -78,6 +72,7 @@ class Usuario extends Persona
         $fieldsUsuario = array();
         foreach($object_vars as $key => $value)        
             if($this->attNotDistinctToTable($key))
+                if($key=='contrasenia')  $fieldsUsuario[$key] = md5($value); 
                 $fieldsUsuario[$key] = $value;             
         return $this->myci->personas->insert_usuario($fieldsUsuario);             
     }    

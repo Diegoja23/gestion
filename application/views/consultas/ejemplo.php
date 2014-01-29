@@ -143,6 +143,15 @@
         //getTiposTramiteByGestion
     }      
         
+    echo "<hr><hr>Usuarios";
+    
+    $usuarios = $Fachada->getUsuarios();
+
+    foreach ($usuarios as $u) 
+    {
+        echo $u->getNombre()."<br>";
+       
+    }  
     
     
     
