@@ -26,7 +26,7 @@ class Usuario extends Persona
                 
     public function getTelefono(){return $this->telefono;}
     
-    public function getCI(){return $this->ci;}
+    public function getContraseña(){return $this->contraseña;}
     
     public function getRol(){return $this->rol;}
     
@@ -95,6 +95,27 @@ class Usuario extends Persona
         }
         return $fieldsUsuario;
     }    
+
+    public function update()
+    {
+        $object_vars=get_object_vars($this);
+        $fieldsUsuario = array();
+        foreach($object_vars as $key => $value)                    
+            if($this->attNotDistinctToTable($key))
+            {
+/*                if($key=='contraseña')  $fieldsUsuario[$key] = md5($value); 
+                else*/ 
+                if ($key=='id_persona')  $fieldsUsuario['id_usuario'] = $value;
+                else $fieldsUsuario[$key] = $value;                                    
+            }                      
+              
+        return $this->myci->usuarios->update_usuario($fieldsUsuario);
+    }        
+    
+    public function eliminar()
+    {
+        return $this->myci->usuarios->eliminar($this->id_persona);
+    }
     
  
 }

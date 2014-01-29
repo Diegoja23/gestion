@@ -71,6 +71,11 @@ class Fachada
         return $this->sp->eliminarByCI($ci);
     }
     
+    public function eliminarPersonaById($id_persona)
+    {
+        return $this->sp->eliminarPersonaById($id_persona);
+    }    
+    
     public function getBlobDatoComplementario($id)
     {
         return $this->sp->getBlob($id);    
@@ -105,7 +110,16 @@ class Fachada
     {
         return $this->sp->agregarUsuario($paramsUsuario);    
     }    
+    
+    public function modificarUsuario($Usuario) 
+    {
+        return $this->sp->modificarUsuario($Usuario);    
+    }    
 
+    public function eliminarUsuario($id_usuario) 
+    {
+        return $this->sp->eliminarUsuario($id_usuario);    
+    }    
     /* GESTIONES */
     
     public function agregarGestion($paramsGestion, $grupo)

@@ -51,6 +51,10 @@ class Personas extends CI_Model
         return $this->db->delete('personas', array('ci' => $ci));        
     }
     
+    public function eliminarById($id_persona){  
+        return $this->db->delete('personas', array('id_persona' => $id_persona));        
+    }        
+    
     function update_persona($personParams)
     {        
         $id_persona = $personParams['id_persona'];
