@@ -2,23 +2,13 @@
 $consulta = $_POST['consulta'];
     
 switch($consulta){
-    case "traer_todos":        
-        $lista_total = traerTodasLasPersonas();
-        echo crearListaParaPersonas($lista_total);
+    case "traer_todos":
+        $listaUsuarios = Fachada::getInstancia()->getUsuarios();
+        echo crearListaParaPersonas($listaUsuarios);
         break;
     
-    case "traer_clientes":
-        $listaClientes = Fachada::getInstancia()->getClientes();
-        echo crearListaParaPersonas($listaClientes);
-        break;
-    
-    case "traer_participantes":
-        $listaParticipantes = Fachada::getInstancia()->getParticipantes();
-        echo crearListaParaPersonas($listaParticipantes);
-        break;
-
-    case "agregar_cliente": 
-        $un_cliente_array = cargarValores();
+    case "agregar_usuario": 
+        $un_usuario_array = cargarValores();
         $adjunto_array = cargarCiDelCliente();
         
         if($adjunto_array != -1){
@@ -35,45 +25,9 @@ switch($consulta){
             /*echo "El cliente ". $un_cliente['nombre']." no pudo ser ingresado. Verifique los datos<br>"; */
             echo 0;
         }
-        break;
-        
-    case "modificar_cliente":         
-        $un_cliente_array = cargarValores();        
-        $es_cli = laPersonaEsCliente($un_cliente_array['id_persona']);
-        if($es_cli){
-            $un_cliente = new Cliente($un_cliente_array);
-            $retorno = Fachada::getInstancia()->modificarCliente($un_cliente);
-        }
-        else{
-            $un_participante = new Cliente($un_cliente_array);
-            $retorno = Fachada::getInstancia()->modificarParticipante($un_participante);
-        }   
-        echo $retorno;
-        break;
-        
-    case "agregar_adjunto_al_cliente": 
-        $ci = cargarUnValor('ci');
-        $id_cliente = cargarUnValor('id_cliente');
-        $posibles_adjuntos = cargarTodosLosAdjuntos(); 
-        $el_adjunto = $posibles_adjuntos[0];                
-        //$adjunto_array = cargarCiDelCliente();
-        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlCliente($id_cliente,$el_adjunto);
-        //$id_adjunto = 12;
-        if($id_adjunto > 0){
-             echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
-        }
-        else{
-            echo -1;
-        }
-        break;    
-    
-    case "eliminar_dato_complementario_por_id":
-       $id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjuntoCliente($id_adjunto);
-       echo $id_adjunto;
-       break; 
-        
-    case "traer_por_ci":
+        break;        
+            
+    case "traer_por_id":
         $ci = cargarUnValor('ci'); 
         $un_cliente = Fachada::getInstancia()->getByCI($ci);
         //var_dump($un_cliente);die();
@@ -88,13 +42,8 @@ switch($consulta){
             
         }*/
         echo json_encode($array);
-        break;
-    
-   case "subir_foto":
-        $file = $_FILES['archivo']['name'];
-        echo $file;
-        break;   
-    
+        break;    
+   
    case "eliminar_por_ci":
         $ci = cargarUnValor('ci');
         $borrado = Fachada::getInstancia()->eliminarByCI($ci);
@@ -115,21 +64,9 @@ function cargarValores(){
     $paramsCliente=array();
     $paramsCliente['nombre']=$_POST['nombre'];
     $paramsCliente['apellido']=$_POST['apellido'];
-    $paramsCliente['ci']=$_POST['ci'];
     $paramsCliente['email']=$_POST['email'];
-    $paramsCliente['telefono']=$_POST['telefono'];
-    $paramsCliente['direccion']=$_POST['direccion']; 
-    if(isset($_POST['id_persona'])){
-        $paramsCliente['id_persona']=$_POST['id_persona']; 
-    }
-    //$paramsCliente['ci_escaneada']=$_POST['ci_escaneada'];
+    $paramsCliente['password']=$_POST['password'];
     return $paramsCliente;
-}
-
-function traerTodasLasPersonas(){
-        $listaParticipantes = Fachada::getInstancia()->getParticipantes();
-        $listaClientes = Fachada::getInstancia()->getClientes();
-        return array_merge($listaParticipantes,$listaClientes);
 }
 
 function cargarCiDelCliente(){
@@ -189,11 +126,11 @@ function traerTodos(){
 }
 
 function crearListaParaPersonas($lista){
-    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
+    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>E-mail</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0;    
     foreach ($lista as $c) 
     {        
-        $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_usuario">'.$c->getId().'</td><td class="dato_mostrado_usuario">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_usuario">'.$c->getMail().'</td><td><p><i class="btn_ver_usuario fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_usuario fa fa-ban fa-2x"></i></p></td></tr>';
     }
     return $retorno;
 }
@@ -220,16 +157,6 @@ function cargarTodosLosAdjuntos(){
     else{
         return -1;
     }
-}
-
-function laPersonaEsCliente($id_persona){
-    $lista = traerTodasLasPersonas();
-    foreach($lista as $una_persona){
-        if($una_persona->getId()==$id_persona){
-            return $una_persona->esCliente();
-        }
-    }
-    return false;
 }
 
 

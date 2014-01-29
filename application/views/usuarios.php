@@ -65,91 +65,39 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Clientes</h1>
-        <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar cliente <i class="fa fa-plus-circle"></i></button>
-        <button id="btn_mostrar_lista_clientes" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
-        <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
+        <h1>Usuarios administradores</h1>
+        <button id="btn_agregar_usuario" type="button" class="btn btn-primary">Agregar usuario <i class="fa fa-plus-circle"></i></button>
+        <button id="btn_mostrar_lista_usuarios" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <div id="retorno_borrado_usuario"></div>       
+
         
-        <select class="form-control float-right" id="combo_lista_personas_personas">
-            <option value="1">Todos</option>
-            <option value="2">Clientes</option>
-            <option value="3">Participantes</option>
-        </select>
-        
-        <div id="div_formulario_cliente">
-            <h3>Datos del cliente</h3>           
+        <div id="div_formulario_usuario">
+            <h3>Datos del usuario</h3>           
             <div class="form-group">
-                <label for="txt_nombre_cliente">Nombre</label>
-                <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                
+                <label for="txt_nombre_usuario">Nombre</label>
+                <input type="text" class="form-control" id="txt_nombre_usuario" placeholder="Ingresar Nombre">                
             </div>
             <div class="form-group">
-                <label for="txt_apellido_cliente">Apellido</label>
-                <input enabled="false" type="text" class="form-control" id="txt_apellido_cliente" placeholder="Ingresar Apellido">                
+                <label for="txt_apellido_usuario">Apellido</label>
+                <input enabled="false" type="text" class="form-control" id="txt_apellido_usuario" placeholder="Ingresar Apellido">                
             </div>
-            <div class="form-group">                
-                <label for="txt_ci_cliente">Cédula de Identidad</label><br />
-                <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
-                <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar cédula <i class="fa fa-upload"></i></button>                
-            </div>  
-            <!--div class="form-group" id="div_formulario_subir_ci"-->
-            <form enctype="multipart/form-data" class="formulario_archivo" id="div_formulario_subir_ci">
-                    <label for="input_file_cedula">Cédula</label>
-                    <input type="file" class="archivo" id="input_file_cedula" name="input_file_cedula">
-                    <p class="help-block retorno_del_file_agregar_elemento">Agregar cédula de identidad.</p>
-                    <button type="button" class="subir_archivo btn btn-info btn-sm">Subir cédula</button> 
-            </form>
-            <div class="mostrarCI"></div>
-            <!--/div-->
-            <div class="form-group">
-                <label for="txt_email_cliente">Email</label>                
-                <input type="email" class="form-control" id="txt_email_cliente" placeholder="E-mail">
+             <div class="form-group">
+                <label for="txt_email_usuario">Email</label>                
+                <input type="email" class="form-control" id="txt_email_usuario" placeholder="E-mail">
             </div>
             
             <div class="form-group">
-                <label for="txt_telefono_cliente">Teléfono</label>
-                <input type="text" class="form-control" id="txt_telefono_cliente" placeholder="Ingresar Teléfono">                
-            </div>
-            <div class="form-group">
-                <label for="txt_direccion_cliente">Dirección</label>
-                <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
+                <label for="txt_pass_usuario">Password</label>                
+                <input type="password" class="form-control" id="txt_pass_usuario" placeholder="Password">
             </div>  
+            <br/>
             <div class="button-group">
-                <button type="button" class="btn btn-success" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
-            </div>  
+                <button type="button" class="btn btn-danger" id="btn_guardar_usuario">Guardar <i class="fa fa-floppy-o"></i></button>
+            </div> 
         </div>
         <br/>
-        <div id="div_formulario_adjuntos_cliente">
-            <div id="div_form_agregar_adjunto_persona">
-            <h3><em>Adjuntos</em></h3>
-            <h3 id="nombre_cliente_adjunto">Nombre del cliente</h3>
-            <form enctype="multipart/form-data" class="formulario_archivo_para_adjunto" id="div_formulario_subir_adjunto">
-                    <br />
-                    <label>Nombre del ajunto: </label>
-                    <input type="text" class="form-control" id="txt_nombre_adjunto" name="txt_nombre_adjunto" placeholder="Nombre del adjunto"><br/><br/> 
-                    <label for="input_file_cedula">Adjunto</label>
-                    <input type="file" class="archivo" id="input_file_adjunto" name="input_file_adjunto">
-                    <p class="help-block retorno_del_file_agregar_elemento_adjunto">Agregar adjunto del cliente.</p>
-                    <button type="button" class="subir_archivo_adjunto_cliente btn btn-info btn-sm">Subir adjunto</button> 
-            </form>
-            </div>
-            <br/>
-            <hr/>
-            <br/>
-            <div id="dialog_adjunto_del_cliente" title="Archivo adjunto" style="display:none;"></div>
-            <div id="div_listado_adjuntos_total_del_cliente">
-                <div id="div_no_hay_adjuntos_del_cliente">
-                    <h3> - No hay adjuntos - </h3>
-                </div>
-                <div id="div_archivos_adjuntos">
-                    <h3>Lista de adjuntos</h3>
-                    <table class="table table-hover" >
-                        <thead><tr><th>#</th><th>Nombre de ajunto</th><th>Acciones</th></tr></thead>
-                        <tbody id="div_listado_adjuntos_de_un_cliente"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div id="div_listado_cliente">            
+        
+        <div id="div_listado_usuarios">            
         </div>
       </div>
     </div>
