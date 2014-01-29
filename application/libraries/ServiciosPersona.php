@@ -40,6 +40,11 @@ class ServiciosPersona
         return $Cliente->update(); 
     } 
     
+    public function modificarParticipante(Participante $Participante)
+    {
+        return $Participante->update(); 
+    }     
+    
     public function getByCI($ci){
         $un_cliente = new Cliente(array('ci'=>$ci)); 
         $un_cliente->getByCI();
