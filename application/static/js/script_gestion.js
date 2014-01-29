@@ -97,7 +97,11 @@ function iniEventos() {
                 }
                 else{
                     if(url == '/gestion/usuarios' || url == '/gestion/usuarios.php'){
-                        $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_u.php",{consulta: "traer_todos"}); 
+                        $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"}); 
+                        /*$.post(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"}).done(function(data) { 
+                        var a = data;
+                        var lolo = a;
+                        });*/
                         //$(".subir_archivo").click(subirElArchivo);
                         $(":file").change(cambioElFile);
                     }
