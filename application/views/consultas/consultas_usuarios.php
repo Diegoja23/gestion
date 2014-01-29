@@ -3,8 +3,9 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        $listaUsuarios = Fachada::getInstancia()->getUsuarios();
-        var_dump($listaUsuarios);die();
+        echo ":asdfasdf";
+        $listaUsuarios = Fachada::getInstancia()->getUsuarios();        
+        var_dump("loo");die();
         echo crearListaParaPersonas($listaUsuarios);
         break;
     
@@ -70,52 +71,6 @@ function cargarValores(){
     return $paramsCliente;
 }
 
-function cargarCiDelCliente(){
-    /*$archivo = $_FILES["input_file_cedula"]["tmp_name"];    
-    $tamanio = $_FILES["input_file_cedula"]["size"];
-    $tipo    = $_FILES["input_file_cedula"]["type"];
-    $nombre  = $_FILES["input_file_cedula"]["name"];    
-         
-    if ( $archivo != "none" )
-    {
-        $fp = fopen($archivo, "rb");
-        $contenido = fread($fp, $tamanio);
-        $contenido = addslashes($contenido);
-        fclose($fp);     
-    }
-    else{
-        return -1;
-    }
-         
-    $arrayDatosAdjuntos = array(
-                                array(  'nombre' => 'cedula',
-                                        'archivo' => $contenido,
-                                        'tipo' => $tipo)
-                               );   */
-    //session_start();
-    if(!isset($_SESSION)){
-        session_start();
-    }
-    if(isset($_SESSION['ci'])){
-        return $arrayDatosAdjuntos = $_SESSION['ci'];
-    }
-    else{
-        return -1;
-    }
-        //echo '<img src="data:image/jpeg;base64,' . base64_encode( $archivo ) . '" />';
-}
-
-function traerPrimerAdjunto($un_cliente){
-    $listaAdjuntos = $un_cliente->getAdjuntos();
-    $listaSola = $listaAdjuntos['adjuntos'];
-    if(count($listaSola)>0){
-        return $listaSola[0];
-    }
-    else{
-        return null;
-    }
-}
-
 function cargarUnValor($variable){
     return $_POST[$variable];
 }
@@ -135,30 +90,5 @@ function crearListaParaPersonas($lista){
     }
     return $retorno;
 }
-
-/*function crearListaGestiones($lista){
-    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0;    
-    foreach ($lista as $c) 
-    {        
-        $retorno .= '<tr><td class="dato_mostrado_cliente">'.++$numero.'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
-    }
-    return $retorno;
-}*/
-
-function cargarTodosLosAdjuntos(){
-    //session_start();
-    if(!isset($_SESSION)){
-        session_start();
-    }
-    if(isset($_SESSION['adjunto'])){        
-        $arrayDatosAdjuntos = $_SESSION['adjunto'];        
-        return $arrayDatosAdjuntos;
-    }
-    else{
-        return -1;
-    }
-}
-
 
 ?>
