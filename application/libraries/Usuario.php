@@ -9,9 +9,8 @@ require_once('Persona.php');
 class Usuario extends Persona
 {
     
-    protected $contrasenia;
-    protected $rol;
-    protected $ci;
+    protected $contraseña;
+    protected $rol=1;    
     
     /* Constructor */
     public function __construct($params = array())
@@ -50,7 +49,7 @@ class Usuario extends Persona
             $paramsUsuario["nombre"] = $u->nombre;    
             $paramsUsuario["apellido"] = $u->apellido;    
             $paramsUsuario["email"] = $u->email;    
-            $paramsUsuario["contrasenia"] = $u->contraseña;    
+            $paramsUsuario["contraseña"] = $u->contraseña;    
             $paramsUsuario["rol"] = $u->rol;                  
             
             $Usuario = new Usuario($paramsUsuario);   
@@ -63,7 +62,7 @@ class Usuario extends Persona
     public function validar()
     {
         //TODO -- aqui hay que validar los datos del participante, asi como asegurarnos de que no exista previamente
-        return ($this->nombre!='' && $this->apellido!='' && $this->email!='' && $this->contrasenia!='');      
+        return ($this->nombre!='' && $this->apellido!='' && $this->email!='' && $this->contraseña!='');      
     }
         
     public function add()
@@ -72,9 +71,12 @@ class Usuario extends Persona
         $fieldsUsuario = array();
         foreach($object_vars as $key => $value)        
             if($this->attNotDistinctToTable($key))
-                if($key=='contrasenia')  $fieldsUsuario[$key] = md5($value); 
-                $fieldsUsuario[$key] = $value;             
-        return $this->myci->personas->insert_usuario($fieldsUsuario);             
+            {
+                if($key=='contraseña')  $fieldsUsuario[$key] = md5($value); 
+                else if ($key=='id_persona')  $fieldsUsuario['id_usuario'] = $value;
+                else $fieldsUsuario[$key] = $value;                                    
+            }         
+        return $this->myci->usuarios->insert_usuario($fieldsUsuario);             
     }    
 
     public function attNotDistinctToTable($att)

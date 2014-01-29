@@ -10,9 +10,9 @@
             
             $failLogin = false;
 
-            if(isset($_POST['email']) && isset($_POST['contrasenia']))
+            if(isset($_POST['email']) && isset($_POST['contraseña']))
             {  
-                $Usuario = Fachada::getInstancia()->login($_POST['email'], md5($_POST['contrasenia']));
+                $Usuario = Fachada::getInstancia()->login($_POST['email'], md5($_POST['contraseña']));
                 
                 if($Usuario)
                 {     
@@ -51,7 +51,7 @@
           <?php if($failLogin) echo "<p style='color:red'>email o contraseña inválidos</p>" ?>
         <form action="/gestion/login" method="post">
             Email: <input name ="email" class="form-control"><br>
-            Contraseña: <input name ="contrasenia" type="password" class="form-control"><br><br>
+            Contraseña: <input name ="contraseña" type="password" class="form-control"><br><br>
             <input type="submit" value="Ingresar" class="btn btn-info">
         </form>
       </div>        
