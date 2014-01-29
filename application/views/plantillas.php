@@ -67,7 +67,8 @@
         <!-- insert the page content here -->
         <h1>Plantillas</h1>
         <button id="btn_agregar_plantilla" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
-        <button id="btn_mostrar_lista_plantillas" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
+        <button id="btn_mostrar_lista_plantillas" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>
+        <div id="retorno_ajax_plantillas"></div>        
         <div id="div_formulario_plantilla">
             <h3>Datos de la plantilla</h3>
             <div class="form-group">
@@ -88,7 +89,7 @@
                     <textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>
             </div>
             <br /><br />
-            <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax_plantillas"></div><div id="retorno_borrado_plantilla"></div>
+            <button type="button" class="btn btn-success" id="btn_guardar_plantilla">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_borrado_plantilla"></div>
         </div>
         <div id="div_listado_plantillas">     - No hay plantillas -       
         </div>

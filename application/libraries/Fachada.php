@@ -40,6 +40,11 @@ class Fachada
         return $this->sp->modificarCliente($Cliente);    
     }
       
+    public function modificarParticipante($Participante) 
+    {
+        return $this->sp->modificarParticipante($Participante);    
+    }
+          
     public function getClientes($limit = 0, $offset = -1) 
     {
         return $this->sp->getClientes($limit, $offset);
