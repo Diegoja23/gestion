@@ -3,46 +3,24 @@ $consulta = $_POST['consulta'];
     
 switch($consulta){
     case "traer_todos":
-        echo ":asdfasdf";
-        $listaUsuarios = Fachada::getInstancia()->getUsuarios();        
-        var_dump("loo");die();
+        $listaUsuarios = traerTodos(); 
         echo crearListaParaPersonas($listaUsuarios);
         break;
     
     case "agregar_usuario": 
         $un_usuario_array = cargarValores();
-        $adjunto_array = cargarCiDelCliente();
-        
-        if($adjunto_array != -1){
-            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array,$adjunto_array);
-        }
-        else{
-            $retorno = Fachada::getInstancia()->agregarCliente($un_cliente_array);
-        }
-        if($retorno){
-            /*echo "El cliente ".$un_cliente['nombre']." se ingresó con éxito<br>";*/
-            echo 1;
-        }
-        else{
-            /*echo "El cliente ". $un_cliente['nombre']." no pudo ser ingresado. Verifique los datos<br>"; */
-            echo 0;
-        }
-        break;        
+        echo Fachada::getInstancia()->agregarUsuario($un_usuario_array);        
+        break;
+    
+    case "modificar_usuario": 
+        $un_usuario_array = cargarValores();
+        echo Fachada::getInstancia()->modificarUsuario($un_usuario_array);        
+        break;
             
     case "traer_por_id":
-        $ci = cargarUnValor('ci'); 
-        $un_cliente = Fachada::getInstancia()->getByCI($ci);
-        //var_dump($un_cliente);die();
-        $a = traerPrimerAdjunto($un_cliente);
-        $array = $un_cliente->convertirArray();
-        if($a != null){
-            $array['adjunto_tipo'] = $a->getTipo();
-                //'<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>'; 
-            $array['adjunto_id'] = $a->getId();
-        }
-        /*else{
-            
-        }*/
+        $id_usuario = cargarUnValor('id_usuario'); 
+        $un_usuario = traerPorId($id_usuario);
+        $array = $un_usuario->convertirArray();
         echo json_encode($array);
         break;    
    
@@ -63,12 +41,15 @@ switch($consulta){
 
 
 function cargarValores(){ 
-    $paramsCliente=array();
-    $paramsCliente['nombre']=$_POST['nombre'];
-    $paramsCliente['apellido']=$_POST['apellido'];
-    $paramsCliente['email']=$_POST['email'];
-    $paramsCliente['password']=$_POST['password'];
-    return $paramsCliente;
+    $paramsUsuario=array();
+    if(isset($_POST['id_persona'])){
+        $paramsUsuario['id_persona']=$_POST['id_persona']; 
+    }
+    $paramsUsuario['nombre']=$_POST['nombre'];
+    $paramsUsuario['apellido']=$_POST['apellido'];
+    $paramsUsuario['email']=$_POST['email'];
+    $paramsUsuario['password']=$_POST['password'];
+    return $paramsUsuario;
 }
 
 function cargarUnValor($variable){
@@ -76,9 +57,7 @@ function cargarUnValor($variable){
 }
 
 function traerTodos(){
-    //$Fachada = $GLOBALS['fachada'];
-    $todas_las_gestiones = Fachada::getInstancia()->getClientes();
-    return $todas_las_gestiones;
+    return Fachada::getInstancia()->getUsuarios();
 }
 
 function crearListaParaPersonas($lista){
@@ -89,6 +68,16 @@ function crearListaParaPersonas($lista){
         $retorno .= '<tr><td class="dato_mostrado_usuario">'.$c->getId().'</td><td class="dato_mostrado_usuario">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_usuario">'.$c->getMail().'</td><td><p><i class="btn_ver_usuario fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_usuario fa fa-ban fa-2x"></i></p></td></tr>';
     }
     return $retorno;
+}
+
+function traerPorId($id_usuario){
+    $lista = traerTodos();
+    foreach($lista as $un_usuario){
+        if($un_usuario->getId()==$id_usuario){
+            return $un_usuario;
+        }
+    }
+    return null;
 }
 
 ?>

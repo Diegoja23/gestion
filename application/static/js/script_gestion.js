@@ -98,11 +98,6 @@ function iniEventos() {
                 else{
                     if(url == '/gestion/usuarios' || url == '/gestion/usuarios.php'){
                         $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"}); 
-                        /*$.post(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"}).done(function(data) { 
-                        var a = data;
-                        var lolo = a;
-                        });*/
-                        //$(".subir_archivo").click(subirElArchivo);
                         $(":file").change(cambioElFile);
                     }
                 }
@@ -2052,7 +2047,7 @@ function guardarUsuario(){
             });
         }
         else{
-            $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "modificar_usuario",id_usuario:GLOBAL_id_usuario,nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
+            $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "modificar_usuario",id_persona:GLOBAL_id_usuario,nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
                 .done(function(data) {
                 if(parseInt(data) == 1){
                     $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se modificó con éxito</strong>");
