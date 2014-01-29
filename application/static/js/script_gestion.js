@@ -191,7 +191,7 @@ $(document).on("click","#btn_mostrar_lista_usuarios",agregarDivListaUsuarios);
 $(document).on("click","#btn_guardar_usuario",guardarUsuario);
 $(document).on("click",".dato_mostrado_usuario",traerUsuarioElegidoClicNombre);
 $(document).on("click",".btn_ver_usuario",traerUsuarioElegidoClicIcono);
-$(document).on("click",".btn_eliminar_cliente",eliminarUsuarioElegido);
+$(document).on("click",".btn_eliminar_usuario",eliminarUsuarioElegido);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -2015,7 +2015,7 @@ function eliminarUsuarioElegido(){
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
         var id_usuario = $($(this).parent().parent().parent().children()[0]).text();
-        $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "eliminar_por_id",id_usuario: id_usuario})
+        $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "eliminar_por_id",id_persona: id_usuario})
                 .done(function(data) {
                     $("#retorno_borrado_usuario").html(data);
                     //$('#content').append(un_cliente);
@@ -2040,6 +2040,7 @@ function guardarUsuario(){
                 if(parseInt(data) == 1){
                     $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se ingresó con éxito</strong>");
                     cargarFormularioCliente(-1);
+                    agregarDivListaUsuarios();
                 }
                 else{
                     $("#retorno_ajax_usuario").append(data);
@@ -2052,6 +2053,7 @@ function guardarUsuario(){
                 if(parseInt(data) == 1){
                     $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se modificó con éxito</strong>");
                     cargarFormularioCliente(-1);
+                    agregarDivListaUsuarios();
                 }
                 else{
                     $("#retorno_ajax_usuario").append(data);

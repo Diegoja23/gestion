@@ -24,8 +24,8 @@ switch($consulta){
         echo json_encode($array);
         break;    
    
-   case "eliminar_por_ci":
-        $ci = cargarUnValor('ci');
+   case "eliminar_por_id":
+        $id_persona = cargarUnValor('id_persona');
         $borrado = Fachada::getInstancia()->eliminarByCI($ci);
         if($borrado){
             echo "<strong style='color:green;'>El cliente de cédula ".$ci." fue exitosamente borrado!";
