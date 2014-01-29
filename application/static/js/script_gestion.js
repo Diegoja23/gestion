@@ -425,6 +425,8 @@ function traerClienteElegido(documento, id_cliente){
                 agregarDivDatosCliente();
                 var un_cliente = jQuery.parseJSON(data);
                 cargarFormularioCliente(un_cliente);
+                agregarAdjuntosAListaDeCliente(un_cliente.adjuntos);
+
                 //$('#div_ci_cliente').append(data);                
         }, "json");
         //$("input").prop('disable', true);
@@ -596,7 +598,8 @@ function eliminar_adjunto_seleccionado_del_cliente(){
                     traerDatosComplementariosDeClienteElegido(documento);
                     //traerTramitePorId(id_tramite);
                 }             
-            }, "json");
+            }, "json");            
+        $(this).parent().parent().parent().fadeOut(1500); 
     }
 }
 
@@ -624,10 +627,14 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
                 //agregarDivDatosCliente();
                 var retorno_adjunto = jQuery.parseJSON(data);
                 //alert(retorno_adjunto.id_adjunto);
-                agregar_fila_adjunto_cliente(retorno_adjunto.id_adjunto,nombre_adjunto,retorno_adjunto.tipo);
+                if($('#div_archivos_adjuntos').css('display')=='none'){
+                    $('#div_archivos_adjuntos').fadeIn(1500);
+                    $('#div_no_hay_adjuntos_del_cliente').fadeOut(1500);
+                }
+                agregar_fila_adjunto_cliente(retorno_adjunto.id_adjunto,nombre_adjunto,retorno_adjunto.tipo);                
                 //return retorno_adjunto;
         }, "json");
-
+        
 }
 
 
