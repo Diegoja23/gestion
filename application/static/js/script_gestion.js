@@ -518,6 +518,7 @@ function guardarCliente(){
                 if(parseInt(data) == 1){
                     $("#retorno_ajax").html("<strong style='color:green;'>La persona "+nombre_cli+" "+apellido_cli+" se modificó con éxito</strong>");
                     cargarFormularioCliente(-1);
+                    agregarDivListaClientes();
                 }
                 else{
                     $("#retorno_ajax").append(data);
