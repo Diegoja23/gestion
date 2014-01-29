@@ -4,6 +4,7 @@ $consulta = $_POST['consulta'];
 switch($consulta){
     case "traer_todos":
         $listaUsuarios = Fachada::getInstancia()->getUsuarios();
+        var_dump($listaUsuarios);die();
         echo crearListaParaPersonas($listaUsuarios);
         break;
     
