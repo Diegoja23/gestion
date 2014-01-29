@@ -84,6 +84,16 @@ class Usuario extends Persona
         return ($att != 'myci');
     }  
     
+    public function convertirArray(){
+        $object_vars=get_object_vars($this);        
+        $fieldsUsuario = array();
+        foreach($object_vars as $key => $value){                   
+            if($this->attNotDistinctToTable($key))
+                $fieldsUsuario[$key] = $value;               
+        }
+        return $fieldsUsuario;
+    }    
+    
  
 }
 
