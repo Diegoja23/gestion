@@ -15,7 +15,7 @@ class Usuarios extends CI_Model
         return false;        
     }
     
-    public function get_all_usuarios()
+    public function get_all_usuarios($limit = 0, $offset = -1)
     {
         $sql = "SELECT * FROM usuario";                
         

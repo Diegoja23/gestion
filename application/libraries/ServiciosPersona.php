@@ -71,12 +71,7 @@ class ServiciosPersona
     public function getParticipantes($limit = 0, $offset = -1) 
     {
         return Participante::getAll($limit, $offset);
-    }       
-    
-    public function getUsuarios($limit = 0, $offset = -1)
-    {
-        return Usuario::getAll($limit, $offset);
-    }
+    }           
 
     public function agregarParticipante($paramsParticipante)
     {
@@ -139,8 +134,22 @@ class ServiciosPersona
             return $Usuario;
         }
         return false;
-
     }
+    
+    public function getUsuarios($limit = 0, $offset = -1)
+    {
+        return Usuario::getAll($limit, $offset);
+    }
+        
+    public function agregarUsuario($paramsUsuario)
+    {
+        $Usuario = new Usuario($paramsUsuario);
+        if($Usuario->validar()) 
+            return $Usuario->add();            
+        else 
+            return false;         
+    }    
+        
     
 }
 
