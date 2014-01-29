@@ -65,7 +65,7 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Clientes</h1>
+        <h1>Personas</h1>
         <button id="btn_agregar_cliente" type="button" class="btn btn-primary">Agregar cliente <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_clientes" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
         <div id="retorno_borrado"></div><div id="div_ci_cliente"></div>
@@ -77,7 +77,7 @@
         </select>
         
         <div id="div_formulario_cliente">
-            <h3>Datos del cliente</h3>           
+            <h3>Datos de la persona</h3>           
             <div class="form-group">
                 <label for="txt_nombre_cliente">Nombre</label>
                 <input type="text" class="form-control" id="txt_nombre_cliente" placeholder="Ingresar Nombre">                

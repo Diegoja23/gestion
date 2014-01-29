@@ -491,3 +491,10 @@ table tr td
 #combo_lista_personas_personas{
     margin: 20px 0;
 }
+
+#div_formulario_usuario{
+    display: none;
+    margin:20px;
+    padding:20px;
+    border: 3px solid #777;
+}

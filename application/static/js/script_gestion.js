@@ -7,6 +7,7 @@ var GLOBAL_id_tramite;
 var GLOBAL_id_tipo_tramite;
 var GLOBAL_documento_cliente;
 var GLOBAL_id_cliente;
+var GLOBAL_id_usuario;
 $(document).ready(iniEventos);
 
 function iniEventos() {
@@ -94,6 +95,13 @@ function iniEventos() {
                     //$(".subir_archivo").click(subirElArchivo);
                     $(":file").change(cambioElFile);
                 }
+                else{
+                    if(url == '/gestion/usuarios' || url == '/gestion/usuarios.php'){
+                        $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_u.php",{consulta: "traer_todos"}); 
+                        //$(".subir_archivo").click(subirElArchivo);
+                        $(":file").change(cambioElFile);
+                    }
+                }
             }
         }
     }
@@ -177,8 +185,14 @@ $(document).on("click","#btn_agregar_tipo_tramite_tipo_gestion",addNewTipoTramit
 $(document).on("click",".dato_mostrado_tipo_tramite_TG",traerTipoTramiteByTipoGestion);
 $(document).on("click",".btn_ver_tipo_tramite_TG",traerTipoTramiteByTipoGestion);
  
-
-
+ 
+/*asignar eventos USUARIOS*/
+$(document).on("click","#btn_agregar_usuario",agregarDivDatosUsuario);
+$(document).on("click","#btn_mostrar_lista_usuarios",agregarDivListaUsuarios);
+$(document).on("click","#btn_guardar_usuario",guardarUsuario);
+$(document).on("click",".dato_mostrado_usuario",traerUsuarioElegidoClicNombre);
+$(document).on("click",".btn_ver_usuario",traerUsuarioElegidoClicIcono);
+$(document).on("click",".btn_eliminar_cliente",eliminarUsuarioElegido);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -485,17 +499,32 @@ function guardarCliente(){
     
     var valido = validarDatosIngresados(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli);
     if(valido == 1){
-        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
-            .done(function(data) {
-            if(parseInt(data) == 1){
-                $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
-                cargarFormularioCliente(-1);
-            }
-            else{
-                $("#retorno_ajax").append(data);
-                //$("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
-            }
-        });
+        if(typeof GLOBAL_id_cliente === 'undefined'){
+            $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
+                .done(function(data) {
+                if(parseInt(data) == 1){
+                    $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
+                    cargarFormularioCliente(-1);
+                }
+                else{
+                    $("#retorno_ajax").append(data);
+                    //$("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
+                }
+            });
+        }
+        else{
+            $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "modificar_cliente",id_persona:GLOBAL_id_cliente,nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
+                .done(function(data) {
+                if(parseInt(data) == 1){
+                    $("#retorno_ajax").html("<strong style='color:green;'>La persona "+nombre_cli+" "+apellido_cli+" se modificó con éxito</strong>");
+                    cargarFormularioCliente(-1);
+                }
+                else{
+                    $("#retorno_ajax").append(data);
+                    //$("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
+                }
+            });
+        }
     }
     else{
         alert("Datos incorrectos. No se puedo guardar");
@@ -1913,4 +1942,129 @@ function eliminarTipoTramiteElegido(){
         //ocultamos el borrado
         $(this).parent().parent().parent().fadeOut(1500);       
     }
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS DE USUARIO
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function agregarDivDatosUsuario(){    
+    //if($("#div_formulario_cliente").css("display") == "none"){        
+        $("#div_listado_usuarios").fadeOut(1500);        
+        $("#btn_agregar_usuario").fadeOut(1500);
+        $("#btn_mostrar_lista_usuarios").fadeIn(1500);        
+        $("#div_formulario_usuario").fadeIn(1500);
+        //$("#btn_agregar_cliente").text("Mostrar Lista"); 
+        cargarFormularioUsuario(-1);
+
+}
+
+
+function agregarDivListaUsuarios(){
+    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"});
+    $("#div_formulario_usuario").fadeOut(1500);
+    $("#btn_mostrar_lista_usuarios").fadeOut(1500);
+    $("#btn_agregar_usuario").fadeIn(1500);
+    $("#div_listado_usuarios").fadeIn(1500);
+    cargarFormularioUsuario(-1);
+}
+
+function cargarFormularioUsuario(un_usuario){
+    if(un_usuario != -1){
+        $("#txt_nombre_usuario").val(un_usuario.nombre);
+        $("#txt_apellido_usuario").val(un_usuario.apellido);
+        $("#txt_email_usuario").val(un_usuario.email);
+        $("#txt_pass_usuario").val("");        
+    }
+    else{
+        $("#txt_nombre_usuario").val("");
+        $("#txt_apellido_usuario").val("");
+        $("#txt_email_usuario").val("");
+        $("#txt_pass_usuario").val("");
+    }
+}
+
+
+
+function traerUsuarioElegidoClicNombre(){
+    //var documento = $($(this).parent().children()[2]).text();
+    var id_usuario = $($(this).parent().children()[0]).text();    
+    traerUsuarioElegido(id_usuario);
+}
+
+function traerUsuarioElegidoClicIcono(){
+    //var documento = $($(this).parent().parent().parent().children()[2]).text();
+    var id_usuario = $($(this).parent().parent().parent().children()[0]).text();    
+    traerUsuarioElegido(id_usuario);
+}
+
+function traerUsuarioElegido(id_usuario){  
+    GLOBAL_id_usuario = id_usuario;
+    $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "traer_por_id",id_usuario: id_usuario})
+            .done(function(data) {            
+                agregarDivDatosUsuario();
+                var un_usuario = jQuery.parseJSON(data);
+                cargarFormularioUsuario(un_usuario);             
+        }, "json");
+}
+
+function eliminarUsuarioElegido(){
+    var confirmado = confirm("¿Seguro que desea eliminar a este usuario?");
+    if(confirmado){
+        //var documento = $($(this).parent().children()[2]).text();  
+        var id_usuario = $($(this).parent().parent().parent().children()[0]).text();
+        $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "eliminar_por_id",id_usuario: id_usuario})
+                .done(function(data) {
+                    $("#retorno_borrado_usuario").html(data);
+                    //$('#content').append(un_cliente);
+            }, "json");
+        //$("input").prop('disable', true);
+        //ocultamos el borrado
+        $(this).parent().parent().parent().fadeOut(1500);       
+    }
+}
+
+function guardarUsuario(){
+    var nombre_usuario = $.trim($("#txt_nombre_usuario").val());
+    var apellido_usuario = $.trim($("#txt_apellido_usuario").val());
+    var email_usuario = $.trim($("#txt_email_usuario").val());
+    var pass_usuario = $.trim($("#txt_pass_usuario").val());
+    
+    var valido = validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario);
+    if(valido == 1){
+        if(typeof GLOBAL_id_usuario === 'undefined'){
+            $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "agregar_usuario",nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
+                .done(function(data) {
+                if(parseInt(data) == 1){
+                    $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se ingresó con éxito</strong>");
+                    cargarFormularioCliente(-1);
+                }
+                else{
+                    $("#retorno_ajax_usuario").append(data);
+                }
+            });
+        }
+        else{
+            $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "modificar_usuario",id_usuario:GLOBAL_id_usuario,nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
+                .done(function(data) {
+                if(parseInt(data) == 1){
+                    $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se modificó con éxito</strong>");
+                    cargarFormularioCliente(-1);
+                }
+                else{
+                    $("#retorno_ajax_usuario").append(data);
+                }
+            });
+        }
+    }
+    else{
+        alert("Error. Llene todo el formulario para guardar!");
+    }
+    //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
+}
+
+function validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario){
+    return nombre_usuario != '' && apellido_usuario != '' && email_usuario != '' && pass_usuario;
 }
