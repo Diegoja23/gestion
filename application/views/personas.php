@@ -148,7 +148,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div>        
         <div id="div_listado_cliente">            
         </div>
       </div>

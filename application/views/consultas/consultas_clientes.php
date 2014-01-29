@@ -45,7 +45,7 @@ switch($consulta){
             $retorno = Fachada::getInstancia()->modificarCliente($un_cliente);
         }
         else{
-            $un_participante = new Cliente($un_cliente_array);
+            $un_participante = new Participante($un_cliente_array);
             $retorno = Fachada::getInstancia()->modificarParticipante($un_participante);
         }   
         echo $retorno;
@@ -189,11 +189,18 @@ function traerTodos(){
 }
 
 function crearListaParaPersonas($lista){
-    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
+    $retorno = '<p style="margin-top:20px;margin-bottom:-10px !important;">Las personas con <i style="color:red;" class="fa fa-check"></i> son clientes</p><table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
     $numero = 0;    
     foreach ($lista as $c) 
-    {        
-        $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+    { 
+        if($c->esCliente()){
+            $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().' <i style="color:red;" class="fa fa-check"></i></td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+    
+        }
+        else{
+            $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+        }
+        
     }
     return $retorno;
 }
