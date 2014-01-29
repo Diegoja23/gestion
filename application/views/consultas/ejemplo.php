@@ -150,6 +150,7 @@
     foreach ($usuarios as $u) 
     {
         echo $u->getNombre()."<br>";
+        var_dump($u->convertirArray());
        
     }  
     
