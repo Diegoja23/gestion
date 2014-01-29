@@ -1981,7 +1981,7 @@ function cargarFormularioUsuario(un_usuario){
         $("#txt_nombre_usuario").val(un_usuario.nombre);
         $("#txt_apellido_usuario").val(un_usuario.apellido);
         $("#txt_email_usuario").val(un_usuario.email);
-        $("#txt_pass_usuario").val(un_usuario.contraseña);        
+        //$("#txt_pass_usuario").val(un_usuario.contraseña);        
     }
     else{
         $("#txt_nombre_usuario").val("");

@@ -16,8 +16,11 @@ switch($consulta){
     case "modificar_usuario": 
         $un_usuario_array = cargarValores();
         $un_usuario = traerPorId($un_usuario_array['id_persona']);
-        if(md5($un_usuario_array['contraseña'])!=$un_usuario->getPass()){
+        if($un_usuario_array['contraseña'] != '' && md5($un_usuario_array['contraseña'])!=$un_usuario->getPass()){
             $un_usuario_array['contraseña'] = md5($un_usuario_array['contraseña']);
+        }
+        else {
+            $un_usuario_array['contraseña'] = $un_usuario->getPass();
         }
         $otro_usuario = new Usuario($un_usuario_array);
         echo Fachada::getInstancia()->modificarUsuario($otro_usuario);        

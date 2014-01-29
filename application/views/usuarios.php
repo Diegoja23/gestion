@@ -88,7 +88,7 @@
             
             <div class="form-group">
                 <label for="txt_pass_usuario">Password</label>                
-                <input type="password" class="form-control" id="txt_pass_usuario" placeholder="Password">
+                <input type="password" class="form-control" id="txt_pass_usuario" placeholder="●●●●●●●●●●">
             </div>  
             <br/>
             <div class="button-group">
