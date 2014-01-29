@@ -71,6 +71,11 @@ class Fachada
         return $this->sp->eliminarByCI($ci);
     }
     
+    public function eliminarPersonaById($id_persona)
+    {
+        return $this->sp->eliminarPersonaById($id_persona);
+    }    
+    
     public function getBlobDatoComplementario($id)
     {
         return $this->sp->getBlob($id);    
