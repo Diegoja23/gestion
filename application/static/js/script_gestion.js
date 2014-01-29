@@ -1888,6 +1888,11 @@ function mostrarDialogPlantilla_tg(){
                         $(this).dialog("close");
                     }
                 },*/
+                Imprimir: function () {
+                    plantilla = CKEDITOR.instances.editorTT.getData();
+                    imprimirPlantilla(plantilla);
+                    //$(this).dialog("close");
+                },
                 Aceptar: function () {
                     plantilla = CKEDITOR.instances.editorTT.getData();
                     $(this).dialog("close");
@@ -1947,6 +1952,18 @@ function eliminarTipoTramiteElegido(){
         //ocultamos el borrado
         $(this).parent().parent().parent().fadeOut(1500);       
     }
+}
+
+function imprimirPlantilla(html) {
+    //htmlParaVer = '<html><head><title>Imprimir Plantilla</title><link rel="stylesheet" href="../bootstrap/css/bootstrap.css" type="text/css"><!--link rel="stylesheet" href="./css/estiloEvimed.css" type="text/css"><script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script><script type="text/javascript" src="../bootstrap/js/bootstrap-tooltip.js"></script> <script type="text/javascript" src="../bootstrap/js/bootstrap-popover.js"></script--></head><body><div id="container"><div id="plantilla">' + html + '</div></div></body></html>';
+    var htmlParaVer = '<html><head><style>body {height: 842px;width: 595px;margin-left: auto;margin-right: auto;}</style><title>Imprimir Plantilla</title><link rel="stylesheet" href="../bootstrap/css/bootstrap.css" type="text/css"><!--link rel="stylesheet" href="./css/estiloEvimed.css" type="text/css"><script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script><script type="text/javascript" src="../bootstrap/js/bootstrap-tooltip.js"></script> <script type="text/javascript" src="../bootstrap/js/bootstrap-popover.js"></script--></head><body><div id="container"><div id="plantilla">' + html + '</div></div></body></html>';
+    
+      
+    
+    var ventana = window.open("", "popup", "");
+    ventana.document.open();
+    ventana.document.write(htmlParaVer);
+    ventana.document.close();
 }
 
 
@@ -2082,7 +2099,7 @@ function validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usu
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
-  MÉTODOS BUSCADOR
+  MÉTODOS DE BUSCADOR
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
 function hacerBusqueda()
