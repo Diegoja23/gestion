@@ -110,6 +110,11 @@ class Fachada
     {
         return $this->sp->agregarUsuario($paramsUsuario);    
     }    
+    
+    public function modificarUsuario($Usuario) 
+    {
+        return $this->sp->modificarUsuario($Usuario);    
+    }    
 
     /* GESTIONES */
     

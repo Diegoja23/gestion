@@ -34,6 +34,14 @@ class Usuarios extends CI_Model
         $id_usuario = $this->db->insert_id();
         return $id_usuario;   
     }    
+    
+    public function update_usuario($usuarioParams)
+    {
+        $id_usuario = $usuarioParams['id_usuario'];        
+        $this->db->where('id_usuario', $id_usuario);
+        $this->db->update('usuario', $usuarioParams);    
+        return true;        
+    }
  
 }
 

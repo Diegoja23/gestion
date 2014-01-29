@@ -62,10 +62,14 @@ class ServiciosPersona
         return $un_cliente->eliminarByCI();        
     }    
     
+    public function eliminarPersonaById($id_persona){        
+        $un_participante = new Participante(array('id'=>$id_persona));        
+        return $un_participante->eliminarByCI();        
+    }      
+    
     public function getClientes($limit = 0, $offset = -1) 
     {
         return Cliente::getAll($limit, $offset);
-
     }   
     
     public function getParticipantes($limit = 0, $offset = -1) 
@@ -149,6 +153,11 @@ class ServiciosPersona
         else 
             return false;         
     }    
+        
+    public function modificarUsuario(Usuario $Usuario, $changePass=false)
+    {
+        return $Usuario->update(); 
+    }         
         
     
 }

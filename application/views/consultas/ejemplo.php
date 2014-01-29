@@ -150,10 +150,11 @@
     foreach ($usuarios as $u) 
     {
         echo $u->getNombre()."<br>";
-        var_dump($u->convertirArray());
+        $usumodi = $u;
        
     }  
     
+    echo "Modificar usuario ".$Fachada->modificarUsuario($usumodi);
     $paramsUsuario=array();
     $paramsUsuario['nombre']='Amanda';
     $paramsUsuario['apellido']='Peterson';

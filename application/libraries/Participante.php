@@ -77,7 +77,6 @@ class Participante extends Persona
                 $fieldsParticipante[$key] = $value;                     
               
         return $this->myci->personas->update_persona($fieldsParticipante);
-
     }    
     
     public function attNotDistinctToTable($att)
