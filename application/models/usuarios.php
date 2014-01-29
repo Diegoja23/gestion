@@ -14,6 +14,18 @@ class Usuarios extends CI_Model
         if ($query->num_rows > 0) return $query->result();
         return false;        
     }
+    
+    public function get_all_usuarios()
+    {
+        $sql = "SELECT * FROM usuario";                
+        
+        if ($limit > 0) $sql .= " LIMIT ".$offset;
+        //$this->db->limit($limit);
+        if ($offset >= 0) $sql .= ",".$limit;
+        //die($sql);
+        $query = $this->db->query($sql);                   
+        return $query->result();              
+    }
  
 }
 

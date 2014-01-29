@@ -13,6 +13,7 @@ class Participante extends Persona
     protected $direccion;
     protected $telefono;
     protected $ci;
+    protected $adjuntos = array();
     protected $es_cliente=false;
     
     /* Constructor */
