@@ -1967,6 +1967,7 @@ function agregarDivDatosUsuario(){
 
 
 function agregarDivListaUsuarios(){
+    GLOBAL_id_usuario = undefined;
     $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"});
     $("#div_formulario_usuario").fadeOut(1500);
     $("#btn_mostrar_lista_usuarios").fadeOut(1500);
@@ -1986,10 +1987,10 @@ function cargarFormularioUsuario(un_usuario){
         $("#txt_nombre_usuario").val("");
         $("#txt_apellido_usuario").val("");
         $("#txt_email_usuario").val("");
-        $("#txt_pass_usuario").val("");
-        GLOBAL_id_usuario = undefined;
+        $("#txt_pass_usuario").val("");        
         
     }
+    $('#retorno_borrado_usuario').html('');
 }
 
 
@@ -2006,14 +2007,14 @@ function traerUsuarioElegidoClicIcono(){
     traerUsuarioElegido(id_usuario);
 }
 
-function traerUsuarioElegido(id_usuario){  
-    GLOBAL_id_usuario = id_usuario;
+function traerUsuarioElegido(id_usuario){ 
     $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "traer_por_id",id_usuario: id_usuario})
             .done(function(data) {            
                 agregarDivDatosUsuario();
                 var un_usuario = jQuery.parseJSON(data);
                 cargarFormularioUsuario(un_usuario);             
         }, "json");
+        GLOBAL_id_usuario = id_usuario;
 }
 
 function eliminarUsuarioElegido(){

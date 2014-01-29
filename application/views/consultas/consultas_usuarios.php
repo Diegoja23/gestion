@@ -32,12 +32,12 @@ switch($consulta){
    
    case "eliminar_por_id":
         $id_persona = cargarUnValor('id_persona');
-        $borrado = Fachada::getInstancia()->eliminarPersonaById($id_persona);
+        $borrado = Fachada::getInstancia()->eliminarUsuario($id_persona);
         if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$ci." fue exitosamente borrado!";
+            echo "<strong style='color:green;'>El usuario ".$id_persona." fue exitosamente borrado!";
         }
         else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$ci." no se pudo borrar";
+            echo "<strong style='color:red;'>El usuario ".$id_persona." no se pudo borrar";
         }
         break;
     
