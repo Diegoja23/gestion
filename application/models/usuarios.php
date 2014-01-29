@@ -42,6 +42,11 @@ class Usuarios extends CI_Model
         $this->db->update('usuario', $usuarioParams);    
         return true;        
     }
+    
+    public function eliminar()
+    {
+        return true;
+    }
  
 }
 

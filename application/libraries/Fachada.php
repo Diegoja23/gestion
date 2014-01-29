@@ -116,6 +116,10 @@ class Fachada
         return $this->sp->modificarUsuario($Usuario);    
     }    
 
+    public function eliminarUsuario($id_usuario) 
+    {
+        return $this->sp->eliminarUsuario($id_usuario);    
+    }    
     /* GESTIONES */
     
     public function agregarGestion($paramsGestion, $grupo)

@@ -159,6 +159,11 @@ class ServiciosPersona
         return $Usuario->update(); 
     }         
         
+    public function eliminarUsuario($id_usuario)        
+    {
+        $Usuario = new Usuario(array('id_persona' => $id_usuario));
+        return $Usuario->Eliminar();         
+    }
     
 }
 

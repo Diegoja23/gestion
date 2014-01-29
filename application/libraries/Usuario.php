@@ -110,6 +110,10 @@ class Usuario extends Persona
         return $this->myci->usuarios->update_usuario($fieldsUsuario);
     }        
     
+    public function eliminar()
+    {
+        return $this->myci->usuarios->eliminar($this->id_persona);
+    }
     
  
 }
