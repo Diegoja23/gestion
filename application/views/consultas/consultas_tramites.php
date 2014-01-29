@@ -144,6 +144,18 @@ switch($consulta){
             echo "<strong style='color:red;'>El cliente de cédula ".$id_tramite." no se pudo borrar";
         }
         break;
+        
+   case "buscar_por_descripcion":
+        $text_busqueda = cargarUnValor('text_busqueda');
+        $lista_ret = traerTramitesBuscados(strtolower($text_busqueda));
+        if(count($lista_ret)>0){
+            echo crearListaTramites($lista_ret);
+        }
+        else{
+            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
+        }        
+        break;
+        
    case "gestion_por_tramite":
        $id_gestion = cargarUnValor('id_gestion');
        echo json_encode(getGestionByTramite($id_gestion,true));
@@ -313,6 +325,17 @@ function traerTramitesPorGestion($id_gestion){
         }
     }
     return $lista_retorno;
+}
+
+function traerTramitesBuscados($text_busqueda){
+    $retorno = array();
+    $lista_gestiones = traerTodos();
+    foreach($lista_gestiones as $una_gestion){
+        if(strpos( strtolower($una_gestion->getDescripcion()), $text_busqueda ) !== false){
+            array_push($retorno, $una_gestion);
+        }
+    }
+    return $retorno;
 }
 
 ?>

@@ -72,9 +72,9 @@
             <div class="form-group float-left">
                 <label for="lbl_seleccionar_elemento_busqueda">Buscar por:</label>  <br />              
                 <select class='form-control' id='combo_elemento_busqueda'>
-                    <option value="clientes">Clientes</option>
-                    <option value="gestion">Gestiones</option>
-                    <option value="tramites">Trámites</option>
+                    <option value="1">Personas</option>
+                    <option value="2">Gestiones</option>
+                    <option value="3">Trámites</option>
                 </select>
             </div>
             <div class="form-group float-left">                

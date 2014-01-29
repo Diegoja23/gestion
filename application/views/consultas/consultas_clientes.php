@@ -93,7 +93,18 @@ switch($consulta){
    case "subir_foto":
         $file = $_FILES['archivo']['name'];
         echo $file;
-        break;   
+        break;
+   
+   case "buscar_por_nombre":
+        $text_busqueda = cargarUnValor('text_busqueda');
+        $lista_ret = traerPersonasBuscadas(strtolower($text_busqueda));
+        if(count($lista_ret)>0){
+            echo crearListaParaPersonas($lista_ret);
+        }
+        else{
+            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
+        }        
+        break;
     
    case "eliminar_por_ci":
         $ci = cargarUnValor('ci');
@@ -205,16 +216,6 @@ function crearListaParaPersonas($lista){
     return $retorno;
 }
 
-/*function crearListaGestiones($lista){
-    $retorno = '<table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0;    
-    foreach ($lista as $c) 
-    {        
-        $retorno .= '<tr><td class="dato_mostrado_cliente">'.++$numero.'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar fa fa-ban fa-2x"></i></p></td></tr>';
-    }
-    return $retorno;
-}*/
-
 function cargarTodosLosAdjuntos(){
     //session_start();
     if(!isset($_SESSION)){
@@ -237,6 +238,17 @@ function laPersonaEsCliente($id_persona){
         }
     }
     return false;
+}
+
+function traerPersonasBuscadas($text_busqueda){
+    $retorno = array();
+    $lista_personas = traerTodasLasPersonas();
+    foreach($lista_personas as $una_persona){
+        if(strpos( strtolower($una_persona->getNombre()), $text_busqueda ) !== false || strpos(strtolower($una_persona->getApellido()), $text_busqueda ) !== false){
+            array_push($retorno, $una_persona);
+        }
+    }
+    return $retorno;
 }
 
 

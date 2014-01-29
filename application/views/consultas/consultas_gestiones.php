@@ -110,7 +110,18 @@ switch($consulta){
             $lista = crearSelectPersonas($lista_total,$lista_vacia);
         }
         echo $lista;
-        break;  
+        break;
+    
+   case "buscar_por_descripcion":
+        $text_busqueda = cargarUnValor('text_busqueda');
+        $lista_ret = traerGestionesBuscadas(strtolower($text_busqueda));
+        if(count($lista_ret)>0){
+            echo crearListaGestiones($lista_ret);
+        }
+        else{
+            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
+        }        
+        break;
     
     case "agregar_participante": 
         $un_participante_array = cargarValoresParticipante();                
@@ -227,6 +238,17 @@ function traerGestionPorID($id_gestion){
     foreach($lista_gestiones as $una_gestion){
         if($una_gestion->getId() == $id_gestion){
             return $una_gestion;
+        }
+    }
+    return $retorno;
+}
+
+function traerGestionesBuscadas($text_busqueda){
+    $retorno = array();
+    $lista_gestiones = traerTodos();
+    foreach($lista_gestiones as $una_gestion){
+        if(strpos( strtolower($una_gestion->getDescripcion()), $text_busqueda ) !== false){
+            array_push($retorno, $una_gestion);
         }
     }
     return $retorno;

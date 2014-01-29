@@ -194,7 +194,8 @@ $(document).on("click",".btn_ver_usuario",traerUsuarioElegidoClicIcono);
 $(document).on("click",".btn_eliminar_usuario",eliminarUsuarioElegido);
 
 
-//btn_buscar_inicio
+/*asignar eventos BUSCADOR*/
+$(document).on("click","#btn_buscar_inicio",hacerBusqueda);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -2076,4 +2077,53 @@ function guardarUsuario(){
 
 function validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario){
     return nombre_usuario != '' && apellido_usuario != '' && email_usuario != '' && pass_usuario !='';
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS BUSCADOR
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function hacerBusqueda()
+{
+    var text_busqueda = $.trim($('#txt_campo_busqueda').val());
+    var combo_tipo_busqueda = $('#combo_elemento_busqueda').val()
+    
+    if(text_busqueda == ''){
+        if(combo_tipo_busqueda == 1){            
+            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+        }
+        else{
+            if(combo_tipo_busqueda == 2){
+                $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
+            }
+            else{
+                if(combo_tipo_busqueda == 3){
+                    $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"}); 
+                }
+                else{
+
+                }
+            }
+        }
+    }
+    else{
+        if(combo_tipo_busqueda == 1){            
+            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "buscar_por_nombre",text_busqueda:text_busqueda}); 
+        }
+        else{
+            if(combo_tipo_busqueda == 2){
+                $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "buscar_por_descripcion",text_busqueda:text_busqueda}); 
+            }
+            else{
+                if(combo_tipo_busqueda == 3){
+                    $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "buscar_por_descripcion",text_busqueda:text_busqueda}); 
+                }
+                else{
+
+                }
+            }
+        }
+    }
 }
