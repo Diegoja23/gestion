@@ -38,6 +38,12 @@ class Usuario extends Persona
         return false;
     }            
     
+    public function validar()
+    {
+        //TODO validar usuarios
+        return true;
+    }
+    
     public static function getAll($limit = 0, $offset = -1)
     {
         $arrayUsuarios = array();
@@ -59,6 +65,27 @@ class Usuario extends Persona
 
         return $arrayUsuarios;
     }      
+    
+    public function validar()
+    {
+        //TODO -- aqui hay que validar los datos del participante, asi como asegurarnos de que no exista previamente
+        return ($this->nombre!='' && $this->apellido!='' && $this->email!='' && $this->contrasenia!='');      
+    }
+        
+    public function add()
+    {
+        $object_vars=get_object_vars($this);        
+        $fieldsUsuario = array();
+        foreach($object_vars as $key => $value)        
+            if($this->attNotDistinctToTable($key))
+                $fieldsUsuario[$key] = $value;             
+        return $this->myci->personas->insert_usuario($fieldsUsuario);             
+    }    
+
+    public function attNotDistinctToTable($att)
+    {
+        return ($att != 'myci');
+    }  
     
  
 }
