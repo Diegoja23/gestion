@@ -24,7 +24,7 @@ class Usuario extends Persona
                 
     public function getTelefono(){return $this->telefono;}
     
-    public function getCI(){return $this->ci;}
+    public function getContraseña(){return $this->contraseña;}
     
     public function getRol(){return $this->rol;}
     

@@ -43,9 +43,9 @@ class Usuarios extends CI_Model
         return true;        
     }
     
-    public function eliminar()
+    public function eliminar($id_usuario)
     {
-        return true;
+        return $this->db->delete('usuario', array('id_usuario' => $id_usuario));        
     }
  
 }

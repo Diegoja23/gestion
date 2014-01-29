@@ -154,7 +154,7 @@
        
     }  
     
-    echo "Modificar usuario ".$Fachada->modificarUsuario($usumodi);
+    echo "eliminar usuario ".$Fachada->eliminarUsuario($u->getId());
     $paramsUsuario=array();
     $paramsUsuario['nombre']='Amanda';
     $paramsUsuario['apellido']='Peterson';
