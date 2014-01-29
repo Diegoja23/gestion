@@ -1858,6 +1858,11 @@ function mostrarDialogPlantilla_tt(){
                         $(this).dialog("close");
                     }
                 },*/
+                Imprimir: function () {
+                    plantilla = CKEDITOR.instances.editorTT.getData();
+                    imprimirPlantilla(plantilla);
+                    //$(this).dialog("close");
+                },
                 Aceptar: function () {
                     plantilla = CKEDITOR.instances.editorTT.getData();
                     $(this).dialog("close");
