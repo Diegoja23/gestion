@@ -20,12 +20,12 @@
         <ul id="menu">
           <!-- put class="current" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="index">Inicio</a></li>
-          <li class="current"><a href="personas">Personas</a></li>
+          <li ><a href="personas">Personas</a></li>
           <li><a href="gestiones">Gestiones</a></li>
           <li><a href="tramites">Trámites</a></li>
           <li><a href="plantillas">Plantillas</a></li>
           <!--li><a href="another_page_test.php">Another Page</a></li-->
-          <li><a href="usuarios">Usuarios</a></li>
+          <li class="current"><a href="usuarios">Usuarios</a></li>
         </ul>
       </div>
     </div>
