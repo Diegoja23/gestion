@@ -9,12 +9,18 @@ switch($consulta){
     
     case "agregar_usuario": 
         $un_usuario_array = cargarValores();
+        //var_dump($un_usuario_array);die();
         echo Fachada::getInstancia()->agregarUsuario($un_usuario_array);        
         break;
     
     case "modificar_usuario": 
         $un_usuario_array = cargarValores();
-        echo Fachada::getInstancia()->modificarUsuario($un_usuario_array);        
+        $un_usuario = traerPorId($un_usuario_array['id_persona']);
+        if(md5($un_usuario_array['contraseña'])!=$un_usuario->getPass()){
+            $un_usuario_array['contraseña'] = md5($un_usuario_array['contraseña']);
+        }
+        $otro_usuario = new Usuario($un_usuario_array);
+        echo Fachada::getInstancia()->modificarUsuario($otro_usuario);        
         break;
             
     case "traer_por_id":
@@ -26,7 +32,7 @@ switch($consulta){
    
    case "eliminar_por_id":
         $id_persona = cargarUnValor('id_persona');
-        $borrado = Fachada::getInstancia()->eliminarByCI($ci);
+        $borrado = Fachada::getInstancia()->eliminarPersonaById($id_persona);
         if($borrado){
             echo "<strong style='color:green;'>El cliente de cédula ".$ci." fue exitosamente borrado!";
         }
@@ -48,7 +54,7 @@ function cargarValores(){
     $paramsUsuario['nombre']=$_POST['nombre'];
     $paramsUsuario['apellido']=$_POST['apellido'];
     $paramsUsuario['email']=$_POST['email'];
-    $paramsUsuario['password']=$_POST['password'];
+    $paramsUsuario['contraseña']=$_POST['pass'];
     return $paramsUsuario;
 }
 

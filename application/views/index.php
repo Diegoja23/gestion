@@ -47,28 +47,7 @@
             <br/>
                 Rol: <em><?php if($el_usuario['rol']==1){echo 'Administrador';} else{if($el_usuario['rol']==2){echo 'Editor';}};?></em>
             </p>
-            <a href="logout" class="btn btn-warning btn-xs float-right">Salir</a>
-            
-            <ul class="nav nav-tabs" id="barraFiltros">                            
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                        Curso<span class="caret"></span>
-                    </a>
-                <ul id='menuCurso' class="dropdown-menu">
-
-                </ul>
-                </li>                         
-                <li class="dropdown">
-                    <a class="dropdown-toggle" style='margin-right: 10px;' data-toggle="dropdown" href="">
-                        Año<span class="caret"></span>
-                    </a>
-                    <ul id='menuFecha' class="dropdown-menu">
-
-                    </ul>
-                </li>
-                    <input type="text" class="form-control casilla" id="txtEmail" placeholder="E-mail" size="30" value=""/> 
-                    <button type="button" id='btnBuscar' class="btn btn-primary">Buscar</button>
-            </ul>
+            <a href="logout" class="btn btn-warning btn-xs float-right">Salir</a>            
             
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
@@ -90,31 +69,23 @@
       </div>
       <div id="content">
         <div id="cabecera">  
-            <div class="form-group">
+            <div class="form-group float-left">
                 <label for="lbl_seleccionar_elemento_busqueda">Buscar por:</label>  <br />              
                 <select class='form-control' id='combo_elemento_busqueda'>
                     <option value="clientes">Clientes</option>
                     <option value="gestion">Gestiones</option>
                     <option value="tramites">Trámites</option>
                 </select>
+            </div>
+            <div class="form-group float-left">                
+                <input enabled="false" type="text" class="form-control" id="txt_campo_busqueda" placeholder="Ingresar su búsqueda">                
+            </div>
+            <div class="button-group float-left">
+                <button type="button" class="btn btn-primary" id="btn_buscar_inicio">Buscar <i class="fa fa-search"></i></button>
             </div> 
         </div>
-        <div class="clear"></div>
-          <!-- insert the page content here -->
-        <h1>Welcome to the simplestyle_7 template</h1>
-        <p>This standards compliant, simple, fixed width website template is released as an 'open source' design (under a <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 Licence</a>), which means that you are free to download and use it for anything you want (including modifying and amending it). All I ask is that you leave the 'design from HTML5webtemplates.co.uk' link in the footer of the template, but other than that...</p>
-        <p>This template is written entirely in <strong>HTML5</strong> and <strong>CSS</strong>, and can be validated using the links in the footer.</p>
-        <p>You can view more free HTML5 web templates <a href="http://www.html5webtemplates.co.uk">here</a>.</p>
-        <p>This template is a fully functional 5 page website, with an <a href="examples.html">examples</a> page that gives examples of all the styles available with this design.</p>
-        <h2>Browser Compatibility</h2>
-        <p>This template has been tested in the following browsers:</p>
-        <ul>
-          <li>Internet Explorer 8</li>
-          <li>Internet Explorer 7</li>
-          <li>FireFox 3.5</li>
-          <li>Google Chrome 6</li>
-          <li>Safari 4</li>
-        </ul>
+        <div id="resultado_busqueda"></div>       
+        
       </div>
     </div>
     <div id="footer">

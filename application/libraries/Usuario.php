@@ -20,6 +20,8 @@ class Usuario extends Persona
     
     
     /* Getters */
+    public function getPass(){ return $this->contraseña; }
+    
     public function getDireccion(){ return $this->direccion; }
                 
     public function getTelefono(){return $this->telefono;}

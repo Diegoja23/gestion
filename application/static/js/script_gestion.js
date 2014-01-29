@@ -193,6 +193,9 @@ $(document).on("click",".dato_mostrado_usuario",traerUsuarioElegidoClicNombre);
 $(document).on("click",".btn_ver_usuario",traerUsuarioElegidoClicIcono);
 $(document).on("click",".btn_eliminar_usuario",eliminarUsuarioElegido);
 
+
+//btn_buscar_inicio
+
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
   MÉTODOS GENERALES
@@ -1801,6 +1804,7 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
         $("#txt_descripcion_plantilla").val("");
         var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
         $("#dialog_plantilla_tt").html(una_plantilla_nueva);
+        GLOBAL_id_tipo_tramite = undefined;
     }
 }
 
@@ -1963,7 +1967,7 @@ function agregarDivDatosUsuario(){
 
 
 function agregarDivListaUsuarios(){
-    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"});
+    $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"});
     $("#div_formulario_usuario").fadeOut(1500);
     $("#btn_mostrar_lista_usuarios").fadeOut(1500);
     $("#btn_agregar_usuario").fadeIn(1500);
@@ -1976,13 +1980,15 @@ function cargarFormularioUsuario(un_usuario){
         $("#txt_nombre_usuario").val(un_usuario.nombre);
         $("#txt_apellido_usuario").val(un_usuario.apellido);
         $("#txt_email_usuario").val(un_usuario.email);
-        $("#txt_pass_usuario").val("");        
+        $("#txt_pass_usuario").val(un_usuario.contraseña);        
     }
     else{
         $("#txt_nombre_usuario").val("");
         $("#txt_apellido_usuario").val("");
         $("#txt_email_usuario").val("");
         $("#txt_pass_usuario").val("");
+        GLOBAL_id_usuario = undefined;
+        
     }
 }
 
@@ -2037,7 +2043,7 @@ function guardarUsuario(){
         if(typeof GLOBAL_id_usuario === 'undefined'){
             $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "agregar_usuario",nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
                 .done(function(data) {
-                if(parseInt(data) == 1){
+                if(parseInt(data) > 0){
                     $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se ingresó con éxito</strong>");
                     cargarFormularioCliente(-1);
                     agregarDivListaUsuarios();
@@ -2068,5 +2074,5 @@ function guardarUsuario(){
 }
 
 function validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario){
-    return nombre_usuario != '' && apellido_usuario != '' && email_usuario != '' && pass_usuario;
+    return nombre_usuario != '' && apellido_usuario != '' && email_usuario != '' && pass_usuario !='';
 }
