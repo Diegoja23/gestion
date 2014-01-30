@@ -40,7 +40,7 @@ switch($consulta){
     case "modificar_cliente":         
         $un_cliente_array = cargarValores();        
         $es_cli = laPersonaEsCliente($un_cliente_array['id_persona']);
-        if($es_cli){
+        if(!$es_cli){
             $un_cliente = new Cliente($un_cliente_array);
             $retorno = Fachada::getInstancia()->modificarCliente($un_cliente);
         }

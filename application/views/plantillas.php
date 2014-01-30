@@ -65,7 +65,7 @@
       </div>
       <div id="content">
         <!-- insert the page content here -->
-        <h1>Plantillas</h1>
+        <h1>Tipos de Trámite y Plantillas</h1>
         <button id="btn_agregar_plantilla" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button>
         <button id="btn_mostrar_lista_plantillas" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>
         <div id="retorno_ajax_plantillas"></div>        
