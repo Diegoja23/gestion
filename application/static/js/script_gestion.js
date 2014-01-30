@@ -582,7 +582,7 @@ function agregarAdjuntosAListaDeCliente(lista_adjuntos){
 }
 
 function agregar_fila_adjunto_cliente(id_adjunto,nombre_adjunto,tipo){
-    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto_de_un_cliente fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto_de_un_cliente fa fa-ban fa-lg"></i></p></td></tr>';
+    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i title="Modificar" class="btn_ver_adjunto_de_un_cliente fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i title="Eliminar" class="btn_eliminar_adjunto_de_un_cliente fa fa-ban fa-lg"></i></p></td></tr>';
     $('#div_listado_adjuntos_de_un_cliente').append(fila);
 }
 
@@ -824,10 +824,10 @@ function cargarListaTramitesDeGestion(tramites){
     var lista_tramites= '';
     jQuery.each(tramites,function(num,data){
         if(data.fecha_fin != null){
-            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite id_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite">' + data.fecha_fin + '</td><td><p><i class="btn_ver_tramite btn_tramite_detail fa fa-pencil-square-o fa-2x" id="'+ data.id_tramite +'"> </i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite id_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite">' + data.fecha_fin + '</td><td><p><i title="Modificar" class="btn_ver_tramite btn_tramite_detail fa fa-pencil-square-o fa-2x" id="'+ data.id_tramite +'"> </i><i title="Eliminar" class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
         }
         else{
-            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite id_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite"></td><td><p><i class="btn_ver_tramite btn_tramite_detail fa fa-pencil-square-o fa-2x" id="'+ data.id_tramite +'"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+            lista_tramites += '<tr><td class="dato_mostrado_tramite">' + data.id_tramite + '</td><td id="' + data.id_tramite + '" class="dato_mostrado_tramite id_tramite">' + data.descripcion + '</td><td class="dato_mostrado_tramite">' + data.tipo_tramite.descripcion + '</td><td class="dato_mostrado_tramite">' + data.fecha_inicio + '</td><td class="dato_mostrado_tramite"></td><td><p><i title="Modificar" class="btn_ver_tramite btn_tramite_detail fa fa-pencil-square-o fa-2x" id="'+ data.id_tramite +'"></i><i title="Eliminar" class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
         }
     });
     $('#listado_tramites_de_gestion').append(lista_tramites);
@@ -1164,7 +1164,7 @@ function cargarFormularioTipoGestion(un_tipo_gestion){
 function llenarListaTiposTramiteDeTipoGestion(lista_tt){
     var item='';
     jQuery.each(lista_tt,function(num,data){
-             item = '<tr><td class="dato_mostrado_tipo_tramite_TG">' + data.id_tipo_tramite + '</td><td id="' + data.id_tipo_tramite + '" class="dato_mostrado_tipo_tramite_TG">' + data.descripcion + '</td><td><button id="btn_ver_plantilla_desde_lista" type="button" class="btn btn-success btn-xs" value="' + data.id_tipo_tramite + '">Ver</button></td><td><p><i class="btn_ver_tipo_tramite_TG fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+             item = '<tr><td class="dato_mostrado_tipo_tramite_TG">' + data.id_tipo_tramite + '</td><td id="' + data.id_tipo_tramite + '" class="dato_mostrado_tipo_tramite_TG">' + data.descripcion + '</td><td><button id="btn_ver_plantilla_desde_lista" type="button" class="btn btn-success btn-xs" value="' + data.id_tipo_tramite + '">Ver</button></td><td><p><i title="Modificar" class="btn_ver_tipo_tramite_TG fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_tipo_tramite fa fa-ban fa-2x"></i></p></td></tr>';
              $('#listado_tipos_tramites_de_tipo_gestion').append(item);
         }
     );
@@ -1712,7 +1712,7 @@ function agregarAdjuntoAlTramite(nombre_adjunto){
 }
 
 function agregar_fila_adjunto_tramite(id_adjunto,nombre_adjunto,tipo){
-    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
+    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i title="Ver adjunto" class="btn_ver_adjunto fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i title="Eliminar" class="btn_eliminar_adjunto fa fa-ban fa-lg"></i></p></td></tr>';
     $('#div_listado_adjuntos').append(fila);
 }
 
