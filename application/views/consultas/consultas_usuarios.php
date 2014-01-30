@@ -74,7 +74,7 @@ function crearListaParaPersonas($lista){
     $numero = 0;    
     foreach ($lista as $c) 
     {        
-        $retorno .= '<tr><td class="dato_mostrado_usuario">'.$c->getId().'</td><td class="dato_mostrado_usuario">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_usuario">'.$c->getMail().'</td><td><p><i class="btn_ver_usuario fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_usuario fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_usuario">'.$c->getId().'</td><td class="dato_mostrado_usuario">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_usuario">'.$c->getMail().'</td><td><p><i title="Modificar" class="btn_ver_usuario fa fa-pencil-square-o fa-2x"></i>&nbsp;<i title="Eliminar" class="btn_eliminar_usuario fa fa-ban fa-2x"></i></p></td></tr>';
     }
     return $retorno;
 }

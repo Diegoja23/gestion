@@ -207,11 +207,11 @@ function crearListaParaPersonas($lista){
     foreach ($lista as $c) 
     { 
         if($c->esCliente()){
-            $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().' <i style="color:red;" class="fa fa-check"></i></td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+            $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().' <i style="color:red;" class="fa fa-check"></i></td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i title="Modificar" class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i title="Eliminar" class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i title="Adjuntos" class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
     
         }
         else{
-            $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+            $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i title="Modificar" class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i title="Eliminar" class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i title="Adjuntos" class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
         }
         
     }

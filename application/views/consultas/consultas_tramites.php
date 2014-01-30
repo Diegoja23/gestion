@@ -199,7 +199,7 @@ function crearListaTramites($lista){
     foreach ($lista as $t)
     {
         $Gestion=getGestionByTramite($t->getIdGestion());
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getTipoGestion()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getTipoGestion()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i title="Modificar" class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
     }   
     return $retorno;
 }

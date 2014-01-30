@@ -105,9 +105,7 @@ function iniEventos() {
             }
         }
     }
-
 }
-
 
 /*asignar eventos CLIENTES*/
 $(document).on("click","#btn_agregar_cliente",agregarDivDatosCliente);
@@ -1205,7 +1203,7 @@ function cargarTablaConLista(lista_tipos_gestiones,id_elemento_dom){
     $(id_elemento_dom).html('');
     var item;
     jQuery.each(lista_tipos_gestiones,function(num,data){
-             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td class="dato_mostrado_tipo_gestion">' + data.descripcion + '</td><td><p><i class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
+             item = '<tr><td value="'+ data.id_tipos_gestion +'" class="dato_mostrado_tipo_gestion">'+ data.id_tipos_gestion +'</td><td class="dato_mostrado_tipo_gestion">' + data.descripcion + '</td><td><p><i title="Modificar" class="btn_modificar_tipo_gestion fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_tipo_gestion fa fa-ban fa-2x"></i></p></td></tr>';
              $(id_elemento_dom).append(item);
         }
     );
