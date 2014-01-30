@@ -416,14 +416,14 @@ function mostrarFormularioSubirCI(){
 }
 
 function traerClienteElegidoClicNombre(){
-    var documento = $($(this).parent().children()[2]).text();
-    var id_cliente = $($(this).parent().children()[0]).text();    
+    var documento = $.trim($($(this).parent().children()[2]).text());
+    var id_cliente = $.trim($($(this).parent().children()[0]).text());    
     traerClienteElegido(documento, id_cliente);
 }
 
 function traerClienteElegidoClicIcono(){
-    var documento = $($(this).parent().parent().parent().children()[2]).text();
-    var id_cliente = $($(this).parent().parent().parent().children()[0]).text();    
+    var documento = $.trim($($(this).parent().parent().parent().children()[2]).text());
+    var id_cliente = $.trim($($(this).parent().parent().parent().children()[0]).text());    
     traerClienteElegido(documento,id_cliente);
 }
 

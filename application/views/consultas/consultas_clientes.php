@@ -39,8 +39,9 @@ switch($consulta){
         
     case "modificar_cliente":         
         $un_cliente_array = cargarValores();        
+        $un_cliente_array['id_persona'] = trim($un_cliente_array['id_persona']);
         $es_cli = laPersonaEsCliente($un_cliente_array['id_persona']);
-        if(!$es_cli){
+        if($es_cli){
             $un_cliente = new Cliente($un_cliente_array);
             $retorno = Fachada::getInstancia()->modificarCliente($un_cliente);
         }
@@ -140,7 +141,8 @@ function cargarValores(){
 function traerTodasLasPersonas(){
         $listaParticipantes = Fachada::getInstancia()->getParticipantes();
         $listaClientes = Fachada::getInstancia()->getClientes();
-        return array_merge($listaParticipantes,$listaClientes);
+        $return = array_merge($listaParticipantes,$listaClientes);        
+        return $return;
 }
 
 function cargarCiDelCliente(){
@@ -232,8 +234,8 @@ function cargarTodosLosAdjuntos(){
 
 function laPersonaEsCliente($id_persona){
     $lista = traerTodasLasPersonas();
-    foreach($lista as $una_persona){
-        if($una_persona->getId()==$id_persona){
+    foreach($lista as $una_persona){        
+        if($una_persona->getId()==$id_persona){         
             return $una_persona->esCliente();
         }
     }
