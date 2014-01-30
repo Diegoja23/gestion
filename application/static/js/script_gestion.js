@@ -861,23 +861,37 @@ function agregarClienteAGrupoSelector(){
     var lista_clientes_seleccionados = $('#combo_lista_clientes_elegidos')[0];
     var lista_personas = $('#combo_lista_personas')[0];
     var lista_personas_abajo = $('#combo_lista_personas2')[0];
+    var lista_participantes_abajo = $('#combo_lista_participantes_elegidos')[0];    
     var persona_elegida_id = $('#combo_lista_personas').val();
-    var persona_elegida_contenido = $('#combo_lista_personas').find(":selected").text();
-    var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
-    //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
-    borrarElementoDeSelector(-1,lista_clientes_seleccionados);
-    borrarElementoDeSelector(persona_elegida_id,lista_personas);
-    borrarElementoDeSelector(persona_elegida_id,lista_personas_abajo);    
-    if(persona_elegida_id == null){
-        alert("Debe seleccionar a una persona para poder agregarla al grupo");
+    if(noEstaPersonaEnOtraLista(lista_participantes_abajo,persona_elegida_id)){
+        var persona_elegida_contenido = $('#combo_lista_personas').find(":selected").text();
+        var option_agregar = '<option value="' + persona_elegida_id + '">' + persona_elegida_contenido + '</option>'
+        //var no_hay_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0].selectedIndex;
+        borrarElementoDeSelector(-1,lista_clientes_seleccionados);
+        borrarElementoDeSelector(persona_elegida_id,lista_personas);
+        borrarElementoDeSelector(persona_elegida_id,lista_personas_abajo);    
+        if(persona_elegida_id == null){
+            alert("Debe seleccionar a una persona para poder agregarla al grupo");
+        }
+        else{
+            $('#combo_lista_clientes_elegidos').append(option_agregar);
+        }
     }
     else{
-        //combo_lista_clientes_elegidos
-        
-        $('#combo_lista_clientes_elegidos').append(option_agregar);
+        alert('Para agregar a esta persona, debe quitarla antes de la otra lista');
     }
-    //var persona_elegida = $('#combo_lista_personas').find(":selected").text();
-    //alert(persona_elegida);
+
+}
+
+function noEstaPersonaEnOtraLista(lista_participantes_abajo,persona_elegida_id){
+    var retorno = true;
+    jQuery.each(lista_participantes_abajo,function(num,data){
+        if(data.value == persona_elegida_id){
+            retorno = false;
+        }
+       }
+    );
+        return retorno;
 }
 
 function quitarClienteAGrupoSelector(){
