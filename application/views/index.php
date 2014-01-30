@@ -11,6 +11,7 @@
      //var_dump($this->session->userdata("id_usuario"));  
      //var_dump($this->session->all_userdata());   
      $el_usuario = $this->session->all_userdata();
+       
 ?>
 <body>
   <div id="main">

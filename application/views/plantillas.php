@@ -53,7 +53,7 @@
           <form method="post" action="#" id="subscribe">
             <p style="padding: 0 0 9px 0;"><input class="search" type="text" name="email_address" value="your email address" onclick="javascript: document.forms['subscribe'].email_address.value=''" /></p>
             <p><input class="subscribe" name="subscribe" type="submit" value="Subscribe" /></p>
-          </form>
+          </form>     
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
@@ -110,5 +110,9 @@
                         
         </span>
     </div>
+          <form method="post" action="convertir_pdf" target="_blank" id="form_plantilla">
+            <input type="hidden" id="plantilla_value" name="plantilla_value">     
+            <input type="hidden" id="plantilla_nombre" name="plantilla_nombre">        
+          </form>        
 </body>
 </html>

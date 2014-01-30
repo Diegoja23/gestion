@@ -73,6 +73,9 @@ if (defined('ENVIRONMENT'))
  *
  */
 	$application_folder = 'application';
+    
+    
+    $dompdf_folder = 'dompdf';
 
 /*
  * --------------------------------------------------------------------
@@ -191,6 +194,8 @@ if (defined('ENVIRONMENT'))
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 
+
+    define('DOMPDFPATH', $dompdf_folder.'/');
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

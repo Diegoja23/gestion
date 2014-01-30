@@ -264,5 +264,9 @@
     </div>
   
   </div>
+          <form method="post" action="convertir_pdf" target="_blank" id="form_plantilla">
+            <input type="hidden" id="plantilla_value" name="plantilla_value">     
+            <input type="hidden" id="plantilla_nombre" name="plantilla_nombre">        
+          </form>   
 </body>
 </html>

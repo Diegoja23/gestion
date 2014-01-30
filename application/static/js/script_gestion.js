@@ -8,6 +8,7 @@ var GLOBAL_id_tipo_tramite;
 var GLOBAL_documento_cliente;
 var GLOBAL_id_cliente;
 var GLOBAL_id_usuario;
+var GLOBAL_tipo_tramite_desc;
 $(document).ready(iniEventos);
 
 function iniEventos() {
@@ -1600,6 +1601,15 @@ function mostrarDialogPlantilla_mismo(){
    
     $("#dialog_plantilla").dialog({width: 800,modal: true,
     buttons: {
+    	
+                Imprimir: 
+                {
+                	text: "Generar PDF a imprimir",
+	                click : function () {
+	                    plantilla = CKEDITOR.instances.editor1.getData();
+	                    convertirAPdf(plantilla);
+	                }                	
+                },    	
                 DelUser:{ 
                     class: 'leftButton',
                     text: 'Aceptar',
@@ -1791,6 +1801,7 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
             var una_plantilla = '<textarea id="editorTT" name="editorTT">'+un_tipo_tramite.plantilla;
             una_plantilla += '</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
             $("#dialog_plantilla_tt").html(una_plantilla);
+            GLOBAL_tipo_tramite_desc = un_tipo_tramite.descripcion;
         }
         else{
             var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">'+plantilla+'</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
@@ -1854,10 +1865,13 @@ function mostrarDialogPlantilla_tt(){
                         $(this).dialog("close");
                     }
                 },*/
-                Imprimir: function () {
-                    plantilla = CKEDITOR.instances.editorTT.getData();
-                    imprimirPlantilla(plantilla);
-                    //$(this).dialog("close");
+                Imprimir: 
+                {
+                	text: "Generar PDF a imprimir",
+	                click : function () {
+	                    plantilla = CKEDITOR.instances.editorTT.getData();
+	                    convertirAPdf(plantilla);
+	                }                	
                 },
                 Aceptar: function () {
                     plantilla = CKEDITOR.instances.editorTT.getData();
@@ -1889,11 +1903,15 @@ function mostrarDialogPlantilla_tg(){
                         $(this).dialog("close");
                     }
                 },*/
-                Imprimir: function () {
-                    plantilla = CKEDITOR.instances.editorTT.getData();
-                    imprimirPlantilla(plantilla);
-                    //$(this).dialog("close");
+                Imprimir: 
+                {
+                	text: "Generar PDF a imprimir",
+	                click : function () {
+	                    plantilla = CKEDITOR.instances.editorTT.getData();
+	                    convertirAPdf(plantilla);
+	                }                	
                 },
+
                 Aceptar: function () {
                     plantilla = CKEDITOR.instances.editorTT.getData();
                     $(this).dialog("close");
@@ -1958,14 +1976,19 @@ function eliminarTipoTramiteElegido(){
 function imprimirPlantilla(html) {
     //htmlParaVer = '<html><head><title>Imprimir Plantilla</title><link rel="stylesheet" href="../bootstrap/css/bootstrap.css" type="text/css"><!--link rel="stylesheet" href="./css/estiloEvimed.css" type="text/css"><script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script><script type="text/javascript" src="../bootstrap/js/bootstrap-tooltip.js"></script> <script type="text/javascript" src="../bootstrap/js/bootstrap-popover.js"></script--></head><body><div id="container"><div id="plantilla">' + html + '</div></div></body></html>';
     var htmlParaVer = '<html><head><style>body {height: 842px;width: 595px;margin-left: auto;margin-right: auto;}</style><title>Imprimir Plantilla</title><link rel="stylesheet" href="../bootstrap/css/bootstrap.css" type="text/css"><!--link rel="stylesheet" href="./css/estiloEvimed.css" type="text/css"><script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script><script type="text/javascript" src="../bootstrap/js/bootstrap-tooltip.js"></script> <script type="text/javascript" src="../bootstrap/js/bootstrap-popover.js"></script--></head><body><div id="container"><div id="plantilla">' + html + '</div></div></body></html>';
-    
-      
-    
+              
     var ventana = window.open("", "popup", "");
     ventana.document.open();
     ventana.document.write(htmlParaVer);
     ventana.document.close();
 }
+
+function convertirAPdf(html) {		
+	$("#plantilla_nombre").val(GLOBAL_tipo_tramite_desc);
+	$("#plantilla_value").val(html);
+	$( "#form_plantilla" ).submit();
+}
+
 
 
 /*---------------------------------------------------------------------------------------------------------------
