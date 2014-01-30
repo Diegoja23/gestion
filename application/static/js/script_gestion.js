@@ -270,6 +270,7 @@ function agregarDivAdjuntosCliente(){
 }
 
 function agregarDivListaClientes(){
+    GLOBAL_id_cliente = undefined;
     $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
     $("#div_formulario_cliente").fadeOut(1500);
     $("#btn_mostrar_lista_clientes").fadeOut(1500);
@@ -538,12 +539,7 @@ function guardarCliente(){
 //$( document ).on( "change",".elegir_familia", cambiarElemento );
 
 function validarDatosIngresados(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli){
-    if(nombre_cli != ""){
-        return 1;
-    }
-    else{
-        return -1;
-    }
+    return nombre_cli !='' && apellido_cli !='' && ci_cli !='' && email_cli !='' && telefono_cli !='' && direccion_cli !='';
 }
 
 function cargarFormularioCliente(un_cliente){
