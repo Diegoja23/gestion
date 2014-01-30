@@ -582,7 +582,7 @@ function agregarAdjuntosAListaDeCliente(lista_adjuntos){
 }
 
 function agregar_fila_adjunto_cliente(id_adjunto,nombre_adjunto,tipo){
-    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i title="Modificar" class="btn_ver_adjunto_de_un_cliente fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i title="Eliminar" class="btn_eliminar_adjunto_de_un_cliente fa fa-ban fa-lg"></i></p></td></tr>';
+    var fila = '<tr id="' + id_adjunto + '" tipo=' + tipo + '><td class="adjunto_mostrado_tramite"><i class="adjunto_tramite fa fa-paperclip fa-lg"></i></td><td class="adjunto_mostrado_tramite">' + nombre_adjunto + '</td><td><p><i title="Ver adjunto" class="btn_ver_adjunto_de_un_cliente fa fa-eye fa-lg"></i>&nbsp;&nbsp;<i title="Eliminar" class="btn_eliminar_adjunto_de_un_cliente fa fa-ban fa-lg"></i></p></td></tr>';
     $('#div_listado_adjuntos_de_un_cliente').append(fila);
 }
 
