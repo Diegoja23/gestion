@@ -80,15 +80,10 @@ class Fachada
     {
         return $this->sp->getBlob($id);    
     }    
-    
-    public function agregarAdjuntoAlCliente($id_cliente,$el_adjunto)
+
+    public function agregarAdjuntoAlParticipante($id_persona,$el_adjunto)
     {
-        return $this->sp->agregarAdjuntoAlCliente($id_cliente,$el_adjunto);        
-    }    
-    
-    public function agregarAdjuntoAlParticipante($id_cliente,$el_adjunto)
-    {
-        return $this->sg->agregarAdjuntoAlParticipante($id_cliente,$el_adjunto);
+        return $this->sp->agregarAdjuntoAlParticipante($id_persona,$el_adjunto);
     }        
         
     public function eliminarAdjuntoCliente($id_adjunto)
