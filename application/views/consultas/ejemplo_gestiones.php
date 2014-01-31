@@ -2,7 +2,7 @@
 
     $Fachada = Fachada::getInstancia();
     
-    //echo "Eliminar ".$Fachada->eliminarAdjuntoCliente(11);
+    
     
     echo "<hr><b>Tipos de Gestion</b> <br><br>";
     $tipos = $Fachada->getTiposGestion();

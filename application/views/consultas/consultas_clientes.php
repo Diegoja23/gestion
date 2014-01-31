@@ -70,7 +70,7 @@ switch($consulta){
     
     case "eliminar_dato_complementario_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjuntoCliente($id_adjunto);
+       $retorno = Fachada::getInstancia()->eliminarAdjuntoParticipante($id_adjunto);
        echo $id_adjunto;
        break; 
         

@@ -86,9 +86,9 @@ class Fachada
         return $this->sp->agregarAdjuntoAlParticipante($id_persona,$el_adjunto);
     }        
         
-    public function eliminarAdjuntoCliente($id_adjunto)
+    public function eliminarAdjuntoParticipante($id_adjunto)
     {
-        return $this->sp->eliminarAdjuntoCliente($id_adjunto);    
+        return $this->sp->eliminarAdjuntoParticipante($id_adjunto);    
     }    
     
     public function login($email, $contraseña)

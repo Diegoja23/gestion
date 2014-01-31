@@ -93,7 +93,7 @@ class ServiciosPersona
         return ($data[0]->archivo);      
     }
     
-    public function eliminarAdjuntoCliente($id)
+    public function eliminarAdjuntoParticipante($id)
     {
         $Adjunto = new Adjunto(array('id' => $id, 'from' => 'datos_complementarios'));
         return $Adjunto->Eliminar();     
