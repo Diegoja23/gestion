@@ -93,19 +93,11 @@ class ServiciosPersona
         return ($data[0]->archivo);      
     }
     
-    public function eliminarAdjuntoCliente($id)
+    public function eliminarAdjuntoParticipante($id)
     {
         $Adjunto = new Adjunto(array('id' => $id, 'from' => 'datos_complementarios'));
         return $Adjunto->Eliminar();     
     }      
-    
-    public function agregarAdjuntoAlCliente($id_cliente,$el_adjunto)
-    {
-        $Cliente = new Cliente(array('id_persona' => $id_cliente));        
-        $attsAdjuntos = array('nombre' => $el_adjunto['nombre'], 'archivo' => $el_adjunto['archivo'], 'tipo' => $el_adjunto['tipo']);
-        $Adjunto = new Adjunto($attsAdjuntos);
-        return $Cliente->addAdjunto($Adjunto);        
-    }  
     
     public function agregarAdjuntoAlParticipante($id_persona,$el_adjunto)
     {
@@ -114,7 +106,7 @@ class ServiciosPersona
         $Adjunto = new Adjunto($attsAdjuntos);
         return $Participante->addAdjunto($Adjunto);        
     }     
- 
+
  
     /* USUARIOS */
     

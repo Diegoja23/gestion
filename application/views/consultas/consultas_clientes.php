@@ -58,7 +58,7 @@ switch($consulta){
         $posibles_adjuntos = cargarTodosLosAdjuntos(); 
         $el_adjunto = $posibles_adjuntos[0];                
         //$adjunto_array = cargarCiDelCliente();
-        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlCliente($id_cliente,$el_adjunto);
+        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlParticipante($id_cliente,$el_adjunto);
         //$id_adjunto = 12;
         if($id_adjunto > 0){
              echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
@@ -70,7 +70,7 @@ switch($consulta){
     
     case "eliminar_dato_complementario_por_id":
        $id_adjunto = cargarUnValor('adjunto_id');
-       $retorno = Fachada::getInstancia()->eliminarAdjuntoCliente($id_adjunto);
+       $retorno = Fachada::getInstancia()->eliminarAdjuntoParticipante($id_adjunto);
        echo $id_adjunto;
        break; 
         

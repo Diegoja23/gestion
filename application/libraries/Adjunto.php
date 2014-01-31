@@ -48,6 +48,7 @@ class Adjunto
         return $this->tipo;
     }     
 
+    
     public function Eliminar()
     {
         if($this->from == 'adjuntos')
