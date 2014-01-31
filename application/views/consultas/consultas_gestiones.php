@@ -125,7 +125,8 @@ switch($consulta){
         
     case "eliminar_por_id":
         $id_gestion = cargarUnValor('id_gestion');
-        echo Fachada::getInstancia()->eliminarGestion($id_gestion);
+        echo Fachada::getInstancia()->eliminarGestion(traerPorId($id_gestion));
+        //echo $id_gestion;
         /*if(count($lista_ret)>0){
             echo crearListaGestiones($lista_ret);
         }

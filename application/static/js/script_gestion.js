@@ -1099,7 +1099,7 @@ function eliminarGestionElegida(){
     var confirmado = confirm("¿Seguro que desea eliminar esta gestión?");
     if(confirmado){
         var id_gestion = $($(this).parent().parent().parent().children()[0]).text();   
-        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_por_id",id_gestion: id_gestion})
+        $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "eliminar_por_id",id_gestion: id_gestion})
                 .done(function(data) {
                     $("#retorno_borrado").html(data);
                     //$('#content').append(un_cliente);
