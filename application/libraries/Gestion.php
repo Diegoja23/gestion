@@ -129,6 +129,8 @@ class Gestion
     
     public function eliminar()
     {
+        if(!isset($this->grupo) || $this->grupo==null) $this->grupo = new Grupo(array('id_grupo' =>$this->id_grupo));
+         
         if($this->grupo->eliminar())
             return $this->myci->gestiones->eliminar_gestion($this->id_gestion);
         return false;

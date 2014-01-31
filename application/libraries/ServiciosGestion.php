@@ -121,9 +121,9 @@ class ServiciosGestion
             return false;        
     }     
     
-    public function eliminarGestion($id_gestion)
+    public function eliminarGestion($paramsGestion)
     {
-        $Gestion = new Gestion(array('id_gestion'=>$id_gestion));        
+        $Gestion = new Gestion($paramsGestion);        
         return $Gestion->eliminar();                   
     }
     
