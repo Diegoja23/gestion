@@ -99,7 +99,7 @@
             <div class="button-group">
                 <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div><div id="info_adjuntos"></div>
             </div>
-            <button type="button" style="display: inline-block;" class="btn btn-success" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button>
+            <button type="button" style="display: inline-block;" class="btn btn-danger" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button>
             <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
                     <br />
                     <label>Nombre del adjunto: </label>

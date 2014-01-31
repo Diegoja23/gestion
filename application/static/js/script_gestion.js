@@ -137,6 +137,8 @@ $(document).on("click","#btn_agregar_participante",agregarParticipanteALista);
 $(document).on("click","#btn_guardar_gestion",guardarGestion);
 $(document).on("click",".dato_mostrado_gestion",traerGestionElegidaClicNombre);
 $(document).on("click",".btn_ver_gestion",traerGestionElegidaClicIcono);
+$(document).on("click",".btn_eliminar_gestion",eliminarGestionElegida);
+ 
 
 /*asignar eventos TIPOS GESTIONES*/
 $(document).on("click","#btn_agregar_div_tipo_gestion",agregarDivManejoTipoGestion);
@@ -1013,7 +1015,7 @@ function guardarGestion(){
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno>0){
-                            $f("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
+                            $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
                             $("#btn_agregar_tramite_gestion").fadeIn(1500);                            
                             $("#btn_mostrar_lista_gestiones").trigger("click");
                         }
@@ -1091,6 +1093,20 @@ function traerGestionElegida(id_gestion){
                 //$('#div_ci_cliente').append(data);                
         }, "json");
         //$("input").prop('disable', true);
+}
+
+function eliminarGestionElegida(){
+    var confirmado = confirm("¿Seguro que desea eliminar esta gestión?");
+    if(confirmado){
+        var id_gestion = $($(this).parent().parent().parent().children()[0]).text();   
+        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_por_id",id_gestion: id_gestion})
+                .done(function(data) {
+                    $("#retorno_borrado").html(data);
+                    //$('#content').append(un_cliente);
+            }, "json");
+
+        $(this).parent().parent().parent().fadeOut(1500);       
+    }
 }
 
 
