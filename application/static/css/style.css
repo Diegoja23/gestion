@@ -408,6 +408,7 @@ table tr td
 
 #btn_guardar_tramite{
     float:right;
+    margin-top: 20px;
     display: none;
 }
 

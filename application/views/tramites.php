@@ -99,7 +99,7 @@
             <div class="button-group">
                 <button type="button" class="btn btn-info" id="btn_agregar_adjunto">Agregar adjunto <i class="fa fa-upload"></i></button><div id="retorno_ajax"></div><div id="info_adjuntos"></div>
             </div>
-            <button type="button" style="display: inline-block;" class="btn btn-danger" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button>
+            
             <form enctype="multipart/form-data" class="formulario_archivo_tramite" id="div_formulario_subir_tramite">
                     <br />
                     <label>Nombre del adjunto: </label>
@@ -109,6 +109,7 @@
                     <p class="help-block retorno_del_file_agregar_elemento">Agregar adjunto.</p>
                     <button type="button" class="subir_archivo_tramite btn btn-info btn-sm">Subir adjunto <i class="fa fa-cloud-upload"></i></button> 
             </form>
+            <button type="button" style="display: inline-block;" class="btn btn-danger" id="btn_guardar_tramite">Guardar <i class="fa fa-floppy-o"></i></button>
             <div id="dialog_plantilla" title="Llene la plantilla" style="display:none;">
                     <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
             </div>
