@@ -48,19 +48,14 @@
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
-          <h3>Newsletter</h3>
-          <p>If you would like to receive our newletter, please enter your email address and click 'Subscribe'.</p>
-          <form method="post" action="#" id="subscribe">
-            <p style="padding: 0 0 9px 0;"><input class="search" type="text" name="email_address" value="your email address" onclick="javascript: document.forms['subscribe'].email_address.value=''" /></p>
-            <p><input class="subscribe" name="subscribe" type="submit" value="Subscribe" /></p>
-          </form>     
+          <h3>Girasol</h3>
+          <p>Este es un sistema que tiene como finalidad la gestión de documentos notariales. Con Girasol podrá crear plantillas para usar en sus trabajos, 
+          llevar un registro detallado de sus clientes, los documentos (editables y escaneados) y mucho más</p>
+          
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
-        <div class="sidebar">
-          <h3>Latest Blog</h3>
-          <h4>Website Goes Live</h4>
-          <h5>1st July 2011</h5>
-          <p>We have just launched our new website. Take a look around, we'd love to know what you think.....<br /><a href="#">read more</a></p>
+        <div class="sidebar" style="background-image:url('<?=APPPATH?>static/images/gestion-documental.jpg');height:215px;widht:265px">
+          
         </div>
       </div>
       <div id="content">
