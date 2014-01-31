@@ -127,9 +127,9 @@ class Fachada
         return $this->sg->modificarGestion($paramsGestion, $grupo);
     }
     
-    public function eliminarGestion($paramsGestion) 
+    public function eliminarGestion($id_gestion) 
     {
-        return $this->sg->eliminarGestion($paramsGestion);
+        return $this->sg->eliminarGestion($id_gestion);
     }    
         
     public function getTiposGestion()
