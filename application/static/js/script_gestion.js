@@ -55,9 +55,12 @@ function iniEventos() {
                         agregarDivDatosTramite();
                         setTimeout(function(){           
                                 cargarPlantilla();
-                                //mostrarDialogPlantilla();
+                                var id_tipo_tramite = $("#combo_tipo_tramite").val();
+                                if(id_tipo_tramite == null){
+                                    alert("Antes de dar de alta este trámite debe cargarle tipos de trámite al tipo de gestión seleccionado");
+                                }
                         }, 1000);
-                        
+                            
                     }            
                     else
                     {
@@ -104,7 +107,7 @@ function iniEventos() {
                 }
             }
         }
-    }
+    }                      
 }
 
 /*asignar eventos CLIENTES*/
@@ -716,6 +719,7 @@ function agregarDivDatosGestion(){
         $("#div_listado_tramites_de_gestion_vacio").fadeIn(1500); 
         $("#div_formulario_gestion").fadeIn(1500);
         $(".fecha-fin-gestion").css("display","none");
+        
         var id_gestion = GLOBAL_id_gestion;
         if(id_gestion == undefined){
             var id_gestion = -1;
@@ -734,6 +738,8 @@ function agregarDivListaGestiones(){
     $("#div_manejo_tipos_gestiones").fadeOut(1500);    
     $("#btn_mostrar_lista_gestiones").fadeOut(1500);
     $("#div_formulario_adjuntos_gestion").fadeOut(1500);
+    $("#combo_tipo_gestion").removeAttr("disabled");
+    $("#btn_crear_tipo_gestion").fadeIn(1500);
     $("#btn_agregar_gestion").fadeIn(1500);
     $("#btn_agregar_div_tipo_gestion").fadeIn(1500);    
     $("#div_listado_gestion").fadeIn(1500);
@@ -745,6 +751,9 @@ function agregarDivListaGestiones(){
 function cargarFormularioGestion(una_gestion){    
     $("#retorno_gestion").html("");
     if(una_gestion != -1){
+            $("#combo_tipo_gestion").attr("disabled","disabled");
+            $("#btn_crear_tipo_gestion").fadeOut(1500);
+            
     	$("#txt_id_gestion").val(una_gestion.id_gestion);
         $("#txt_descripcion_gestion").val(una_gestion.descripcion);
         //cargarTipoGestion('#combo_tipo_gestion','combo');
@@ -1527,10 +1536,6 @@ function cargarFormularioTramite(un_tramite){
         setTimeout(function(){            
             seleccionarComboConValor("#combo_tipo_tramite",un_tramite.id_tipo_tramite);
                 //var id_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
-    var id_tipo_tramite = $("#combo_tipo_tramite").val();
-    if(id_tipo_tramite == "No se cargaron las opciones"){
-             alert("Antes de dar de alta este trámite debe cargarle tipos de trámite al tipo de gestión seleccionado");
-         }
         }, 1000);
         
        // $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
