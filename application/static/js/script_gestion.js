@@ -378,7 +378,7 @@ function subirElArchivoAdjuntoParaCliente(){
                             retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
                             agregarAdjuntoALosDelCliente(data);
                             //var id_adjunto = datos_adjunto.id_adjunto;
-                            
+                            //$('#retorno_borrado').html('<h4 style="color:green;">Archivo agregado exitosamente!</h4>')
                             $(".formulario_archivo_tramite").fadeOut(1500);
 			},
 			//si ha ocurrido un error
