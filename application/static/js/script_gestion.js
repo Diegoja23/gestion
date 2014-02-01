@@ -1727,6 +1727,8 @@ function subirElArchivo_tramite(){
 			    retornoSubirArchivo(message);
 			}
 		});
+                $('#div_no_hay_adjuntos_tramite').fadeOut(1500);
+                $('#div_archivos_adjuntos').fadeIn(1500);                
     }
     else{
         alert('Debe agregarle un nombre al adjunto');
@@ -1756,9 +1758,10 @@ function ver_adjunto_seleccionado(){
     var padre = $(this).parent().parent().parent()[0];
     var adjunto_id = padre.id;
     var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
+    var nombre_adjunto = $($(this).parent().parent().parent().children()[1]).text(); 
     //var accion_para_tipo_de_adjunto = traerAccionParaTipoDeAdjunto(adjunto_tipo);
     //var frame = '<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&&nombre=poneraquinombrearchivo&from=' + accion_para_tipo_de_adjunto + '"></iframe>';
-    var frame = '<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&&nombre=poneraquinombrearchivo&from=adjunto"></iframe>';
+    var frame = '<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&&nombre='+nombre_adjunto+'&from=adjunto"></iframe>';
     $('#dialog_adjunto').html(frame);
     $("#dialog_adjunto").dialog({width: 800,modal: true,
     buttons: {
@@ -1992,6 +1995,7 @@ function guardarTipoTramite(){
                         var retorno = parseInt(data);
                         if(retorno==1){
                             $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La plantilla y tipo trámite fueron agregados exitosamente</strong></span>");
+                            agregarDivListaPlantillas();
                         }
                         else{
                             $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>La plantilla y tipo trámite no fueron agregados</strong></span>");
