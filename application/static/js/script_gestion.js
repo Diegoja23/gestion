@@ -1333,6 +1333,7 @@ function agregarDivDatosTramite(){
                 
 	var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
     $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
+
         
     if(GLOBAL_id_tramite === undefined || GLOBAL_id_tramite <= 0)
     {
@@ -1525,6 +1526,11 @@ function cargarFormularioTramite(un_tramite){
         
         setTimeout(function(){            
             seleccionarComboConValor("#combo_tipo_tramite",un_tramite.id_tipo_tramite);
+                //var id_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    var id_tipo_tramite = $("#combo_tipo_tramite").val();
+    if(id_tipo_tramite == "No se cargaron las opciones"){
+             alert("Antes de dar de alta este trámite debe cargarle tipos de trámite al tipo de gestión seleccionado");
+         }
         }, 1000);
         
        // $("#combo_tipo_tramite option:selected").val(un_tramite.id_tipo_tramite);
@@ -1595,12 +1601,14 @@ function cambioTipoTramite(){
 }
 
 function cargarPlantilla(){
-    var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
+    
      if(typeof plantilla === 'undefined') {
-         if(vid_tipo_tramite == "No se cargaron las opciones"){
+         var vid_tipo_tramite = $("#combo_tipo_tramite option:selected").val();
+     
+         /*if(vid_tipo_tramite == "No se cargaron las opciones"){
              alert("Antes de dar de alta este trámite debe cargarle tipos de trámite al tipo de gestión seleccionado");
          }
-         else{
+         else{*/
     
     //$("#dialog_plantilla").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta:"get_plantilla_por_id_tipo_tramite", id_tipo_tramite:vid_tipo_tramite});
     var vid_tipo_gestion = parseInt($("#span_id_tipo_gestion").text());
@@ -1617,7 +1625,7 @@ function cargarPlantilla(){
         $("#dialog_plantilla").html(una_plantilla);
             });
     }
-     }
+     //}
 }
 
 function mostrarDialogPlantilla(){    
