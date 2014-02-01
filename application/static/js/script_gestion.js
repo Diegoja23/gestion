@@ -1228,7 +1228,9 @@ function cargarTablaConLista(lista_tipos_gestiones,id_elemento_dom){
 
 function agregarTipoGestionGestion(){
 	var descripcion_tipo_gestion = $.trim($("#txt_descripcion_tipo_gestion").val());
-    $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+    /*$.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+        .done(function(data) {*/
+    $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
         .done(function(data) {
         if(parseInt(data) > 0){       
 		   $("#retorno_tipo_gestion").html("<span style='color:green'></span>");
