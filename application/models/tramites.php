@@ -8,7 +8,13 @@ class Tramites extends CI_Model
     }
     
             
-            
+    function get_tipos_tramite()
+    {
+        $sql = "SELECT * FROM tipos_tramite ";                        
+        $query = $this->db->query($sql);                   
+        return $query->result();           
+    }   
+             
     function get_tipos_tramite_by_tipos_gestion($id_tipos_gestion)
     {
         $sql = "SELECT * FROM tipos_tramite WHERE id_tipos_gestion = ".$id_tipos_gestion;                
