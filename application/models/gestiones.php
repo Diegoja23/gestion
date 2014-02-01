@@ -56,8 +56,10 @@ class Gestiones extends CI_Model
     function modificar_gestion($gestionParams)
     {
         $this->db->where('id_gestion', $gestionParams['id_gestion']);
-        $this->db->update('gestiones', $gestionParams);   
-        return($this->db->affected_rows() > 0);
+        $this->db->update('gestiones', $gestionParams);  
+        if($this->db->_error_message() == '') return true;
+        return false;         
+        //return($this->db->affected_rows() > 0);
     }     
     
     function eliminar_gestion($id_gestion)
