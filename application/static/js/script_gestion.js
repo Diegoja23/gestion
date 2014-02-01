@@ -378,7 +378,7 @@ function subirElArchivoAdjuntoParaCliente(){
                             retornoSubirArchivo('<span>El archivo <strong>'+data+'</strong> fue subido exitosamente</span>');
                             agregarAdjuntoALosDelCliente(data);
                             //var id_adjunto = datos_adjunto.id_adjunto;
-                            
+                            //$('#retorno_borrado').html('<h4 style="color:green;">Archivo agregado exitosamente!</h4>')
                             $(".formulario_archivo_tramite").fadeOut(1500);
 			},
 			//si ha ocurrido un error
@@ -557,7 +557,7 @@ function cargarFormularioCliente(un_cliente){
         $("#txt_direccion_cliente").attr("locked","true");
         //var accion_para_tipo_de_adjunto = traerAccionParaTipoDeAdjunto(un_cliente.adjunto_tipo);
         //$('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=' + accion_para_tipo_de_adjunto + '"></iframe>');
-        if(un_cliente.adjuntos.length > 0){
+        if(un_cliente.adjuntos.length > 0){            
             $('#div_ci_cliente').html('<iframe id="iframe_ci_cliente" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + un_cliente.adjunto_tipo + '&id=' + un_cliente.adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
             $('#div_ci_cliente').fadeIn(1500); 
         }
@@ -595,9 +595,10 @@ function ver_adjunto_seleccionado_del_cliente(){
     var padre = $(this).parent().parent().parent()[0];
     var adjunto_id = padre.id;
     var adjunto_tipo = $('#'+adjunto_id).attr('tipo');
+    var nombre_adjunto = $($(this).parent().parent().parent().children()[1]).text(); 
     //var accion_para_tipo_de_adjunto = traerAccionParaTipoDeAdjunto(adjunto_tipo);
     //$('#dialog_adjunto_del_cliente').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=poneraquinombrearchivo&from=' + accion_para_tipo_de_adjunto + '"></iframe>');
-    $('#dialog_adjunto_del_cliente').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>');
+    $('#dialog_adjunto_del_cliente').html('<iframe id="iframe_adjunto_tramite" src="'+globalUrl+'/gestion/consultas/mostrar_archivo.php?mime=' + adjunto_tipo + '&id=' + adjunto_id + '&nombre='+nombre_adjunto+'&from=dato_complementario"></iframe>');
     $("#dialog_adjunto_del_cliente").dialog({width: 800,modal: true,
     buttons: {
                 
@@ -1056,7 +1057,7 @@ function guardarParticipanteGestion(){
     var email_par = $.trim($("#txt_email_participante_gestion").val());
     var telefono_par = $.trim($("#txt_telefono_participante_gestion").val());
     var direccion_par = $.trim($("#txt_direccion_participante_gestion").val());
-
+    if(validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par)){
     $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_participante",nombre: nombre_par, apellido: apellido_par, ci: ci_par, email: email_par, telefono: telefono_par, direccion: direccion_par})
         .done(function(data) {
         if(parseInt(data) > 0){       
@@ -1069,7 +1070,15 @@ function guardarParticipanteGestion(){
 			$("#retorno_participante").html("<span style='color:red'><strong>El participante no ha sido agregado, verifique los datos!</strong></span>");
         }
     });
+    }
+    else{
+        alert('Para poder guardar debe llenar todos los campos del participante');
+    }
 
+}
+
+function validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par){
+    return nombre_par != '' && apellido_par != '' && ci_par != '' && email_par !='' && telefono_par != '' && direccion_par !='';
 }
 
 function traerGestionPorIdUrl($id_gestion){   	  
@@ -1827,6 +1836,7 @@ function agregarDivDatosPlantilla(){
 }
         
 function agregarDivListaPlantillas(){
+    $("#retorno_ajax_plantillas").html('');
     $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
     $("#div_formulario_plantilla").fadeOut(1500);
     $("#btn_mostrar_lista_plantillas").fadeOut(1500);
@@ -1995,7 +2005,9 @@ function guardarTipoTramite(){
                         var retorno = parseInt(data);
                         if(retorno==1){
                             $("#retorno_ajax_plantillas").html("<span style='color:green'><strong>La plantilla y tipo trámite fueron agregados exitosamente</strong></span>");
-                            agregarDivListaPlantillas();
+                            setTimeout(function(){  
+                                agregarDivListaPlantillas();
+                            },3000);
                         }
                         else{
                             $("#retorno_ajax_plantillas").html("<span style='color:red'><strong>La plantilla y tipo trámite no fueron agregados</strong></span>");
