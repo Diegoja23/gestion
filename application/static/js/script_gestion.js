@@ -1057,7 +1057,7 @@ function guardarParticipanteGestion(){
     var email_par = $.trim($("#txt_email_participante_gestion").val());
     var telefono_par = $.trim($("#txt_telefono_participante_gestion").val());
     var direccion_par = $.trim($("#txt_direccion_participante_gestion").val());
-
+    if(validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par)){
     $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_participante",nombre: nombre_par, apellido: apellido_par, ci: ci_par, email: email_par, telefono: telefono_par, direccion: direccion_par})
         .done(function(data) {
         if(parseInt(data) > 0){       
@@ -1070,7 +1070,15 @@ function guardarParticipanteGestion(){
 			$("#retorno_participante").html("<span style='color:red'><strong>El participante no ha sido agregado, verifique los datos!</strong></span>");
         }
     });
+    }
+    else{
+        alert('Para poder guardar debe llenar todos los campos del participante');
+    }
 
+}
+
+function validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par){
+    return nombre_par != '' && apellido_par != '' && ci_par != '' && email_par !='' && telefono_par != '' && direccion_par !='';
 }
 
 function traerGestionPorIdUrl($id_gestion){   	  
