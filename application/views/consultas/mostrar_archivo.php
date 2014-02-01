@@ -1,6 +1,6 @@
 <?php
 header('Content-type: '.$_GET['mime']);
-header("Content-Disposition: inline; filename=".$_GET['nombre']."");
+header("Content-Disposition: inline; filename=".$_GET['nombre'].".".$_GET['mime']);
 $Fachada = Fachada::getInstancia();
 $id_adjunto = $_GET['id'];
 $from = $_GET['from']; 
