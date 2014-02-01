@@ -110,13 +110,14 @@ function cargarUnValor($variable){
 
 function traerTodos(){   
     $listaTiposTramites=array();
-    $listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
+    $listaTiposTramites = Fachada::getInstancia()->getTiposTramite();
+    /*$listaTiposGestion = Fachada::getInstancia()->getTiposGestion();
     foreach ($listaTiposGestion as $tg) 
     {        
         //$retorno .= '<option value="'.$tg->getIdTiposGestion().'">'.$tg->getDescripcion().'</option>';
         $listaTiposTramites = array_merge($listaTiposTramites, Fachada::getInstancia()->getTiposTramiteByTipoGestion($tg->getIdTiposGestion()));
         //$listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByTipoGestion($tg->getIdTiposGestion());
-    }
+    }*/
     return $listaTiposTramites;
 }
 

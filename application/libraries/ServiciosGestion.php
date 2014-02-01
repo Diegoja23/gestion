@@ -78,6 +78,27 @@ class ServiciosGestion
         return $arrayGestiones;
     }     
 
+    public function getTiposTramite()
+    {
+        $arrayTipos = array();
+        $paramsTipo = array();
+        $ci =& get_instance(); 
+        
+        $data = $ci->tramites->get_tipos_tramite();        
+        foreach($data as $t)
+        {
+            $paramsTipo["id_tipo_tramite"] = $t->id_tipo_tramite;   
+            $paramsTipo["descripcion"] = $t->descripcion;    
+            $paramsTipo["plantilla"] = $t->plantilla;
+            $paramsTipo["id_tipos_gestion"] = $t->id_tipos_gestion;                
+
+            $Tipo = new TipoTramite($paramsTipo); 
+            $arrayTipos[] = $Tipo;
+        }
+
+        return $arrayTipos;        
+    }
+    
     public function getTiposTramiteByTipoGestion($id_tipos_gestion)
     {
         $arrayTipos = array();
