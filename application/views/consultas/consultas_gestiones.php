@@ -25,8 +25,10 @@ switch($consulta){
     $grupo = new Grupo(array('descripcion' => "Descripcion de grupo es opcional",
                              'clientes' => $clientes,
                              'participantes' => $participantes));
-                                 
-    echo Fachada::getInstancia()->agregarGestion($paramsGestion, $grupo);        
+
+    $agregar = Fachada::getInstancia()->agregarGestion($paramsGestion, $grupo);
+    if($agregar) echo $agregar;
+    else echo "0";            
 
     break;
     
@@ -47,8 +49,10 @@ switch($consulta){
         $grupo = new Grupo(array('id_grupo' => $id_grupo,
                                  'descripcion' => "Descripcion de grupo es opcional",
                                  'clientes' => $clientes,
-                                 'participantes' => $participantes));       
-        echo Fachada::getInstancia()->modificarGestion($paramsGestion, $grupo);                                    
+                                 'participantes' => $participantes));               
+    $modificar = Fachada::getInstancia()->modificarGestion($paramsGestion, $grupo);
+    if($modificar) echo $modificar;
+    else echo "0";                                         
         
     break;
         
