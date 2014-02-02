@@ -72,6 +72,7 @@
         </select>
         
         <div id="div_formulario_cliente">
+            <div id="retorno_ajax"></div>
             <h3>Datos de la persona</h3>           
             <div class="form-group">
                 <label for="txt_nombre_cliente">Nombre</label>
@@ -83,7 +84,9 @@
             </div>
             <div class="form-group">                
                 <label for="txt_ci_cliente">Cédula de Identidad</label><br />
-                <input type="text" class="form-control" id="txt_ci_cliente" placeholder="Ingresar Céldula">    
+                <input type="text" class="form-control" id="txt_ci_cliente" maxlength="9" placeholder="Ingresar Cédula">  <span style="color: grey">* sin puntos ni guiones, ej.: 44092562</span>
+            </div>      
+            <div class="form-group">            
                 <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar cédula <i class="fa fa-upload"></i></button>                
             </div>  
             <!--div class="form-group" id="div_formulario_subir_ci"-->
@@ -109,7 +112,7 @@
                 <input type="text" class="form-control" id="txt_direccion_cliente" placeholder="Ingresar Dirección">                
             </div>  
             <div class="button-group">
-                <button type="button" class="btn btn-danger float-right" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button><div id="retorno_ajax"></div>
+                <button type="button" class="btn btn-danger float-right" id="btn_guardar">Guardar <i class="fa fa-floppy-o"></i></button>
             </div>  
         </div>
         <br/>
