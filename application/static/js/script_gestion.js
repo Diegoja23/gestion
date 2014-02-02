@@ -505,8 +505,6 @@ function guardarCliente(){
       //  ci_escaneada_cli = new FormData($(".formulario_archivo")[0]);
     //}
     
-    var valido = validarDatosIngresados(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli);
-    if(valido == 1){
         if(typeof GLOBAL_id_cliente === 'undefined'){
             $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
                 .done(function(data) {
@@ -515,7 +513,8 @@ function guardarCliente(){
                     cargarFormularioCliente(-1);
                 }
                 else{
-                    $("#retorno_ajax").append(data);
+                	$info= "<li>El nombre no debe contener menos de dos caracteres</li><li>El apellido no puede contener menos de dos caracteres</li><li>La cédula debe contener 9 dígitos</li><li>Email debe contener un formato válido</li><li>No dejar datos sin rellenar</li>"
+                	 $("#retorno_ajax").html("<strong style='color:red;'>Verifique los datos ingresados!"+$info+"</strong>");
                     //$("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
                 }
             });
@@ -534,10 +533,6 @@ function guardarCliente(){
                 }
             });
         }
-    }
-    else{
-        alert("Datos incorrectos. No se puedo guardar");
-    }
     //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 //$( document ).on( "change",".elegir_familia", cambiarElemento );
@@ -2145,8 +2140,7 @@ function guardarUsuario(){
     var email_usuario = $.trim($("#txt_email_usuario").val());
     var pass_usuario = $.trim($("#txt_pass_usuario").val());
     
-    var valido = validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario);
-    if(valido == 1){
+
         if(typeof GLOBAL_id_usuario === 'undefined'){
             $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "agregar_usuario",nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
                 .done(function(data) {
@@ -2173,10 +2167,6 @@ function guardarUsuario(){
                 }
             });
         }
-    }
-    else{
-        alert("Error. Llene todo el formulario para guardar!");
-    }
     //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 

@@ -172,8 +172,8 @@
                             <input enabled="false" type="text" class="form-control input-par" id="txt_apellido_participante_gestion" placeholder="Ingresar Apellido">                
                         </div>
                         <div class="form-group">                
-                            <label for="txt_ci_participante_gestion">Cédula de Identidad</label>
-                            <input type="text" class="form-control input-par" id="txt_ci_participante_gestion" placeholder="Ingresar Céldula">    
+                            <label for="txt_ci_participante_gestion">Cédula de Identidad</label> 
+                            <input type="text" class="form-control input-par" id="txt_ci_participante_gestion" maxlength="9" placeholder="Ingresar Cédula"> <span style="color: grey">* sin puntos ni guiones, ej.: 44092562</span>   
                         </div>  
                         <div class="form-group">
                             <label for="txt_email_participante_gestion">Email</label>                

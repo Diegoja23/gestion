@@ -168,37 +168,9 @@ class CI_Session {
 
         // mark all new flashdata as old (data will be deleted before next request)
         $this->_flashdata_mark();
-        
-        // session close by inactivity
-        $this->_is_inactivity_true();       
+  
     }
     
-    /**
-    * Checks if session needs to be close for user inactivity
-    */
-    
-    function _is_inactivity_true()
-    {
-        $time_to_close = $this->object->config->item('sess_time_to_close_on_inactivity');
-        
-        if (@isset($_SESSION['last_activity']))
-        {
-            if (is_numeric($time_to_close) && $time_to_close > 0)
-            {
-                if($_SESSION['last_activity'] + $time_to_close < time())
-                {
-                    if(@isset($_SESSION['amember_admin_login']) && $_SESSION['amember_admin_login'] != '' )
-                        header("Location:/clients/admin-auth/logout");
-                    if(@isset($_SESSION['amember_login']) && $_SESSION['amember_login'] != '' )
-                        header("Location:/clients/logout");                 
-                }
-                else 
-                    $_SESSION['last_activity'] = time();                
-            }
-
-        }
-        
-    }
 
     /**
     * Checks if session has expired
