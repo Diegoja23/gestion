@@ -64,9 +64,28 @@ class Usuario extends Persona
     public function validar()
     {
         //TODO -- aqui hay que validar los datos del participante, asi como asegurarnos de que no exista previamente
-        return ($this->nombre!='' && $this->apellido!='' && $this->email!='' && $this->contraseña!='');      
+        return (
+        strlen($this->nombre) > 2 
+        && strlen($this->apellido) > 2
+        && $this->validarEmail() 
+        && strlen($this->contraseña) > 6
+        && !$this->exists());      
     }
-        
+    
+    private function exists()
+    {
+        //TODO
+        return false;
+    }
+    
+    private function validarEmail()
+    {         
+         $regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$^";
+         if (preg_match($regex, $this->email))
+            return true; 
+         return false;
+    }    
+
     public function add()
     {
         $object_vars=get_object_vars($this);        
