@@ -104,7 +104,9 @@ ol li
   float: left;
   height: 100px;
   background: transparent;
-  padding: 0 0 0px 10px;}
+  /*padding: 0 0 0px 10px;*/
+  margin-bottom: 38px;
+  }
 
 #logo h1
 { font: normal 350% 'Yanone Kaffeesatz', arial, sans-serif;

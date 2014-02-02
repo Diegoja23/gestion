@@ -40,8 +40,9 @@
   <div id="main">
     <div id="header">
       <div id="logo">
-        <h1>GIRASOL</h1>
-        <div class="slogan">Sistema de Gesti&oacute;n Notarial</div>
+          <img  src="<?=APPPATH?>static/images/encabezado-girasoles.gif" alt="cabezal" />
+        <!--h1>GIRASOL</h1>
+        <div class="slogan">Sistema de Gesti&oacute;n Notarial</div-->
       </div>
     </div>
     <div id="site_content_login">
@@ -58,7 +59,7 @@
 
     </div>
     <div id="footer">
-      <p>Copyright &copy; Girasol | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.html5webtemplates.co.uk">design from HTML5webtemplates.co.uk</a></p>
+      <p>Copyright &copy; Girasol | Proyecto Integrador | Fernando Marichal - Yohana Parodi</p>
     </div>
   </div>
 </body>
