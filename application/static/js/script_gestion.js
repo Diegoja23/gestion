@@ -242,13 +242,43 @@ function seleccionarComboConValor(id_elemento_dom,id_seleccionado){
     $(elemento).attr('selected','selected');   
 }
 
+
+/*---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------
+  MÉTODOS VALIDACIÓN
+  ---------------------------------------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------------------------------------*/
+function validarString(str){
+    return str == '';
+}
+
+function validarInt(entero){
+    return  isNaN(entero) || entero == '';
+}
+
+function validarCedula(ci){
+    return validarInt(ci) || ci.length != 8;
+}
+
+function validarEmail(email){
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return !regex.test(email);
+}
+
+function mensajeValidacion(div,msg){
+    var linea = '<br/><span style="color:red;margin-left: 15px;"><i class="fa fa-arrow-circle-o-right"></i> '+msg+'</span>';
+    $(div).append(linea);
+}
+
+
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
   MÉTODOS DE CLIENTE
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
 function agregarDivDatosCliente(){    
-    //if($("#div_formulario_cliente").css("display") == "none"){        
+    //if($("#div_formulario_cliente").css("display") == "none"){ 
+        $('#retorno_borrado').html('');
         $("#div_listado_cliente").fadeOut(1500);        
         $("#btn_agregar_cliente").fadeOut(1500);
         $('#combo_lista_personas_personas').fadeOut(1500);
@@ -493,6 +523,7 @@ function eliminarClienteElegido(){
 }
 
 function guardarCliente(){
+    $('#retorno_borrado').html('');
     var nombre_cli = $.trim($("#txt_nombre_cliente").val());
     var apellido_cli = $.trim($("#txt_apellido_cliente").val());
     var ci_cli = $.trim($("#txt_ci_cliente").val());
@@ -501,10 +532,11 @@ function guardarCliente(){
     var direccion_cli = $.trim($("#txt_direccion_cliente").val());
     //var archivo = $(".archivo")[0].files[0];
     var ci_escaneada_cli = -1;
+    var div_error ='#retorno_borrado';
     //if(archivo != undefined){
       //  ci_escaneada_cli = new FormData($(".formulario_archivo")[0]);
     //}
-    
+    if(validarDatosPersona(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli,div_error)){
         if(typeof GLOBAL_id_cliente === 'undefined'){
             $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
                 .done(function(data) {
@@ -533,7 +565,37 @@ function guardarCliente(){
                 }
             });
         }
+    }
     //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
+}
+
+function validarDatosPersona(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli,div){
+    var retorno = true;
+    if(validarString(nombre_cli)){
+        mensajeValidacion(div,'<em>Nombre</em> no válido');
+        retorno = false;
+    }
+    if(validarString(apellido_cli)){
+        mensajeValidacion(div,'<em>Apellido</em> no válido');
+        retorno = false;
+    }
+    if(validarCedula(ci_cli)){
+        mensajeValidacion(div,'<em>Cédula</em>. Debe tener únicamente 8 números');
+        retorno = false;
+    }
+    if(validarEmail(email_cli)){
+        mensajeValidacion(div,'<em>Email</em> no valido');
+        retorno = false;
+    }
+    if(validarString(telefono_cli)){
+        mensajeValidacion(div,'<em>Teléfono</em> no válido');
+        retorno = false;
+    }
+    if(validarString(direccion_cli)){
+        mensajeValidacion(div,'<em>Dirección</em> no válida');
+        retorno = false;
+    }    
+    return retorno;
 }
 //$( document ).on( "change",".elegir_familia", cambiarElemento );
 
@@ -1046,13 +1108,16 @@ function agregarParticipanteALista(){
 }
 
 function guardarParticipanteGestion(){
+    $('#retorno_participante').html('');
     var nombre_par = $.trim($("#txt_nombre_participante_gestion").val());
     var apellido_par = $.trim($("#txt_apellido_participante_gestion").val());
     var ci_par = $.trim($("#txt_ci_participante_gestion").val());
     var email_par = $.trim($("#txt_email_participante_gestion").val());
     var telefono_par = $.trim($("#txt_telefono_participante_gestion").val());
     var direccion_par = $.trim($("#txt_direccion_participante_gestion").val());
-    if(validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par)){
+    var div_error = '#retorno_participante';
+    if(validarDatosPersona(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par,div_error)){
+    //if(validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par)){
     $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "agregar_participante",nombre: nombre_par, apellido: apellido_par, ci: ci_par, email: email_par, telefono: telefono_par, direccion: direccion_par})
         .done(function(data) {
         if(parseInt(data) > 0){       
@@ -1067,14 +1132,14 @@ function guardarParticipanteGestion(){
     });
     }
     else{
-        alert('Para poder guardar debe llenar todos los campos del participante');
+        //alert('Para poder guardar debe llenar todos los campos del participante');
     }
 
 }
 
-function validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par){
+/*function validarDatosDeParticipante(nombre_par,apellido_par,ci_par,email_par,telefono_par,direccion_par){
     return nombre_par != '' && apellido_par != '' && ci_par != '' && email_par !='' && telefono_par != '' && direccion_par !='';
-}
+}*/
 
 function traerGestionPorIdUrl($id_gestion){   	  
     $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "traer_por_id",id_gestion: $id_gestion})

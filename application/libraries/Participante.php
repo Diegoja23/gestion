@@ -42,7 +42,7 @@ class Participante extends Persona
         && strlen($this->apellido) > 2
         && $this->validarEmail() 
         && strlen($this->direccion) != ''
-        && strlen($this->ci) == 9 
+        && strlen($this->ci) == 8 
         && !$this->exists());      
     }
     
