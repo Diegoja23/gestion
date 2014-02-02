@@ -32,13 +32,6 @@ class Usuario extends Persona
     
     /* Setters */
 
-    
-    public function exists()
-    {
-        //TODO
-        return false;
-    }            
-
     public static function getAll($limit = 0, $offset = -1)
     {
         $arrayUsuarios = array();
@@ -72,7 +65,7 @@ class Usuario extends Persona
         && !$this->exists());      
     }
     
-    private function exists()
+    public function exists()
     {
         //TODO
         return false;
