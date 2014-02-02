@@ -37,9 +37,13 @@
             
             foreach($title_part as $t)                            
                 $data['title'] .= ucfirst($t)." "; // Capitalize the first letter               
-                
-            $this->load->view('header', $data);                            
-            $this->load->view($page, $data);                
+                                                                     
+            if(is_file(APPPATH."views/".$page.".php"))
+            {
+                $this->load->view('header', $data);              
+                $this->load->view($page, $data);    
+            }         
+            else show_404();
                       
         }
                

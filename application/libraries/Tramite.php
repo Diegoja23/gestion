@@ -107,7 +107,6 @@ class Tramite
                 if(!$this->myci->adjuntos->add($adjunto, $id_tramite)) return false;            
                                                               
         return true;
-
     }
     
     public function modificar()

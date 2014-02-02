@@ -42,7 +42,6 @@
 $route['default_controller'] = 'init/index';
 $route['consultas/(:any)'] = 'consultas/index/$1';
 $route['(:any)'] = 'init/index/$1';
-$route['404_override'] = '';
 
 
 /* End of file routes.php */
