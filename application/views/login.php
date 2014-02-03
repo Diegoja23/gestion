@@ -51,7 +51,7 @@
           <h2 style="color:#555;letter-spacing:1px"><strong>Ingresar al sistema</strong></h2><br>
           <?php if($failLogin) echo "<p style='color:red'>email o contraseña inválidos</p>" ?>
         <form action="/gestion/login" method="post">
-            <p style="padding-bottom: 8px;">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <input name ="email" class="form-control"></p>
+            <p style="padding-bottom: 8px;">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp <input name ="email" class="form-control"></p>
             <p>Contraseña: <input name ="contrasenia" type="password" class="form-control"></p>
             <input type="submit" value="Ingresar" class="btn btn-info"></p>
         </form>
