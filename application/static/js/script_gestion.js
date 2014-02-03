@@ -1773,7 +1773,10 @@ function mostrarDialogPlantilla_mismo(){
                 	text: "Generar PDF a imprimir",
 	                click : function () {
 	                    plantilla = CKEDITOR.instances.editor1.getData();
-	                    convertirAPdf(plantilla);
+                            //var html= '<div style="font-size:15px;text-align:justify;line-height: 27px;margin: 85px 49px 20px 138px">'+plantilla+'</div>';
+                            var html= '<style>@page{font-size:15px;text-align:justify;line-height: 27px;margin: 135px 103px 20px 177px}</style><div>'+plantilla+'</div>';
+                            convertirAPdf(html);
+	                    //convertirAPdf(plantilla);
 	                }                	
                 },    	
                 DelUser:{ 
