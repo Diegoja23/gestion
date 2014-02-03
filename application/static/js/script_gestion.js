@@ -252,6 +252,10 @@ function validarString(str){
     return str == '';
 }
 
+function validarStringM(str, n){
+    return str.length <= n;
+}
+
 function validarInt(entero){
     return  isNaN(entero) || entero == '';
 }
@@ -2270,8 +2274,9 @@ function guardarUsuario(){
     var apellido_usuario = $.trim($("#txt_apellido_usuario").val());
     var email_usuario = $.trim($("#txt_email_usuario").val());
     var pass_usuario = $.trim($("#txt_pass_usuario").val());
+    var repeat_pass_usuario = $.trim($("#txt_pass_usuario_2").val());
     
-    if(validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,div_error)){
+    if(validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,repeat_pass_usuario,div_error)){
         if(typeof GLOBAL_id_usuario === 'undefined'){
             $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "agregar_usuario",nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
                 .done(function(data) {
@@ -2302,7 +2307,7 @@ function guardarUsuario(){
     //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 
-function validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,div){
+function validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,repeat_pass_usuario,div){
     var retorno = true;
     if(validarString(nombre_usuario)){
         mensajeValidacion(div,'<em>Nombre</em> no válido');
@@ -2320,6 +2325,16 @@ function validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_
         mensajeValidacion(div,'Debe llenar el campo <em>password</em>');
         retorno = false;
     }   
+    if(validarStringM(pass_usuario, 6))
+    {
+        mensajeValidacion(div,'La <em>contraseña</em> debe tener mas de 6 caracteres');
+        retorno = false;        	
+    }
+    
+    if(pass_usuario != repeat_pass_usuario){
+        mensajeValidacion(div,'Las <em>contraseñas</em> deben coicidir');
+        retorno = false;    	
+    }
     return retorno;
 }
 

@@ -87,6 +87,10 @@
                 <label for="txt_pass_usuario">Password</label>                
                 <input type="password" class="form-control" id="txt_pass_usuario" placeholder="●●●●●●●●●●">
             </div>  
+            <div class="form-group">
+                <label for="txt_pass_usuario">Reperir Password</label>                
+                <input type="password" class="form-control" id="txt_pass_usuario_2" placeholder="●●●●●●●●●●">
+            </div>              
             <br/>
             <div class="button-group">
                 <button type="button" class="btn btn-danger" id="btn_guardar_usuario">Guardar <i class="fa fa-floppy-o"></i></button>
