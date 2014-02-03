@@ -1712,7 +1712,8 @@ function agregarAdjuntosAlTramiteCargado(lista_adjuntos){
 }
 
 function cambioTipoTramite(){
-    var tipo_tramite = $("#combo_tipo_tramite option:selected").text();
+    //var tipo_tramite = $("#combo_tipo_tramite option:selected").text();
+    plantilla = undefined;
     //$("#dialog_plantilla").attr("title",tipo_tramite);
    // $( "#dialog_plantilla" ).dialog( "option", "title", tipo_tramite );
     //alert(tipo_tramite);
