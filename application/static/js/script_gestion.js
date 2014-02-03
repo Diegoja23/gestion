@@ -1542,6 +1542,10 @@ function validarDatosTramite(descripcion,div_error){
         mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
         retorno = false;
     }
+    if(typeof plantilla === 'undefined') {
+        mensajeValidacion(div_error,'Debe chequear la <em>plantilla</em> antes de guardar');
+        retorno = false;
+    }
     return retorno;
 }
 
