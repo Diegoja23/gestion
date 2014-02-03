@@ -64,7 +64,7 @@
         <h1>Trámites</h1>
         <!-- <button id="btn_agregar_tramite" class="btn btn-primary">Agregar nuevo <i class="fa fa-plus-circle"></i></button> -->
         <button id="btn_mostrar_lista_tramites" type="button" style="display: none;" class="btn btn-primary">Mostrar Lista <i class="fa fa-list"></i></button>        
-        <div id="retorno_ajax"></div><div id="retorno_borrado_tramite"></div>
+        <div id="retorno_borrado_tramite"></div>
         <div id="div_formulario_tramite">
             <h3>Datos del trámite perteneciente a Gestion <div style="display: inline-block" id="nombre_gestion_trammite"></div></h3>
             <div class="form-group">
