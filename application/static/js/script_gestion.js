@@ -1035,6 +1035,8 @@ function borrarElementoDeSelector(id_elemento, lista){
 }
 
 function guardarGestion(){
+    var div_error = '#retorno_borrado_gestion';
+    $(div_error).html('');
 	//var vid_gestion = $("#txt_id_gestion").val();
     var vdescripcion = $("#txt_descripcion_gestion").val();
     var vtipo_gestion = $("#combo_tipo_gestion").val();
@@ -1061,8 +1063,9 @@ function guardarGestion(){
 	  }
    
     var vid_gestion = GLOBAL_id_gestion;
+    var listado_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0];   
      
-    if(vdescripcion != ''){
+    if(validarDatosGestion(vdescripcion,listado_clientes_elegidos,div_error)){
         if(vid_gestion > 0){           
             $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, estado:vestado, id_grupo:vid_grupo, lista_id_clientes:lista_id_clientes, lista_id_participantes:lista_id_participantes})
                     .done(function(data) {            
@@ -1096,6 +1099,17 @@ function guardarGestion(){
         alert('Debe llenar el campo Descripción para poder guardar esta Gestión');
     }
 
+}
+
+function validarDatosGestion(vdescripcion,listado_clientes_elegidos,div_error){
+    var retorno = true;
+    if(validarString(vdescripcion)){
+        mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
+    }
+    if(listado_clientes_elegidos.length==0){
+        mensajeValidacion(div_error,'El listado de <em>clientes elegidos</em> debe tener al menos uno.');
+    }    
+    return retorno;
 }
 
 function agregarParticipanteALista(){
