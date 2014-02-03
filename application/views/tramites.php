@@ -80,7 +80,7 @@
                 </select>
             </div> 
             <div class="button-group float-left" style="margin-top:30px;margin-left:20px;">
-                <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Plantilla<i class="fa fa-list"></i></button>        
+                <button id="btn_mostrar_dialog_plantilla" type="button" class="btn btn-primary btn-xs">Documento <i class="fa fa-list"></i></button>        
             </div>   
             <br /><br /><br /><br /><br />
             <div class="form-group fecha fecha-inicio">                
