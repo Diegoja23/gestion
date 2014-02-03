@@ -54,7 +54,8 @@
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
         <div class="sidebar">
-          <h3>Girasol</h3>
+           <img src="<?=APPPATH?>static/images/logo-girasol.gif" alt="girasol logo" /> 
+          <!--h3>Girasol</h3-->
           <p>Este es un sistema que tiene como finalidad la gestión de documentos notariales. Con Girasol podrá crear plantillas para usar en sus trabajos, 
           llevar un registro detallado de sus clientes, los documentos (editables y escaneados) y mucho más</p>
           

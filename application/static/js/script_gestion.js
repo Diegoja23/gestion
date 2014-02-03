@@ -1940,6 +1940,7 @@ function agregarDivDatosPlantilla(){
 }
         
 function agregarDivListaPlantillas(){
+    GLOBAL_id_tipo_tramite = undefined;
     $("#retorno_ajax_plantillas").html('');
     $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
     $("#div_formulario_plantilla").fadeOut(1500);
@@ -1977,7 +1978,7 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
         $("#txt_descripcion_plantilla").val("");
         var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
         $("#dialog_plantilla_tt").html(una_plantilla_nueva);
-        GLOBAL_id_tipo_tramite = undefined;
+        //GLOBAL_id_tipo_tramite = undefined;
     }
 }
 
