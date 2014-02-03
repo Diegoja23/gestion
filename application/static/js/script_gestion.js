@@ -35,7 +35,7 @@ function iniEventos() {
         }
         else{
             if(url == '/gestion/tramites' || url == '/gestion/tramites.php'){            					             	 	                                       
-                    $urlVars = parseURLParams(window.location.href);                 
+                    $urlVars = parseURLParams(window.location.href);    
                     if($urlVars.id_tramite > 0)
                     {                    	
                     	$id_tramite=parseInt($urlVars.id_tramite);
@@ -737,7 +737,7 @@ function agregarAdjuntoALosDelCliente(nombre_adjunto){
   ---------------------------------------------------------------------------------------------------------------*/
  
 function goToTramite() 
-{
+{    
 	$id_tramite = $(this).attr("id");
 	window.location.href="tramites?id_tramite="+$id_tramite;
 	//window.open(globalUrl+"/gestion/tramites?id_tramite="+$id_tramite,'_newtab');
@@ -767,6 +767,7 @@ function agregarDivDatosGestionSinLista(){
 }
 
 function agregarDivDatosGestion(){    
+     $('#retorno_borrado_gestion').html('');
         $("#div_listado_gestion").fadeOut(1500);        
         $("#btn_agregar_gestion").fadeOut(1500);               
         $("#div_manejo_tipos_gestiones").fadeOut(1500);
@@ -791,6 +792,7 @@ function agregarDivDatosGestion(){
 }
         
 function agregarDivListaGestiones(){
+     $('#retorno_borrado_gestion').html('');
     $("#div_listado_gestion").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"});
     $("#div_formulario_gestion").fadeOut(1500);
     $("#div_manejo_tipos_gestiones").fadeOut(1500);    
@@ -1096,7 +1098,7 @@ function guardarGestion(){
         }
     }
     else{
-        alert('Debe llenar el campo Descripción para poder guardar esta Gestión');
+        //alert('Debe llenar el campo Descripción para poder guardar esta Gestión');
     }
 
 }
@@ -1105,9 +1107,11 @@ function validarDatosGestion(vdescripcion,listado_clientes_elegidos,div_error){
     var retorno = true;
     if(validarString(vdescripcion)){
         mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
+        retorno = false;
     }
     if(listado_clientes_elegidos.length==0){
         mensajeValidacion(div_error,'El listado de <em>clientes elegidos</em> debe tener al menos uno.');
+        retorno = false;
     }    
     return retorno;
 }
@@ -1217,6 +1221,7 @@ function agregarDivCrearTipoGestion(){
 }
 
 function agregarDivManejoTipoGestion(){    
+    $('#retorno_borrado_gestion').html('');
         $("#div_listado_gestion").fadeOut(1500);
         $("#btn_agregar_div_tipo_gestion").fadeOut(1500);        
         $("#div_formulario_gestion").fadeOut(1500);
@@ -1337,34 +1342,47 @@ function agregarTipoGestionGestion(){
 }
 
 function agregarTipoGestion2(){
+    var div_error = '#retorno_borrado_gestion';
+    $(div_error).html('');
     var descripcion_tipo_gestion = $.trim($("#txt_descripcion_tipo_gestion2").val());
     var vid_tipo_gestion = GLOBAL_id_tipo_gestion;
-    if(vid_tipo_gestion > 0)
-    {
-        $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "modificar_tipo_gestion",descripcion: descripcion_tipo_gestion,id_tipo_gestion:vid_tipo_gestion})
-            .done(function(data) {
-            if(parseInt(data) > 0){       
-                $("#retorno_tipo_gestion2").html("<span style='color:green'>Tipo Gestión modificado exitosamente</span>");
-                agregarDivManejoTipoGestion();
-            }
-            else{
-                $("#retorno_tipo_gestion2").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
-            }
-        });	
+    if(validarDatosTipoGestion(descripcion_tipo_gestion,div_error)){
+        if(vid_tipo_gestion > 0)
+        {
+            $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "modificar_tipo_gestion",descripcion: descripcion_tipo_gestion,id_tipo_gestion:vid_tipo_gestion})
+                .done(function(data) {
+                if(parseInt(data) > 0){       
+                    $("#retorno_tipo_gestion2").html("<span style='color:green'>Tipo Gestión modificado exitosamente</span>");
+                    agregarDivManejoTipoGestion();
+                }
+                else{
+                    $("#retorno_tipo_gestion2").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
+                }
+            });	
+        }
+        else
+        {
+            $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
+                .done(function(data) {
+                if(parseInt(data) > 0){       
+                    $("#retorno_tipo_gestion2").html("<span style='color:green'>Tipo Gestión agregado exitosamente</span>");
+                    agregarDivManejoTipoGestion();
+                }
+                else{
+                    $("#retorno_tipo_gestion2").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
+                }
+            });    	
+        }
     }
-    else
-    {
-        $.post(globalUrl+"/gestion/consultas/consultas_tipos_gestiones.php", {consulta: "agregar_tipo_gestion",descripcion: descripcion_tipo_gestion})
-            .done(function(data) {
-            if(parseInt(data) > 0){       
-                $("#retorno_tipo_gestion2").html("<span style='color:green'>Tipo Gestión agregado exitosamente</span>");
-                agregarDivManejoTipoGestion();
-            }
-            else{
-                $("#retorno_tipo_gestion2").html("<span style='color:red'><strong>Tipo no agregado, verifique los datos!</strong></span>");
-            }
-        });    	
-    }
+}
+
+function validarDatosTipoGestion(descripcion_tipo_gestion,div_error){
+    var retorno = true;
+    if(validarString(descripcion_tipo_gestion)){
+        mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
+        retorno = false;
+    } 
+    return retorno;
 }
 
 function eliminarTipoGestion(){
@@ -1467,6 +1485,8 @@ function agregarDivDatosTramite(){
 
 
 function guardarTramite(){
+    var div_error = '#retorno_borrado_tramite';
+     $(div_error).html('');
     var vid_tramite = $("#txt_id_tramite").val();
     var vdescripcion = $("#txt_descripcion_tramite").val();
     var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
@@ -1484,36 +1504,46 @@ function guardarTramite(){
     var vid_gestion = $.trim($("#span_id_gestion").text());
     var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
     var vplantilla = plantilla;
-    if(vid_tramite > 0)
-    {    	
-	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
-	            .done(function(data) {            
-	                var retorno = parseInt(data);
-	                if(retorno==1){
-	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente! Ud. será redirigido a la gestión</strong></span>");
-	                    setTimeout(function(){goToGestion(vid_gestion)},3000);	    
-	                }
-	                else{
-	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado ! Revise los datos</strong></span>");
-	                }
-	        });      	
-    }
-    else
-    {
-	    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
-	            .done(function(data) {            
-	                var retorno = parseInt(data);
-	                if(retorno==1){
-	                    $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente! Ud. será redirigido a la gestión</strong></span>");
-	                    setTimeout(function(){goToGestion(vid_gestion)},3000);	                    
-	                }
-	                else{
-	                    $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no agregado ! Revise los datos</strong></span>");
-	                }
-	        });    	
+    if(validarDatosTramite(vdescripcion,div_error)){
+        if(vid_tramite > 0)
+        {    	
+                $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
+                        .done(function(data) {            
+                            var retorno = parseInt(data);
+                            if(retorno==1){
+                                $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite modificado exitosamente! Ud. será redirigido a la gestión</strong></span>");
+                                setTimeout(function(){goToGestion(vid_gestion)},3000);	    
+                            }
+                            else{
+                                $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no modificado ! Revise los datos</strong></span>");
+                            }
+                    });      	
+        }
+        else
+        {
+                $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
+                        .done(function(data) {            
+                            var retorno = parseInt(data);
+                            if(retorno==1){
+                                $("#retorno_borrado_tramite").html("<span style='color:green'><strong>Trámite agregado exitosamente! Ud. será redirigido a la gestión</strong></span>");
+                                setTimeout(function(){goToGestion(vid_gestion)},3000);	                    
+                            }
+                            else{
+                                $("#retorno_borrado_tramite").html("<span style='color:red'><strong>Trámite no agregado ! Revise los datos</strong></span>");
+                            }
+                    });    	
+        }
     }
 }
 
+function validarDatosTramite(descripcion,div_error){
+    var retorno = true;
+    if(validarString(descripcion)){
+        mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
+        retorno = false;
+    }
+    return retorno;
+}
 
 function agregarDivListaTramite(){
     $("#btn_mostrar_lista_tramites").fadeOut(1500);
@@ -1682,7 +1712,8 @@ function agregarAdjuntosAlTramiteCargado(lista_adjuntos){
 }
 
 function cambioTipoTramite(){
-    var tipo_tramite = $("#combo_tipo_tramite option:selected").text();
+    //var tipo_tramite = $("#combo_tipo_tramite option:selected").text();
+    plantilla = undefined;
     //$("#dialog_plantilla").attr("title",tipo_tramite);
    // $( "#dialog_plantilla" ).dialog( "option", "title", tipo_tramite );
     //alert(tipo_tramite);
@@ -1910,6 +1941,7 @@ function agregarDivDatosPlantilla(){
 }
         
 function agregarDivListaPlantillas(){
+    GLOBAL_id_tipo_tramite = undefined;
     $("#retorno_ajax_plantillas").html('');
     $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
     $("#div_formulario_plantilla").fadeOut(1500);
@@ -1947,7 +1979,7 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
         $("#txt_descripcion_plantilla").val("");
         var una_plantilla_nueva = '<textarea id="editorTT" name="editorTT">Agregue el texto de la plantilla aquí.</textarea><script type="text/javascript">CKEDITOR.replace( "editorTT" );</script>';
         $("#dialog_plantilla_tt").html(una_plantilla_nueva);
-        GLOBAL_id_tipo_tramite = undefined;
+        //GLOBAL_id_tipo_tramite = undefined;
     }
 }
 
@@ -2056,11 +2088,13 @@ function mostrarDialogPlantilla_tg(){
 }
 
 function guardarTipoTramite(){
+    var div_error = '#retorno_ajax_plantillas';
+    $(div_error).html('');
     var vdescripcion = $("#txt_descripcion_plantilla").val();
     var vtipo_gestion = $("#combo_tipo_gestion_pl").val();
     var vplantilla = plantilla;
     var vid_tipo_tramite = GLOBAL_id_tipo_tramite;
-    if(vdescripcion != ''){
+    if(validarDatosTipoTramite(vdescripcion,div_error)){
         if(vid_tipo_tramite > 0){
             $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
                     .done(function(data) {            
@@ -2090,8 +2124,17 @@ function guardarTipoTramite(){
         }
     }
     else{
-        alert('Debe llenar el campo Descripción para poder guardar esta Plantilla y Tipo de Trámite');
+        //alert('Debe llenar el campo Descripción para poder guardar esta Plantilla y Tipo de Trámite');
     }
+}
+
+function validarDatosTipoTramite(descripcion,div_error){
+    var retorno = true;
+    if(validarString(descripcion)){
+        mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
+        retorno = false;
+    }
+    return retorno;
 }
 
 function eliminarTipoTramiteElegido(){
@@ -2214,12 +2257,14 @@ function eliminarUsuarioElegido(){
 }
 
 function guardarUsuario(){
+    var div_error = '#retorno_borrado_usuario';
+    $(div_error).html('');
     var nombre_usuario = $.trim($("#txt_nombre_usuario").val());
     var apellido_usuario = $.trim($("#txt_apellido_usuario").val());
     var email_usuario = $.trim($("#txt_email_usuario").val());
     var pass_usuario = $.trim($("#txt_pass_usuario").val());
     
-
+    if(validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,div_error)){
         if(typeof GLOBAL_id_usuario === 'undefined'){
             $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "agregar_usuario",nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
                 .done(function(data) {
@@ -2246,12 +2291,31 @@ function guardarUsuario(){
                 }
             });
         }
+    }
     //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 
-function validarDatosIngresadosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario){
-    return nombre_usuario != '' && apellido_usuario != '' && email_usuario != '' && pass_usuario !='';
+function validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,div){
+    var retorno = true;
+    if(validarString(nombre_usuario)){
+        mensajeValidacion(div,'<em>Nombre</em> no válido');
+        retorno = false;
+    }
+    if(validarString(apellido_usuario)){
+        mensajeValidacion(div,'<em>Apellido</em> no válido');
+        retorno = false;
+    }
+    if(validarEmail(email_usuario)){
+        mensajeValidacion(div,'<em>Email</em> no valido');
+        retorno = false;
+    }
+    if(validarString(pass_usuario)){
+        mensajeValidacion(div,'Debe llenar el campo <em>password</em>');
+        retorno = false;
+    }   
+    return retorno;
 }
+
 
 
 /*---------------------------------------------------------------------------------------------------------------
