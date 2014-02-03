@@ -29,7 +29,7 @@ function iniEventos() {
     }
     else{
         if(url == '/gestion/personas' || url == '/gestion/personas.php'){
-                $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+                $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"}); 
                 //$(".subir_archivo").click(subirElArchivo);
                 $(":file").change(cambioElFile);
         }
@@ -91,7 +91,7 @@ function iniEventos() {
                             }, 1000);
                         }
                         else{
-                            $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+                            $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php",{consulta: "traer_todos"}); 
                         
                         }
                     }
@@ -305,7 +305,7 @@ function agregarDivAdjuntosCliente(){
 
 function agregarDivListaClientes(){
     GLOBAL_id_cliente = undefined;
-    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"});
+    $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"});
     $("#div_formulario_cliente").fadeOut(1500);
     $("#btn_mostrar_lista_clientes").fadeOut(1500);
     $("#div_formulario_adjuntos_cliente").fadeOut(1500);
@@ -472,7 +472,7 @@ function traerListaAdjuntosDeCliente(){
 function traerClienteElegido(documento, id_cliente){  
     GLOBAL_documento_cliente = documento;
     GLOBAL_id_cliente = id_cliente;
-    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento})
+    $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "traer_por_ci",ci: documento})
             .done(function(data) {            
                 agregarDivDatosCliente();
                 var un_cliente = jQuery.parseJSON(data);
@@ -487,7 +487,7 @@ function traerClienteElegido(documento, id_cliente){
 function traerDatosComplementariosDeClienteElegido(documento, id_cliente){ 
     GLOBAL_documento_cliente = documento;
     GLOBAL_id_cliente = id_cliente;
-    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "traer_por_ci",ci: documento, id_cliente: id_cliente})
+    $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "traer_por_ci",ci: documento, id_cliente: id_cliente})
             .done(function(data) {            
                 //agregarDivDatosCliente();
                 agregarDivAdjuntosCliente();
@@ -511,7 +511,7 @@ function eliminarClienteElegido(){
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
         var documento = $($(this).parent().parent().parent().children()[2]).text();  
-        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_por_ci",ci: documento})
+        $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "eliminar_por_ci",ci: documento})
                 .done(function(data) {
                     $("#retorno_borrado").html(data);
                     //$('#content').append(un_cliente);
@@ -538,7 +538,7 @@ function guardarCliente(){
     //}
     if(validarDatosPersona(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli,div_error)){
         if(typeof GLOBAL_id_cliente === 'undefined'){
-            $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
+            $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
                 .done(function(data) {
                 if(parseInt(data) == 1){
                     $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
@@ -552,7 +552,7 @@ function guardarCliente(){
             });
         }
         else{
-            $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "modificar_cliente",id_persona:GLOBAL_id_cliente,nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
+            $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "modificar_cliente",id_persona:GLOBAL_id_cliente,nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli})
                 .done(function(data) {
                 if(parseInt(data) == 1){
                     $("#retorno_ajax").html("<strong style='color:green;'>La persona "+nombre_cli+" "+apellido_cli+" se modificó con éxito</strong>");
@@ -566,7 +566,7 @@ function guardarCliente(){
             });
         }
     }
-    //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
+    //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_personas.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 
 function validarDatosPersona(nombre_cli,apellido_cli,ci_cli,email_cli,telefono_cli,direccion_cli,div){
@@ -681,7 +681,7 @@ function eliminar_adjunto_seleccionado_del_cliente(){
         var documento = GLOBAL_documento_cliente;
         var padre = $(this).parent().parent().parent()[0];
         var vdato_complementario_id = padre.id;
-        $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "eliminar_dato_complementario_por_id",adjunto_id: vdato_complementario_id})
+        $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "eliminar_dato_complementario_por_id",adjunto_id: vdato_complementario_id})
                 .done(function(data) {  
                 var ret = parseInt(data);
                 if(ret == 1){
@@ -697,14 +697,14 @@ function eliminar_adjunto_seleccionado_del_cliente(){
 function cambiar_lista_a_opcion_seleccionada(){
     var opcion = $('#combo_lista_personas_personas').val();
     if(opcion == 1){
-        $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+        $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"}); 
     }
     else{
         if(opcion == 2){
-            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_clientes"}); 
+            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_clientes"}); 
         }
         else{
-            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_participantes"}); 
+            $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_participantes"}); 
         }
     }
     //alert(opcion);
@@ -713,7 +713,7 @@ function cambiar_lista_a_opcion_seleccionada(){
 function agregarAdjuntoALosDelCliente(nombre_adjunto){
     var vdocumento_cliente = GLOBAL_documento_cliente;
     var vid_cliente = GLOBAL_id_cliente;
-    $.post(globalUrl+"/gestion/consultas/consultas_clientes.php", {consulta: "agregar_adjunto_al_cliente",ci: vdocumento_cliente, id_cliente: GLOBAL_id_cliente})
+    $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "agregar_adjunto_al_cliente",ci: vdocumento_cliente, id_cliente: GLOBAL_id_cliente})
             .done(function(data) {            
                 //agregarDivDatosCliente();
                 var retorno_adjunto = jQuery.parseJSON(data);
@@ -1940,7 +1940,7 @@ function agregarDivDatosPlantilla(){
     $("#btn_agregar_plantilla").fadeOut(1500);
     $("#btn_mostrar_lista_plantillas").fadeIn(1500);        
     $("#div_formulario_plantilla").fadeIn(1500);
-    //$('#combo_tipo_gestion_pl').load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_tipos_gestion"});
+    //$('#combo_tipo_gestion_pl').load(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php",{consulta: "traer_tipos_gestion"});
     cargarTipoGestion('#combo_tipo_gestion_pl','combo')
         //$('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_personas"});
     cargarFormularioTipoTramite(-1);
@@ -1950,7 +1950,7 @@ function agregarDivDatosPlantilla(){
 function agregarDivListaPlantillas(){
     GLOBAL_id_tipo_tramite = undefined;
     $("#retorno_ajax_plantillas").html('');
-    $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_plantillas.php",{consulta: "traer_todos"}); 
+    $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php",{consulta: "traer_todos"}); 
     $("#div_formulario_plantilla").fadeOut(1500);
     $("#btn_mostrar_lista_plantillas").fadeOut(1500);
     //$("#div_formulario_adjuntos_gestion").fadeOut(1500);
@@ -2008,7 +2008,7 @@ function traerTipoTramiteElegidoPorId(id_tipo_tramite){
 }
 
 function traerTipoTramitePorId(id_tipo_tramite,solo_plantilla){
-    $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "matchear_por_id",id_tipo_tramite: id_tipo_tramite})
+    $.post(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php", {consulta: "matchear_por_id",id_tipo_tramite: id_tipo_tramite})
             .done(function(data) {     
                 if(!solo_plantilla){
                     agregarDivDatosPlantilla();
@@ -2103,7 +2103,7 @@ function guardarTipoTramite(){
     var vid_tipo_tramite = GLOBAL_id_tipo_tramite;
     if(validarDatosTipoTramite(vdescripcion,div_error)){
         if(vid_tipo_tramite > 0){
-            $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
+            $.post(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php", {consulta: "modificar_tipo_tramite", id_tipo_tramite:vid_tipo_tramite, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
@@ -2115,7 +2115,7 @@ function guardarTipoTramite(){
             });      	
         }
         else{
-            $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "agregar_tipo_tramite", descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
+            $.post(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php", {consulta: "agregar_tipo_tramite", descripcion:vdescripcion, tipo_gestion:vtipo_gestion, plantilla:vplantilla})
                     .done(function(data) {            
                         var retorno = parseInt(data);
                         if(retorno==1){
@@ -2150,7 +2150,7 @@ function eliminarTipoTramiteElegido(){
         //var documento = $($(this).parent().children()[2]).text(); 
         //var id_tipo_tramite = GLOBAL_id_tipo_tramite;
         var id_tipo_tramite = $($(this).parent().parent().parent().children()[0]).text();  
-        $.post(globalUrl+"/gestion/consultas/consultas_plantillas.php", {consulta: "eliminar_por_id",id_tipo_tramite: id_tipo_tramite})
+        $.post(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php", {consulta: "eliminar_por_id",id_tipo_tramite: id_tipo_tramite})
                 .done(function(data) {
                     $("#retorno_ajax_plantillas").html(data);
                     //$('#content').append(un_cliente);
@@ -2299,7 +2299,7 @@ function guardarUsuario(){
             });
         }
     }
-    //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_clientes.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
+    //$("#retorno_ajax").load("'+globalUrl+'/gestion/consultas/consultas_personas.php",{consulta: "agregar_cliente",nombre: nombre_cli, apellido: apellido_cli, ci: ci_cli, email: email_cli, telefono: telefono_cli, direccion: direccion_cli, ci_escaneada: ci_escaneada_cli});
 }
 
 function validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_usuario,div){
@@ -2337,7 +2337,7 @@ function hacerBusqueda()
     
     if(text_busqueda == ''){
         if(combo_tipo_busqueda == 1){            
-            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "traer_todos"}); 
+            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"}); 
         }
         else{
             if(combo_tipo_busqueda == 2){
@@ -2355,7 +2355,7 @@ function hacerBusqueda()
     }
     else{
         if(combo_tipo_busqueda == 1){            
-            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_clientes.php",{consulta: "buscar_por_nombre",text_busqueda:text_busqueda}); 
+            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "buscar_por_nombre",text_busqueda:text_busqueda}); 
         }
         else{
             if(combo_tipo_busqueda == 2){
