@@ -86,7 +86,7 @@
             </div>
             <div class="form-group">                
                 <label for="txt_ci_cliente">Cédula de Identidad</label><br />
-                <input type="text" class="form-control" id="txt_ci_cliente" maxlength="9" placeholder="Ingresar Cédula">  <span style="color: grey">* sin puntos ni guiones, ej.: 44092562</span>
+                <input type="text" class="form-control" id="txt_ci_cliente" maxlength="8" placeholder="Ingresar Cédula">  <span style="color: grey">* sin puntos ni guiones, ej.: 44092562</span>
             </div>      
             <div class="form-group">            
                 <button type="button" id="btn_agregar_form_subir_ci" class="btn btn-info">Agregar cédula <i class="fa fa-upload"></i></button>                
