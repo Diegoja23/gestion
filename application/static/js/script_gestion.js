@@ -26,6 +26,7 @@ function iniEventos() {
                 }				
             
             $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});
+           
         
     }
     else{
@@ -797,6 +798,7 @@ function agregarDivDatosGestion(){
             var id_gestion = -1;
         }
      
+
         //$('#combo_tipo_gestion').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_tipos_gestion"});        
         cargarTipoGestion('#combo_tipo_gestion','combo');
         $('#combo_lista_personas').load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_lista_clientes", id_gestion:id_gestion});
@@ -868,6 +870,9 @@ function cargarFormularioGestion(una_gestion){
         
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
+        var myDate = new Date();
+        var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();           	       	
+        $("#txt_fecha_inicio_gestion").val(prettyDate);      
         //$("#span_id_tramite").text("un_tramite.id_tramite");        
     }
 }
