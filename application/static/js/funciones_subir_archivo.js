@@ -31,7 +31,7 @@ $(document).ready(function(){
 		var message = "";	
 		//hacemos la petición ajax  
 		$.ajax({
-			url: globalUrl+"/gestion/consultas/consultas_clientes.php",  
+			url: globalUrl+"/gestion/consultas/consultas_personas.php",  
 			type: 'POST',
 			// Form data
 			//datos del formulario
