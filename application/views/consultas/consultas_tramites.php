@@ -145,7 +145,7 @@ switch($consulta){
         }
         break;
         
-   case "buscar_por_descripcion":
+   case "traer_busqueda_nombre":
         $text_busqueda = cargarUnValor('text_busqueda');
         $lista_ret = traerTramitesBuscados(strtolower($text_busqueda));
         if(count($lista_ret)>0){

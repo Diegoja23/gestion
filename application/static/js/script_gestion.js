@@ -105,6 +105,11 @@ function iniEventos() {
                         $("#div_listado_usuarios").load(globalUrl+"/gestion/consultas/consultas_usuarios.php",{consulta: "traer_todos"}); 
                         $(":file").change(cambioElFile);
                     }
+                    else{
+                        if(url == '/gestion/' || url == '/gestion/index.php' || url == '/gestion/index'){
+                            $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"}); 
+                        }
+                    }
                 }
             }
         }
@@ -201,6 +206,9 @@ $(document).on("click",".btn_eliminar_usuario",eliminarUsuarioElegido);
 
 /*asignar eventos BUSCADOR*/
 $(document).on("click","#btn_buscar_inicio",hacerBusqueda);
+$(document).on("change","#combo_elemento_busqueda",agregarDivFechaBusqueda);
+$(document).on("change","#checkbox_fecha_buscar",buscarTambienPorFecha);
+
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -1954,6 +1962,7 @@ function agregarDivDatosPlantilla(){
         
 function agregarDivListaPlantillas(){
     GLOBAL_id_tipo_tramite = undefined;
+    $("#combo_tipo_gestion_pl").removeAttr("disabled");
     $("#retorno_ajax_plantillas").html('');
     $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php",{consulta: "traer_todos"}); 
     $("#div_formulario_plantilla").fadeOut(1500);
@@ -1971,9 +1980,9 @@ function cargarFormularioTipoTramite(un_tipo_tramite){
             $("#txt_descripcion_plantilla").val(un_tipo_tramite.descripcion);
             
             setTimeout(function(){            
-                seleccionarComboConValor("#combo_tipo_gestion_pl",un_tipo_tramite.id_tipos_gestion);
+                seleccionarComboConValor("#combo_tipo_gestion_pl",un_tipo_tramite.id_tipos_gestion);                
             }, 1000);
-            
+            $("#combo_tipo_gestion_pl").attr("disabled","disabled");
             //$("#combo_tipo_gestion_pl").val(un_tipo_tramite.tipo_gestion);
             //$("#dialog_plantilla").val(un_tipo_tramite.plantilla);
             plantilla = un_tipo_tramite.plantilla;
@@ -2349,19 +2358,37 @@ function validarDatosUsuario(nombre_usuario,apellido_usuario,email_usuario,pass_
 function hacerBusqueda()
 {
     var text_busqueda = $.trim($('#txt_campo_busqueda').val());
-    var combo_tipo_busqueda = $('#combo_elemento_busqueda').val()
-    
+    var combo_tipo_busqueda = $('#combo_elemento_busqueda').val();
+    var combo_tipo_fecha = $('#combo_seleccionar_tipo_fecha').val();    
+    var fecha_ini;
+    var fecha_fin;
+    var checkbox = $('#checkbox_fecha_buscar').prop('checked');
+    if(checkbox){
+        fecha_ini = $('#txt_fecha_inicio_busqueda').val();
+        fecha_fin = $('#txt_fecha_fin_busqueda').val();
+        if(fecha_ini == ''){
+            fecha_ini = -1;
+        }
+        if(fecha_fin == ''){
+            fecha_fin = -1;
+        }
+    }
+    else{
+        fecha_ini = -1;
+        fecha_fin = -1;
+    }
+
     if(text_busqueda == ''){
         if(combo_tipo_busqueda == 1){            
             $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"}); 
         }
         else{
             if(combo_tipo_busqueda == 2){
-                $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_todos"}); 
+                $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_busqueda",fecha_inicio:fecha_ini,fecha_final:fecha_fin,combo_tipo_fecha:combo_tipo_fecha}); 
             }
             else{
                 if(combo_tipo_busqueda == 3){
-                    $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_todos"}); 
+                    $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_busqueda",fecha_inicio:fecha_ini,fecha_final:fecha_fin,combo_tipo_fecha:combo_tipo_fecha}); 
                 }
                 else{
 
@@ -2371,20 +2398,49 @@ function hacerBusqueda()
     }
     else{
         if(combo_tipo_busqueda == 1){            
-            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "buscar_por_nombre",text_busqueda:text_busqueda}); 
+            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_busqueda_nombre",text_busqueda:text_busqueda}); 
         }
         else{
             if(combo_tipo_busqueda == 2){
-                $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "buscar_por_descripcion",text_busqueda:text_busqueda}); 
+                $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_gestiones.php",{consulta: "traer_busqueda_nombre",text_busqueda:text_busqueda,fecha_inicio:fecha_ini,fecha_final:fecha_fin,combo_tipo_fecha:combo_tipo_fecha}); 
             }
             else{
                 if(combo_tipo_busqueda == 3){
-                    $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "buscar_por_descripcion",text_busqueda:text_busqueda}); 
+                    $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_busqueda_nombre",text_busqueda:text_busqueda,fecha_inicio:fecha_ini,fecha_final:fecha_fin,combo_tipo_fecha:combo_tipo_fecha}); 
                 }
                 else{
 
                 }
             }
         }
+    }
+}
+
+function agregarDivFechaBusqueda(){    
+    var combo_tipo_busqueda = $('#combo_elemento_busqueda').val();
+    if(combo_tipo_busqueda > 1){        
+        $('#div_fecha_busqeuda').fadeIn(1500);
+    }
+    else{
+        $('#div_fecha_busqeuda').fadeOut(1500);
+    }
+}
+
+function buscarTambienPorFecha(){
+    if(this.checked){
+        $("#cabecera").animate({
+            'height': "149px"
+        });
+        $('#cabecera_linea2').fadeIn(1500);
+    }
+    else{
+        $('#cabecera_linea2').fadeOut(1500);
+        setTimeout(function(){           
+            $("#cabecera").animate({
+                'height': "97px"
+            });
+        }, 1000);
+        
+        
     }
 }

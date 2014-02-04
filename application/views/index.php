@@ -66,7 +66,8 @@
         </div>
       </div>
       <div id="content">
-        <div id="cabecera">  
+        <div id="cabecera">
+          <div id="cabecera_linea1">
             <div class="form-group float-left">
                 <label for="lbl_seleccionar_elemento_busqueda">Buscar por:</label>  <br />              
                 <select class='form-control' id='combo_elemento_busqueda'>
@@ -78,9 +79,35 @@
             <div class="form-group float-left">                
                 <input enabled="false" type="text" class="form-control" id="txt_campo_busqueda" placeholder="Ingresar su búsqueda">                
             </div>
-            <div class="button-group float-left">
+            <div class="checkbox float-left" id="div_fecha_busqeuda">
+                <label>
+                  <input type="checkbox" id="checkbox_fecha_buscar"> Buscar fecha
+                </label>
+            </div>
+            
+            <div class="button-group float-right">
                 <button type="button" class="btn btn-primary" id="btn_buscar_inicio">Buscar <i class="fa fa-search"></i></button>
             </div> 
+         </div>
+            <br />
+            <div id="cabecera_linea2">
+                <div class="form-group float-right">  
+                    <label for="lbl_fecha_fin_busqueda">Desde</label><br />                
+                    <input type="text" class="form-control datepicker" id="txt_fecha_fin_busqueda" placeholder="Fecha de fin">
+              </div>
+              <div class="form-group float-right">  
+                    <label for="lbl_fecha_inicio_busqueda">Hasta</label><br />
+                    <input type="text" class="form-control datepicker" id="txt_fecha_inicio_busqueda" placeholder="Fecha de inicio">    
+              </div>
+              <div class="form-group float-right" style="margin-right:25px">
+                <label for="lbl_seleccionar_tipo_fecha">Buscar por:</label>  <br />              
+                <select class='form-control' id='combo_seleccionar_tipo_fecha'>
+                    <option value="1">Fecha inicio</option>
+                    <option value="2">Fecha fin</option>
+                    <option value="3">Gestión total</option>
+                </select>
+              </div>
+            </div>
         </div>
         <div id="resultado_busqueda"></div>       
         
