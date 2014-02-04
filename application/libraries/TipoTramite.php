@@ -65,7 +65,7 @@
         $object_vars=get_object_vars($this);       
         $fieldsTipoTramite = array();
         foreach($object_vars as $key => $value)        
-            if($this->attNotDistinctToTable($key))
+            if($this->attNotDistinctToTable($key) && $key != 'id_tipos_gestion') // el id_tipo_gestion no debe ser modificable.
                 $fieldsTipoTramite[$key] = $value;
              
         return $this->myci->tramites->modificar_tipo_tramite($fieldsTipoTramite);                           

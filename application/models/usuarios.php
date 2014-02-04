@@ -43,6 +43,13 @@ class Usuarios extends CI_Model
         return true;        
     }
     
+    public function exists_usuario($email)
+    {
+        $query = $this->db->get_where('usuario', array('email' => $email));
+        if ($query->num_rows > 0) return true;
+        return false;        
+    }
+    
     public function eliminar($id_usuario)
     {
         return $this->db->delete('usuario', array('id_usuario' => $id_usuario));        

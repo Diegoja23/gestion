@@ -2281,12 +2281,12 @@ function guardarUsuario(){
             $.post(globalUrl+"/gestion/consultas/consultas_usuarios.php", {consulta: "agregar_usuario",nombre: nombre_usuario, apellido: apellido_usuario, email: email_usuario, pass: pass_usuario})
                 .done(function(data) {
                 if(parseInt(data) > 0){
-                    $("#retorno_ajax_usuario").html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se ingresó con éxito</strong>");
-                    cargarFormularioCliente(-1);
-                    agregarDivListaUsuarios();
+                    $(div_error).html("<strong style='color:green;'>El usuario "+nombre_usuario+" "+apellido_usuario+" se ingresó con éxito</strong>");
+                    //cargarFormularioCliente(-1);
+                    //agregarDivListaUsuarios();
                 }
                 else{
-                    $("#retorno_ajax_usuario").append(data);
+                    $(div_error).html("<strong style='color:red;'>El usuario "+nombre_usuario+" "+apellido_usuario+" no fue ingresado. Verifique que el email ingresado no haya sido dado de alta previamente");
                 }
             });
         }

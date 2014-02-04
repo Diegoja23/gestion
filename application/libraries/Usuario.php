@@ -67,8 +67,7 @@ class Usuario extends Persona
     
     public function exists()
     {
-        //TODO
-        return false;
+        return $this->myci->usuarios->exists_usuario($this->email);    
     }
     
     private function validarEmail()
