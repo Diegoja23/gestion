@@ -97,10 +97,10 @@ class Gestion
     {
         $object_vars=get_object_vars($this);       
         $fieldsGestion = array();
+        if($this->fecha_inicio == null) $this->fecha_inicio = date("Y-m-d");        
         foreach($object_vars as $key => $value)        
             if($this->attNotDistinctToTable($key))
-                $fieldsGestion[$key] = $value;
-                                
+                $fieldsGestion[$key] = $value;                   
         $id_grupo = $this->grupo->add();      
         if($id_grupo > 0)            
         {

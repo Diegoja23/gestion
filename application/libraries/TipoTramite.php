@@ -46,7 +46,7 @@
     public function validar()
     {
         //TODO
-        return true;    
+        return $this->plantilla != '';    
     }
     
     public function add()

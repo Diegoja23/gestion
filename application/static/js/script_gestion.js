@@ -26,6 +26,7 @@ function iniEventos() {
                 }				
             
             $( ".datepicker" ).datepicker({dateFormat:"dd/mm/yy"});
+        
     }
     else{
         if(url == '/gestion/personas' || url == '/gestion/personas.php'){
