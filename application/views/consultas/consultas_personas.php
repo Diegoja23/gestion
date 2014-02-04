@@ -96,7 +96,7 @@ switch($consulta){
         echo $file;
         break;
    
-   case "buscar_por_nombre":
+   case "traer_busqueda_nombre":
         $text_busqueda = cargarUnValor('text_busqueda');
         $lista_ret = traerPersonasBuscadas(strtolower($text_busqueda));
         if(count($lista_ret)>0){

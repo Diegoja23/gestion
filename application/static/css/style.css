@@ -506,3 +506,15 @@ table tr td
 #txt_campo_busqueda, #btn_buscar_inicio{
     margin:18px;
 }
+
+#div_fecha_busqeuda{
+    margin-top:25px;
+    display: none;
+}
+
+#cabecera_linea2{
+    position: absolute;
+    margin-top: 45px;
+    width: 606px;
+    display:none;
+}
