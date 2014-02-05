@@ -111,10 +111,10 @@ switch($consulta){
         $ci = cargarUnValor('ci');
         $borrado = Fachada::getInstancia()->eliminarByCI($ci);
         if($borrado){
-            echo "<strong style='color:green;'>El cliente de cédula ".$ci." fue exitosamente borrado!";
+            echo 1;
         }
         else{
-            echo "<strong style='color:red;'>El cliente de cédula ".$ci." no se pudo borrar";
+            echo 0;
         }
         break;
     

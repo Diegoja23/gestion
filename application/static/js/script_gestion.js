@@ -41,12 +41,8 @@ function iniEventos() {
                     if($urlVars.id_tramite > 0)
                     {                    	
                     	$id_tramite=parseInt($urlVars.id_tramite);
-			//$(document).ready(traerTramitePorIdUrl($id_tramite));	
                         traerTramitePorIdUrl($id_tramite);
-			GLOBAL_id_tramite = $id_tramite;
-                        /*setTimeout(function(){
-                        cargarPlantilla();
-                }, 1000);*/
+						GLOBAL_id_tramite = $id_tramite;
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
                     {                    	
@@ -521,18 +517,27 @@ function traerDatosComplementariosDeClienteElegido(documento, id_cliente){
 }
 
 function eliminarClienteElegido(){
-    var confirmado = confirm("¿Seguro que desea eliminar esta persona?");
+
+    var confirmado = confirm("¿Seguro que desea eliminar esta persona? No se eliminará si pertenece a alguna gestión");
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
         var documento = $($(this).parent().parent().parent().children()[2]).text();  
         $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "eliminar_por_ci",ci: documento})
                 .done(function(data) {
-                    $("#retorno_borrado").html(data);
+                	if(parseInt(data)>0)
+                	{
+                		$("#retorno_borrado").html("<span style='color:green;'>La persona con CI "+documento+" fue eliminada.</span>");
+                		$(this).parent().parent().parent().fadeOut(1500);
+                		
+                	}
+                	else
+                	{
+                		$("#retorno_borrado").html("<span style='color:red;'>No se pudo eliminar a la persona con CI "+documento+". erifique que no pertenezca a ningún trámite</span>");
+                	}
+                    
                     //$('#content').append(un_cliente);
-            }, "json");
-        //$("input").prop('disable', true);
-        //ocultamos el borrado
-        $(this).parent().parent().parent().fadeOut(1500);       
+            }, "json"); 
+               
     }
 }
 
@@ -870,12 +875,7 @@ function cargarFormularioGestion(una_gestion){
         
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
-        var myDate = new Date();
-        var month = myDate.getMonth();
-        ++month;
-        var prettyDate =myDate.getDate() + '/' + month + '/' + myDate.getFullYear();           	       	
-        $("#txt_fecha_inicio_gestion").val(prettyDate);      
-        //$("#span_id_tramite").text("un_tramite.id_tramite");        
+		$( "#txt_fecha_inicio_gestion" ).datepicker( "setDate", new Date());
     }
 }
 
@@ -932,13 +932,9 @@ function finalizarGestion(){
 
         if($("#btn_finalizar_gestion").text()== "Finalizar"){              
             $("#btn_finalizar_gestion").text("Re-abrir");
-            $(".fecha-fin-gestion").fadeIn(1500);
-            var myDate = new Date();
-            var month = myDate.getMonth();
-            ++month;
-            var prettyDate =(myDate.getDate() + '/' + month + '/' + myDate.getFullYear());           	
+            $(".fecha-fin-gestion").fadeIn(1500);         	
            	$("#gestion_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");
-            $("#txt_fecha_fin_gestion").val(prettyDate);
+           	$( "#txt_fecha_fin_gestion" ).datepicker( "setDate", new Date());
         }
         else{
         	$("#gestion_estado").html("<span style='color:green'><strong>En curso</strong></span>");
@@ -1141,7 +1137,7 @@ function validarDatosGestion(vdescripcion,listado_clientes_elegidos,fecha_inicio
     	var nfecha_fin = new Date(ff);
 		
 		var fiA = fecha_inicio.split("/");
-		var fi = fiA[2]+"-"+fiA[1]+"-"+ffA[0];
+		var fi = fiA[2]+"-"+fiA[1]+"-"+fiA[0];
 		var nfecha_inicio = new Date(fi);
 		
 		if(nfecha_fin < nfecha_inicio)
@@ -1465,7 +1461,7 @@ function traerTipoGestionElegido(id_tipo_gestion){
                 cargarFormularioTipoGestion(un_tipo_gestion);
                 //$('#div_ci_cliente').append(data);                
         }, "json");
-        //$("input").prop('disable', true);
+
 }
     
 
@@ -1475,7 +1471,6 @@ function traerTipoGestionElegido(id_tipo_gestion){
   ---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------*/
 function agregarDivDatosTramite(){
-    //if($("#div_formulario_tramite").css("display") == "none"){
     $("#btn_agregar_tramite").fadeOut(1500);
     $("#div_listado_tramite").fadeOut(1500);
     $("#div_archivos_adjuntos").fadeOut(1500);
@@ -1483,9 +1478,7 @@ function agregarDivDatosTramite(){
     $("#btn_mostrar_lista_tramites").fadeIn(1500);
     $("#div_formulario_tramite").fadeIn(1500);
     $("#btn_guardar_tramite").fadeIn(1500);  
-    //$("#btn_agregar_tramite").text("Mostrar Lista");
-        
-    //$("#combo_estado_tramite").css("display","none");
+
     $(".fecha-fin").css("display","none");
                 
 	var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
@@ -1497,39 +1490,10 @@ function agregarDivDatosTramite(){
     	$("#btn_agregar_adjunto").css("display","none");
     	$("#info_adjuntos").html("<span style='color:grey'><strong>*Para agregar adjuntos al trámite, edite el mismo a posterori de agregarlo</strong></span>");
     } 
-        //cargarFormulario(-1);
-        //$("input").prop('disable', false);
-    //}
-    //else{
+       
+    $(document).ready(function(){$( "#txt_fecha_inicio" ).datepicker( "setDate", new Date())});
 
-    //}
 }
-
-/*function guardarTramite(){
-    var vdescripcion = $("#txt_descripcion_tramite").val();
-    var vtipo_tramite = $("#combo_tipo_tramite option:selected").val();
-    var vfecha_inicio = $("#txt_fecha_inicio").val();
-    var vfecha_fin = $("#txt_fecha_fin").val();
-    var vid_gestion = $.trim($("#span_id_gestion").text());
-    var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
-    var vplantilla = plantilla;
-    $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "agregar_tramite", descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla})
-            .done(function(data) {            
-                //alert(data);
-                //var un_cliente = jQuery.parseJSON(data);
-                //cargarFormulario(un_cliente);
-                var retorno = parseInt(data);
-                if(retorno==1){
-                    $("#retorno_borrado").html("<span style='color:green'><strong>Trámite agregado exitosamente!</strong></span>");
-                    agregarDivListaTramite();
-                }
-                else{
-                    $("#retorno_borrado").html("<span style='color:red'><strong>Trámite agregado exitosamente!</strong></span>");
-                }
-                //$('#content').append(data);
-        });
-}*/
-
 
 function guardarTramite(){
     var div_error = '#retorno_borrado_tramite';
@@ -1551,7 +1515,7 @@ function guardarTramite(){
     var vid_gestion = $.trim($("#span_id_gestion").text());
     var vid_tipo_gestion = $.trim($("#span_id_tipo_gestion").text());
     var vplantilla = plantilla;
-    if(validarDatosTramite(vdescripcion,div_error)){
+    if(validarDatosTramite(vdescripcion, vfecha_inicio, vfecha_fin, div_error)){
         if(vid_tramite > 0)
         {    	
                 $.post(globalUrl+"/gestion/consultas/consultas_tramites.php", {consulta: "modificar_tramite", id_tramite:vid_tramite, descripcion:vdescripcion, id_tipo_tramite:vtipo_tramite, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, id_gestion:vid_gestion, id_tipo_gestion:vid_tipo_gestion, plantilla_modificada:vplantilla, estado:vestado})
@@ -1583,7 +1547,7 @@ function guardarTramite(){
     }
 }
 
-function validarDatosTramite(descripcion,div_error){
+function validarDatosTramite(descripcion, fecha_inicio, fecha_fin, div_error){
     var retorno = true;
     if(validarString(descripcion)){
         mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
@@ -1593,6 +1557,22 @@ function validarDatosTramite(descripcion,div_error){
         mensajeValidacion(div_error,'Debe chequear la <em>plantilla</em> antes de guardar');
         retorno = false;
     }
+    if(fecha_fin != '' && fecha_fin != -1)
+    {
+    	var ffA = fecha_fin.split("/");
+    	var ff = ffA[2]+"-"+ffA[1]+"-"+ffA[0];
+    	var nfecha_fin = new Date(ff);
+		
+		var fiA = fecha_inicio.split("/");
+		var fi = fiA[2]+"-"+fiA[1]+"-"+fiA[0];
+		var nfecha_inicio = new Date(fi);
+	
+		if(nfecha_fin < nfecha_inicio)
+		{
+			mensajeValidacion(div_error,'La <em>fecha de fin</em> no debe ser menor que la fecha de inicio.');	
+			retorno = false;
+		}
+   }
     return retorno;
 }
 
@@ -1665,13 +1645,8 @@ function finalizarTramite(){
         	$("#tramite_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");   
             $("#btn_finalizar_tramite").text("Re-abrir");
             $(".fecha-fin").fadeIn(1500);
-            var myDate = new Date();
-            var month = myDate.getMonth();
-            ++month;            
-            var prettyDate =myDate.getDate() + '/' + month + '/' + myDate.getFullYear();              
-            
-            $( ".fecha-fin" ).val(prettyDate);
-            $("#txt_fecha_fin").val(prettyDate);
+            $( ".fecha-fin" ).datepicker( "setDate", new Date());
+            	$( "#txt_fecha_fin" ).datepicker( "setDate", new Date());
             //$( ".fecha-fin" ).datepicker('setDate', 'today');
         }
         else{
@@ -1845,7 +1820,7 @@ function mostrarDialogPlantilla_mismo(){
 }
 
 function eliminarTramiteElegido(){
-    var confirmado = confirm("¿Seguro que desea eliminar este trámite?");
+    var confirmado = confirm("¿Seguro que desea eliminar este trámite? Se borrarán tambien todos los adjuntos del mismo");
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
         var id_tramite = $($(this).parent().parent().parent().children()[0]).text();  
