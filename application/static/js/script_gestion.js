@@ -572,7 +572,7 @@ function eliminarClienteElegido(){
                 	}
                 	else
                 	{
-                		$("#retorno_borrado").html("<span style='color:red;'>No se pudo eliminar a la persona con CI "+documento+". erifique que no pertenezca a ningún trámite</span>");
+                		$("#retorno_borrado").html("<span style='color:red;'>No se pudo eliminar a la persona con CI "+documento+". erifique que no pertenezca a ninguna gestión</span>");
                 	}
                     
                     //$('#content').append(un_cliente);
