@@ -244,7 +244,7 @@ $(document).on("click",".dato_mostrado_tramite_buscador",traerTramiteElegido_bus
 $(document).on("click",".btn_ver_tramite_buscador",traerTramiteElegido_buscador); 
 $(document).on("click",".btn_eliminar_tramite_buscador",eliminarTramiteElegido);
 $(document).on("click",".dato_mostrado_cliente_buscador",traerClienteElegidoClicNombre_buscador);
-$(document).on("click",".btn_ver_cliente",traerClienteElegidoClicIcono_buscador);
+$(document).on("click",".btn_ver_cliente_buscador",traerClienteElegidoClicIcono_buscador);
 $(document).on("click",".btn_eliminar_cliente_buscador",eliminarClienteElegido);
 $(document).on("click",".adjunto_cliente_buscador",traerListaAdjuntosDeCliente_buscador);
 
@@ -574,7 +574,7 @@ function eliminarClienteElegido(){
                 	}
                 	else
                 	{
-                		$("#retorno_borrado").html("<span style='color:red;'>No se pudo eliminar a la persona con CI "+documento+". erifique que no pertenezca a ninguna gestión</span>");
+                		$("#retorno_borrado").html("<span style='color:red;float:left;margin-bottom:10px'>No se pudo eliminar a la persona con CI "+documento+". Verifique que no pertenezca a ninguna gestión</span>");
                 	}
                     
                     //$('#content').append(un_cliente);
@@ -2533,7 +2533,7 @@ function traerClienteElegidoClicNombre_buscador(){
 }
 
 function traerClienteElegidoClicIcono_buscador(){
-    var documento = $.trim($($(this).parent().children()[2]).text());
+    var documento = $.trim($($(this).parent().parent().parent().children()[2]).text());
     var id_cliente = $.trim($($(this).parent().parent().parent().children()[0]).text());    
     irAPaginaPersona(documento,id_cliente,0);
 }

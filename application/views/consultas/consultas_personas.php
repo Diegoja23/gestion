@@ -105,7 +105,7 @@ switch($consulta){
         $text_busqueda = cargarUnValor('text_busqueda');
         $lista_ret = traerPersonasBuscadas(strtolower($text_busqueda));
         if(count($lista_ret)>0){
-            echo crearListaParaPersonas($lista_ret);
+            echo crearListaParaPersonas_buscador($lista_ret);
         }
         else{
             echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
