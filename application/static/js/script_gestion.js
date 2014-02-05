@@ -902,7 +902,9 @@ function cargarFormularioGestion(una_gestion){
         $("#span_id_gestion").text("");
         $("#span_id_tipo_gestion").text("");
         var myDate = new Date();
-        var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();           	       	
+        var month = myDate.getMonth();
+        ++month;
+        var prettyDate =myDate.getDate() + '/' + month + '/' + myDate.getFullYear();           	       	
         $("#txt_fecha_inicio_gestion").val(prettyDate);      
         //$("#span_id_tramite").text("un_tramite.id_tramite");        
     }
@@ -963,7 +965,9 @@ function finalizarGestion(){
             $("#btn_finalizar_gestion").text("Re-abrir");
             $(".fecha-fin-gestion").fadeIn(1500);
             var myDate = new Date();
-            var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();           	
+            var month = myDate.getMonth();
+            ++month;
+            var prettyDate =(myDate.getDate() + '/' + month + '/' + myDate.getFullYear());           	
            	$("#gestion_estado").html("<span style='color:red'><strong>Finalizado</strong></span>");
             $("#txt_fecha_fin_gestion").val(prettyDate);
         }
@@ -1116,7 +1120,7 @@ function guardarGestion(){
     var vid_gestion = GLOBAL_id_gestion;
     var listado_clientes_elegidos = $('#combo_lista_clientes_elegidos')[0];   
      
-    if(validarDatosGestion(vdescripcion,listado_clientes_elegidos,div_error)){
+    if(validarDatosGestion(vdescripcion,listado_clientes_elegidos,vfecha_inicio,vfecha_fin,div_error)){
         if(vid_gestion > 0){           
             $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "modificar_gestion", id_gestion:vid_gestion, descripcion:vdescripcion, tipo_gestion:vtipo_gestion, fecha_inicio:vfecha_inicio, fecha_fin:vfecha_fin, estado:vestado, id_grupo:vid_grupo, lista_id_clientes:lista_id_clientes, lista_id_participantes:lista_id_participantes})
                     .done(function(data) {            
@@ -1137,8 +1141,7 @@ function guardarGestion(){
                         var retorno = parseInt(data);
                         if(retorno>0){
                             $("#retorno_gestion").html("<span style='color:green'><strong>La gestión fue agregada exitosamente!</strong></span>");
-                            $("#btn_agregar_tramite_gestion").fadeIn(1500);                            
-                            $("#btn_mostrar_lista_gestiones").trigger("click");
+                            setTimeout(function(){$("#btn_agregar_tramite_gestion").fadeIn(1500);$("#btn_mostrar_lista_gestiones").trigger("click");},3000);	 
                         }
                         else{
                             $("#retorno_gestion").html("<span style='color:red'><strong>¡La gestión no fue agregada, revise los datos ingresados!</strong></span>");
@@ -1152,7 +1155,7 @@ function guardarGestion(){
 
 }
 
-function validarDatosGestion(vdescripcion,listado_clientes_elegidos,div_error){
+function validarDatosGestion(vdescripcion,listado_clientes_elegidos,fecha_inicio,fecha_fin,div_error){
     var retorno = true;
     if(validarString(vdescripcion)){
         mensajeValidacion(div_error,'Debe llenar la <em>descripción</em>');
@@ -1162,6 +1165,24 @@ function validarDatosGestion(vdescripcion,listado_clientes_elegidos,div_error){
         mensajeValidacion(div_error,'El listado de <em>clientes elegidos</em> debe tener al menos uno.');
         retorno = false;
     }    
+    if(fecha_fin != '')
+    {
+    	var ffA = fecha_fin.split("/");
+    	var ff = ffA[2]+"-"+ffA[1]+"-"+ffA[0];
+    	var nfecha_fin = new Date(ff);
+		
+		var fiA = fecha_inicio.split("/");
+		var fi = fiA[2]+"-"+fiA[1]+"-"+ffA[0];
+		var nfecha_inicio = new Date(fi);
+		
+		if(nfecha_fin < nfecha_inicio)
+		{
+			mensajeValidacion(div_error,'La <em>fecha de fin</em> no debe ser menor que la fecha de inicio.');	
+			retorno = false;
+		}
+		
+    }
+    
     return retorno;
 }
 
@@ -1241,16 +1262,24 @@ function traerGestionElegida(id_gestion){
 }
 
 function eliminarGestionElegida(){
-    var confirmado = confirm("¿Seguro que desea eliminar esta gestión?");
+    var confirmado = confirm("¿Seguro que desea eliminar esta gestión. No se eliminarán gestiones que contengan trámites?");
     if(confirmado){
         var id_gestion = $($(this).parent().parent().parent().children()[0]).text();   
         $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "eliminar_por_id",id_gestion: id_gestion})
                 .done(function(data) {
-                    $("#retorno_borrado").html(data);
+                	if(parseInt(data) > 0){ 
+                			$("#retorno_borrado_gestion").html("<span style='color:green'>Se ha eliminado la gestion "+ id_gestion+"</span>");
+                			$(this).parent().parent().parent().fadeOut(1500);       
+                		}
+                		else
+                		{
+                			$("#retorno_borrado_gestion").html("<span style='color:red'>NO se ha eliminado la gestion "+ id_gestion+". Verifique que no tenga trámites asociados.</span>");
+                		}    
+                    
                     //$('#content').append(un_cliente);
             }, "json");
 
-        $(this).parent().parent().parent().fadeOut(1500);       
+        
     }
 }
 
@@ -1668,7 +1697,10 @@ function finalizarTramite(){
             $("#btn_finalizar_tramite").text("Re-abrir");
             $(".fecha-fin").fadeIn(1500);
             var myDate = new Date();
-            var prettyDate =(myDate.getDate() + '/' + myDate.getMonth()+1) + '/' + myDate.getFullYear();
+            var month = myDate.getMonth();
+            ++month;            
+            var prettyDate =myDate.getDate() + '/' + month + '/' + myDate.getFullYear();              
+            
             $( ".fecha-fin" ).val(prettyDate);
             $("#txt_fecha_fin").val(prettyDate);
             //$( ".fecha-fin" ).datepicker('setDate', 'today');

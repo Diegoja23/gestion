@@ -131,9 +131,11 @@ class Gestion
     {
         if(!isset($this->grupo) || $this->grupo==null) $this->grupo = new Grupo(array('id_grupo' =>$this->id_grupo));
          
-        if($this->myci->gestiones->eliminar_gestion($this->id_gestion))         
-        return $this->grupo->eliminar();
-
+        if($this->myci->gestiones->eliminar_gestion($this->id_gestion)) 
+        {
+            $this->grupo->eliminar();
+            return true;
+        }                
         return false;
     }
     

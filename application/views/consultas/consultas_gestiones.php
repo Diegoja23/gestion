@@ -150,14 +150,10 @@ switch($consulta){
         
     case "eliminar_por_id":
         $id_gestion = cargarUnValor('id_gestion');
-        echo Fachada::getInstancia()->eliminarGestion(traerPorId($id_gestion));
-        //echo $id_gestion;
-        /*if(count($lista_ret)>0){
-            echo crearListaGestiones($lista_ret);
-        }
-        else{
-            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
-        }     */   
+        if (Fachada::getInstancia()->eliminarGestion(traerPorId($id_gestion)))
+        echo 1;
+        else 
+            echo 0;
         break;        
         
     case "agregar_participante": 
