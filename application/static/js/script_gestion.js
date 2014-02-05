@@ -31,6 +31,37 @@ function iniEventos() {
     }
     else{
         if(url == '/gestion/personas' || url == '/gestion/personas.php'){
+                /*var urlParamsPersona = getParamsPart(window.location.href);
+				if (typeof urlParamsPersona === 'undefined') {
+					urlParamsPersona='0';
+				}*/
+            //alert(urlVarsPersona.documento);
+                    var urlVarsPersona = parseURLParams(window.location.href);                 
+                    if(urlVarsPersona){                    	
+                    	var documento =urlVarsPersona.documento[0];
+                        var id_persona =parseInt(urlVarsPersona.id_persona);
+                        var hay_adjunto =parseInt(urlVarsPersona.adjunto);
+                        //traerTipoTramiteElegidoPorId(urlVarsPersona.id_persona);
+                        if(hay_adjunto){
+                            traerDatosComplementariosDeClienteElegido(documento,id_persona);
+                            $('#combo_lista_personas_personas').fadeOut(1500);
+                        }
+                        else{
+                            traerClienteElegido(documento, id_persona);
+                        }
+                        
+                        
+						//$(document).ready(traerTramitePorIdUrl($id_tramite));						
+                    }
+                    else{
+                        
+                            $("#div_listado_plantillas").load(globalUrl+"/gestion/consultas/consultas_tipos_tramites.php",{consulta: "traer_todos"}); 
+                        
+                        
+                    }
+
+                    
+                    
                 $("#div_listado_cliente").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"}); 
                 //$(".subir_archivo").click(subirElArchivo);
                 $(":file").change(cambioElFile);
@@ -205,7 +236,16 @@ $(document).on("click",".btn_eliminar_usuario",eliminarUsuarioElegido);
 $(document).on("click","#btn_buscar_inicio",hacerBusqueda);
 $(document).on("change","#combo_elemento_busqueda",agregarDivFechaBusqueda);
 $(document).on("change","#checkbox_fecha_buscar",buscarTambienPorFecha);
-
+$(document).on("click",".dato_mostrado_gestion_buscador",traerGestionElegidaClicNombre_buscador);
+$(document).on("click",".btn_ver_gestion_buscador",traerGestionElegidaClicIcono_buscador);
+$(document).on("click",".btn_eliminar_gestion_buscador",eliminarGestionElegida);
+$(document).on("click",".dato_mostrado_tramite_buscador",traerTramiteElegido_buscador);
+$(document).on("click",".btn_ver_tramite_buscador",traerTramiteElegido_buscador); 
+$(document).on("click",".btn_eliminar_tramite_buscador",eliminarTramiteElegido);
+$(document).on("click",".dato_mostrado_cliente_buscador",traerClienteElegidoClicNombre_buscador);
+$(document).on("click",".btn_ver_cliente",traerClienteElegidoClicIcono_buscador);
+$(document).on("click",".btn_eliminar_cliente_buscador",eliminarClienteElegido);
+$(document).on("click",".adjunto_cliente_buscador",traerListaAdjuntosDeCliente_buscador);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -2392,7 +2432,7 @@ function hacerBusqueda()
 
     if(text_busqueda == ''){
         if(combo_tipo_busqueda == 1){            
-            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos"}); 
+            $("#resultado_busqueda").load(globalUrl+"/gestion/consultas/consultas_personas.php",{consulta: "traer_todos_buscador"}); 
         }
         else{
             if(combo_tipo_busqueda == 2){
@@ -2435,6 +2475,13 @@ function agregarDivFechaBusqueda(){
     }
     else{
         $('#div_fecha_busqeuda').fadeOut(1500);
+        $('#cabecera_linea2').fadeOut(1500);
+        $('#checkbox_fecha_buscar').attr('checked',false);
+        setTimeout(function(){           
+            $("#cabecera").animate({
+                'height': "97px"
+            });
+        }, 1000);
     }
 }
 
@@ -2455,4 +2502,44 @@ function buscarTambienPorFecha(){
         
         
     }
+}
+
+function traerGestionElegidaClicNombre_buscador(){
+    var id_gestion = $($(this).parent().children()[0]).text();        
+    goToGestion(id_gestion);
+}
+
+function traerGestionElegidaClicIcono_buscador(){
+    var id_gestion = $($(this).parent().parent().parent().children()[0]).text();    
+    goToGestion(id_gestion);
+}
+
+function traerTramiteElegido_buscador(){
+    var id_tramite = $(this).parent().children()[1].id;
+    if(id_tramite == ''){
+        id_tramite = $($(this).parent().parent().parent().children()[0]).text(); 
+    }
+    window.location.href="tramites?id_tramite="+id_tramite;
+}
+
+function traerClienteElegidoClicNombre_buscador(){
+    var documento = $.trim($($(this).parent().children()[2]).text());
+    var id_cliente = $.trim($($(this).parent().children()[0]).text());    
+    irAPaginaPersona(documento,id_cliente,0);
+}
+
+function traerClienteElegidoClicIcono_buscador(){
+    var documento = $.trim($($(this).parent().children()[2]).text());
+    var id_cliente = $.trim($($(this).parent().parent().parent().children()[0]).text());    
+    irAPaginaPersona(documento,id_cliente,0);
+}
+
+function traerListaAdjuntosDeCliente_buscador(){
+    var documento = $($(this).parent().parent().parent().children()[2]).text();
+    var id_cliente = $($(this).parent().parent().parent().children()[0]).text();
+    irAPaginaPersona(documento,id_cliente,1);
+}
+
+function irAPaginaPersona(documento,id_cliente,tiene_adjunto){
+    window.location.href="personas?documento="+documento+"&id_persona="+id_cliente+"&adjunto="+tiene_adjunto;
 }

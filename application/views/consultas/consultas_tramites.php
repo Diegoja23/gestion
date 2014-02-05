@@ -2,13 +2,6 @@
 
 $consulta = $_POST['consulta'];
 
-//if(!defined(TIPOS_TRAMITE_BY_GESTION)) define('TIPOS_TRAMITE_BY_GESTION', array());
-
-//$allTiposTramiteByGestion = array();
-/*
-if(!isset($_GLOBALS['allTiposTramite']))
-    $_GLOBALS['allTiposTramite'] = array();
-  */  
 switch($consulta){
     case "traer_todos":        
         echo crearListaTramites(traerTodos());
@@ -16,7 +9,6 @@ switch($consulta){
     
     case "traer_tipos_tramite":
         $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
-        //define('TIPOS_TRAMITE_BY_GESTION', Fachada::getInstancia()->getTiposTramiteByGestion($id_tipo_gestion)); 
         $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByTipoGestion($id_tipo_gestion);
         echo crearSelectTiposTramites($listaTiposTramites);
         break;
@@ -47,8 +39,6 @@ switch($consulta){
                                         'documento'=>$un_tramite_array['documento'],
                                     )
                                );
-        /*$Tramite->setDescripcion($un_tramite_array['descripcion']);
-        $Tramite->setDocumento($un_tramite_array['documento']);*/
         $retorno = Fachada::getInstancia()->modificarTramite($Tramite);
         if($retorno){
             echo 1;
@@ -62,29 +52,24 @@ switch($consulta){
         $un_tramite = traerPorId($id_tramite);
         if($un_tramite != false){
             $array_tramite = $un_tramite->convertirArray();            
-            //$array_tramite['plantilla'] = traerPlantillaTramiteO($un_tramite);
             echo json_encode($array_tramite);
         }
         else{
             return -1;
         }                
-    break;        
+        break; 
+    
     case "matchear_por_id":
         $id_tramite = cargarUnValor('id_tramite'); 
         $un_tramite = traerTramiteElegido($id_tramite);        
-        //$un_tramite = seleccionarPorID($id_tramite);
         if($un_tramite != false){
             $array_tramite = $un_tramite->convertirArray();
-            //var_dump($array_tramite);die();
-            //$array_tramite['tipo_tramite'] = $array_tramite['tipo_tramite']->convertirArray();
             $array_tramite['plantilla'] = traerPlantillaTramite($id_tramite);
             echo json_encode($array_tramite);
         }
         else{
             return -1;
         }
-        //$un_tramite = Fachada::getInstancia()->getTramiteByID($id_tramite);
-        //echo json_encode($un_tramite->convertirArray());
         break;
     
    case "get_plantilla_por_id_tipo_tramite":
@@ -97,25 +82,13 @@ switch($consulta){
        else{
            echo traerPlantillaDelTipoTraite($id_tipo_tramite,$id_tipo_gestion);
        }       
-       //$file = $_FILES['archivo']['name'];
-        //echo $file;
-        break;
+       break;
 
    
    case "agregar_adjunto_al_tramite":
        $id_tramite = cargarUnValor('id_tramite');
-       /*tener en cuenta que cargarAdjuntos esta preparado para poder cargar un array de adjuntos en el caso de que se quieran 
-        * subir varios. En este caso hay que llamar a la posición 0 del array porque queremos subir uno sólo. O sea,
-        * esta funcion se llama con cada click del botón "Subir adjunto" por lo que, a nivel de UI, no permite subir varios a la vez
-        * pero sí está soportado a nivel de dominio.
-       */
        $posibles_adjuntos = cargarAdjuntos(); 
-       
-       /*echo json_encode(array('id_adjunto' => 34,'tipo' => $posibles_adjuntos[0]['tipo']));*/      
-       
        $el_adjunto = $posibles_adjuntos[0];
-       
-       //esto ya está hecho, solo falta todo lo del dominio
        $id_adjunto = Fachada::getInstancia()->agregarAdjuntoAlTramite($id_tramite,$el_adjunto);
        if($id_adjunto > 0){
             echo json_encode(array('id_adjunto' => $id_adjunto,'tipo' => $el_adjunto['tipo']));
@@ -134,9 +107,7 @@ switch($consulta){
        
    case "eliminar_por_id":
         $id_tramite = cargarUnValor('id_tramite');
-        //este llamado a la función ya está pronto, solo hay que descomentarlo cuando esté lista.
         $borrado = Fachada::getInstancia()->eliminarTramite($id_tramite);
-       //$borrado = true;
         if($borrado){
             echo "<strong style='color:green;'>El cliente de cédula ".$id_tramite." fue exitosamente borrado!";
         }
@@ -147,24 +118,36 @@ switch($consulta){
         
    case "traer_busqueda_nombre":
         $text_busqueda = cargarUnValor('text_busqueda');
-        $lista_ret = traerTramitesBuscados(strtolower($text_busqueda));
+        $fecha_inicio = cargarUnValor('fecha_inicio');
+        $fecha_final = cargarUnValor('fecha_final');
+        $tipo_fecha = cargarUnValor('combo_tipo_fecha');
+        $lista_filtrada = traerTramitesFiltrados($fecha_inicio,$fecha_final,$tipo_fecha);
+        $lista_ret = traerTramitesBuscados($lista_filtrada,strtolower($text_busqueda));
         if(count($lista_ret)>0){
-            echo crearListaTramites($lista_ret);
+            echo crearListaTramites_buscador($lista_ret);
         }
         else{
             echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
         }        
         break;
         
+   case "traer_busqueda":
+        $fecha_inicio = cargarUnValor('fecha_inicio');
+        $fecha_final = cargarUnValor('fecha_final');
+        $tipo_fecha = cargarUnValor('combo_tipo_fecha');
+        $lista_filtrada = traerTramitesFiltrados($fecha_inicio,$fecha_final,$tipo_fecha);
+        if(count($lista_filtrada)>0){
+            echo crearListaTramites_buscador($lista_filtrada);
+        }
+        else{
+            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>fechas</em></h3>';
+        }   
+        break;
+        
    case "gestion_por_tramite":
        $id_gestion = cargarUnValor('id_gestion');
        echo json_encode(getGestionByTramite($id_gestion,true));
        break;
-        
-    /*case "traer_tramites_por_id_gestion":
-        $id_gestion = cargarUnValor('id_gestion');
-        echo crearListaTramitesParaGestion(traerTramitesPorGestion($id_gestion));
-        break;*/
     
     default:        
         break;
@@ -195,11 +178,22 @@ function traerTramiteElegido($id_tramite){
 
 function crearListaTramites($lista){
     $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Gestion</th><th>Tipo Gestion</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0; 
+    //$numero = 0; 
     foreach ($lista as $t)
     {
         $Gestion=getGestionByTramite($t->getIdGestion());
         $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$Gestion->getTipoGestion()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i title="Modificar" class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
+    }   
+    return $retorno;
+}
+
+function crearListaTramites_buscador($lista){
+    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Gestion</th><th>Tipo Gestion</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
+    //$numero = 0; 
+    foreach ($lista as $t)
+    {
+        $Gestion=getGestionByTramite($t->getIdGestion());
+        $retorno .= '<tr><td class="dato_mostrado_tramite_buscador">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite_buscador">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite_buscador">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite_buscador">'.$Gestion->getDescripcion().'</td><td class="dato_mostrado_tramite_buscador">'.$Gestion->getTipoGestion()->getDescripcion().'</td><td class="dato_mostrado_tramite_buscador">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite_buscador">'.$t->getFechaFin().'</td><td><p><i title="Modificar" class="btn_ver_tramite_buscador fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_tramite_buscador fa fa-ban fa-2x"></i></p></td></tr>';
     }   
     return $retorno;
 }
@@ -211,17 +205,6 @@ function getGestionByTramite($id_gestion,$array=false)
         return $Gestion->convertirArray();
     return $Gestion;
 }
-/*function crearListaTramitesParaGestion($lista){
-    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Trámite</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Acciones</th></tr></thead><tbody>';
-    $numero = 0; 
-    foreach ($lista as $t)
-    {        
-        $retorno .= '<tr><td class="dato_mostrado_tramite">'.$t->getId().'</td><td id="'.$t->getId().'" class="dato_mostrado_tramite">'.$t->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getTipoTramite()->getDescripcion().'</td><td class="dato_mostrado_tramite">'.$t->getFechaInicio().'</td><td class="dato_mostrado_tramite">'.$t->getFechaFin().'</td><td><p><i class="btn_ver_tramite fa fa-pencil-square-o fa-2x"></i><i class="btn_eliminar_tramite fa fa-ban fa-2x"></i></p></td></tr>';
-    }   
-
-    return $retorno;
-    
-}*/
 
 function seleccionarPorID($id_tramite)
 {
@@ -251,13 +234,11 @@ function cargarValoresTramite(){
     else{
         $paramsCliente['fecha_fin'] = null;
     }
-    //var_dump($paramsCliente['fecha_fin']);
     return $paramsCliente;
 }
 
 function crearSelectTiposTramites($lista){
     $retorno = '';
-    //$numero = 0;    
     foreach ($lista as $tt) 
     {        
         $retorno .= '<option value="'.$tt->getIdTiposTramite().'">'.$tt->getDescripcion().'</option>';
@@ -279,21 +260,8 @@ function traerPlantillaTramiteO($el_tramite){
 
 }
 function traerPlantillaTramite($id_tramite){
-
     $el_tramite = traerTramiteElegido($id_tramite);
-    /*$textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
-    return $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';*/
     return $el_tramite->getDocumento();
-/*
-    $el_tramite = traerTramiteElegido($id_tramite);
-    //var_dump($el_tramite);    
-    $textarea = '<textarea id="editor1" name="editor1">'.$el_tramite->getDocumento().'</textarea>';
-    $textarea .= '<script type="text/javascript">CKEDITOR.replace( "editor1" );</script>';
-    return $textarea;
-    /*return '<h2>Boleto de reserva</h2><textarea id="editor1" name="editor1">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
-<p>Este es un documento de boleto de reserva. [placeholder=Nombre del comprador||id=1] Sigue el doc, etc.
-La otra parte del documento es [placeholder=Nombre del vendedor||id=2] que además bla bla bla.</p>';*/
-
 }
 
 function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
@@ -307,7 +275,6 @@ function traerTipoTramitePorId($id_tt,$id_tipo_gestion){
 }
 
 function cargarAdjuntos(){
-    //session_start();
     if(isset($_SESSION['adjunto'])){        
         return $arrayDatosAdjuntos = $_SESSION['adjunto'];
     }
@@ -327,15 +294,120 @@ function traerTramitesPorGestion($id_gestion){
     return $lista_retorno;
 }
 
-function traerTramitesBuscados($text_busqueda){
+function traerTramitesBuscados($lista_tramites,$text_busqueda){
     $retorno = array();
-    $lista_gestiones = traerTodos();
-    foreach($lista_gestiones as $una_gestion){
-        if(strpos( strtolower($una_gestion->getDescripcion()), $text_busqueda ) !== false){
-            array_push($retorno, $una_gestion);
+    foreach($lista_tramites as $un_tramite){
+        if(strpos( strtolower($un_tramite->getDescripcion()), $text_busqueda ) !== false){
+            array_push($retorno, $un_tramite);
         }
     }
     return $retorno;
+}
+
+
+
+function traerTramitesFiltrados($fecha_inicio,$fecha_final,$tipo_busqueda){
+    $retorno = array();
+    $lista_tramitess = traerTodos();
+    foreach($lista_tramitess as $un_tramite){
+        if($fecha_inicio != -1 && $fecha_final != -1){
+            if(compararFechasPorTipoBusqueda($un_tramite,$fecha_inicio,$fecha_final,$tipo_busqueda)){
+                    array_push($retorno, $un_tramite);
+             }    
+        }        
+        else{
+            if($fecha_inicio != -1){
+                if(compararFechasPorTipoBusqueda_sin_fecha_fin($un_tramite,$fecha_inicio,$tipo_busqueda)){
+                        array_push($retorno, $un_tramite);
+                 }    
+            }        
+            else{
+                if($fecha_final != -1){
+                    if(compararFechasPorTipoBusqueda_sin_fecha_inicio($un_tramite,$fecha_fin,$tipo_busqueda)){
+                            array_push($retorno, $un_tramite);
+                     } 
+                }        
+                else{
+                    array_push($retorno, $un_tramite);
+                }
+            }
+        }
+    }
+    return $retorno;
+}
+
+function primeraFechaEsMayorOIgual($primera_fecha,$segunda_fecha){    
+    if($primera_fecha == null || $segunda_fecha == null){
+        return false;
+    }
+    return compararFechas($primera_fecha,$segunda_fecha)>=0;
+}
+
+function compararFechasPorTipoBusqueda($un_tramite,$fecha_inicio,$fecha_final,$tipo_busqueda){    
+    if($tipo_busqueda == 1){
+        return primeraFechaEsMayorOIgual($un_tramite->getFechaInicio(),$fecha_inicio) && primeraFechaEsMayorOIgual($fecha_final,$un_tramite->getFechaInicio());
+    }
+    if($tipo_busqueda == 2){
+        return primeraFechaEsMayorOIgual($un_tramite->getFechaFin(),$fecha_inicio) && primeraFechaEsMayorOIgual($fecha_final,$un_tramite->getFechaFin());
+    }
+    if($tipo_busqueda == 3){
+        return primeraFechaEsMayorOIgual($un_tramite->getFechaInicio(),$fecha_inicio) && primeraFechaEsMayorOIgual($fecha_final,$un_tramite->getFechaFin());
+    }
+    return false;
+}
+
+function compararFechasPorTipoBusqueda_sin_fecha_fin($un_tramite,$fecha_inicio,$tipo_busqueda){
+    if($tipo_busqueda == 1){
+        return primeraFechaEsMayorOIgual($un_tramite->getFechaInicio(),$fecha_inicio);
+    }
+    if($tipo_busqueda == 2){
+        return primeraFechaEsMayorOIgual($un_tramite->getFechaFin(),$fecha_inicio);
+    }
+    if($tipo_busqueda == 3){
+        return primeraFechaEsMayorOIgual($un_tramite->getFechaInicio(),$fecha_inicio) || primeraFechaEsMayorOIgual($un_tramite->getFechaFin(),$fecha_inicio);
+    }
+    return false;
+}
+
+function compararFechasPorTipoBusqueda_sin_fecha_inicio($un_tramite,$fecha_fin,$tipo_busqueda){
+    if($tipo_busqueda == 1){
+        return primeraFechaEsMayorOIgual($fecha_fin,$un_tramite->getFechaInicio());
+    }
+    if($tipo_busqueda == 2){
+        return primeraFechaEsMayorOIgual($fecha_fin,$un_tramite->getFechaFin());
+    }
+    if($tipo_busqueda == 3){
+        return primeraFechaEsMayorOIgual($fecha_fin,$un_tramite->getFechaInicio()) || primeraFechaEsMayorOIgual($fecha_fin,$un_tramite->getFechaFin());
+    }
+    return false;
+}
+
+function compararFechas($primera, $segunda)
+{
+  $valoresPrimera = explode ("/", $primera);   
+  $valoresSegunda = explode ("/", $segunda); 
+
+  $diaPrimera    = $valoresPrimera[0];  
+  $mesPrimera  = $valoresPrimera[1];  
+  $anyoPrimera   = $valoresPrimera[2]; 
+
+  $diaSegunda   = $valoresSegunda[0];  
+  $mesSegunda = $valoresSegunda[1];  
+  $anyoSegunda  = $valoresSegunda[2];
+
+  $diasPrimeraJuliano = gregoriantojd($mesPrimera, $diaPrimera, $anyoPrimera);  
+  $diasSegundaJuliano = gregoriantojd($mesSegunda, $diaSegunda, $anyoSegunda);     
+
+  if(!checkdate($mesPrimera, $diaPrimera, $anyoPrimera)){
+    // "La fecha ".$primera." no es v&aacute;lida";
+    return 0;
+  }elseif(!checkdate($mesSegunda, $diaSegunda, $anyoSegunda)){
+    // "La fecha ".$segunda." no es v&aacute;lida";
+    return 0;
+  }else{
+    return  $diasPrimeraJuliano - $diasSegundaJuliano;
+  } 
+
 }
 
 ?>
