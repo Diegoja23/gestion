@@ -562,12 +562,13 @@ function eliminarClienteElegido(){
     if(confirmado){
         //var documento = $($(this).parent().children()[2]).text();  
         var documento = $($(this).parent().parent().parent().children()[2]).text();  
+        var elementoHTML = this;
         $.post(globalUrl+"/gestion/consultas/consultas_personas.php", {consulta: "eliminar_por_ci",ci: documento})
                 .done(function(data) {
                 	if(parseInt(data)>0)
                 	{
                 		$("#retorno_borrado").html("<span style='color:green;'>La persona con CI "+documento+" fue eliminada.</span>");
-                		$(this).parent().parent().parent().fadeOut(1500);
+                		$(elementoHTML).parent().parent().parent().fadeOut(1500);
                 		
                 	}
                 	else
