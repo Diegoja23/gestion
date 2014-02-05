@@ -56,7 +56,7 @@
           
         </div>
         <img class="paperclip" src="<?=APPPATH?>static/images/paperclip.png" alt="paperclip" />
-        <div class="sidebar" style="background-image:url('<?=APPPATH?>static/images/gestion-documental.jpg');height:215px;widht:265px">
+        <div class="sidebar" style="background-image:url('<?=APPPATH?>static/images/gestiones.jpg');height:215px;widht:265px">
           
         </div>
       </div>

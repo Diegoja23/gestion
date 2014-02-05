@@ -192,12 +192,12 @@ ul#menu li a:hover
   width: 265px;
   margin: 0 24px 27px 0;
   background: #FBFBFB;
-  border: 1px solid #eee;
+  border: 1.5px solid #ddd;
   padding: 0 15px 15px 15px;
 
--webkit-box-shadow: 0px 6px 53px -16px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 6px 53px -16px rgba(0,0,0,0.75);
-box-shadow: 0px 6px 53px -16px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 6px 35px -16px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 6px 35px -16px rgba(0,0,0,0.75);
+box-shadow: 0px 6px 35px -16px rgba(0,0,0,0.75);
 }
 
 .sidebar h3, .content h1
