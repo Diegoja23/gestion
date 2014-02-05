@@ -40,8 +40,16 @@ function iniEventos() {
                     if(urlVarsPersona){                    	
                     	var documento =urlVarsPersona.documento[0];
                         var id_persona =parseInt(urlVarsPersona.id_persona);
+                        var hay_adjunto =parseInt(urlVarsPersona.adjunto);
                         //traerTipoTramiteElegidoPorId(urlVarsPersona.id_persona);
-                        traerClienteElegido(documento, id_persona);
+                        if(hay_adjunto){
+                            traerDatosComplementariosDeClienteElegido(documento,id_persona);
+                            $('#combo_lista_personas_personas').fadeOut(1500);
+                        }
+                        else{
+                            traerClienteElegido(documento, id_persona);
+                        }
+                        
                         
 						//$(document).ready(traerTramitePorIdUrl($id_tramite));						
                     }
@@ -241,6 +249,7 @@ $(document).on("click",".btn_eliminar_tramite_buscador",eliminarTramiteElegido);
 $(document).on("click",".dato_mostrado_cliente_buscador",traerClienteElegidoClicNombre_buscador);
 $(document).on("click",".btn_ver_cliente",traerClienteElegidoClicIcono_buscador);
 $(document).on("click",".btn_eliminar_cliente_buscador",eliminarClienteElegido);
+$(document).on("click",".adjunto_cliente_buscador",traerListaAdjuntosDeCliente_buscador);
 
 /*---------------------------------------------------------------------------------------------------------------
   ---------------------------------------------------------------------------------------------------------------
@@ -2541,15 +2550,21 @@ function traerTramiteElegido_buscador(){
 function traerClienteElegidoClicNombre_buscador(){
     var documento = $.trim($($(this).parent().children()[2]).text());
     var id_cliente = $.trim($($(this).parent().children()[0]).text());    
-    irAPaginaPersona(documento,id_cliente);
+    irAPaginaPersona(documento,id_cliente,0);
 }
 
 function traerClienteElegidoClicIcono_buscador(){
     var documento = $.trim($($(this).parent().children()[2]).text());
     var id_cliente = $.trim($($(this).parent().parent().parent().children()[0]).text());    
-    irAPaginaPersona(documento,id_cliente);
+    irAPaginaPersona(documento,id_cliente,0);
 }
 
-function irAPaginaPersona(documento,id_cliente){
-    window.location.href="personas?documento="+documento+"&id_persona="+documento;
+function traerListaAdjuntosDeCliente_buscador(){
+    var documento = $($(this).parent().parent().parent().children()[2]).text();
+    var id_cliente = $($(this).parent().parent().parent().children()[0]).text();
+    irAPaginaPersona(documento,id_cliente,1);
+}
+
+function irAPaginaPersona(documento,id_cliente,tiene_adjunto){
+    window.location.href="personas?documento="+documento+"&id_persona="+id_cliente+"&adjunto="+tiene_adjunto;
 }
