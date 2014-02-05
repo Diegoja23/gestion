@@ -133,9 +133,6 @@ switch($consulta){
     
         
     case "traer_busqueda":
-        /*$fecha_inicio = $_POST['fecha_inicio'];
-        $fecha_final = $_POST['fecha_final'];
-        $tipo_fecha = $_POST['combo_tipo_fecha'];*/
         $fecha_inicio = cargarUnValor('fecha_inicio');
         $fecha_final = cargarUnValor('fecha_final');
         $tipo_fecha = cargarUnValor('combo_tipo_fecha');
