@@ -603,10 +603,11 @@ function guardarCliente(){
                 if(parseInt(data) == 1){
                     $("#retorno_ajax").html("<strong style='color:green;'>El cliente "+nombre_cli+" "+apellido_cli+" se ingresó con éxito</strong>");
                     cargarFormularioCliente(-1);
+                    agregarDivListaClientes();
                 }
                 else{
-                	$info= "<li>El nombre no debe contener menos de dos caracteres</li><li>El apellido no puede contener menos de dos caracteres</li><li>La cédula debe contener 9 dígitos</li><li>Email debe contener un formato válido</li><li>No dejar datos sin rellenar</li>"
-                	 $("#retorno_ajax").html("<strong style='color:red;'>Verifique los datos ingresados!"+$info+"</strong>");
+                	var info= "<li>El nombre no debe contener menos de dos caracteres</li><li>El apellido no puede contener menos de dos caracteres</li><li>La cédula debe contener 9 dígitos</li><li>Email debe contener un formato válido</li><li>No dejar datos sin rellenar</li>"
+                	 $("#retorno_ajax").html("<strong style='color:red;'>Verifique los datos ingresados!"+info+"</strong>");
                     //$("#retorno_ajax").html("<strong style='color:red;'>¡El cliente "+nombre_cli+" "+apellido_cli+" no se pudo ingresar!</strong>");
                 }
             });
