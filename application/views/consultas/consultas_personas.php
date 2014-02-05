@@ -148,7 +148,7 @@ function traerTodasLasPersonas(){
         $listaClientes = Fachada::getInstancia()->getClientes();
         $arrayPersonas = array_merge($listaParticipantes,$listaClientes);
         $return = sort($arrayPersonas,SORT_NATURAL);
-        return $return;
+        return $arrayPersonas;
 }
 
 function cargarCiDelCliente(){
