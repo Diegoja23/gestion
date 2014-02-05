@@ -7,6 +7,11 @@ switch($consulta){
         echo crearListaParaPersonas($lista_total);
         break;
     
+    case "traer_todos_buscador":        
+        $lista_total = traerTodasLasPersonas();
+        echo crearListaParaPersonas_buscador($lista_total);
+        break;
+    
     case "traer_clientes":
         $listaClientes = Fachada::getInstancia()->getClientes();
         echo crearListaParaPersonas($listaClientes);
@@ -212,6 +217,22 @@ function crearListaParaPersonas($lista){
         }
         else{
             $retorno .= '<tr><td class="dato_mostrado_cliente">'.$c->getId().'</td><td class="dato_mostrado_cliente">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente">'.$c->getCI().'</td><td><p><i title="Modificar" class="btn_ver_cliente fa fa-pencil-square-o fa-2x"></i>&nbsp;<i title="Eliminar" class="btn_eliminar_cliente fa fa-ban fa-2x"></i>&nbsp;<i title="Adjuntos" class="adjunto_cliente fa fa-paperclip fa-2x"></i></p></td></tr>';
+        }
+        
+    }
+    return $retorno;
+}
+
+function crearListaParaPersonas_buscador($lista){
+    $retorno = '<p style="margin-top:20px;margin-bottom:-10px !important;">Las personas con <i style="color:red;" class="fa fa-check"></i> son clientes</p><table class="table table-hover"><thead><tr><th>#</th><th>Nombre</th><th>Documento</th><th>Acciones</th></tr></thead><tbody>';
+    //$numero = 0;    
+    foreach ($lista as $c){
+        if($c->esCliente()){
+            $retorno .= '<tr><td class="dato_mostrado_cliente_buscador">'.$c->getId().' <i style="color:red;" class="fa fa-check"></i></td><td class="dato_mostrado_cliente_buscador">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente_buscador">'.$c->getCI().'</td><td><p><i title="Modificar" class="btn_ver_cliente_buscador fa fa-pencil-square-o fa-2x"></i>&nbsp;<i title="Eliminar" class="btn_eliminar_cliente_buscador fa fa-ban fa-2x"></i>&nbsp;<i title="Adjuntos" class="adjunto_cliente_buscador fa fa-paperclip fa-2x"></i></p></td></tr>';
+    
+        }
+        else{
+            $retorno .= '<tr><td class="dato_mostrado_cliente_buscador">'.$c->getId().'</td><td class="dato_mostrado_cliente_buscador">'.$c->getNombre()." ".$c->getApellido().'</td><td class="dato_mostrado_cliente_buscador">'.$c->getCI().'</td><td><p><i title="Modificar" class="btn_ver_cliente_buscador fa fa-pencil-square-o fa-2x"></i>&nbsp;<i title="Eliminar" class="btn_eliminar_cliente_buscador fa fa-ban fa-2x"></i>&nbsp;<i title="Adjuntos" class="adjunto_cliente_buscador fa fa-paperclip fa-2x"></i></p></td></tr>';
         }
         
     }

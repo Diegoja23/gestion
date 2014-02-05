@@ -7,27 +7,6 @@ switch($consulta){
         echo crearListaGestiones(traerTodos());
         //echo crearSelectTiposTramites($listaTiposTramites);
         break;
-    
-    case "traer_busqueda":
-        $fecha_inicio = $_POST['fecha_inicio'];
-        $fecha_final = $_POST['fecha_final'];
-        $tipo_fecha = $_POST['combo_tipo_fecha'];
-        /*if($fecha_inicio != -1){
-            //$fecha_inicio = Common::fromUsrToSqlDate($_POST['fecha_inicio']);
-        }
-        if($fecha_final != -1){
-            //$fecha_final = Common::fromUsrToSqlDate($_POST['fecha_final']);
-        }*/
-        //$lista_filtrada = traerGestionesFiltradas();
-        //var_dump($fecha_inicio);die();
-        $lista_filtrada = traerGestionesFiltradas($fecha_inicio,$fecha_final,$tipo_fecha);
-        if(count($lista_filtrada)>0){
-            echo crearListaGestiones($lista_filtrada);
-        }
-        else{
-            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>fechas</em></h3>';
-        }   
-        break;
 
     case "agregar_gestion": 
         $paramsGestion = cargarValoresGestion();      
@@ -139,13 +118,34 @@ switch($consulta){
     
    case "traer_busqueda_nombre":
         $text_busqueda = cargarUnValor('text_busqueda');
-        $lista_ret = traerGestionesBuscadas(strtolower($text_busqueda));
+        $fecha_inicio = cargarUnValor('fecha_inicio');
+        $fecha_final = cargarUnValor('fecha_final');
+        $tipo_fecha = cargarUnValor('combo_tipo_fecha');
+        $lista_filtrada = traerGestionesFiltradas($fecha_inicio,$fecha_final,$tipo_fecha);
+        $lista_ret = traerGestionesBuscadas($lista_filtrada,strtolower($text_busqueda));
         if(count($lista_ret)>0){
-            echo crearListaGestiones($lista_ret);
+            echo crearListaGestiones_buscador($lista_ret);
         }
         else{
             echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>'.$text_busqueda.'</em></h3>';
         }        
+        break;
+    
+        
+    case "traer_busqueda":
+        /*$fecha_inicio = $_POST['fecha_inicio'];
+        $fecha_final = $_POST['fecha_final'];
+        $tipo_fecha = $_POST['combo_tipo_fecha'];*/
+        $fecha_inicio = cargarUnValor('fecha_inicio');
+        $fecha_final = cargarUnValor('fecha_final');
+        $tipo_fecha = cargarUnValor('combo_tipo_fecha');
+        $lista_filtrada = traerGestionesFiltradas($fecha_inicio,$fecha_final,$tipo_fecha);
+        if(count($lista_filtrada)>0){
+            echo crearListaGestiones_buscador($lista_filtrada);
+        }
+        else{
+            echo '<h3 style="margin:30px;"><strong>No hay resultados para la búsqueda:</strong> <em>fechas</em></h3>';
+        }   
         break;
         
     case "eliminar_por_id":
@@ -233,10 +233,21 @@ function crearListaGestiones($lista){
         if($g->getEstado()==1)$estado="Finalizado";
         $TipoGestion = $g->getTipoGestion();                
         $retorno .= '<tr><td class="dato_mostrado_gestion">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion"><em>Tipo</em>: '.$TipoGestion->getDescripcion().'</td><td class="dato_mostrado_gestion">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion">'.$estado.'</td><td><p><i title="Modificar" class="btn_ver_gestion fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_gestion fa fa-ban fa-2x"></i></p></td></tr>';
-    }   
-
+    }
     return $retorno;
-    
+}
+
+function crearListaGestiones_buscador($lista){
+    $retorno= '<table class="table table-hover"><thead><tr><th>#</th><th>Descripcion</th><th>Tipo de Gestión</th><th>Fecha Inicio</th><th>Fecha Finalizado</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>';
+    //$numero = 0; 
+    foreach ($lista as $g)
+    {
+        $estado="En curso";
+        if($g->getEstado()==1)$estado="Finalizado";
+        $TipoGestion = $g->getTipoGestion();                
+        $retorno .= '<tr><td class="dato_mostrado_gestion_buscador">'.$g->getId().'</td><td id="'.$g->getId().'" class="dato_mostrado_gestion_buscador">'.$g->getDescripcion().'</td><td class="dato_mostrado_gestion_buscador"><em>Tipo</em>: '.$TipoGestion->getDescripcion().'</td><td class="dato_mostrado_gestion_buscador">'.$g->getFechaInicio().'</td><td class="dato_mostrado_gestion_buscador">'.$g->getFechaFin().'</td><td class="dato_mostrado_gestion_buscador">'.$estado.'</td><td><p><i title="Modificar" class="btn_ver_gestion_buscador fa fa-pencil-square-o fa-2x"></i><i title="Eliminar" class="btn_eliminar_gestion_buscador fa fa-ban fa-2x"></i></p></td></tr>';
+    }
+    return $retorno;
 }
 
 function crearSelectTiposGestion($lista){
@@ -280,9 +291,8 @@ function traerGestionPorID($id_gestion){
     return $retorno;
 }
 
-function traerGestionesBuscadas($text_busqueda){
-    $retorno = array();
-    $lista_gestiones = traerTodos();
+function traerGestionesBuscadas($lista_gestiones,$text_busqueda){
+    $retorno = array();    
     foreach($lista_gestiones as $una_gestion){
         if(strpos( strtolower($una_gestion->getDescripcion()), $text_busqueda ) !== false){
             array_push($retorno, $una_gestion);
@@ -297,30 +307,23 @@ function traerGestionesFiltradas($fecha_inicio,$fecha_final,$tipo_busqueda){
     foreach($lista_gestiones as $una_gestion){
         if($fecha_inicio != -1 && $fecha_final != -1){
             if(compararFechasPorTipoBusqueda($una_gestion,$fecha_inicio,$fecha_final,$tipo_busqueda)){
-//if(primeraFechaEsMayorOIgual($una_gestion->getFechaInicio(),$fecha_inicio) && primeraFechaEsMayorOIgual($fecha_final,$una_gestion->getFechaFin())){
                     array_push($retorno, $una_gestion);
-                    //var_dump('uno');die();
              }    
         }        
         else{
             if($fecha_inicio != -1){
                 if(compararFechasPorTipoBusqueda_sin_fecha_fin($una_gestion,$fecha_inicio,$tipo_busqueda)){
-                //if(primeraFechaEsMayorOIgual($una_gestion->getFechaInicio(),$fecha_inicio)){
                         array_push($retorno, $una_gestion);
-                        //var_dump($fecha_inicio);die();
                  }    
             }        
             else{
                 if($fecha_final != -1){
                     if(compararFechasPorTipoBusqueda_sin_fecha_inicio($una_gestion,$fecha_fin,$tipo_busqueda)){
-                    //if(primeraFechaEsMayorOIgual($fecha_final,$una_gestion->getFechaFin())){
                             array_push($retorno, $una_gestion);
-                            //var_dump($una_gestion);die();
                      } 
                 }        
                 else{
                     array_push($retorno, $una_gestion);
-                    //var_dump('tres');die();
                 }
             }
         }
@@ -335,7 +338,7 @@ function primeraFechaEsMayorOIgual($primera_fecha,$segunda_fecha){
     return compararFechas($primera_fecha,$segunda_fecha)>=0;
 }
 
-function compararFechasPorTipoBusqueda($una_gestion,$fecha_inicio,$fecha_final,$tipo_busqueda){
+function compararFechasPorTipoBusqueda($una_gestion,$fecha_inicio,$fecha_final,$tipo_busqueda){    
     if($tipo_busqueda == 1){
         return primeraFechaEsMayorOIgual($una_gestion->getFechaInicio(),$fecha_inicio) && primeraFechaEsMayorOIgual($fecha_final,$una_gestion->getFechaInicio());
     }

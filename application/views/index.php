@@ -109,6 +109,7 @@
               </div>
             </div>
         </div>
+        <div id="retorno_borrado"></div> 
         <div id="resultado_busqueda"></div>       
         
       </div>
