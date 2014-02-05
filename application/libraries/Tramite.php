@@ -97,6 +97,7 @@ class Tramite
     {
         $object_vars=get_object_vars($this);       
         $fieldsTramite = array();
+        if($this->fecha_inicio == null || $this->fecha_inicio == '') $this->fecha_inicio = date("Y-m-d");
         foreach($object_vars as $key => $value)        
             if($this->attNotDistinctToTable($key))
                 $fieldsTramite[$key] = $value;
