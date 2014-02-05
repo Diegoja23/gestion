@@ -323,7 +323,7 @@ function traerTramitesFiltrados($fecha_inicio,$fecha_final,$tipo_busqueda){
             }        
             else{
                 if($fecha_final != -1){
-                    if(compararFechasPorTipoBusqueda_sin_fecha_inicio($un_tramite,$fecha_fin,$tipo_busqueda)){
+                    if(compararFechasPorTipoBusqueda_sin_fecha_inicio($un_tramite,$fecha_final,$tipo_busqueda)){
                             array_push($retorno, $un_tramite);
                      } 
                 }        

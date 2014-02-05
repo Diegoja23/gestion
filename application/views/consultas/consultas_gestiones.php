@@ -311,7 +311,7 @@ function traerGestionesFiltradas($fecha_inicio,$fecha_final,$tipo_busqueda){
             }        
             else{
                 if($fecha_final != -1){
-                    if(compararFechasPorTipoBusqueda_sin_fecha_inicio($una_gestion,$fecha_fin,$tipo_busqueda)){
+                    if(compararFechasPorTipoBusqueda_sin_fecha_inicio($una_gestion,$fecha_final,$tipo_busqueda)){
                             array_push($retorno, $una_gestion);
                      } 
                 }        
