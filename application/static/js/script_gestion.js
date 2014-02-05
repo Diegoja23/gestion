@@ -18,7 +18,8 @@ function iniEventos() {
                 if($urlVars.id_gestion > 0)
                 {                    	
                 	$id_gestion=parseInt($urlVars.id_gestion);
-					$(document).ready(traerGestionPorIdUrl($id_gestion));						
+					//$(document).ready(traerGestionPorIdUrl($id_gestion));		
+                                        $(document).ready(traerGestionElegida($id_gestion));
                 }
                 else
                 {
