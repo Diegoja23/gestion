@@ -18,12 +18,12 @@ class Grupos extends CI_Model
         
         foreach($clientes as $c)
         {
-            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $c->getId());
+            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $c->getId(), 'rol' => 'c');
             $this->db->insert('pertenece', $paramsPertenece);   
         }
         foreach($partcipantes as $p)
         {
-            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $p->getId());
+            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $p->getId(), 'rol' => 'p');
             $this->db->insert('pertenece', $paramsPertenece);   
         }        
         
@@ -49,9 +49,9 @@ class Grupos extends CI_Model
         return false;              
     }
     
-    public function get_id_personas_by_grupo($id_grupo)
+    public function get_id_rol_personas_by_grupo($id_grupo)
     {
-        $sql = "SELECT id_persona FROM pertenece WHERE id_grupo=".$id_grupo;
+        $sql = "SELECT id_persona, rol FROM pertenece WHERE id_grupo=".$id_grupo;
         $query = $this->db->query($sql);                   
         return $query->result();              
     }    
@@ -70,12 +70,12 @@ class Grupos extends CI_Model
                            
         foreach($clientes as $c)
         {
-            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $c->getId());
+            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $c->getId(), 'rol' => 'c');
             $this->db->insert('pertenece', $paramsPertenece);   
         }
         foreach($partcipantes as $p)
         {
-            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $p->getId());
+            $paramsPertenece = array('id_grupo' => $id_grupo, 'id_persona' => $p->getId(), 'rol' => 'p');
             $this->db->insert('pertenece', $paramsPertenece);   
         }        
         

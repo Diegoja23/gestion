@@ -146,8 +146,9 @@ function cargarValores(){
 function traerTodasLasPersonas(){
         $listaParticipantes = Fachada::getInstancia()->getParticipantes();
         $listaClientes = Fachada::getInstancia()->getClientes();
-        $return = array_merge($listaParticipantes,$listaClientes);        
-        return $return;
+        $arrayPersonas = array_merge($listaParticipantes,$listaClientes);
+        $return = sort($arrayPersonas,SORT_NATURAL);
+        return $arrayPersonas;
 }
 
 function cargarCiDelCliente(){

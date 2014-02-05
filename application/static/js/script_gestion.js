@@ -573,7 +573,7 @@ function eliminarClienteElegido(){
                 	}
                 	else
                 	{
-                		$("#retorno_borrado").html("<span style='color:red;'>No se pudo eliminar a la persona con CI "+documento+". verifique que no pertenezca a ningún trámite</span>");
+                		$("#retorno_borrado").html("<span style='color:red;'>No se pudo eliminar a la persona con CI "+documento+". erifique que no pertenezca a ninguna gestión</span>");
                 	}
                     
                     //$('#content').append(un_cliente);
@@ -1271,12 +1271,13 @@ function traerGestionElegida(id_gestion){
 function eliminarGestionElegida(){
     var confirmado = confirm("¿Seguro que desea eliminar esta gestión. No se eliminarán gestiones que contengan trámites?");
     if(confirmado){
+    	var elementoHTML = this;
         var id_gestion = $($(this).parent().parent().parent().children()[0]).text();   
         $.post(globalUrl+"/gestion/consultas/consultas_gestiones.php", {consulta: "eliminar_por_id",id_gestion: id_gestion})
                 .done(function(data) {
                 	if(parseInt(data) > 0){ 
                 			$("#retorno_borrado_gestion").html("<span style='color:green'>Se ha eliminado la gestion "+ id_gestion+"</span>");
-                			$(this).parent().parent().parent().fadeOut(1500);       
+                			$(elementoHTML).parent().parent().parent().fadeOut(1500);       
                 		}
                 		else
                 		{

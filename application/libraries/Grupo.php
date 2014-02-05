@@ -101,13 +101,13 @@ class Grupo
     public function fill()
     {
         $array_grupo = $this->myci->grupos->get_grupo_by_id($this->id_grupo);    
-        $array_id_personas = $this->myci->grupos->get_id_personas_by_grupo($this->id_grupo);
+        $array_id_personas = $this->myci->grupos->get_id_rol_personas_by_grupo($this->id_grupo);
         $clientes = $participantes = array();        
         foreach($array_id_personas as $obj_id_persona)
         {            
             $Participante = new Participante(array('id_persona' => $obj_id_persona->id_persona));
-            $Participante->fillById();
-            if($Participante->esCliente())
+            $Participante->fillById();            
+            if($obj_id_persona->rol == 'c')
                 $clientes[] = $Participante;
             else $participantes[] = $Participante;
         }
