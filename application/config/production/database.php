@@ -53,13 +53,13 @@ $active_record = TRUE;
 
  /* Para configurar en producción recordar poner debug en FALSE */
 $db['gestion']['hostname'] = 'localhost';
-$db['gestion']['username'] = 'root';
-$db['gestion']['password'] = '';
+$db['gestion']['username'] = 'proyecto_usu';
+$db['gestion']['password'] = 'qwerty22';
 $db['gestion']['database'] = 'gestion_notarial';
 $db['gestion']['dbdriver'] = 'mysql';
 $db['gestion']['dbprefix'] = '';
 $db['gestion']['pconnect'] = TRUE;
-$db['gestion']['db_debug'] = FALSE;
+$db['gestion']['db_debug'] = TRUE;
 $db['gestion']['cache_on'] = FALSE;
 $db['gestion']['cachedir'] = '';
 $db['gestion']['char_set'] = 'utf8';

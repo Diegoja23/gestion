@@ -154,7 +154,7 @@ class Tramite
         $adjuntos = $this->myci->adjuntos->get_adjuntos($this->id_tramite);               
         foreach ($adjuntos as $a) 
         {
-            $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'adjuntos');
+            $attsAdjuntos = array('id' => $a->id_adjunto,'nombre' => $a->nombre, 'archivo' => utf8_encode($a->archivo), 'tipo' => $a->mime, 'from' => 'adjuntos');
             $Adjunto = new Adjunto($attsAdjuntos);               
             array_push($this->adjuntos,$Adjunto);
         }                 

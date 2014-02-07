@@ -35,7 +35,7 @@
                                         'tipo' => $tipo)
                                );                                          
                                                
-    session_start();
+    //session_start();
     unset($_SESSION['ci']);
     $_SESSION['ci'] = $arrayDatosAdjuntos;    
     

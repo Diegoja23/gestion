@@ -21,7 +21,9 @@ class Datos_complementarios extends CI_Model
     function get_adjuntos($id_persona)
     {
         $sql = "SELECT * FROM datos_complementarios as d where d.id_persona=".$id_persona;                
-        $query = $this->db->query($sql);                   
+        $query = $this->db->query($sql);   
+        //var_dump("qr ");      
+       // var_dump($query->result());          
         return $query->result();   
     }       
     

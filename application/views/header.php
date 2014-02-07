@@ -3,6 +3,7 @@
     echo '<!DOCTYPE HTML>
     <html lang="es-ES">
     <head>';
+        echo '<meta http-equiv="Content-type" content="text/html;charset=UTF-8">';
         echo '<script type="text/javascript" src="'.APPPATH.'static/js/jquery-2.0.2.min.js"></script>'; 
         echo '<!-- Bootstrap -->
     <link rel="stylesheet" href="'.APPPATH.'static/dist/css/bootstrap.min.css">

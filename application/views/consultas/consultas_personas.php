@@ -1,4 +1,5 @@
 <?php
+//header("charset=utf-8");
 $consulta = $_POST['consulta'];
     
 switch($consulta){
@@ -82,6 +83,9 @@ switch($consulta){
     case "traer_por_ci":
         $ci = cargarUnValor('ci'); 
         $un_cliente = Fachada::getInstancia()->getByCI($ci);
+        
+         $array = $un_cliente->convertirArray();
+    
         //var_dump($un_cliente);die();
         $a = traerPrimerAdjunto($un_cliente);
         $array = $un_cliente->convertirArray();
@@ -89,10 +93,12 @@ switch($consulta){
             $array['adjunto_tipo'] = $a->getTipo();
                 //'<iframe src="http://localhost/gestion/consultas/mostrar_archivo.php?mime='.$a->getTipo().'&id='.$a->getId().'&nombre=poneraquinombrearchivo&from=dato_complementario"></iframe>'; 
             $array['adjunto_id'] = $a->getId();
+          //  var_dump($a->getArchivo());
         }
         /*else{
             
         }*/
+        
         echo json_encode($array);
         break;
     
@@ -147,7 +153,7 @@ function traerTodasLasPersonas(){
         $listaParticipantes = Fachada::getInstancia()->getParticipantes();
         $listaClientes = Fachada::getInstancia()->getClientes();
         $arrayPersonas = array_merge($listaParticipantes,$listaClientes);
-        $return = sort($arrayPersonas,SORT_NATURAL);
+        //$return = sort($arrayPersonas,SORT_NATURAL);
         return $arrayPersonas;
 }
 

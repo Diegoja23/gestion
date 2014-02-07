@@ -60,7 +60,7 @@ class Cliente extends Participante
  
             foreach ($adjuntos as $a) 
             {
-                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => $a->archivo, 'tipo' => $a->mime, 'from' => 'datos_complementarios');
+                $attsAdjuntos = array('id' => $a->id_dato_complementario,'nombre' => $a->nombre, 'archivo' => utf8_encode($a->archivo), 'tipo' => $a->mime, 'from' => 'datos_complementarios');
                 $Adjunto = new Adjunto($attsAdjuntos);
                 array_push($paramsCliente["adjuntos"],$Adjunto);
             }  
