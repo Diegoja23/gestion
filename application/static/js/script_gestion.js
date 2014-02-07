@@ -74,6 +74,7 @@ function iniEventos() {
                     {                    	
                     	$id_tramite=parseInt($urlVars.id_tramite);
                         traerTramitePorIdUrl($id_tramite);
+                        //$('#span_id_tipo_gestion').text($urlVars.id_tipo_gestion);
 						GLOBAL_id_tramite = $id_tramite;
                     }
                     else if($urlVars.id_gestion > 0 && $urlVars.id_tipo_gestion > 0)
@@ -1526,8 +1527,13 @@ function agregarDivDatosTramite(){
     $(".fecha-fin").css("display","none");
                 
 	var vid_tipo_gestion = $("#span_id_tipo_gestion").text();
-    $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
-
+        if (vid_tipo_gestion>1){
+            $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite", id_tipo_gestion: vid_tipo_gestion});
+        }
+        else{
+            var id_tramite = GLOBAL_id_tramite;
+            $("#combo_tipo_tramite").load(globalUrl+"/gestion/consultas/consultas_tramites.php",{consulta: "traer_tipos_tramite_id_tramite", id_tramite:id_tramite});;
+        }  
         
     if(GLOBAL_id_tramite === undefined || GLOBAL_id_tramite <= 0)
     {

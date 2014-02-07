@@ -8,8 +8,17 @@ switch($consulta){
         break;
     
     case "traer_tipos_tramite":
-        $id_tipo_gestion = cargarUnValor('id_tipo_gestion');   
+        $id_tipo_gestion = cargarUnValor('id_tipo_gestion'); 
         $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByTipoGestion($id_tipo_gestion);
+        echo crearSelectTiposTramites($listaTiposTramites);
+        break;
+    
+    case "traer_tipos_tramite_id_tramite":
+        //$id_tipo_gestion = cargarUnValor('id_tipo_gestion'); 
+        $id_tramite = cargarUnValor('id_tramite'); 
+        $un_tramite = traerPorId($id_tramite);
+        $gestion=getGestionByTramite($un_tramite->getIdGestion());
+        $listaTiposTramites = Fachada::getInstancia()->getTiposTramiteByTipoGestion($gestion->getIdTipoGestion());
         echo crearSelectTiposTramites($listaTiposTramites);
         break;
 

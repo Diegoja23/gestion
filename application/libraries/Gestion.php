@@ -56,6 +56,11 @@ class Gestion
         return $this->tipo_gestion;
     }
     
+    public function getIdTipoGestion()
+    {
+        return $this->id_tipo_gestion;
+    }
+    
     public function getEstado()
     {
         return $this->estado;
