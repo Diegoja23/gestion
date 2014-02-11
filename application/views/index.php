@@ -92,11 +92,11 @@
             <br />
             <div id="cabecera_linea2">
                 <div class="form-group float-right">  
-                    <label for="lbl_fecha_fin_busqueda">Desde</label><br />                
+                    <label for="lbl_fecha_fin_busqueda">Hasta</label><br />                
                     <input type="text" class="form-control datepicker" id="txt_fecha_fin_busqueda" placeholder="Fecha de fin">
               </div>
               <div class="form-group float-right">  
-                    <label for="lbl_fecha_inicio_busqueda">Hasta</label><br />
+                    <label for="lbl_fecha_inicio_busqueda">Desde</label><br />
                     <input type="text" class="form-control datepicker" id="txt_fecha_inicio_busqueda" placeholder="Fecha de inicio">    
               </div>
               <div class="form-group float-right" style="margin-right:25px">
