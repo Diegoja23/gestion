@@ -50,7 +50,8 @@ class Tramites extends CI_Model
     {
         $this->db->where('id_tramite', $tramiteParams['id_tramite']);
         $this->db->update('tramites', $tramiteParams);
-        return($this->db->affected_rows() > 0);
+        return true;
+        //return($this->db->affected_rows() > 0);
     }          
                 
     function get_tramites($id_gestion = 0)
