@@ -1849,7 +1849,7 @@ function mostrarDialogPlantilla_mismo(){
 	                click : function () {
 	                    plantilla = CKEDITOR.instances.editor1.getData();
                             //var html= '<div style="font-size:15px;text-align:justify;line-height: 27px;margin: 85px 49px 20px 138px">'+plantilla+'</div>';
-                            var html= '<style>@page{font-size:15px;text-align:justify;line-height: 27px;margin: 135px 103px 20px 177px}</style><div>'+plantilla+'</div>';
+                            var html= '<style>@page{font-size:15px;text-align:justify;line-height: 27px;margin: 135px 103px 35px 177px}</style><div>'+plantilla+'</div>';
                             convertirAPdf(html);
 	                    //convertirAPdf(plantilla);
 	                }                	
